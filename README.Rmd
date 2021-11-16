@@ -63,8 +63,7 @@ Here is an overview of `forcis` content: **{{ PLEASE ADD A FEW LINES }}**
 
 Please cite this package as: 
 
-> Casajus Nicolas (`r format(Sys.Date(), "%Y")`) forcis: An R 
-package to **{{ TITLE }}**. R package version 0.0.0.9000.
+> Coming soon...
 
 
 
