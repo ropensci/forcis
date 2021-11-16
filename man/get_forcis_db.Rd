@@ -7,7 +7,8 @@
 get_forcis_db(path = ".")
 }
 \arguments{
-\item{path}{a character. The folder in which the FORCIS database will be save}
+\item{path}{a character. The folder in which the FORCIS database will be
+save}
 }
 \value{
 No return value.
