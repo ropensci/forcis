@@ -22,8 +22,8 @@ Concept](https://www.repostatus.org/badges/latest/concept.svg)](https://www.repo
 [![Dependencies](https://img.shields.io/badge/dependencies-0/0-brightgreen?style=flat)](#)
 <!-- badges: end -->
 
-The goal of the R package `forcis` is to **{{ PLEASE ADD A FEW LINES
-}}**
+The goal of the R package `forcis` is to handle the FORCIS Foraminifera
+database.
 
 ## Installation
 
@@ -43,8 +43,9 @@ library("forcis")
 
 ## Overview
 
-Here is an overview of `forcis` content: **{{ PLEASE ADD A FEW LINES
-}}**
+Please read the [Get
+started](https://frbcesab.github.io/forcis/articles/forcis.html)
+vignette.
 
 ## Citation
 

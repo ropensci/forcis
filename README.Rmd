@@ -32,7 +32,7 @@ forcis <img src="man/figures/hexsticker.png" height="120" align="right"/>
 <!-- badges: end -->
 
 
-The goal of the R package `forcis` is to **{{ PLEASE ADD A FEW LINES }}**
+The goal of the R package `forcis` is to handle the FORCIS Foraminifera database.
 
 
 
@@ -55,8 +55,7 @@ library("forcis")
 
 ## Overview
 
-Here is an overview of `forcis` content: **{{ PLEASE ADD A FEW LINES }}**
-
+Please read the [Get started](https://frbcesab.github.io/forcis/articles/forcis.html) vignette.
 
 
 ## Citation
