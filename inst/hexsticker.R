@@ -22,8 +22,8 @@ hexSticker::sticker(
   p_family  = "Aller_Rg",
   
   p_color   = "#FFFFFF",   # Title
-  h_fill    = "#CA3833",   # Background
-  h_color   = "#972B28",   # Border
+  h_fill    = "#2C4370",   # Background
+  h_color   = "#5C6F94",   # Border
   u_color   = "#FFFFFF",   # URL
   
   p_x       = 1.00,        # Title
