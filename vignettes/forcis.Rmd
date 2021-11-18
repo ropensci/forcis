@@ -14,8 +14,24 @@ knitr::opts_chunk$set(
 )
 ```
 
+# Title 1
+
+Paragraph
+
+Second paragraph with *italic*, **bold**, and `code`.
+
+Document produced on `r Sys.Date()`
+
+[Google](https://google.fr)
+
+![](../man/figures/hexsticker.png)
+
+## Title 2
+
+### Title 3
 
 ```{r setup}
+# Load package
 library(forcis)
 ```
 
