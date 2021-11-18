@@ -9,10 +9,8 @@
 #' @return No return value.
 #' 
 #' @examples
-#' \dontrun{
 #' ## Download the FORCIS database ----
-#' forcis::get_forcis_db()
-#' }
+#' # forcis::get_forcis_db()
 
 get_forcis_db <- function(path = ".") {
  
