@@ -14,8 +14,3 @@ file_path <- system.file("extdata", "example_dataset.csv", package = "forcis")
 dat <- readr::read_csv(file = file_path)
 
 
-
-
-
-# qdmfbjnvmezf
-hhh
