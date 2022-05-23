@@ -19,3 +19,22 @@ get_forcis_db <- function(path = ".") {
   
   invisible(NULL)
 }
+
+
+
+#' Title
+#'
+#' @param data ...
+#'
+#' @return ...
+#' 
+#' @export
+
+
+get_nets_table <- function(data) {
+  
+  # ...
+  
+  x <- 1 + 2
+  x
+}
