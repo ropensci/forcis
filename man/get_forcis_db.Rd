@@ -2,21 +2,27 @@
 % Please edit documentation in R/get-funs.R
 \name{get_forcis_db}
 \alias{get_forcis_db}
-\title{Download the last version of the FORCIS database}
+\title{Download the FORCIS database as csv files}
 \usage{
-get_forcis_db(path = ".")
+get_forcis_db(path = ".", version = forcis_db_version())
 }
 \arguments{
 \item{path}{a character. The folder in which the FORCIS database will be
 save}
+
+\item{version}{a character. The version number of the database.}
 }
 \value{
-No return value.
+No return value. The five \code{csv} files will be saved in the \code{path}
+folder.
 }
 \description{
-...
+\strong{ADD DESCRIPTION}
 }
 \examples{
-## Download the FORCIS database ----
-# forcis::get_forcis_db()
+\dontrun{
+path_to_save_csv <- "data"
+forcis::get_forcis_db(path_to_save_csv)
+list.files(path_to_save_csv)
+}
 }
