@@ -22,3 +22,21 @@ check_if_path_exists <- function(path) {
   
   invisible(NULL)
 }
+
+
+check_if_not_df <- function(data) {
+  
+  if (!is.data.frame(data)) {
+    stop("Argument 'data' must be a data.frame", call. = FALSE)
+  }
+  
+  if (!nrow(data)) {
+    stop("Argument 'data' must have at least one row", call. = FALSE)
+  }
+  
+  if (!ncol(data)) {
+    stop("Argument 'data' must have at least one column", call. = FALSE)
+  }
+  
+  invisible(NULL)
+}
