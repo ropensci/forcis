@@ -61,5 +61,5 @@ get_plankton_nets_data <- function(path, version = forcis_db_version()) {
     download_csv(path, plankton_net_filename())
   }
   
-  utils::read.csv(file.path(path, plankton_net_filename()))
+  utils::read.csv2(file.path(path, plankton_net_filename()))
 }
