@@ -36,19 +36,39 @@ get_forcis_db <- function(path = ".", version = forcis_db_version()) {
 
 
 
-#' Title
+#' Import plankton nets data
+#' 
+#' @description 
+#' This function reads the csv file `planktonnet_May2022.csv` stored in the 
+#' folder `path`. If this file does not exist it will be downloaded from
+#' \url{Repository}.
 #'
-#' @param data ...
+#' @inheritParams get_forcis_db
 #'
-#' @return ...
+#' @return A `data.frame` with x rows and y columns. See **Data Paper URL** for
+#'   further information.
 #' 
 #' @export
 
 
-get_nets_table <- function(data) {
+get_plankton_nets_data <- function(path, version = forcis_db_version()) {
   
-  # ...
+  ## Check if path exists ----
   
-  x <- 1 + 2
-  x
+  if (!dir.exists(path)) {
+    stop("The directory '", path, "' does not exist")
+  }
+  
+  
+  ## Check if csv exists ----
+  
+  file_name <- list.files(path, pattern = plankton_net_filename())
+  
+  if (length(file_name) == 0) {
+    
+    message("Downloading Plankton nets data...")
+    # utils::download.file()
+  }
+  
+  read.csv(file.path(path, plankton_net_filename()))
 }
