@@ -1,16 +1,33 @@
 Package: forcis
 Type: Package
-Title: The Title of the Project
+Title: A Client to Access the FORCIS Database
 Version: 0.0.0.9000
 Authors@R: c(
     person(given   = "Nicolas",
            family  = "Casajus",
-           role    = c("aut", "cre"),
+           role    = c("aut", "cre", "cph"),
            email   = "nicolas.casajus@fondationbiodiversite.fr",
-           comment = c(ORCID = "0000-0002-5537-5294")))
-Description: A paragraph providing a full description of the project (on several 
-    lines...)
-URL: https://github.com/FRBCesab/forcis
+           comment = c(ORCID = "0000-0002-5537-5294")),
+    person(given   = "Mattia",
+           family  = "Greco",
+           role    = "aut",
+           email   = "mgreco@iopan.pl",
+           comment = c(ORCID = "0000-0003-2416-6235")),
+    person(given   = "Xavier",
+           family  = "Giraud",
+           role    = "aut",
+           email   = "giraud@cerege.fr",
+           comment = c(ORCID = "0000-0001-5067-8176")),
+    person(given   = "Sonia",
+           family  = "Chaabane",
+           role    = "aut",
+           email   = "sonia.chaabane@fondationbiodiversite.fr",
+           comment = c(ORCID = "0000-0002-4653-8610")))
+Description: Provides an interface to the FORCIS database on global foraminifera
+    distribution. This package allows to download and to handle FORCIS data.
+    It is part of the FRB-CESAB working group FORCIS.
+    <https://www.fondationbiodiversite.fr/en/the-frb-in-action/programs-and-projects/le-cesab/forcis/>.
+URL: https://frbcesab.github.io/forcis
 BugReports: https://github.com/FRBCesab/forcis/issues
 License: GPL (>= 2)
 Encoding: UTF-8

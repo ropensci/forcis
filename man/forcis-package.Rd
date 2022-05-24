@@ -4,20 +4,27 @@
 \name{forcis-package}
 \alias{forcis}
 \alias{forcis-package}
-\title{forcis: The Title of the Project}
+\title{forcis: A Client to Access the FORCIS Database}
 \description{
-A paragraph providing a full description of the project (on several lines...)
+Provides an interface to the FORCIS database on global foraminifera distribution. This package allows to download and to handle FORCIS data. It is part of the FRB-CESAB working group FORCIS. \url{https://www.fondationbiodiversite.fr/en/the-frb-in-action/programs-and-projects/le-cesab/forcis/}.
 }
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/FRBCesab/forcis}
+  \item \url{https://frbcesab.github.io/forcis}
   \item Report bugs at \url{https://github.com/FRBCesab/forcis/issues}
 }
 
 }
 \author{
-\strong{Maintainer}: Nicolas Casajus \email{nicolas.casajus@fondationbiodiversite.fr} (\href{https://orcid.org/0000-0002-5537-5294}{ORCID})
+\strong{Maintainer}: Nicolas Casajus \email{nicolas.casajus@fondationbiodiversite.fr} (\href{https://orcid.org/0000-0002-5537-5294}{ORCID}) [copyright holder]
+
+Authors:
+\itemize{
+  \item Mattia Greco \email{mgreco@iopan.pl} (\href{https://orcid.org/0000-0003-2416-6235}{ORCID})
+  \item Xavier Giraud \email{giraud@cerege.fr} (\href{https://orcid.org/0000-0001-5067-8176}{ORCID})
+  \item Sonia Chaabane \email{sonia.chaabane@fondationbiodiversite.fr} (\href{https://orcid.org/0000-0002-4653-8610}{ORCID})
+}
 
 }
 \keyword{internal}

@@ -2,9 +2,9 @@ citHeader("To cite forcis in publications use:")
 
 bibentry(
   bibtype = "Manual",
-  title   = "forcis: {A}n {R} package to handle the FORCIS Foraminifera database",
-  author  = c(person("Casajus Nicolas")),
-  year    = "2021",
+  title   = "forcis: {A} {C}lient to {A}ccess the {FORCIS} {D}atabase",
+  author  = c(person("Casajus Nicolas"), person("Greco Mattia"), person("Giraud Xavier"), person("Chaabane Sonia")),
+  year    = "2022",
   note    = "R package version 0.0.0.9000",
-  url     = "https://github.com/FRBCesab/forcis"
+  url     = "https://frbcesab.github.io/forcis"
 )

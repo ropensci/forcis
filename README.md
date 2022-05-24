@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# forcis <img src="man/figures/hexsticker.png" height="120" align="right"/>
+# forcis <img src="man/figures/hexsticker.png" height="120px" align="right" style="float:right; height:120px;"/>
 
 <!-- badges: start -->
 
@@ -9,21 +9,20 @@
 Check](https://github.com/FRBCesab/forcis/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/FRBCesab/forcis/actions/workflows/R-CMD-check.yaml)
 [![Website
 deployment](https://github.com/FRBCesab/forcis/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/FRBCesab/forcis/actions/workflows/pkgdown.yaml)
-[![Test
-coverage](https://github.com/FRBCesab/forcis/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/FRBCesab/forcis/actions/workflows/test-coverage.yaml)
-[![codecov](https://codecov.io/gh/FRBCesab/forcis/branch/master/graph/badge.svg)](https://codecov.io/gh/FRBCesab/forcis)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/forcis)](https://CRAN.R-project.org/package=forcis)
-[![License: GPL (>=
+[![License: GPL (\>=
 2)](https://img.shields.io/badge/License-GPL%20%28%3E%3D%202%29-blue.svg)](https://choosealicense.com/licenses/gpl-2.0/)
 [![LifeCycle](man/figures/lifecycle/lifecycle-experimental.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![Project Status:
 Concept](https://www.repostatus.org/badges/latest/concept.svg)](https://www.repostatus.org/#concept)
-[![Dependencies](https://img.shields.io/badge/dependencies-0/0-brightgreen?style=flat)](#)
 <!-- badges: end -->
 
-The goal of the R package `forcis` is to handle the FORCIS Foraminifera
-database.
+The goal of the R package `forcis` is to provide an interface to the
+FORCIS database on global foraminifera distribution. This package allows
+to download and to handle FORCIS data. This work is part of the
+FRB-CESAB working group
+[FORCIS](https://www.fondationbiodiversite.fr/en/the-frb-in-action/programs-and-projects/le-cesab/forcis/).
 
 ## Installation
 
@@ -51,7 +50,15 @@ vignette.
 
 Please cite this package as:
 
-> Coming soon…
+> Casajus N, Greco M, Giraud X & Chaabane S (2022) forcis: A Client to
+> Access the FORCIS Database. R package version 0.0.0.9000. URL:
+> <https://frbcesab.github.io/forcis/>.
+
+You can also run:
+
+``` r
+citation("forcis")
+```
 
 ## Code of Conduct
 
