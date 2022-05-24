@@ -18,7 +18,7 @@ forcis_db_url <- function() "repository_url"
 #' 
 #' @noRd
 
-plankton_net_filename <- function() paste0("planktonnet_", 
+plankton_net_filename <- function() paste0("subset-planktonnet_", 
                                            forcis_db_version(), ".csv")
 
 
