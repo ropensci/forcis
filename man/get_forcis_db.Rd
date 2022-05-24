@@ -8,7 +8,7 @@ get_forcis_db(path = ".", version = forcis_db_version())
 }
 \arguments{
 \item{path}{a character. The folder in which the FORCIS database will be
-save}
+saved.}
 
 \item{version}{a character. The version number of the database.}
 }

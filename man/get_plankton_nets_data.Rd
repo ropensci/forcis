@@ -7,8 +7,8 @@
 get_plankton_nets_data(path, version = forcis_db_version())
 }
 \arguments{
-\item{path}{a character. The folder in which the FORCIS database will be
-save}
+\item{path}{a character. The folder in which the FORCIS database is (or will
+be) saved or read}
 
 \item{version}{a character. The version number of the database.}
 }

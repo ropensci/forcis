@@ -4,7 +4,7 @@
 #' __ADD DESCRIPTION__
 #'
 #' @param path a character. The folder in which the FORCIS database will be 
-#'   save
+#'   saved.
 #'   
 #' @param version a character. The version number of the database. 
 #'
@@ -47,6 +47,9 @@ get_forcis_db <- function(path = ".", version = forcis_db_version()) {
 #' folder `path`. If this file does not exist it will be downloaded from
 #' \url{Repository}.
 #'
+#' @param path a character. The folder in which the FORCIS database is (or will
+#'   be) saved or read
+#'   
 #' @inheritParams get_forcis_db
 #'
 #' @return A `data.frame` with x rows and y columns. See **Data Paper URL** for
