@@ -13,9 +13,6 @@ deployment](https://github.com/FRBCesab/forcis/actions/workflows/pkgdown.yaml/ba
 status](https://www.r-pkg.org/badges/version/forcis)](https://CRAN.R-project.org/package=forcis)
 [![License: GPL (\>=
 2)](https://img.shields.io/badge/License-GPL%20%28%3E%3D%202%29-blue.svg)](https://choosealicense.com/licenses/gpl-2.0/)
-[![LifeCycle](man/figures/lifecycle/lifecycle-experimental.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-[![Project Status:
-Concept](https://www.repostatus.org/badges/latest/concept.svg)](https://www.repostatus.org/#concept)
 <!-- badges: end -->
 
 The goal of the R package `forcis` is to provide an interface to the
