@@ -26,7 +26,8 @@ get_forcis_db <- function(path = ".", version = forcis_db_version()) {
     dir.create(path, recursive = TRUE)
   }
   
-  # download_csv(path, plankton_net_filename())
+  download_csv(path, plankton_net_filename())
+
   # download_csv(path, pump_filename())
   # download_csv(path, cpr_north_filename())
   # download_csv(path, cpr_south_filename())

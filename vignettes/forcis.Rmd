@@ -14,24 +14,12 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Title 1
 
-Paragraph
+## Getting Plankton net data
 
-Second paragraph with *italic*, **bold**, and `code`.
 
-Document produced on `r Sys.Date()`
-
-[Google](https://google.fr)
-
-![](../man/figures/hexsticker.png)
-
-## Title 2
-
-### Title 3
 
 ```{r setup}
-# Load package
 library(forcis)
 ```
 
@@ -39,15 +27,15 @@ library(forcis)
 
 
 ```{r 'import-data'}
-## Define filename path ----
-file_path <- system.file("extdata", "example_dataset.csv", package = "forcis")
+## Define the path to store data ----
+path <- tempdir()
 
-## Read CSV file ----
-dat <- read.csv(file = file_path)
+## Download and import data ----
+nets <- get_plankton_nets_data(path)
 
 ## Explore dataset ----
-dim(dat)
+dim(nets)
 
-colnames(dat)
+colnames(nets)
 ```
 

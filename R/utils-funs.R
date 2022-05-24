@@ -10,7 +10,8 @@ forcis_db_version <- function() "May2022"
 #' 
 #' @noRd
 
-forcis_db_url <- function() "repository_url"
+forcis_db_url <- function() paste0("https://raw.githubusercontent.com/", 
+                                   "FRBCesab/forcis/master/inst/extdata")
 
 
 
@@ -90,7 +91,7 @@ download_csv <- function(path, file) {
   
   check_if_path_exists(path)
   
-  utils::download.file(url      = paste0(forcis_db_url(), ""), 
+  utils::download.file(url      = paste(forcis_db_url(), file, sep = "/"), 
                        destfile = file.path(path, file))
   
   invisible(NULL)
