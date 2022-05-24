@@ -22,7 +22,5 @@ Imports:
 Suggests: 
     knitr,
     readr,
-    rmarkdown,
-    testthat (>= 3.0.0)
-Config/testthat/edition: 3
+    rmarkdown
 VignetteBuilder: knitr
