@@ -26,10 +26,11 @@ get_forcis_db <- function(path = ".", version = forcis_db_version()) {
     dir.create(path, recursive = TRUE)
   }
   
-  # Download a ZIP or separate csv files ???
-  
-  # utils::download.file(url = "url_on_zenodo",
-  #                      destfile = file.path(path, "forcis_database.csv"))
+  # download_csv(path, plankton_net_filename())
+  # download_csv(path, pump_filename())
+  # download_csv(path, cpr_north_filename())
+  # download_csv(path, cpr_south_filename())
+  # download_csv(path, sediment_trap_filename())
   
   invisible(NULL)
 }
@@ -50,25 +51,15 @@ get_forcis_db <- function(path = ".", version = forcis_db_version()) {
 #' 
 #' @export
 
-
 get_plankton_nets_data <- function(path, version = forcis_db_version()) {
   
-  ## Check if path exists ----
-  
-  if (!dir.exists(path)) {
-    stop("The directory '", path, "' does not exist")
-  }
-  
-  
-  ## Check if csv exists ----
+  check_if_path_exists(path)
   
   file_name <- list.files(path, pattern = plankton_net_filename())
   
-  if (length(file_name) == 0) {
-    
-    message("Downloading Plankton nets data...")
-    # utils::download.file()
+  if (!length(file_name)) {
+    download_csv(path, plankton_net_filename())
   }
   
-  read.csv(file.path(path, plankton_net_filename()))
+  utils::read.csv(file.path(path, plankton_net_filename()))
 }
