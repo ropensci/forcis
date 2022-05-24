@@ -24,6 +24,11 @@ check_if_path_exists <- function(path) {
 }
 
 
+
+#' Check for non-empty data.frame
+#' 
+#' @noRd
+
 check_if_not_df <- function(data) {
   
   if (!is.data.frame(data)) {
@@ -40,3 +45,5 @@ check_if_not_df <- function(data) {
   
   invisible(NULL)
 }
+
+
