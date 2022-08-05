@@ -10,6 +10,7 @@
 #' @import dplyr
 #' @import tidyr
 #' @import rlang
+#' @import messages
 compute_concentrations<-function(df, aggregate=TRUE){
   
   
@@ -74,9 +75,43 @@ compute_concentrations<-function(df, aggregate=TRUE){
               .data$total_of_forams_counted_ind)) %>%
     rename('counts'='new_counts') %>%
     distinct(.data)
+  
+  excluded_samples_volume<-df %>%
+    filter(.data$subsample_count_type!="Absolute") %>%
+    select(.data$cruise_id,.data$profile_id,.data$new_station_id,
+           .data$profile_id,.data$sample_id,.data$subsample_id,
+           .data$sample_max_depth,.data$site_lat_start_decimal,
+           .data$site_lon_start_decimal,
+           .data$subsample_count_type,.data$sample_volume_filtered,79:276) %>% 
+    filter(is.na(.data$sample_volume_filtered)==TRUE)
+  
+  excluded_samples_missing_counts<-df %>%
+    filter(.data$sample_volume_filtered>0) %>% 
+    select(.data$cruise_id,.data$profile_id,.data$new_station_id,
+           .data$profile_id,.data$sample_id,.data$subsample_id,
+           .data$sample_max_depth,.data$site_lat_start_decimal,
+           .data$site_lon_start_decimal,
+           .data$subsample_count_type,.data$sample_volume_filtered,
+           .data$subsample_all_shells_present_were_counted,
+           .data$total_of_forams_counted_ind,79:276) %>% 
+    filter(.data$subsample_count_type=='Relative') %>%    
+    pivot_longer(13:210, names_to = 'taxa', values_to = 'counts') %>%
+    mutate(to_drop=ifelse(is.na(.data$counts),'drop','keep')) %>% 
+    filter(.data$to_drop=='keep') %>% 
+    select(-.data$to_drop) %>%  
+    filter(is.na(.data$total_of_forams_counted_ind))
+  
+  
+  
+  msg_info("Counts from",msg_value(length(unique(excluded_samples_volume$sample_id))),
+           "samples could not be converted because of missing volume data")
+  
+  msg_info("Relative counts from",msg_value(length(unique(excluded_samples_missing_counts$sample_id))),
+           "samples could not be converted because of missing data on total assemblage")
 
 
   tot_dat<-rbind(ready_dat,abs_data_to_convert,rel_data_to_convert)
+  
 
   if (!aggregate) {
     return(tot_dat)}
