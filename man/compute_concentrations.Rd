@@ -2,7 +2,7 @@
 % Please edit documentation in R/conversions.R
 \name{compute_concentrations}
 \alias{compute_concentrations}
-\title{Compute concentrations from net data}
+\title{Compute count conversions from net data}
 \usage{
 compute_concentrations(df, aggregate = TRUE)
 }
@@ -16,5 +16,5 @@ If TRUE subsample counts will be aggregated by sample_id.}
 dataframe
 }
 \description{
-Compute concentrations from net data
+Compute count conversions from net data
 }
