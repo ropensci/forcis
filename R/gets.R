@@ -1,12 +1,13 @@
-#' Download the FORCIS database as csv files
+#' Download the FORCIS database as a collection of five csv files
 #'
 #' @description 
 #' __ADD DESCRIPTION__
 #'
-#' @param path a character. The folder in which the FORCIS database will be 
-#'   saved.
+#' @param path a `character` of length 1. The folder in which the FORCIS 
+#'   database will be saved.
 #'   
-#' @param version a character. The version number of the database. 
+#' @param version a `character` of length 1. The version number of the 
+#'   FORCIS database. Default is the latest version.
 #'
 #' @return No return value. The five `csv` files will be saved in the `path` 
 #'   folder.
@@ -22,44 +23,76 @@
 
 get_forcis_db <- function(path = ".", version = forcis_db_version()) {
   
-  ## Create outputs directory is required ----
+  ## Check args ----
+  
+  is_character(path)
+  is_character(version)
+  
+  
+  ## Create outputs directory if required ----
   
   if (!dir.exists(path)) {
     dir.create(path, recursive = TRUE)
   }
   
+  
+  ## Download files from Zenodo ----
+  
   download_csv(path, plankton_net_filename())
-
-  # download_csv(path, pump_filename())
-  # download_csv(path, cpr_north_filename())
-  # download_csv(path, cpr_south_filename())
-  # download_csv(path, sediment_trap_filename())
+  download_csv(path, pump_filename())
+  download_csv(path, cpr_north_filename())
+  download_csv(path, cpr_south_filename())
+  download_csv(path, sediment_trap_filename())
   
   invisible(NULL)
 }
 
 
 
-#' Import plankton nets data
+#' Import FORCIS data
 #' 
 #' @description 
-#' This function reads the csv file `planktonnet_May2022.csv` stored in the 
-#' folder `path`. If this file does not exist it will be downloaded from
-#' \url{Repository}.
+#' These functions import one specific csv file of the FORCIS database 
+#' (see below) stored in the folder `path`. If the csv file does not exist 
+#' it will be downloaded from \url{https://zenodo.org/record/7390792}.
 #'
-#' @param path a character. The folder in which the FORCIS database is (or will
-#'   be) saved or read
+#' @param path a `character` of length 1. The folder in which the FORCIS 
+#'   database is (or will be) saved or read.
 #'   
 #' @inheritParams get_forcis_db
-#'
-#' @return A `data.frame` with x rows and y columns. See **Data Paper URL** for
-#'   further information.
 #' 
+#' @details
+#' 
+#' - `get_plankton_nets_data()` imports the FORCIS plankton nets data
+#' - `get_pump_data()` imports the FORCIS pump data
+#' - `get_cpr_north_data()` imports the FORCIS CPR North data
+#' - `get_cpr_south_data()` imports the FORCIS CPR South data
+#' - `get_sediment_trap_data()` imports the FORCIS sediment traps data
+#'
+#' @return A `data.frame`. See \url{https://zenodo.org/record/7390792} for a
+#'   preview of the dataset.
+#' 
+#' @seealso [get_forcis_db()] to download the complete FORCIS database.
+#'
+#' @name get_data
+NULL
+
+
+
+#' @rdname get_data
 #' @export
 
 get_plankton_nets_data <- function(path, version = forcis_db_version()) {
   
+  ## Check args ----
+  
+  is_character(path)
+  is_character(version)
+  
   check_if_path_exists(path)
+  
+  
+  ## Download csv (if required) ----
   
   file_name <- list.files(path, pattern = plankton_net_filename())
   
@@ -67,14 +100,143 @@ get_plankton_nets_data <- function(path, version = forcis_db_version()) {
     download_csv(path, plankton_net_filename())
   }
   
-  utils::read.csv2(file.path(path, plankton_net_filename()))
+  
+  ## Read data ----
+  
+  forcis_data <- utils::read.csv2(file.path(path, plankton_net_filename()))
+  
+  data.frame("data_type" = "plankton_net", forcis_data)
+}
+
+
+
+#' @rdname get_data
+#' @export
+
+get_pump_data <- function(path, version = forcis_db_version()) {
+  
+  ## Check args ----
+  
+  is_character(path)
+  is_character(version)
+  
+  check_if_path_exists(path)
+  
+  
+  ## Download csv (if required) ----
+  
+  file_name <- list.files(path, pattern = pump_filename())
+  
+  if (!length(file_name)) {
+    download_csv(path, pump_filename())
+  }
+  
+  
+  ## Read data ----
+  
+  forcis_data <- utils::read.csv2(file.path(path, pump_filename()))
+  
+  data.frame("data_type" = "pump", forcis_data)
+}
+
+
+
+#' @rdname get_data
+#' @export
+
+get_cpr_north_data <- function(path, version = forcis_db_version()) {
+  
+  ## Check args ----
+  
+  is_character(path)
+  is_character(version)
+  
+  check_if_path_exists(path)
+  
+  
+  ## Download csv (if required) ----
+  
+  file_name <- list.files(path, pattern = cpr_north_filename())
+  
+  if (!length(file_name)) {
+    download_csv(path, cpr_north_filename())
+  }
+  
+  
+  ## Read data ----
+  
+  forcis_data <- utils::read.csv2(file.path(path, cpr_north_filename()))
+  
+  data.frame("data_type" = "cpr_north", forcis_data)
+}
+
+
+
+#' @rdname get_data
+#' @export
+
+get_cpr_south_data <- function(path, version = forcis_db_version()) {
+  
+  ## Check args ----
+  
+  is_character(path)
+  is_character(version)
+  
+  check_if_path_exists(path)
+  
+  
+  ## Download csv (if required) ----
+  
+  file_name <- list.files(path, pattern = cpr_south_filename())
+  
+  if (!length(file_name)) {
+    download_csv(path, cpr_south_filename())
+  }
+  
+  
+  ## Read data ----
+  
+  forcis_data <- utils::read.csv2(file.path(path, cpr_south_filename()))
+  
+  data.frame("data_type" = "cpr_south", forcis_data)
+}
+
+
+
+#' @rdname get_data
+#' @export
+
+get_sediment_trap_data <- function(path, version = forcis_db_version()) {
+  
+  ## Check args ----
+  
+  is_character(path)
+  is_character(version)
+  
+  check_if_path_exists(path)
+  
+  
+  ## Download csv (if required) ----
+  
+  file_name <- list.files(path, pattern = sediment_trap_filename())
+  
+  if (!length(file_name)) {
+    download_csv(path, sediment_trap_filename())
+  }
+  
+  
+  ## Read data ----
+  
+  forcis_data <- utils::read.csv2(file.path(path, sediment_trap_filename()))
+  
+  data.frame("data_type" = "sediment_trap", forcis_data)
 }
 
 
 
 #' Download a csv file
 #' 
-#' @param file a character. The name of the csv to download.
+#' @param file a `character` of length 1. The name of the csv to download.
 #' 
 #' @inheritParams get_forcis_db
 #' 
@@ -87,8 +249,7 @@ download_csv <- function(path, file) {
   utils::download.file(url      = paste(forcis_db_url(), file, sep = "/"), 
                        destfile = file.path(path, file))
   
-  messages::msg_done("The file", messages::msg_value(file), 
-                     "has been successfully downloaded")
+  message("The file '", file, "' has been successfully downloaded")
   
   invisible(NULL)
 }

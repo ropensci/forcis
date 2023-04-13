@@ -2,7 +2,7 @@
 #' 
 #' @noRd
 
-forcis_db_version <- function() "May2022"
+forcis_db_version <- function() "v01_02122022"
 
 
 
@@ -10,8 +10,7 @@ forcis_db_version <- function() "May2022"
 #' 
 #' @noRd
 
-forcis_db_url <- function() paste0("https://raw.githubusercontent.com/", 
-                                   "FRBCesab/forcis/master/inst/extdata")
+forcis_db_url <- function() "https://zenodo.org/record/7390792/"
 
 
 

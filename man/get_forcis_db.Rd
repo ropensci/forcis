@@ -2,15 +2,16 @@
 % Please edit documentation in R/gets.R
 \name{get_forcis_db}
 \alias{get_forcis_db}
-\title{Download the FORCIS database as csv files}
+\title{Download the FORCIS database as a collection of five csv files}
 \usage{
 get_forcis_db(path = ".", version = forcis_db_version())
 }
 \arguments{
-\item{path}{a character. The folder in which the FORCIS database will be
-saved.}
+\item{path}{a \code{character} of length 1. The folder in which the FORCIS
+database will be saved.}
 
-\item{version}{a character. The version number of the database.}
+\item{version}{a \code{character} of length 1. The version number of the
+FORCIS database. Default is the latest version.}
 }
 \value{
 No return value. The five \code{csv} files will be saved in the \code{path}

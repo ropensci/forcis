@@ -47,3 +47,28 @@ check_if_not_df <- function(data) {
 }
 
 
+
+#' Check for non-missing argument of type character and length 1
+#' 
+#' @noRd
+
+is_character <- function(str) {
+  
+  if (missing(str)) {
+    stop("Argument '", deparse(substitute(str)), "' is required", 
+         call. = FALSE)
+  }
+  
+  if (!is.character(str)) {
+    stop("Argument '", deparse(substitute(str)), "' must be a character", 
+         call. = FALSE)
+  }
+  
+  if (length(str) != 1) {
+    stop("Argument '", deparse(substitute(str)), "' must be of length 1", 
+         call. = FALSE)
+  }
+  
+  invisible(NULL)
+}
+

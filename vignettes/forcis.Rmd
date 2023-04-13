@@ -26,7 +26,7 @@ library(forcis)
 
 
 
-```{r 'import-data'}
+```{r 'import-data', eval=FALSE}
 ## Define the path to store data ----
 path <- tempdir()
 
