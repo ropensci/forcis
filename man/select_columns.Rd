@@ -2,19 +2,22 @@
 % Please edit documentation in R/selects.R
 \name{select_columns}
 \alias{select_columns}
-\title{Select columns in a data.frame}
+\title{Select columns in FORCIS data}
 \usage{
 select_columns(data, cols = NULL)
 }
 \arguments{
-\item{data}{a data.frame. One obtained by \verb{get_*_data()} functions.}
+\item{data}{a \code{data.frame}. One obtained by \verb{get_*_data()} functions.}
 
-\item{cols}{a character vector of columns names to keep in addition to the
+\item{cols}{a \code{character} vector of columns names to keep in addition to the
 required ones.}
 }
 \value{
-A \code{data.frame}
+A \code{data.frame}.
 }
 \description{
-Select columns in a data.frame
+\strong{ADD DESCRIPTION}
+}
+\examples{
+## __ADD EXAMPLE__
 }
