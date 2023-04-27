@@ -66,8 +66,7 @@ Please read the [Get started](https://frbcesab.github.io/forcis/articles/forcis.
 
 Please cite this package as: 
 
-> Casajus N, Greco M, Giraud X & Chaabane S (2022) forcis: A Client to Access the FORCIS Database.
-R package version 0.0.0.9000. URL: https://frbcesab.github.io/forcis/.
+> Casajus N, Greco M, Giraud X & Chaabane S (2023) forcis: An R client to access the FORCIS database. R package version 0.0.0.9000. URL: https://frbcesab.github.io/forcis/.
 
 You can also run:
 

@@ -1,6 +1,6 @@
 Package: forcis
 Type: Package
-Title: A Client to Access the FORCIS Database
+Title: An R Client to Access the FORCIS Database
 Version: 0.0.0.9000
 Authors@R: c(
     person(given   = "Nicolas",
