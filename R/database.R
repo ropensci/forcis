@@ -18,7 +18,20 @@ forcis_db_url <- function() "https://zenodo.org/record/7390792/"
 #' 
 #' @noRd
 
-required_columns <- function() c()
+required_columns <- function() {
+
+  c("cruise_id",
+    "profile_id",
+    "sample_id",
+    "subsample_id",
+    "subsample_count_type",
+    "sample_max_depth",
+    "site_lat_start_decimal",
+    "site_lon_start_decimal",
+    "sample_volume_filtered",
+    "subsample_all_shells_present_were_counted",
+    "total_of_forams_counted_ind")
+}
 
 
 
@@ -338,3 +351,21 @@ species_list <- function() {
     
     "taxonomy" = c(rep("LT", 48), rep("VT", 57), rep("OT", 198)))
 }
+
+
+
+#' Check for required columns
+#' 
+#' @noRd
+
+check_required_columns <- function(data) {
+  
+  check_if_not_df(data)
+  
+  if (any(!(required_columns() %in% colnames(data)))) {
+    stop("Some required columns are absent from data", call. = FALSE)
+  }
+  
+  invisible(NULL)
+}
+

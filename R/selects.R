@@ -31,9 +31,7 @@ select_columns <- function(data, cols = NULL) {
   
   # Check for missing columns ----
   
-  if (any(!(required_columns() %in% colnames(data)))) {
-    stop("Some required columns are absent from data", call. = FALSE)
-  }
+  check_required_columns(data)
   
   if (!is.null(cols)) {
     if (any(!(cols %in% colnames(data)))) {
