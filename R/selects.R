@@ -40,15 +40,20 @@ select_columns <- function(data, cols = NULL) {
   }
   
   
+  # Extract species columns ----
+  
+  species_cols <- extract_species_names(data)
+  
+  
   # Subset columns ----
   
   if (is.null(cols)) {
     
-    data <- data[ , required_columns()]
+    data <- data[ , c(required_columns(), species_cols)]
     
   } else {
     
-    data <- data[ , c(required_columns(), cols)]
+    data <- data[ , c(required_columns(), cols, species_cols)]
   }
   
   data
