@@ -369,3 +369,27 @@ check_required_columns <- function(data) {
   invisible(NULL)
 }
 
+
+
+#' Detect taxonomy
+#' 
+#' @noRd
+
+detect_taxonomy <- function(data) {
+  
+  check_required_columns(data)
+  
+  pos <- which(species_list()[ , "taxon"] %in% colnames(data))
+  
+  if (length(pos) > 0) { 
+    
+    taxonomy <- unique(species_list()[pos, "taxonomy"])
+    
+    if (length(taxonomy) > 1) {
+      stop("Multiple taxonomies are not allowed. Please use the function ", 
+           "'select_taxonomy()' before going any further", call. = FALSE)
+    }
+  }
+  
+  invisible(NULL)
+}
