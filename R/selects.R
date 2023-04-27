@@ -94,3 +94,26 @@ select_taxonomy <- function(data, taxonomy) {
   
   data
 }
+
+
+
+#' Extract species names from columns names
+#'
+#' @description
+#' __ADD DESCRIPTION__
+#' 
+#' @param data a `data.frame`. One obtained by `get_*_data()` functions.
+#' 
+#' @export
+#'
+#' @return A `data.frame`.
+#' 
+#' @examples
+#' ## __ADD EXAMPLE__
+
+extract_species_names <- function(data) {
+  
+  check_if_not_df(data)
+  
+  colnames(data)[which(colnames(data) %in% species_list()[ , "taxon"])]
+}
