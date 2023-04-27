@@ -53,3 +53,44 @@ select_columns <- function(data, cols = NULL) {
   
   data
 }
+
+
+
+#' Select a taxonomy in FORCIS data
+#'
+#' @description
+#' __ADD DESCRIPTION__
+#' 
+#' @param data a `data.frame`. One obtained by `get_*_data()` functions.
+#'
+#' @param taxonomy a `character` of length 1. One among `"LT"`, `"VT"`, `"OT"`.
+#' 
+#' @export
+#'
+#' @return A `data.frame`.
+#' 
+#' @examples
+#' ## __ADD EXAMPLE__
+
+select_taxonomy <- function(data, taxonomy) {
+  
+  
+  ## Check args ----
+  
+  check_if_not_df(data)
+  check_if_valid_taxonomy(taxonomy)
+  
+  
+  ## Remove species from others taxonomies ----
+  
+  species_to_del <- species_list()[which(species_list()[ , "taxonomy"] != 
+                                           toupper(taxonomy)), "taxon"]
+  
+  pos <- which(colnames(data) %in% species_to_del)
+  
+  if (length(pos) > 0) {
+    data <- data[ , -pos]
+  }
+  
+  data
+}

@@ -393,3 +393,25 @@ detect_taxonomy <- function(data) {
   
   invisible(NULL)
 }
+
+
+
+#' Detect taxonomy
+#' 
+#' @noRd
+
+check_if_valid_taxonomy <- function(taxonomy) {
+  
+  is_character(taxonomy)
+  taxonomy   <- tolower(taxonomy)
+  
+  taxonomies <- unique(species_list()[ , "taxonomy"])
+  taxonomies <- tolower(taxonomies)
+  
+  if (!(taxonomy %in% taxonomies)) {
+    stop("Bad taxonomy. Valid taxonomies names are: ",
+         toString(toupper(taxonomies)), call. = FALSE)
+  }
+  
+  invisible(NULL)
+}
