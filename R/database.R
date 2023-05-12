@@ -30,7 +30,8 @@ required_columns <- function() {
     "site_lon_start_decimal",
     "sample_volume_filtered",
     "subsample_all_shells_present_were_counted",
-    "total_of_forams_counted_ind")
+    "total_of_forams_counted_ind",
+    "sampling_device_type")
 }
 
 
