@@ -10,32 +10,47 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
+  eval     = FALSE,
+  echo     = TRUE,
   comment  = "#>"
 )
 ```
 
 
-## Getting Plankton net data
+## Skeleton
 
 
 
 ```{r setup}
-library(forcis)
+# Setup ----
+library("forcis")
 ```
 
 
 
+```{r 'xxx'}
+# Define the path to store data ----
+path       <- here::here()
+db_version <- "v01_02122022"
 
-```{r 'import-data', eval=FALSE}
-## Define the path to store data ----
-path <- tempdir()
+# Download FORCIS database (from Zenodo) ----
+get_forcis_db(path = path, version = db_version)
 
-## Download and import data ----
+# Import net data ----
 nets <- get_plankton_nets_data(path)
 
-## Explore dataset ----
-dim(nets)
+# Select taxonomy ----
+nets <- select_taxonomy(nets, taxonomy = "OT")
 
-colnames(nets)
+# Select columns ----
+nets <- select_columns(nets, cols = NULL)
+
+# Compute concentration ----
+nets_concentrations <- compute_concentrations(nets, aggregate = TRUE)
+
+# Compute frequencies ----
+nets_frequencies <- compute_frequencies(nets, aggregate = TRUE)
+
+# Compute abundances ----
+nets_abundances <- compute_abundances(nets, aggregate = TRUE)
 ```
-
