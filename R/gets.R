@@ -103,7 +103,7 @@ get_plankton_nets_data <- function(path, version = forcis_db_version()) {
   
   ## Read data ----
   
-  forcis_data <- utils::read.csv2(file.path(path, plankton_net_filename()))
+  forcis_data <- utils::read.csv(file.path(path, plankton_net_filename()))
   
   data.frame("data_type" = "plankton_net", forcis_data)
 }
@@ -134,7 +134,7 @@ get_pump_data <- function(path, version = forcis_db_version()) {
   
   ## Read data ----
   
-  forcis_data <- utils::read.csv2(file.path(path, pump_filename()))
+  forcis_data <- utils::read.csv(file.path(path, pump_filename()))
   
   data.frame("data_type" = "pump", forcis_data)
 }
@@ -165,7 +165,7 @@ get_cpr_north_data <- function(path, version = forcis_db_version()) {
   
   ## Read data ----
   
-  forcis_data <- utils::read.csv2(file.path(path, cpr_north_filename()))
+  forcis_data <- utils::read.csv(file.path(path, cpr_north_filename()))
   
   data.frame("data_type" = "cpr_north", forcis_data)
 }
@@ -196,7 +196,7 @@ get_cpr_south_data <- function(path, version = forcis_db_version()) {
   
   ## Read data ----
   
-  forcis_data <- utils::read.csv2(file.path(path, cpr_south_filename()))
+  forcis_data <- utils::read.csv(file.path(path, cpr_south_filename()))
   
   data.frame("data_type" = "cpr_south", forcis_data)
 }
@@ -227,7 +227,7 @@ get_sediment_trap_data <- function(path, version = forcis_db_version()) {
   
   ## Read data ----
   
-  forcis_data <- utils::read.csv2(file.path(path, sediment_trap_filename()))
+  forcis_data <- utils::read.csv(file.path(path, sediment_trap_filename()))
   
   data.frame("data_type" = "sediment_trap", forcis_data)
 }
