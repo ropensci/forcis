@@ -39,6 +39,7 @@ Imports:
     messages,
     utils, 
     dplyr,
+    readr,
     rlang,
     tidyr
 Suggests: 

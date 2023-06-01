@@ -103,9 +103,7 @@ get_plankton_nets_data <- function(path, version = forcis_db_version()) {
   
   ## Read data ----
   
-  forcis_data <- utils::read.csv(file.path(path, plankton_net_filename()))
-  
-  data.frame("data_type" = "plankton_net", forcis_data)
+  readr::read_csv2(file.path(path, plankton_net_filename()))
 }
 
 
@@ -134,9 +132,7 @@ get_pump_data <- function(path, version = forcis_db_version()) {
   
   ## Read data ----
   
-  forcis_data <- utils::read.csv(file.path(path, pump_filename()))
-  
-  data.frame("data_type" = "pump", forcis_data)
+  readr::read_csv2(file.path(path, pump_filename()))
 }
 
 
@@ -165,9 +161,7 @@ get_cpr_north_data <- function(path, version = forcis_db_version()) {
   
   ## Read data ----
   
-  forcis_data <- utils::read.csv(file.path(path, cpr_north_filename()))
-  
-  data.frame("data_type" = "cpr_north", forcis_data)
+  readr::read_csv2(file.path(path, cpr_north_filename()))
 }
 
 
@@ -196,9 +190,7 @@ get_cpr_south_data <- function(path, version = forcis_db_version()) {
   
   ## Read data ----
   
-  forcis_data <- utils::read.csv(file.path(path, cpr_south_filename()))
-  
-  data.frame("data_type" = "cpr_south", forcis_data)
+  readr::read_csv2(file.path(path, cpr_south_filename()))
 }
 
 
@@ -227,9 +219,7 @@ get_sediment_trap_data <- function(path, version = forcis_db_version()) {
   
   ## Read data ----
   
-  forcis_data <- utils::read.csv(file.path(path, sediment_trap_filename()))
-  
-  data.frame("data_type" = "sediment_trap", forcis_data)
+  readr::read_csv2(file.path(path, sediment_trap_filename()))
 }
 
 
@@ -246,7 +236,8 @@ download_csv <- function(path, file) {
   
   check_if_path_exists(path)
   
-  utils::download.file(url      = paste(forcis_db_url(), file, sep = "/"), 
+  utils::download.file(url      = paste0(forcis_db_url(), "/files/", 
+                                         file, "?download=1"), 
                        destfile = file.path(path, file))
   
   message("The file '", file, "' has been successfully downloaded")
