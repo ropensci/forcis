@@ -10,7 +10,7 @@ forcis_db_version <- function() "v01_02122022"
 #' 
 #' @noRd
 
-forcis_db_url <- function() "https://zenodo.org/record/7390792/"
+forcis_db_url <- function() "https://zenodo.org/record/7827791"
 
 
 
@@ -91,7 +91,7 @@ species_list <- function() {
       "t_quinqueloba_LT",
       "t_sacculifer_LT",
       "UniD_LT", 
-      "number_of_species_counted_LT",
+#      "number_of_species_counted_LT",
       
       "b_digitata_VT",
       "b_pumilio_VT",
@@ -149,7 +149,7 @@ species_list <- function() {
       "t_sacculifer_no_sac_VT",
       "t_sacculifer_sac_VT",
       "UnID_VT",
-      "number_of_species_counted_VT",
+      # "number_of_species_counted_VT",
       
       "unidentified_specimens",
       "other",
@@ -350,7 +350,7 @@ species_list <- function() {
       "Globigerinoides_ruber_ruber_&Globigerinoides_ruber_albus&Globigerinoides_elongatus",
       "Globoturborotalita_rubescens&_Globigerinoides_tenellus"),
     
-    "taxonomy" = c(rep("LT", 48), rep("VT", 57), rep("OT", 198)))
+    "taxonomy" = c(rep("LT", 47), rep("VT", 56), rep("OT", 198)))
 }
 
 
