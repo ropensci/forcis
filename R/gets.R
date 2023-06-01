@@ -238,7 +238,7 @@ download_csv <- function(path, file) {
   
   utils::download.file(url      = paste0(forcis_db_url(), "/files/", 
                                          file, "?download=1"), 
-                       destfile = file.path(path, file))
+                       destfile = file.path(path, file), mode = "wb")
   
   message("The file '", file, "' has been successfully downloaded")
   
