@@ -2,7 +2,7 @@
 #' 
 #' @noRd
 
-forcis_db_version <- function() "v01_02122022"
+forcis_db_version <- function() "v03_14062023"
 
 
 
@@ -10,7 +10,7 @@ forcis_db_version <- function() "v01_02122022"
 #' 
 #' @noRd
 
-forcis_db_url <- function() "https://zenodo.org/record/7827791/files/"
+forcis_db_url <- function() "https://zenodo.org/record/7936568/files/"
 
 
 
