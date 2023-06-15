@@ -11,18 +11,21 @@
 #' @import tidyr
 #' @import rlang
 #' @import messages
-compute_concentrations<-function(df, aggregate=TRUE){
+
+
+
+compute_concentrations<-function(df, cols = NULL, aggregate=TRUE){
   
   #insert check device (net and pump only)
   #insert check taxonomy
   
   taxa_cols <- extract_species_names(df) 
   
+  df = select_columns(df, cols)
   
   ready_dat<-df %>%
-    select(select(required_columns(),all_of(taxa_cols)),79:276) %>% 
     filter(.data$subsample_count_type=="Absolute") %>%  
-    pivot_longer(13:ncol(.data), names_to = 'taxa', values_to = 'counts') %>%
+    pivot_longer(all_of(taxa_cols), names_to = 'taxa', values_to = 'counts') %>%
     mutate(to_drop=ifelse(is.na(.data$counts),'drop','keep')) %>% 
     filter(.data$to_drop=='keep')%>%
     select(-c(.data$to_drop,.data$subsample_count_type,
@@ -32,9 +35,8 @@ compute_concentrations<-function(df, aggregate=TRUE){
   
   abs_data_to_convert<-df %>%
     filter(.data$sample_volume_filtered>0) %>% 
-    select(required_columns(),all_of(taxa_cols)) %>% 
     filter(.data$subsample_count_type=='Raw') %>%   
-    pivot_longer(13:ncol(.data), names_to = 'taxa', values_to = 'counts') %>%
+    pivot_longer(all_of(taxa_cols), names_to = 'taxa', values_to = 'counts') %>%
     mutate(to_drop=ifelse(is.na(.data$counts),'drop','keep')) %>% 
     filter(.data$to_drop=='keep') %>% 
     select(-.data$to_drop) %>% 
@@ -48,9 +50,8 @@ compute_concentrations<-function(df, aggregate=TRUE){
   
   rel_data_to_convert<-df %>%
     filter(.data$sample_volume_filtered>0) %>%
-    select(required_columns(),all_of(taxa_cols)) %>% 
     filter(.data$subsample_count_type=='Relative') %>%
-    pivot_longer(13:ncol(.data), names_to = 'taxa', values_to = 'counts') %>%
+    pivot_longer(all_of(taxa_cols), names_to = 'taxa', values_to = 'counts') %>% 
     mutate(to_drop=ifelse(is.na(.data$counts),'drop','keep')) %>%
     filter(.data$to_drop=='keep') %>%
     select(-.data$to_drop) %>%
@@ -67,14 +68,12 @@ compute_concentrations<-function(df, aggregate=TRUE){
   
   excluded_samples_volume<-df %>%
     filter(.data$subsample_count_type!="Absolute") %>%
-    select(required_columns(),all_of(taxa_cols)) %>% 
     filter(is.na(.data$sample_volume_filtered)==TRUE)
   
   excluded_samples_missing_counts<-df %>%
     filter(.data$sample_volume_filtered>0) %>% 
-    select(required_columns(),all_of(taxa_cols)) %>% 
     filter(.data$subsample_count_type=='Relative') %>%    
-    pivot_longer(13:ncol(.data), names_to = 'taxa', values_to = 'counts') %>%
+    pivot_longer(all_of(taxa_cols), names_to = 'taxa', values_to = 'counts') %>% 
     mutate(to_drop=ifelse(is.na(.data$counts),'drop','keep')) %>% 
     filter(.data$to_drop=='keep') %>% 
     select(-.data$to_drop) %>%  
@@ -114,17 +113,20 @@ compute_concentrations<-function(df, aggregate=TRUE){
   
 }
 
-compute_frequencies<-function(df, aggregate=TRUE){
+
+compute_frequencies<-function(df, cols = NULL, aggregate=TRUE){
   
   #insert check device (net and pump only)
+  
   #insert check taxonomy
+  
+  df = select_columns(df, cols)
   
   taxa_cols <- extract_species_names(df)
   
   ready_dat<-df %>%
-    select(required_columns(),all_of(taxa_cols)) %>% 
     filter(.data$subsample_count_type=="Relative") %>%    
-    pivot_longer(13:ncol(.data), names_to = 'taxa', values_to = 'counts') %>% 
+    pivot_longer(all_of(taxa_cols), names_to = 'taxa', values_to = 'counts') %>% 
     mutate(to_drop=ifelse(is.na(.data$counts),'drop','keep')) %>% 
     filter(.data$to_drop=='keep') %>% 
     select(-c(.data$to_drop,.data$subsample_count_type,
@@ -139,9 +141,8 @@ compute_frequencies<-function(df, aggregate=TRUE){
   
   
   conc_to_frequency<-df %>%
-    select(required_columns(),all_of(taxa_cols)) %>% 
     filter(.data$subsample_count_type=="Absolute") %>% 
-    pivot_longer(13:ncol(.data), names_to = 'taxa', values_to = 'counts') %>% 
+    pivot_longer(all_of(taxa_cols), names_to = 'taxa', values_to = 'counts') %>% 
     mutate(to_drop=ifelse(is.na(.data$counts),'drop','keep')) %>% 
     filter(.data$to_drop=='keep') %>% 
     select(-c(.data$to_drop,.data$subsample_count_type)) %>% 
@@ -162,9 +163,8 @@ compute_frequencies<-function(df, aggregate=TRUE){
               .data$sampling_device_type))
   
   abs_to_frequency<-df %>% 
-    select(required_columns(),all_of(taxa_cols)) %>% 
     filter(.data$subsample_count_type=="Raw") %>% 
-    pivot_longer(13:ncol(.data), names_to = 'taxa', values_to = 'counts') %>% 
+    pivot_longer(all_of(taxa_cols), names_to = 'taxa', values_to = 'counts') %>% 
     mutate(to_drop=ifelse(is.na(.data$counts),'drop','keep')) %>% 
     filter(.data$to_drop=='keep') %>% 
     select(-c(.data$to_drop,.data$subsample_count_type)) %>% 
@@ -186,9 +186,8 @@ compute_frequencies<-function(df, aggregate=TRUE){
   merged_frequency<-rbind(conc_to_frequency,abs_to_frequency)
   
   excluded_samples_volume<-df %>% 
-    select(required_columns(),all_of(taxa_cols)) %>% 
     filter(.data$subsample_count_type=="Absolute") %>% 
-    pivot_longer(13:ncol(.data), names_to = 'taxa', values_to = 'counts') %>% 
+    pivot_longer(all_of(taxa_cols), names_to = 'taxa', values_to = 'counts') %>% 
     filter(is.na(.data$sample_volume_filtered)==TRUE)
   
   
@@ -228,17 +227,17 @@ compute_frequencies<-function(df, aggregate=TRUE){
 }
 
 
-compute_abundances<-function(df, aggregate=TRUE){
+compute_abundances<-function(df, cols = NULL, aggregate=TRUE){
   
   #insert check device (net and pump only)
   #insert check taxonomy
+  df = select_columns(df, cols)
   
   taxa_cols <- extract_species_names(df)
   
   ready_dat<-df %>%
-    select(required_columns(),all_of(taxa_cols)) %>%  
     filter(.data$subsample_count_type=="Raw") %>%  
-    pivot_longer(13:ncol(.data), names_to = 'taxa', values_to = 'counts') %>% 
+    pivot_longer(all_of(taxa_cols), names_to = 'taxa', values_to = 'counts') %>% 
     mutate(to_drop=ifelse(is.na(.data$counts),'drop','keep')) %>% 
     filter(.data$to_drop=='keep')%>%
     select(-c(.data$to_drop,.data$subsample_count_type,
@@ -249,9 +248,8 @@ compute_abundances<-function(df, aggregate=TRUE){
   
   conc_data_to_convert<-df %>%
     filter(.data$sample_volume_filtered>0) %>% 
-    select(required_columns(),all_of(taxa_cols)) %>%
     filter(.data$subsample_count_type=='Absolute') %>%   
-    pivot_longer(13:ncol(.data), names_to = 'taxa', values_to = 'counts') %>%
+    pivot_longer(all_of(taxa_cols), names_to = 'taxa', values_to = 'counts') %>%
     mutate(to_drop=ifelse(is.na(.data$counts),'drop','keep')) %>% 
     filter(.data$to_drop=='keep') %>% 
     select(-c(.data$to_drop,
@@ -261,14 +259,13 @@ compute_abundances<-function(df, aggregate=TRUE){
     mutate(new_counts=floor(.data$counts*.data$sample_volume_filtered)) %>% 
     select(-c(.data$counts,.data$subsample_count_type)) %>% 
     rename('counts'='new_counts') %>% 
-    distinct()
+    distinct(.data)
   
   
   rel_data_to_convert<-df %>%
     filter(.data$sample_volume_filtered>0) %>% 
-    select(required_columns(),all_of(taxa_cols)) %>%
     filter(.data$subsample_count_type=='Relative') %>%    
-    pivot_longer(13:ncol(.data), names_to = 'taxa', values_to = 'counts') %>%
+    pivot_longer(all_of(taxa_cols), names_to = 'taxa', values_to = 'counts') %>%
     mutate(to_drop=ifelse(is.na(.data$counts),'drop','keep')) %>% 
     filter(.data$to_drop=='keep') %>% 
     select(-.data$to_drop) %>% 
@@ -281,19 +278,17 @@ compute_abundances<-function(df, aggregate=TRUE){
               .data$total_of_forams_counted_ind,
               .data$sampling_device_type)) %>% 
     rename('counts'='new_counts') %>% 
-    distinct()
+    distinct(.data)
   
   excluded_samples_volume<-df %>%
     filter(.data$subsample_count_type!="Raw") %>%
-    select(required_columns(),all_of(taxa_cols)) %>%   
     filter(is.na(.data$sample_volume_filtered)==TRUE)
   
   #
   excluded_samples_missing_counts<-df %>%
     filter(.data$sample_volume_filtered>0) %>% 
-    select(required_columns(),all_of(taxa_cols)) %>% 
     filter(.data$subsample_count_type=='Relative') %>%    
-    pivot_longer(13:ncol(.data), names_to = 'taxa', values_to = 'counts') %>% 
+    pivot_longer(all_of(taxa_cols), names_to = 'taxa', values_to = 'counts') %>%
     mutate(to_drop=ifelse(is.na(.data$counts),'drop','keep')) %>% 
     filter(.data$to_drop=='keep') %>% 
     select(-.data$to_drop) %>%  
@@ -316,9 +311,9 @@ compute_abundances<-function(df, aggregate=TRUE){
     aggregated_dat<-tot_dat %>% 
       group_by(.data$sample_id,.data$taxa) %>% 
       mutate(new_counts=sum(.data$counts, na.rm = TRUE)) %>% 
-      ungroup() %>% 
+      ungroup(.data) %>% 
       select(-c(.data$counts,.data$subsample_id)) %>%
-      distinct() %>% 
+      distinct(.data) %>% 
       rename('counts'='new_counts')
     
     
@@ -327,8 +322,4 @@ compute_abundances<-function(df, aggregate=TRUE){
   }
   
 }
-
-
-
-
 
