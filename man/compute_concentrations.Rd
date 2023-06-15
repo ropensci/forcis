@@ -4,13 +4,15 @@
 \alias{compute_concentrations}
 \title{Compute count conversions from net and pump data}
 \usage{
-compute_concentrations(df, aggregate = TRUE)
+compute_concentrations(df, cols = NULL, aggregate = TRUE)
 }
 \arguments{
 \item{df}{forcis net dataset}
 
-\item{aggregate}{logical, if FALSE counts will be derived for each subsample.
+\item{cols}{character, if NULL only required_columns will be included
 If TRUE subsample counts will be aggregated by sample_id.}
+
+\item{aggregate}{logical, if FALSE counts will be derived for each subsample.}
 }
 \value{
 dataframe

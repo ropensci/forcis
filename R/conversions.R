@@ -1,7 +1,8 @@
 #' Compute count conversions from net and pump data
 #'
 #' @param df forcis net dataset
-#' @param aggregate logical, if FALSE counts will be derived for each subsample. 
+#' @param aggregate logical, if FALSE counts will be derived for each subsample.
+#' @param cols character, if NULL only required_columns will be included
 #' If TRUE subsample counts will be aggregated by sample_id.
 #'
 #' @return dataframe
