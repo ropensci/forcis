@@ -103,7 +103,7 @@ get_plankton_nets_data <- function(path, version = forcis_db_version()) {
   
   ## Read data ----
   
-  data <- read.csv2(file.path(path, plankton_net_filename()), dec = ".")
+  data <- utils::read.csv2(file.path(path, plankton_net_filename()), dec = ".")
   
   taxa_columns <- extract_species_names(data)
   
@@ -137,7 +137,7 @@ get_pump_data <- function(path, version = forcis_db_version()) {
   
   ## Read data ----
   
-  data <- read.csv2(file.path(path, pump_filename()), dec = ".")
+  data <- utils::read.csv2(file.path(path, pump_filename()), dec = ".")
   
   taxa_columns <- extract_species_names(data)
   
@@ -171,7 +171,7 @@ get_cpr_north_data <- function(path, version = forcis_db_version()) {
   
   ## Read data ----
   
-  data <- read.csv2(file.path(path, cpr_north_filename()), dec = ".")
+  data <- utils::read.csv2(file.path(path, cpr_north_filename()), dec = ".")
   
   data |> 
     dplyr::mutate(dplyr::across(.data$count_bin_min:.data$count_bin_max, 
@@ -204,7 +204,7 @@ get_cpr_south_data <- function(path, version = forcis_db_version()) {
   
   ## Read data ----
   
-  data <- read.csv2(file.path(path, cpr_south_filename()), dec = ".")
+  data <- utils::read.csv2(file.path(path, cpr_south_filename()), dec = ".")
   
   taxa_columns <- extract_species_names(data)
   
@@ -238,7 +238,7 @@ get_sediment_trap_data <- function(path, version = forcis_db_version()) {
   
   ## Read data ----
   
-  data <- read.csv2(file.path(path, sediment_trap_filename()), dec = ".")
+  data <- utils::read.csv2(file.path(path, sediment_trap_filename()), dec = ".")
   
   taxa_columns <- extract_species_names(data)
   

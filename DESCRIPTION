@@ -35,15 +35,15 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 VignetteBuilder: knitr
 Depends: R (>= 4.0) 
-Imports:
-    messages,
-    utils, 
+Imports: 
     dplyr,
-    readr,
+    messages,
     rlang,
-    tidyr
+    tidyr,
+    utils
 Suggests: 
+    here,
     knitr,
     rmarkdown
-Remotes:
+Remotes: 
     frbcesab/messages
