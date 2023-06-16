@@ -10,7 +10,7 @@
 #' @param version a `character` of length 1. The version number of the 
 #'   FORCIS database. Default is the latest version.
 #'
-#' @return No return value. The five `csv` files will be saved in the `path` 
+#' @return No return value. The five `csv` files will be saved in the `path`
 #' folder.
 #' 
 #' @details
@@ -64,8 +64,8 @@ get_forcis_db <- function(path = ".", version = forcis_db_version()) {
 #' 
 #' @description 
 #' These functions import one specific `csv` file of the FORCIS database 
-#' (see below) stored in the folder `path`. If the csv file does not exist 
-#' it will be downloaded from \url{https://zenodo.org/record/7936568}.
+#' (see below) stored in the folder `path`. If the `csv` file does not exist 
+#' it will be downloaded from Zenodo (\url{https://zenodo.org/record/7936568}).
 #'
 #' @param path a `character` of length 1. The folder in which the FORCIS 
 #'   database has been (or will be) saved.

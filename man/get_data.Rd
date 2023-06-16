@@ -32,8 +32,8 @@ preview of the dataset.
 }
 \description{
 These functions import one specific \code{csv} file of the FORCIS database
-(see below) stored in the folder \code{path}. If the csv file does not exist
-it will be downloaded from \url{https://zenodo.org/record/7936568}.
+(see below) stored in the folder \code{path}. If the \code{csv} file does not exist
+it will be downloaded from Zenodo (\url{https://zenodo.org/record/7936568}).
 }
 \details{
 \itemize{

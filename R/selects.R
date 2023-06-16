@@ -3,7 +3,7 @@
 #' @description
 #' Selects columns in FORCIS data. Because FORCIS data contains more than 100 
 #' columns, this function can be used to lighten the `data.frame` to easily 
-#' handle it to speed up some computations.
+#' handle it and to speed up some computations.
 #' 
 #' @param data a `data.frame`. One obtained by `get_*_data()` functions.
 #'
