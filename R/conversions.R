@@ -20,7 +20,6 @@
 #' @import dplyr
 #' @import tidyr
 #' @import rlang
-#' @import messages
 #'
 #' @name computations
 NULL
@@ -95,11 +94,14 @@ compute_concentrations <- function(data, aggregate = TRUE) {
   
   
   
-  msg_info("Counts from",msg_value(length(unique(excluded_samples_volume$sample_id))),
-           "samples could not be converted because of missing volume data")
+  message("Counts from ", 
+          length(unique(excluded_samples_volume$"sample_id")),
+          " samples could not be converted because of missing volume data")
   
-  msg_info("Relative counts from",msg_value(length(unique(excluded_samples_missing_counts$sample_id))),
-           "samples could not be converted because of missing data on total assemblage")
+  message("Relative counts from ", 
+          length(unique(excluded_samples_missing_counts$"sample_id")),
+          " samples could not be converted because of missing data on total ",
+          "assemblage")
   
   
   tot_dat<-rbind(ready_dat,abs_data_to_convert,rel_data_to_convert)
@@ -209,12 +211,14 @@ compute_frequencies<-function(data, aggregate = TRUE){
   samples_not_possible__to_convert<-data$sample_id[which(data$subsample_all_shells_present_were_counted==0)]
   
   
+  message("Counts from ", 
+          length(unique(excluded_samples_volume$"sample_id")),
+          " samples could not be converted because of missing volume data")
   
-  msg_info("Counts from",msg_value(length(unique(excluded_samples_volume$sample_id))),
-           "samples could not be converted because of missing volume data")
-  
-  msg_info("Counts from",msg_value(length(unique(samples_not_possible__to_convert))),
-           "samples could not be converted because of missing data on total assemblage")
+  message("Counts from ", 
+          length(unique(samples_not_possible__to_convert)),
+          " samples could not be converted because of missing data on total ",
+          "assemblage")
   
   partial_data<-merged_frequency %>% 
     mutate(counts=(.data$counts/.data$tot_subsample)*100) %>% 
@@ -311,12 +315,15 @@ compute_abundances<-function(data, aggregate = TRUE){
     select(-.data$to_drop) %>%  
     filter(is.na(.data$total_of_forams_counted_ind))
   
-  msg_info("Counts from",msg_value(length(unique(excluded_samples_volume$sample_id))),
-           "samples could not be converted because of missing volume data")
+  message("Counts from ", 
+          length(unique(excluded_samples_volume$"sample_id")),
+          " samples could not be converted because of missing volume data")
   
-  msg_info("Relative counts from",msg_value(length(unique(excluded_samples_missing_counts$sample_id))),
-           "samples could not be converted because of missing data on total assemblage")
-  
+  message("Relative counts from ", 
+          length(unique(excluded_samples_missing_counts$"sample_id")),
+          " samples could not be converted because of missing data on total ",
+          "assemblage")
+
   
   tot_dat<-rbind(ready_dat,conc_data_to_convert,rel_data_to_convert)
   

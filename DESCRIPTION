@@ -37,7 +37,6 @@ VignetteBuilder: knitr
 Depends: R (>= 4.0) 
 Imports: 
     dplyr,
-    messages,
     rlang,
     tidyr,
     utils
@@ -45,5 +44,3 @@ Suggests:
     here,
     knitr,
     rmarkdown
-Remotes: 
-    frbcesab/messages
