@@ -15,8 +15,20 @@ select_taxonomy(data, taxonomy)
 A \code{data.frame}.
 }
 \description{
-\strong{ADD DESCRIPTION}
+Selects a taxonomy in FORCIS data. FORCIS database provides three different
+taxonomies: \code{"LT"} (lumped taxonomy), \code{"VT"} (validated taxonomy) and \code{"OT"}
+(original taxonomy). See \url{https://doi.org/10.1038/s41597-023-02264-2} for
+further information.
 }
 \examples{
-## __ADD EXAMPLE__
+\dontrun{
+# Folder in which the database is stored ----
+path_to_db <- "data"
+
+# Download and read the plankton nets data ----
+nets <- forcis::get_plankton_nets_data(path_to_db)
+
+# Select a taxonomy ----
+nets <- forcis::select_taxonomy(nets, taxonomy = "OT")
+}
 }

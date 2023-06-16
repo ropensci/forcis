@@ -1,7 +1,8 @@
-#' Download the FORCIS database as a collection of five csv files
+#' Download the entire FORCIS database
 #'
 #' @description 
-#' __ADD DESCRIPTION__
+#' Downloads the entire FORCIS database as a collection of five `csv` files from
+#' Zenodo (\url{https://zenodo.org/record/7936568}). 
 #'
 #' @param path a `character` of length 1. The folder in which the FORCIS 
 #'   database will be saved.
@@ -10,15 +11,25 @@
 #'   FORCIS database. Default is the latest version.
 #'
 #' @return No return value. The five `csv` files will be saved in the `path` 
-#'   folder.
+#' folder.
+#' 
+#' @details
+#' If user is interested in only one type of data (e.g. plankton nets), the 
+#' function `get_plankton_nets_data()` (and others) is a better choice as it 
+#' will download only one `csv` file.
 #' 
 #' @export
 #' 
 #' @examples
 #' \dontrun{
-#' path_to_save_csv <- "data"
-#' forcis::get_forcis_db(path_to_save_csv)
-#' list.files(path_to_save_csv)
+#' # Folder in which the database will be saved ----
+#' path_to_save_db <- "data"
+#' 
+#' # Download the database ----
+#' forcis::get_forcis_db(path = path_to_save_db)
+#' 
+#' # Check the content of the folder ----
+#' list.files(path_to_save_db)
 #' }
 
 get_forcis_db <- function(path = ".", version = forcis_db_version()) {
@@ -52,12 +63,12 @@ get_forcis_db <- function(path = ".", version = forcis_db_version()) {
 #' Import FORCIS data
 #' 
 #' @description 
-#' These functions import one specific csv file of the FORCIS database 
+#' These functions import one specific `csv` file of the FORCIS database 
 #' (see below) stored in the folder `path`. If the csv file does not exist 
-#' it will be downloaded from \url{https://zenodo.org/record/7390792}.
+#' it will be downloaded from \url{https://zenodo.org/record/7936568}.
 #'
 #' @param path a `character` of length 1. The folder in which the FORCIS 
-#'   database is (or will be) saved or read.
+#'   database has been (or will be) saved.
 #'   
 #' @inheritParams get_forcis_db
 #' 

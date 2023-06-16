@@ -21,7 +21,7 @@ get_sediment_trap_data(path, version = forcis_db_version())
 }
 \arguments{
 \item{path}{a \code{character} of length 1. The folder in which the FORCIS
-database is (or will be) saved or read.}
+database has been (or will be) saved.}
 
 \item{version}{a \code{character} of length 1. The version number of the
 FORCIS database. Default is the latest version.}
@@ -31,9 +31,9 @@ A \code{data.frame}. See \url{https://zenodo.org/record/7390792} for a
 preview of the dataset.
 }
 \description{
-These functions import one specific csv file of the FORCIS database
+These functions import one specific \code{csv} file of the FORCIS database
 (see below) stored in the folder \code{path}. If the csv file does not exist
-it will be downloaded from \url{https://zenodo.org/record/7390792}.
+it will be downloaded from \url{https://zenodo.org/record/7936568}.
 }
 \details{
 \itemize{

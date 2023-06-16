@@ -9,15 +9,29 @@ select_columns(data, cols = NULL)
 \arguments{
 \item{data}{a \code{data.frame}. One obtained by \verb{get_*_data()} functions.}
 
-\item{cols}{a \code{character} vector of columns names to keep in addition to the
-required ones.}
+\item{cols}{a \code{character} vector of column names to keep in addition to the
+required ones (see \code{required_columns()}) and to the taxa columns.}
 }
 \value{
 A \code{data.frame}.
 }
 \description{
-\strong{ADD DESCRIPTION}
+Selects columns in FORCIS data. Because FORCIS data contains more than 100
+columns, this function can be used to lighten the \code{data.frame} to easily
+handle it to speed up some computations.
 }
 \examples{
-## __ADD EXAMPLE__
+\dontrun{
+# Folder in which the database is stored ----
+path_to_db <- "data"
+
+# Download and read the plankton nets data ----
+nets <- forcis::get_plankton_nets_data(path_to_db)
+
+# Select a taxonomy ----
+nets <- forcis::select_taxonomy(nets, taxonomy = "OT")
+
+# Select required columns (and taxa) ----
+nets <- forcis::select_columns(nets)
+}
 }

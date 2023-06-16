@@ -2,7 +2,7 @@
 % Please edit documentation in R/gets.R
 \name{get_forcis_db}
 \alias{get_forcis_db}
-\title{Download the FORCIS database as a collection of five csv files}
+\title{Download the entire FORCIS database}
 \usage{
 get_forcis_db(path = ".", version = forcis_db_version())
 }
@@ -18,12 +18,23 @@ No return value. The five \code{csv} files will be saved in the \code{path}
 folder.
 }
 \description{
-\strong{ADD DESCRIPTION}
+Downloads the entire FORCIS database as a collection of five \code{csv} files from
+Zenodo (\url{https://zenodo.org/record/7936568}).
+}
+\details{
+If user is interested in only one type of data (e.g. plankton nets), the
+function \code{get_plankton_nets_data()} (and others) is a better choice as it
+will download only one \code{csv} file.
 }
 \examples{
 \dontrun{
-path_to_save_csv <- "data"
-forcis::get_forcis_db(path_to_save_csv)
-list.files(path_to_save_csv)
+# Folder in which the database will be saved ----
+path_to_save_db <- "data"
+
+# Download the database ----
+forcis::get_forcis_db(path = path_to_save_db)
+
+# Check the content of the folder ----
+list.files(path_to_save_db)
 }
 }

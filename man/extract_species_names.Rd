@@ -2,7 +2,7 @@
 % Please edit documentation in R/selects.R
 \name{extract_species_names}
 \alias{extract_species_names}
-\title{Extract species names from columns names}
+\title{Extract species names from column names}
 \usage{
 extract_species_names(data)
 }
@@ -13,8 +13,21 @@ extract_species_names(data)
 A \code{data.frame}.
 }
 \description{
-\strong{ADD DESCRIPTION}
+Extracts species names from column names. This function is just an utility to
+easily retrieve taxon names.
 }
 \examples{
-## __ADD EXAMPLE__
+\dontrun{
+# Folder in which the database is stored ----
+path_to_db <- "data"
+
+# Download and read the plankton nets data ----
+nets <- forcis::get_plankton_nets_data(path_to_db)
+
+# Select a taxonomy ----
+nets <- forcis::select_taxonomy(nets, taxonomy = "OT")
+
+# Retrieve taxon names ----
+forcis::extract_species_names(nets)
+}
 }
