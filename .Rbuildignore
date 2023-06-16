@@ -7,3 +7,4 @@
 ^\.github$
 ^_pkgdown\.yaml$
 ^rscripts$
+^CITATION\.cff$
