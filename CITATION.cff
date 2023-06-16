@@ -85,17 +85,6 @@ references:
     orcid: https://orcid.org/0000-0003-4777-038X
   year: '2023'
 - type: software
-  title: messages
-  abstract: 'messages: Print Messages in the Console'
-  notes: Imports
-  url: https://github.com/FRBCesab/messages
-  authors:
-  - family-names: Casajus
-    given-names: Nicolas
-    email: nicolas.casajus@fondationbiodiversite.fr
-    orcid: https://orcid.org/0000-0002-5537-5294
-  year: '2023'
-- type: software
   title: rlang
   abstract: 'rlang: Functions for Base Types and Core R and ''Tidyverse'' Features'
   notes: Imports
