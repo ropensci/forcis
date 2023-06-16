@@ -30,7 +30,7 @@ data_types <- function() c("Net", "Pump", "Sediment trap",
                            "CPR South", "CPR North")
 
 
-
+# 
 #' Vector of required columns names
 #' 
 #' @noRd
