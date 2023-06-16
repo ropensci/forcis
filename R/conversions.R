@@ -17,10 +17,6 @@
 #' - `compute_frequencies()` __ADD A FEW WORDS__
 #' - `compute_abundances()` __ADD A FEW WORDS__
 #'
-#' @import dplyr
-#' @import tidyr
-#' @import rlang
-#'
 #' @name computations
 NULL
 
