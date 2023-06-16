@@ -22,6 +22,15 @@ forcis_db_url <- function() "https://zenodo.org/record/7936568/files/"
 
 
 
+#' Vector of device types available in FORCIS database
+#' 
+#' @noRd
+
+data_types <- function() c("Net", "Pump", "Sediment trap", 
+                           "CPR South", "CPR North")
+
+
+
 #' Vector of required columns names
 #' 
 #' @noRd
