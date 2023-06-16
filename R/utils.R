@@ -146,18 +146,21 @@ check_if_valid_taxonomy <- function(taxonomy) {
 
 check_multiple_taxonomies <- function(data) {
   
-  check_required_columns(data)
-  
-  pos <- which(species_list()[ , "taxon"] %in% colnames(data))
-  
-  if (length(pos) > 0) { 
+  if (get_data_type(data) != "CPR North") {
     
-    taxonomy <- unique(species_list()[pos, "taxonomy"])
+    check_required_columns(data)
     
-    if (length(taxonomy) > 1) {
-      stop("Multiple taxonomies are not allowed. Please use the function ", 
-           "'select_taxonomy()' before going any further", call. = FALSE)
-    }
+    pos <- which(species_list()[ , "taxon"] %in% colnames(data))
+    
+    if (length(pos) > 0) { 
+      
+      taxonomy <- unique(species_list()[pos, "taxonomy"])
+      
+      if (length(taxonomy) > 1) {
+        stop("Multiple taxonomies are not allowed. Please use the function ", 
+             "'select_taxonomy()' before going any further", call. = FALSE)
+      }
+    } 
   }
   
   invisible(NULL)

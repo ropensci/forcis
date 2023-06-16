@@ -56,7 +56,14 @@ select_columns <- function(data, cols = NULL) {
   
   # Extract species columns ----
   
-  species_cols <- extract_species_names(data)
+  if (get_data_type(data) != "CPR North") {
+    
+    species_cols <- extract_species_names(data) 
+    
+  } else {
+    
+    species_cols <- c("species", "count_bin_min", "count_bin_max")
+  }
   
   
   # Subset columns ----
@@ -112,6 +119,14 @@ select_taxonomy <- function(data, taxonomy) {
   check_if_valid_taxonomy(taxonomy)
   
   
+  ## Error for CPR North ----
+  
+  if (get_data_type(data) == "CPR North") {
+    stop(paste0("This function cannot be used with CPR North data. There is ",
+                "no need to filter these data."), call. = FALSE)
+  }
+  
+  
   ## Remove species from others taxonomies ----
   
   species_to_del <- species_list()[which(species_list()[ , "taxonomy"] != 
@@ -159,5 +174,21 @@ extract_species_names <- function(data) {
   
   check_if_not_df(data)
   
-  colnames(data)[which(colnames(data) %in% species_list()[ , "taxon"])]
+  
+  ## Special case for CPR North ----
+  
+  if (get_data_type(data) == "CPR North") {
+    
+    species_names <- unique(data$"species")
+    
+    
+  ## Otherwise ----
+    
+  } else {
+    
+    species_names <- colnames(data)[which(colnames(data) %in% 
+                                            species_list()[ , "taxon"])]
+  }
+  
+  species_names
 }
