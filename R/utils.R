@@ -6,6 +6,33 @@ date_format <- function() "%d/%m/%Y"
 
 
 
+#' Retrieve data type
+#' 
+#' @noRd
+
+get_data_type <- function(data) {
+  
+  check_if_not_df(data)
+  
+  if (!("data_type" %in% colnames(data))) {
+    stop(paste0("The column 'data_type' is absent from 'data'. Did you use ", 
+                "the functions 'get_*_data()' to import data?"),
+         call. = FALSE)
+  }
+  
+  
+  data_type <- unique(data$"data_type")
+  
+  if (length(data_type) != 1) {
+    stop("The column 'data_type' cannot contain different values", 
+         call. = FALSE)
+  }
+  
+  data_type
+}
+
+
+
 #' Check if a path exists
 #' 
 #' If the path `path` does not exist, returns an error.
