@@ -72,3 +72,66 @@ is_character <- function(str) {
   invisible(NULL)
 }
 
+
+
+#' Check for required columns
+#' 
+#' @noRd
+
+check_required_columns <- function(data) {
+  
+  check_if_not_df(data)
+  
+  if (any(!(required_columns() %in% colnames(data)))) {
+    stop("Some required columns are absent from data", call. = FALSE)
+  }
+  
+  invisible(NULL)
+}
+
+
+
+#' Check if a taxonomy name is valid
+#' 
+#' @noRd
+
+check_if_valid_taxonomy <- function(taxonomy) {
+  
+  is_character(taxonomy)
+  taxonomy   <- tolower(taxonomy)
+  
+  taxonomies <- unique(species_list()[ , "taxonomy"])
+  taxonomies <- tolower(taxonomies)
+  
+  if (!(taxonomy %in% taxonomies)) {
+    stop("Bad taxonomy. Valid taxonomies names are: ",
+         toString(toupper(taxonomies)), call. = FALSE)
+  }
+  
+  invisible(NULL)
+}
+
+
+
+#' Check for multiple taxonomies
+#' 
+#' @noRd
+
+check_multiple_taxonomies <- function(data) {
+  
+  check_required_columns(data)
+  
+  pos <- which(species_list()[ , "taxon"] %in% colnames(data))
+  
+  if (length(pos) > 0) { 
+    
+    taxonomy <- unique(species_list()[pos, "taxonomy"])
+    
+    if (length(taxonomy) > 1) {
+      stop("Multiple taxonomies are not allowed. Please use the function ", 
+           "'select_taxonomy()' before going any further", call. = FALSE)
+    }
+  }
+  
+  invisible(NULL)
+}

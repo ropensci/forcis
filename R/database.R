@@ -1,5 +1,9 @@
 #' FORCIS database version
 #' 
+#' @note
+#' This value must be changed each time a new version of the database is 
+#' released on Zenodo.
+#' 
 #' @noRd
 
 forcis_db_version <- function() "v03_14062023"
@@ -7,6 +11,10 @@ forcis_db_version <- function() "v03_14062023"
 
 
 #' FORCIS database URL
+#' 
+#' @note
+#' This value must be changed each time a new version of the database is 
+#' released on Zenodo.
 #' 
 #' @noRd
 
@@ -36,7 +44,7 @@ required_columns <- function() {
 
 
 
-#' Species names and taxonomy information
+#' Species names and taxonomy name
 #' 
 #' @noRd
 
@@ -351,68 +359,4 @@ species_list <- function() {
       "Globoturborotalita_rubescens&_Globigerinoides_tenellus"),
     
     "taxonomy" = c(rep("LT", 47), rep("VT", 56), rep("OT", 198)))
-}
-
-
-
-#' Check for required columns
-#' 
-#' @noRd
-
-check_required_columns <- function(data) {
-  
-  check_if_not_df(data)
-  
-  if (any(!(required_columns() %in% colnames(data)))) {
-    stop("Some required columns are absent from data", call. = FALSE)
-  }
-  
-  invisible(NULL)
-}
-
-
-
-#' Detect taxonomy
-#' 
-#' @noRd
-
-detect_taxonomy <- function(data) {
-  
-  check_required_columns(data)
-  
-  pos <- which(species_list()[ , "taxon"] %in% colnames(data))
-  
-  if (length(pos) > 0) { 
-    
-    taxonomy <- unique(species_list()[pos, "taxonomy"])
-    
-    if (length(taxonomy) > 1) {
-      stop("Multiple taxonomies are not allowed. Please use the function ", 
-           "'select_taxonomy()' before going any further", call. = FALSE)
-    }
-  }
-  
-  invisible(NULL)
-}
-
-
-
-#' Detect taxonomy
-#' 
-#' @noRd
-
-check_if_valid_taxonomy <- function(taxonomy) {
-  
-  is_character(taxonomy)
-  taxonomy   <- tolower(taxonomy)
-  
-  taxonomies <- unique(species_list()[ , "taxonomy"])
-  taxonomies <- tolower(taxonomies)
-  
-  if (!(taxonomy %in% taxonomies)) {
-    stop("Bad taxonomy. Valid taxonomies names are: ",
-         toString(toupper(taxonomies)), call. = FALSE)
-  }
-  
-  invisible(NULL)
 }
