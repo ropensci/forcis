@@ -174,7 +174,8 @@ get_cpr_north_data <- function(path, version = forcis_db_version()) {
   data <- read.csv2(file.path(path, cpr_north_filename()), dec = ".")
   
   data |> 
-    dplyr::mutate(dplyr::across(.data$count_bin_min:.data$count_bin_max, as.numeric))
+    dplyr::mutate(dplyr::across(.data$count_bin_min:.data$count_bin_max, 
+                                as.numeric))
 }
 
 
