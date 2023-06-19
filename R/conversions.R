@@ -27,8 +27,17 @@ NULL
 
 compute_concentrations <- function(data, aggregate = TRUE) {
   
-  #insert check device (net and pump only)
-  #insert check taxonomy
+  ## Check data ----
+  
+  check_if_not_df(data)
+  
+  if (get_data_type(data) == "CPR North") {
+    stop("This function is not designed to work with CPR North data",
+         call. = FALSE) 
+  }
+  
+  check_multiple_taxonomies(data)
+  
   
   taxa_cols <- extract_species_names(data) 
   
@@ -141,8 +150,17 @@ compute_concentrations <- function(data, aggregate = TRUE) {
 
 compute_frequencies <- function(data, aggregate = TRUE) {
   
-  #insert check device (net and pump only)
-  #insert check taxonomy
+  ## Check data ----
+  
+  check_if_not_df(data)
+  
+  if (get_data_type(data) == "CPR North") {
+    stop("This function is not designed to work with CPR North data",
+         call. = FALSE) 
+  }
+  
+  check_multiple_taxonomies(data)
+  
   
   taxa_cols <- extract_species_names(data)
   
@@ -264,8 +282,17 @@ compute_frequencies <- function(data, aggregate = TRUE) {
 
 compute_abundances <- function(data, aggregate = TRUE) {
   
-  #insert check device (net and pump only)
-  #insert check taxonomy
+  ## Check data ----
+  
+  check_if_not_df(data)
+  
+  if (get_data_type(data) == "CPR North") {
+    stop("This function is not designed to work with CPR North data",
+         call. = FALSE) 
+  }
+  
+  check_multiple_taxonomies(data)
+  
   
   taxa_cols <- extract_species_names(data)
   
