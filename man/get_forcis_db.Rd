@@ -4,7 +4,12 @@
 \alias{get_forcis_db}
 \title{Download the entire FORCIS database}
 \usage{
-get_forcis_db(path = ".", version = forcis_db_version())
+get_forcis_db(
+  path = ".",
+  version = forcis_db_version(),
+  overwrite = FALSE,
+  timeout = 60
+)
 }
 \arguments{
 \item{path}{a \code{character} of length 1. The folder in which the FORCIS
@@ -12,6 +17,12 @@ database will be saved.}
 
 \item{version}{a \code{character} of length 1. The version number of the
 FORCIS database. Default is the latest version.}
+
+\item{overwrite}{a \code{Boolean}. Override the downloaded files of
+FORCIS database. Default is FALSE.}
+
+\item{timeout}{a \code{int}. The timeout for downloading files from
+FORCIS database. Default is 60.}
 }
 \value{
 No return value. The five \code{csv} files will be saved in the \code{path}
