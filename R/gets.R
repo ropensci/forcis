@@ -10,11 +10,11 @@
 #' @param version a `character` of length 1. The version number of the 
 #'   FORCIS database. Default is the latest version.
 #'
-#' @param overwrite a `Boolean`. Override the downloaded files of  
-#'   FORCIS database. Default is FALSE.
+#' @param overwrite a `logical`. If `TRUE` it will override the downloaded 
+#'   files of the FORCIS database. Default is `FALSE`.
 #'
-#'@param timeout a `int`. The timeout for downloading files from  
-#'   FORCIS database. Default is 60.
+#' @param timeout a `integer`. The timeout for downloading files from the 
+#'   FORCIS database. Default is `60`.
 #'
 #' @return No return value. The five `csv` files will be saved in the `path`
 #' folder.
@@ -38,7 +38,7 @@
 #' list.files(path_to_save_db)
 #' }
 
-get_forcis_db <- function(path      = ".", version = forcis_db_version(), 
+get_forcis_db <- function(path = ".", version = forcis_db_version(), 
                           overwrite = FALSE, timeout = 60) {
   
   ## Check args ----
@@ -289,14 +289,17 @@ download_csv <- function(path, file, overwrite = FALSE, timeout = 60) {
   download_url <- paste0(forcis_db_url(), file, "?download=1")
   
   if (!overwrite && file.exists(destination)) {
-    message("File already exists. Skipping download.")
+    message("The file '", file, "' already exists. If you want to download ",
+            "again this file please use the argument 'overwrite'.")
     return(invisible(NULL))
   }
   
   ## Download the file if 'overwrite' is TRUE or it doesn't exist ----
   
   # change timeout for large file and slow connection
-  options(timeout= max(timeout, getOption('timeout')))
+  user_opts <- options()
+  on.exit(options(user_opts))
+  options(timeout = max(timeout, getOption("timeout")))
   
   tryCatch({
     utils::download.file(url = download_url, destfile = destination, mode = "wb")

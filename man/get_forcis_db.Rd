@@ -18,11 +18,11 @@ database will be saved.}
 \item{version}{a \code{character} of length 1. The version number of the
 FORCIS database. Default is the latest version.}
 
-\item{overwrite}{a \code{Boolean}. Override the downloaded files of
-FORCIS database. Default is FALSE.}
+\item{overwrite}{a \code{logical}. If \code{TRUE} it will override the downloaded
+files of the FORCIS database. Default is \code{FALSE}.}
 
-\item{timeout}{a \code{int}. The timeout for downloading files from
-FORCIS database. Default is 60.}
+\item{timeout}{a \code{integer}. The timeout for downloading files from the
+FORCIS database. Default is \code{60}.}
 }
 \value{
 No return value. The five \code{csv} files will be saved in the \code{path}
