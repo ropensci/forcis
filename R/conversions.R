@@ -31,9 +31,9 @@ compute_concentrations <- function(data, aggregate = TRUE) {
   
   check_if_not_df(data)
   
-  if (get_data_type(data) == "CPR North") {
-    stop("This function is not designed to work with CPR North data",
-         call. = FALSE) 
+  if (get_data_type(data) %in% c("CPR North", "Sediment trap")) {
+    stop(paste0("This function is not designed to work with 'CPR North' or ", 
+                "'Sediment trap' data"), call. = FALSE) 
   }
   
   check_multiple_taxonomies(data)
@@ -154,9 +154,9 @@ compute_frequencies <- function(data, aggregate = TRUE) {
   
   check_if_not_df(data)
   
-  if (get_data_type(data) == "CPR North") {
-    stop("This function is not designed to work with CPR North data",
-         call. = FALSE) 
+  if (get_data_type(data) %in% c("CPR North", "Sediment trap")) {
+    stop(paste0("This function is not designed to work with 'CPR North' or ", 
+                "'Sediment trap' data"), call. = FALSE) 
   }
   
   check_multiple_taxonomies(data)
@@ -240,7 +240,7 @@ compute_frequencies <- function(data, aggregate = TRUE) {
                  values_to = 'counts') %>% 
     filter(is.na(.data$sample_volume_filtered))
   
-  samples_not_possible__to_convert < data$sample_id[
+  samples_not_possible__to_convert <- data$sample_id[
     which(data$subsample_all_shells_present_were_counted == 0)]
   
   message("Counts from ", 
@@ -286,9 +286,9 @@ compute_abundances <- function(data, aggregate = TRUE) {
   
   check_if_not_df(data)
   
-  if (get_data_type(data) == "CPR North") {
-    stop("This function is not designed to work with CPR North data",
-         call. = FALSE) 
+  if (get_data_type(data) %in% c("CPR North", "Sediment trap")) {
+    stop(paste0("This function is not designed to work with 'CPR North' or ", 
+                "'Sediment trap' data"), call. = FALSE) 
   }
   
   check_multiple_taxonomies(data)
