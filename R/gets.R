@@ -10,6 +10,12 @@
 #' @param version a `character` of length 1. The version number of the 
 #'   FORCIS database. Default is the latest version.
 #'
+#' @param overwrite a `logical`. If `TRUE` it will override the downloaded 
+#'   files of the FORCIS database. Default is `FALSE`.
+#'
+#' @param timeout a `integer`. The timeout for downloading files from the 
+#'   FORCIS database. Default is `60`.
+#'
 #' @return No return value. The five `csv` files will be saved in the `path`
 #' folder.
 #' 
@@ -32,7 +38,8 @@
 #' list.files(path_to_save_db)
 #' }
 
-get_forcis_db <- function(path = ".", version = forcis_db_version()) {
+get_forcis_db <- function(path = ".", version = forcis_db_version(), 
+                          overwrite = FALSE, timeout = 60) {
   
   ## Check args ----
   
@@ -49,11 +56,11 @@ get_forcis_db <- function(path = ".", version = forcis_db_version()) {
   
   ## Download files from Zenodo ----
   
-  download_csv(path, plankton_net_filename())
-  download_csv(path, pump_filename())
-  download_csv(path, cpr_north_filename())
-  download_csv(path, cpr_south_filename())
-  download_csv(path, sediment_trap_filename())
+  download_csv(path, plankton_net_filename(), overwrite, timeout)
+  download_csv(path, pump_filename(), overwrite, timeout)
+  download_csv(path, cpr_north_filename(), overwrite, timeout)
+  download_csv(path, cpr_south_filename(), overwrite, timeout)
+  download_csv(path, sediment_trap_filename(), overwrite, timeout)
   
   invisible(NULL)
 }
@@ -272,14 +279,43 @@ get_sediment_trap_data <- function(path, version = forcis_db_version()) {
 #' 
 #' @noRd
 
-download_csv <- function(path, file) {
+download_csv <- function(path, file, overwrite = FALSE, timeout = 60) {
   
   check_if_path_exists(path)
   
-  utils::download.file(url      = paste0(forcis_db_url(), file, "?download=1"), 
-                       destfile = file.path(path, file), mode = "wb")
+  ## Check if the file is already exists ----
   
-  message("The file '", file, "' has been successfully downloaded")
+  destination  <- file.path(path, file)
+  download_url <- paste0(forcis_db_url(), file, "?download=1")
+  
+  if (!overwrite && file.exists(destination)) {
+    message("The file '", file, "' already exists. If you want to download ",
+            "again this file please use the argument 'overwrite'.")
+    return(invisible(NULL))
+  }
+  
+  ## Download the file if 'overwrite' is TRUE or it doesn't exist ----
+  
+  # change timeout for large file and slow connection
+  user_opts <- options()
+  on.exit(options(user_opts))
+  options(timeout = max(timeout, getOption("timeout")))
+  
+  tryCatch({
+    utils::download.file(url = download_url, destfile = destination, mode = "wb")
+  
+    message("The file '", file, "' has been successfully downloaded")
+    
+  }, error = function(e) {
+    
+    message("Download error: ", e$message)
+    
+    if (file.exists(destination)) {
+      file.remove(destination)
+      
+      message("Temporary file deleted.")
+    }
+  })
   
   invisible(NULL)
 }
