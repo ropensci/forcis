@@ -39,7 +39,8 @@ Imports:
     dplyr,
     rlang,
     tidyr,
-    utils
+    utils,
+    vroom
 Suggests: 
     here,
     knitr,
