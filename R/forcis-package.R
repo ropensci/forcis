@@ -5,6 +5,7 @@
 #' @import dplyr
 #' @import tidyr
 #' @import rlang
+#' @import vroom
 # Imports: end ----
 
 NULL
