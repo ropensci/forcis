@@ -5,6 +5,7 @@
 \alias{compute_concentrations}
 \alias{compute_frequencies}
 \alias{compute_abundances}
+\alias{compute_concentration_bins_CPR_n}
 \title{Compute count conversions}
 \usage{
 compute_concentrations(data, aggregate = TRUE)
@@ -12,6 +13,8 @@ compute_concentrations(data, aggregate = TRUE)
 compute_frequencies(data, aggregate = TRUE)
 
 compute_abundances(data, aggregate = TRUE)
+
+compute_concentration_bins_CPR_n(data)
 }
 \arguments{
 \item{data}{a \code{data.frame}. One obtained by \verb{get_*_data()} functions.}
