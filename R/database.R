@@ -37,7 +37,8 @@ data_types <- function() c("Net", "Pump", "Sediment trap",
 
 required_columns <- function() {
 
-  c("cruise_id",
+  c("data_type",
+    "cruise_id",
     "profile_id",
     "sample_id",
     "subsample_id",
