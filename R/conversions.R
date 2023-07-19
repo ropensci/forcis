@@ -70,7 +70,7 @@ compute_concentrations <- function(data, aggregate = TRUE) {
               .data$total_of_forams_counted_ind,
               .data$sampling_device_type)) %>% 
     rename('counts' = 'new_counts') %>% 
-    distinct(.data)
+    distinct()
   
   rel_data_to_convert <- data %>%
     filter(.data$sample_volume_filtered > 0) %>%
@@ -93,7 +93,7 @@ compute_concentrations <- function(data, aggregate = TRUE) {
               .data$total_of_forams_counted_ind,
               .data$sampling_device_type)) %>%
     rename('counts' = 'new_counts') %>%
-    distinct(.data)
+    distinct()
   
   excluded_samples_volume <- data %>%
     filter(.data$subsample_count_type != "Absolute") %>%
@@ -131,7 +131,7 @@ compute_concentrations <- function(data, aggregate = TRUE) {
                                    .data$counts)) %>%
       group_by(.data$sample_id, .data$taxa) %>%
       mutate(new_counts = sum(.data$abs_sub_tot, na.rm = TRUE)) %>%
-      ungroup(.data) %>%
+      ungroup() %>%
       select(-c(.data$counts, .data$abs_sub_tot, .data$subsample_id)) %>%
       distinct() %>%
       mutate(conc_counts = .data$new_counts / .data$sample_volume_filtered) %>%
@@ -199,10 +199,10 @@ compute_frequencies <- function(data, aggregate = TRUE) {
     mutate(counts = floor(.data$sample_volume_filtered * .data$counts)) %>% 
     group_by(.data$subsample_id) %>% 
     mutate(tot_subsample = sum(.data$counts)) %>% 
-    ungroup(.data) %>% 
+    ungroup() %>% 
     group_by(.data$sample_id) %>% 
     mutate(tot_sample = sum(.data$counts)) %>% 
-    ungroup(.data) %>% 
+    ungroup() %>% 
     select(-c(.data$sample_volume_filtered,
               .data$subsample_all_shells_present_were_counted,
               .data$total_of_forams_counted_ind,
@@ -226,10 +226,10 @@ compute_frequencies <- function(data, aggregate = TRUE) {
                .data$sample_volume_filtered)) %>% 
     group_by(.data$subsample_id) %>% 
     mutate(tot_subsample = sum(.data$counts)) %>% 
-    ungroup(.data) %>% 
+    ungroup() %>% 
     group_by(.data$sample_id) %>% 
     mutate(tot_sample = sum(.data$counts)) %>% 
-    ungroup(.data)
+    ungroup()
   
   merged_frequency <- rbind(conc_to_frequency, abs_to_frequency)
   
@@ -378,7 +378,7 @@ compute_abundances <- function(data, aggregate = TRUE) {
     tot_dat <- tot_dat %>% 
       group_by(.data$sample_id, .data$taxa) %>% 
       mutate(new_counts = sum(.data$counts, na.rm = TRUE)) %>% 
-      ungroup(.data) %>% 
+      ungroup() %>% 
       select(-c(.data$counts, .data$subsample_id)) %>%
       distinct() %>% 
       rename('counts' = 'new_counts')
