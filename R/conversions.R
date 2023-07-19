@@ -70,7 +70,7 @@ compute_concentrations <- function(data, aggregate = TRUE) {
               .data$total_of_forams_counted_ind,
               .data$sampling_device_type)) %>% 
     rename('counts' = 'new_counts') %>% 
-    distinct()
+    distinct(.data)
   
   rel_data_to_convert <- data %>%
     filter(.data$sample_volume_filtered > 0) %>%
@@ -93,7 +93,7 @@ compute_concentrations <- function(data, aggregate = TRUE) {
               .data$total_of_forams_counted_ind,
               .data$sampling_device_type)) %>%
     rename('counts' = 'new_counts') %>%
-    distinct()
+    distinct(.data)
   
   excluded_samples_volume <- data %>%
     filter(.data$subsample_count_type != "Absolute") %>%
