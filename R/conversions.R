@@ -70,7 +70,7 @@ compute_concentrations <- function(data, aggregate = TRUE) {
               .data$total_of_forams_counted_ind,
               .data$sampling_device_type)) %>% 
     rename('counts' = 'new_counts') %>% 
-    distinct(.data)
+    distinct()
   
   rel_data_to_convert <- data %>%
     filter(.data$sample_volume_filtered > 0) %>%
@@ -93,7 +93,7 @@ compute_concentrations <- function(data, aggregate = TRUE) {
               .data$total_of_forams_counted_ind,
               .data$sampling_device_type)) %>%
     rename('counts' = 'new_counts') %>%
-    distinct(.data)
+    distinct()
   
   excluded_samples_volume <- data %>%
     filter(.data$subsample_count_type != "Absolute") %>%
@@ -133,10 +133,10 @@ compute_concentrations <- function(data, aggregate = TRUE) {
       mutate(new_counts = sum(.data$abs_sub_tot, na.rm = TRUE)) %>%
       ungroup(.data) %>%
       select(-c(.data$counts, .data$abs_sub_tot, .data$subsample_id)) %>%
-      distinct(.data) %>%
+      distinct() %>%
       mutate(conc_counts = .data$new_counts / .data$sample_volume_filtered) %>%
       select(-.data$new_counts) %>%
-      distinct(.data) %>%
+      distinct() %>%
       rename('counts' = 'conc_counts')
   }
   
@@ -324,7 +324,7 @@ compute_abundances <- function(data, aggregate = TRUE) {
     mutate(new_counts = floor(.data$counts * .data$sample_volume_filtered)) %>% 
     select(-c(.data$counts, .data$subsample_count_type)) %>% 
     rename('counts' = 'new_counts') %>% 
-    distinct(.data)
+    distinct()
   
   rel_data_to_convert <- data %>%
     filter(.data$sample_volume_filtered > 0) %>% 
@@ -345,7 +345,7 @@ compute_abundances <- function(data, aggregate = TRUE) {
               .data$total_of_forams_counted_ind,
               .data$sampling_device_type)) %>% 
     rename('counts' = 'new_counts') %>% 
-    distinct(.data)
+    distinct()
   
   excluded_samples_volume <- data %>%
     filter(.data$subsample_count_type != "Raw") %>%
@@ -380,7 +380,7 @@ compute_abundances <- function(data, aggregate = TRUE) {
       mutate(new_counts = sum(.data$counts, na.rm = TRUE)) %>% 
       ungroup(.data) %>% 
       select(-c(.data$counts, .data$subsample_id)) %>%
-      distinct(.data) %>% 
+      distinct() %>% 
       rename('counts' = 'new_counts')
   }
   
