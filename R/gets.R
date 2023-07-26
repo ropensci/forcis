@@ -100,7 +100,8 @@ NULL
 #' @rdname get_data
 #' @export
 
-get_plankton_nets_data <- function(path, version = forcis_db_version()) {
+get_plankton_nets_data <- function(path, version = forcis_db_version(), 
+                                   timeout = 60) {
   
   ## Check args ----
   
@@ -115,7 +116,7 @@ get_plankton_nets_data <- function(path, version = forcis_db_version()) {
   file_name <- list.files(path, pattern = plankton_net_filename())
   
   if (!length(file_name)) {
-    download_csv(path, plankton_net_filename())
+    download_csv(path, plankton_net_filename(), timeout)
   }
   
   
@@ -135,7 +136,7 @@ get_plankton_nets_data <- function(path, version = forcis_db_version()) {
 #' @rdname get_data
 #' @export
 
-get_pump_data <- function(path, version = forcis_db_version()) {
+get_pump_data <- function(path, version = forcis_db_version(), timeout = 60) {
   
   ## Check args ----
   
@@ -150,7 +151,7 @@ get_pump_data <- function(path, version = forcis_db_version()) {
   file_name <- list.files(path, pattern = pump_filename())
   
   if (!length(file_name)) {
-    download_csv(path, pump_filename())
+    download_csv(path, pump_filename(), timeout)
   }
   
   
@@ -170,7 +171,8 @@ get_pump_data <- function(path, version = forcis_db_version()) {
 #' @rdname get_data
 #' @export
 
-get_cpr_north_data <- function(path, version = forcis_db_version()) {
+get_cpr_north_data <- function(path, version = forcis_db_version(), 
+                               timeout = 60) {
   
   ## Check args ----
   
@@ -185,7 +187,7 @@ get_cpr_north_data <- function(path, version = forcis_db_version()) {
   file_name <- list.files(path, pattern = cpr_north_filename())
   
   if (!length(file_name)) {
-    download_csv(path, cpr_north_filename())
+    download_csv(path, cpr_north_filename(), timeout)
   }
   
   
@@ -204,7 +206,8 @@ get_cpr_north_data <- function(path, version = forcis_db_version()) {
 #' @rdname get_data
 #' @export
 
-get_cpr_south_data <- function(path, version = forcis_db_version()) {
+get_cpr_south_data <- function(path, version = forcis_db_version(),
+                               timeout = 60) {
   
   ## Check args ----
   
@@ -219,7 +222,7 @@ get_cpr_south_data <- function(path, version = forcis_db_version()) {
   file_name <- list.files(path, pattern = cpr_south_filename())
   
   if (!length(file_name)) {
-    download_csv(path, cpr_south_filename())
+    download_csv(path, cpr_south_filename(), timeout)
   }
   
   
@@ -239,7 +242,8 @@ get_cpr_south_data <- function(path, version = forcis_db_version()) {
 #' @rdname get_data
 #' @export
 
-get_sediment_trap_data <- function(path, version = forcis_db_version()) {
+get_sediment_trap_data <- function(path, version = forcis_db_version(), 
+                                   timeout = 60) {
   
   ## Check args ----
   
@@ -254,7 +258,7 @@ get_sediment_trap_data <- function(path, version = forcis_db_version()) {
   file_name <- list.files(path, pattern = sediment_trap_filename())
   
   if (!length(file_name)) {
-    download_csv(path, sediment_trap_filename())
+    download_csv(path, sediment_trap_filename(), timeout)
   }
   
   
@@ -302,7 +306,8 @@ download_csv <- function(path, file, overwrite = FALSE, timeout = 60) {
   options(timeout = max(timeout, getOption("timeout")))
   
   tryCatch({
-    utils::download.file(url = download_url, destfile = destination, mode = "wb")
+    utils::download.file(url = download_url, destfile = destination, 
+                         mode = "wb")
   
     message("The file '", file, "' has been successfully downloaded")
     
