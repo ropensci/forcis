@@ -109,7 +109,6 @@ species_list <- function() {
       "t_quinqueloba_LT",
       "t_sacculifer_LT",
       "UniD_LT", 
-#      "number_of_species_counted_LT",
       
       "b_digitata_VT",
       "b_pumilio_VT",
@@ -167,7 +166,6 @@ species_list <- function() {
       "t_sacculifer_no_sac_VT",
       "t_sacculifer_sac_VT",
       "UnID_VT",
-      # "number_of_species_counted_VT",
       
       "unidentified_specimens",
       "other",
@@ -366,7 +364,18 @@ species_list <- function() {
       "n_pachyderma",
       "g_ruber_ albus_or_ elongatus",
       "Globigerinoides_ruber_ruber_&Globigerinoides_ruber_albus&Globigerinoides_elongatus",
-      "Globoturborotalita_rubescens&_Globigerinoides_tenellus"),
+      "Globoturborotalita_rubescens&_Globigerinoides_tenellus",
+      "benthics",
+      "reworked_planktonic_foraminifera",
+      "g_ruber_albus_or_elongatus",
+      "Globigerinoides_ruber_ruber_&_Globigerinoides_ruber_albus_&_Globigerinoides_elongatus",
+      "Globoturborotalita_rubescens_&_Globigerinoides_tenellus",
+      
+
+      "forams_per_m3", 
+      "number_of_forams_per_1000m3",
+      "number_of_species_counted_VT",
+      "number_of_species_counted_LT"),
     
-    "taxonomy" = c(rep("LT", 47), rep("VT", 56), rep("OT", 198)))
+    "taxonomy" = c(rep("LT", 47), rep("VT", 56), rep("OT", 203), rep("ZZ", 4)))
 }
