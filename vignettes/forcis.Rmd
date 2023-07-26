@@ -28,13 +28,12 @@ library("forcis")
 
 
 
-```{r 'xxx'}
+```{r 'to-develop'}
 # Define the path to store data ----
 path       <- here::here()
-db_version <- "v01_02122022"
 
-# Download FORCIS database (from Zenodo) ----
-get_forcis_db(path = path, version = db_version)
+# Download the latest version of FORCIS database (from Zenodo) ----
+get_forcis_db(path = path)
 
 # Import net data ----
 nets <- get_plankton_nets_data(path)
