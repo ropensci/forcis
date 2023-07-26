@@ -58,7 +58,7 @@ select_columns <- function(data, cols = NULL) {
   
   if (get_data_type(data) != "CPR North") {
     
-    species_cols <- extract_species_names(data) 
+    species_cols <- get_species_names(data) 
     
   } else {
     
@@ -143,10 +143,10 @@ select_taxonomy <- function(data, taxonomy) {
 
 
 
-#' Extract species names from column names
+#' Get species names from column names
 #'
 #' @description
-#' Extracts species names from column names. This function is just an utility to
+#' Gets species names from column names. This function is just an utility to
 #' easily retrieve taxon names.
 #' 
 #' @param data a `data.frame`. One obtained by `get_*_data()` functions.
@@ -167,10 +167,10 @@ select_taxonomy <- function(data, taxonomy) {
 #' nets <- forcis::select_taxonomy(nets, taxonomy = "OT")
 #' 
 #' # Retrieve taxon names ----
-#' forcis::extract_species_names(nets)
+#' forcis::get_species_names(nets)
 #' }
 
-extract_species_names <- function(data) {
+get_species_names <- function(data) {
   
   check_if_not_df(data)
   

@@ -124,7 +124,7 @@ get_plankton_nets_data <- function(path, version = forcis_db_version()) {
   data <- vroom::vroom(file.path(path, plankton_net_filename()), delim = ";")
   data <- data.frame("data_type" = "Net", data)
   
-  taxa_columns <- extract_species_names(data)
+  taxa_columns <- get_species_names(data)
   
   data |> 
     dplyr::mutate(dplyr::across(dplyr::all_of(taxa_columns), as.numeric))
@@ -159,7 +159,7 @@ get_pump_data <- function(path, version = forcis_db_version()) {
   data <- vroom::vroom(file.path(path, pump_filename()), delim = ";")
   data <- data.frame("data_type" = "Pump", data)
   
-  taxa_columns <- extract_species_names(data)
+  taxa_columns <- get_species_names(data)
   
   data |> 
     dplyr::mutate(dplyr::across(dplyr::all_of(taxa_columns), as.numeric))
@@ -228,7 +228,7 @@ get_cpr_south_data <- function(path, version = forcis_db_version()) {
   data <- vroom::vroom(file.path(path, cpr_south_filename()), delim = ";")
   data <- data.frame("data_type" = "CPR South", data)
   
-  taxa_columns <- extract_species_names(data)
+  taxa_columns <- get_species_names(data)
   
   data |> 
     dplyr::mutate(dplyr::across(dplyr::all_of(taxa_columns), as.numeric))
@@ -263,7 +263,7 @@ get_sediment_trap_data <- function(path, version = forcis_db_version()) {
   data <- vroom::vroom(file.path(path, sediment_trap_filename()), delim = ";")
   data <- data.frame("data_type" = "Sediment trap", data)
   
-  taxa_columns <- extract_species_names(data)
+  taxa_columns <- get_species_names(data)
   
   data |> 
     dplyr::mutate(dplyr::across(dplyr::all_of(taxa_columns), as.numeric))

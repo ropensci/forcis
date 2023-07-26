@@ -39,7 +39,7 @@ compute_concentrations <- function(data, aggregate = TRUE) {
   check_multiple_taxonomies(data)
   
   
-  taxa_cols <- extract_species_names(data) 
+  taxa_cols <- get_species_names(data) 
   
   ready_dat <- data %>%
     filter(.data$subsample_count_type == "Absolute") %>%  
@@ -162,7 +162,7 @@ compute_frequencies <- function(data, aggregate = TRUE) {
   check_multiple_taxonomies(data)
   
   
-  taxa_cols <- extract_species_names(data)
+  taxa_cols <- get_species_names(data)
   
   ready_dat <- data %>%
     filter(.data$subsample_count_type == "Relative") %>%    
@@ -294,7 +294,7 @@ compute_abundances <- function(data, aggregate = TRUE) {
   check_multiple_taxonomies(data)
   
   
-  taxa_cols <- extract_species_names(data)
+  taxa_cols <- get_species_names(data)
   
   ready_dat <- data %>%
     filter(.data$subsample_count_type == "Raw") %>%  
