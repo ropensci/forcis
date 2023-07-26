@@ -8,7 +8,7 @@
 #' @param data a `data.frame`. One obtained by `get_*_data()` functions.
 #'
 #' @param cols a `character` vector of column names to keep in addition to the 
-#'   required ones (see `required_columns()`) and to the taxa columns.
+#'   required ones (see [get_required_columns()]) and to the taxa columns.
 #' 
 #' @export
 #'
@@ -191,4 +191,28 @@ get_species_names <- function(data) {
   }
   
   species_names
+}
+
+
+
+#' Get required column names
+#'
+#' @description
+#' Gets required column names (except taxa names) for the package. This 
+#' function is designed to help users to add additional columns in 
+#' [select_columns()] (argument `cols`) if missing from this list.
+#' 
+#' @export
+#'
+#' @return A `character`.
+#' 
+#' @examples
+#' \dontrun{
+#' # Get required column names (expect taxa names) ----
+#' forcis::get_required_columns()
+#' }
+
+get_required_columns <- function() {
+  
+  required_columns()
 }
