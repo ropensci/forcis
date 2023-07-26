@@ -9,15 +9,40 @@
 \alias{get_sediment_trap_data}
 \title{Import FORCIS data}
 \usage{
-get_plankton_nets_data(path, version = forcis_db_version(), timeout = 60)
+get_plankton_nets_data(
+  path,
+  version = forcis_db_version(),
+  overwrite = FALSE,
+  timeout = 60
+)
 
-get_pump_data(path, version = forcis_db_version(), timeout = 60)
+get_pump_data(
+  path,
+  version = forcis_db_version(),
+  overwrite = FALSE,
+  timeout = 60
+)
 
-get_cpr_north_data(path, version = forcis_db_version(), timeout = 60)
+get_cpr_north_data(
+  path,
+  version = forcis_db_version(),
+  overwrite = FALSE,
+  timeout = 60
+)
 
-get_cpr_south_data(path, version = forcis_db_version(), timeout = 60)
+get_cpr_south_data(
+  path,
+  version = forcis_db_version(),
+  overwrite = FALSE,
+  timeout = 60
+)
 
-get_sediment_trap_data(path, version = forcis_db_version(), timeout = 60)
+get_sediment_trap_data(
+  path,
+  version = forcis_db_version(),
+  overwrite = FALSE,
+  timeout = 60
+)
 }
 \arguments{
 \item{path}{a \code{character} of length 1. The folder in which the FORCIS
@@ -25,6 +50,9 @@ database has been (or will be) saved.}
 
 \item{version}{a \code{character} of length 1. The version number of the
 FORCIS database. Default is the latest version.}
+
+\item{overwrite}{a \code{logical}. If \code{TRUE} it will override the downloaded
+files of the FORCIS database. Default is \code{FALSE}.}
 
 \item{timeout}{a \code{integer}. The timeout for downloading files from the
 FORCIS database. Default is \code{60}.}

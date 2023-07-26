@@ -101,7 +101,7 @@ NULL
 #' @export
 
 get_plankton_nets_data <- function(path, version = forcis_db_version(), 
-                                   timeout = 60) {
+                                   overwrite = FALSE, timeout = 60) {
   
   ## Check args ----
   
@@ -116,7 +116,7 @@ get_plankton_nets_data <- function(path, version = forcis_db_version(),
   file_name <- list.files(path, pattern = plankton_net_filename())
   
   if (!length(file_name)) {
-    download_csv(path, plankton_net_filename(), timeout)
+    download_csv(path, plankton_net_filename(), overwrite, timeout)
   }
   
   
@@ -136,7 +136,8 @@ get_plankton_nets_data <- function(path, version = forcis_db_version(),
 #' @rdname get_data
 #' @export
 
-get_pump_data <- function(path, version = forcis_db_version(), timeout = 60) {
+get_pump_data <- function(path, version = forcis_db_version(), 
+                          overwrite = FALSE, timeout = 60) {
   
   ## Check args ----
   
@@ -151,7 +152,7 @@ get_pump_data <- function(path, version = forcis_db_version(), timeout = 60) {
   file_name <- list.files(path, pattern = pump_filename())
   
   if (!length(file_name)) {
-    download_csv(path, pump_filename(), timeout)
+    download_csv(path, pump_filename(), overwrite, timeout)
   }
   
   
@@ -172,7 +173,7 @@ get_pump_data <- function(path, version = forcis_db_version(), timeout = 60) {
 #' @export
 
 get_cpr_north_data <- function(path, version = forcis_db_version(), 
-                               timeout = 60) {
+                               overwrite = FALSE, timeout = 60) {
   
   ## Check args ----
   
@@ -187,7 +188,7 @@ get_cpr_north_data <- function(path, version = forcis_db_version(),
   file_name <- list.files(path, pattern = cpr_north_filename())
   
   if (!length(file_name)) {
-    download_csv(path, cpr_north_filename(), timeout)
+    download_csv(path, cpr_north_filename(), overwrite, timeout)
   }
   
   
@@ -207,7 +208,7 @@ get_cpr_north_data <- function(path, version = forcis_db_version(),
 #' @export
 
 get_cpr_south_data <- function(path, version = forcis_db_version(),
-                               timeout = 60) {
+                               overwrite = FALSE, timeout = 60) {
   
   ## Check args ----
   
@@ -222,7 +223,7 @@ get_cpr_south_data <- function(path, version = forcis_db_version(),
   file_name <- list.files(path, pattern = cpr_south_filename())
   
   if (!length(file_name)) {
-    download_csv(path, cpr_south_filename(), timeout)
+    download_csv(path, cpr_south_filename(), overwrite, timeout)
   }
   
   
@@ -243,7 +244,7 @@ get_cpr_south_data <- function(path, version = forcis_db_version(),
 #' @export
 
 get_sediment_trap_data <- function(path, version = forcis_db_version(), 
-                                   timeout = 60) {
+                                   overwrite = FALSE, timeout = 60) {
   
   ## Check args ----
   
@@ -258,7 +259,7 @@ get_sediment_trap_data <- function(path, version = forcis_db_version(),
   file_name <- list.files(path, pattern = sediment_trap_filename())
   
   if (!length(file_name)) {
-    download_csv(path, sediment_trap_filename(), timeout)
+    download_csv(path, sediment_trap_filename(), overwrite, timeout)
   }
   
   
