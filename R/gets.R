@@ -100,7 +100,7 @@ NULL
 #' @rdname get_data
 #' @export
 
-get_plankton_nets_data <- function(path, version = forcis_db_version(), 
+get_plankton_nets_data <- function(path = ".", version = forcis_db_version(), 
                                    overwrite = FALSE, timeout = 60) {
   
   ## Check args ----
@@ -136,7 +136,7 @@ get_plankton_nets_data <- function(path, version = forcis_db_version(),
 #' @rdname get_data
 #' @export
 
-get_pump_data <- function(path, version = forcis_db_version(), 
+get_pump_data <- function(path = ".", version = forcis_db_version(), 
                           overwrite = FALSE, timeout = 60) {
   
   ## Check args ----
@@ -172,7 +172,7 @@ get_pump_data <- function(path, version = forcis_db_version(),
 #' @rdname get_data
 #' @export
 
-get_cpr_north_data <- function(path, version = forcis_db_version(), 
+get_cpr_north_data <- function(path = ".", version = forcis_db_version(), 
                                overwrite = FALSE, timeout = 60) {
   
   ## Check args ----
@@ -207,7 +207,7 @@ get_cpr_north_data <- function(path, version = forcis_db_version(),
 #' @rdname get_data
 #' @export
 
-get_cpr_south_data <- function(path, version = forcis_db_version(),
+get_cpr_south_data <- function(path = ".", version = forcis_db_version(),
                                overwrite = FALSE, timeout = 60) {
   
   ## Check args ----
@@ -243,7 +243,7 @@ get_cpr_south_data <- function(path, version = forcis_db_version(),
 #' @rdname get_data
 #' @export
 
-get_sediment_trap_data <- function(path, version = forcis_db_version(), 
+get_sediment_trap_data <- function(path = ".", version = forcis_db_version(), 
                                    overwrite = FALSE, timeout = 60) {
   
   ## Check args ----
