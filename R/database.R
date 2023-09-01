@@ -366,10 +366,10 @@ species_list <- function() {
       "Globigerinoides_ruber_ruber_&Globigerinoides_ruber_albus&Globigerinoides_elongatus",
       "Globoturborotalita_rubescens&_Globigerinoides_tenellus",
       "benthics",
-      "reworked_planktonic_foraminifera",
-      "g_ruber_albus_or_elongatus",
-      "Globigerinoides_ruber_ruber_&_Globigerinoides_ruber_albus_&_Globigerinoides_elongatus",
-      "Globoturborotalita_rubescens_&_Globigerinoides_tenellus",
+      "reworked_planktic_foraminifera",
+      "g_ruber_.albus_or_.elongatus",
+      "Globigerinoides_ruber_ruber_._Globigerinoides_ruber_albus_._Globigerinoides_elongatus",
+      "Globoturborotalita_rubescens_._Globigerinoides_tenellus",
       
 
       "forams_per_m3", 
