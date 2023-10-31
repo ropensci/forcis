@@ -121,9 +121,23 @@ get_plankton_nets_data <- function(path = ".", version = forcis_db_version(),
   
   
   ## Read data ----
+
+  data <- vroom::vroom(file.path(path, plankton_net_filename()), delim = ";")
   
-  data <- vroom::vroom(file.path(path, plankton_net_filename()))
-  data <- data.frame("data_type" = "Net", data)
+  
+  ## Check for data_type column ----
+  
+  pos <- which("data_type" %in% colnames(data))
+  
+  if (length(pos) > 0) {
+    
+    data$"data_type" <- "Net"
+  
+  } else {
+  
+    data <- data.frame("data_type" = "Net", data)  
+  }
+
   
   taxa_columns <- get_species_names(data)
   
@@ -157,9 +171,23 @@ get_pump_data <- function(path = ".", version = forcis_db_version(),
   
   
   ## Read data ----
+
+  data <- vroom::vroom(file.path(path, pump_filename()), delim = ";")
   
-  data <- vroom::vroom(file.path(path, pump_filename()))
-  data <- data.frame("data_type" = "Pump", data)
+  
+  ## Check for data_type column ----
+  
+  pos <- which("data_type" %in% colnames(data))
+  
+  if (length(pos) > 0) {
+    
+    data$"data_type" <- "Pump"
+    
+  } else {
+    
+    data <- data.frame("data_type" = "Pump", data)
+  }
+  
   
   taxa_columns <- get_species_names(data)
   
@@ -194,8 +222,22 @@ get_cpr_north_data <- function(path = ".", version = forcis_db_version(),
   
   ## Read data ----
   
-  data <- vroom::vroom(file.path(path, cpr_north_filename()))
-  data <- data.frame("data_type" = "CPR North", data)
+  data <- vroom::vroom(file.path(path, cpr_north_filename()), delim = ";")
+  
+  
+  ## Check for data_type column ----
+  
+  pos <- which("data_type" %in% colnames(data))
+  
+  if (length(pos) > 0) {
+    
+    data$"data_type" <- "CPR North"
+    
+  } else {
+    
+    data <- data.frame("data_type" = "CPR North", data)
+  }
+  
   
   data |> 
     dplyr::mutate(dplyr::across(.data$count_bin_min:.data$count_bin_max, 
@@ -229,8 +271,22 @@ get_cpr_south_data <- function(path = ".", version = forcis_db_version(),
   
   ## Read data ----
   
-  data <- vroom::vroom(file.path(path, cpr_south_filename()))
-  data <- data.frame("data_type" = "CPR South", data)
+  data <- vroom::vroom(file.path(path, cpr_south_filename()), delim = ";")
+  
+  
+  ## Check for data_type column ----
+  
+  pos <- which("data_type" %in% colnames(data))
+  
+  if (length(pos) > 0) {
+    
+    data$"data_type" <- "CPR South"
+    
+  } else {
+    
+    data <- data.frame("data_type" = "CPR South", data)
+  }
+  
   
   taxa_columns <- get_species_names(data)
   
@@ -264,9 +320,23 @@ get_sediment_trap_data <- function(path = ".", version = forcis_db_version(),
   
   
   ## Read data ----
+
+  data <- vroom::vroom(file.path(path, sediment_trap_filename()), delim = ";")
   
-  data <- vroom::vroom(file.path(path, sediment_trap_filename()))
-  data <- data.frame("data_type" = "Sediment trap", data)
+  
+  ## Check for data_type column ----
+  
+  pos <- which("data_type" %in% colnames(data))
+  
+  if (length(pos) > 0) {
+    
+    data$"data_type" <- "Sediment trap"
+    
+  } else {
+    
+    data <- data.frame("data_type" = "Sediment trap", data)
+  }
+
   
   taxa_columns <- get_species_names(data)
   
