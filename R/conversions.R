@@ -132,7 +132,9 @@ compute_concentrations <- function(data, aggregate = TRUE) {
       group_by(.data$sample_id, .data$taxa) %>%
       mutate(new_counts = sum(.data$abs_sub_tot, na.rm = TRUE)) %>%
       ungroup() %>%
-      select(-c(.data$counts, .data$abs_sub_tot, .data$subsample_id)) %>%
+      select(-c(.data$counts, .data$abs_sub_tot, .data$subsample_id,
+                .data$subsample_size_fraction_min,
+                .data$subsample_size_fraction_max)) %>%
       distinct() %>%
       mutate(conc_counts = .data$new_counts / .data$sample_volume_filtered) %>%
       select(-.data$new_counts) %>%
@@ -269,7 +271,11 @@ compute_frequencies <- function(data, aggregate = TRUE) {
       mutate(counts = (.data$counts / .data$tot_sample) * 100) %>% 
       select(-c(.data$tot_subsample, .data$tot_sample))
     
-    aggregated_dat <- rbind(partial_data, ready_dat)
+    aggregated_dat <- rbind(partial_data, ready_dat) %>% 
+      select(-c(.data$subsample_id,
+                .data$subsample_size_fraction_min,
+                .data$subsample_size_fraction_max)) %>% 
+      distinct()
     
     return(aggregated_dat)
   }
@@ -379,7 +385,9 @@ compute_abundances <- function(data, aggregate = TRUE) {
       group_by(.data$sample_id, .data$taxa) %>% 
       mutate(new_counts = sum(.data$counts, na.rm = TRUE)) %>% 
       ungroup() %>% 
-      select(-c(.data$counts, .data$subsample_id)) %>%
+      select(-c(.data$counts, .data$subsample_id,
+                .data$subsample_size_fraction_min,
+                .data$subsample_size_fraction_max)) %>%
       distinct() %>% 
       rename('counts' = 'new_counts')
   }

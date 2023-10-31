@@ -41,9 +41,18 @@ required_columns <- function() {
     "cruise_id",
     "profile_id",
     "sample_id",
+    "sample_min_depth",#new
+    "sample_max_depth",#new
+    "profile_depth_min",#new
+    "profile_depth_max",#new
+    "profile_date_time",#new
+    "cast_net_op_m2",#new
     "subsample_id",
+    "sample_segment_length",#new
     "subsample_count_type",
-    "sample_max_depth",
+    "subsample_size_fraction_min",#new
+    "subsample_size_fraction_max",#new
+    #    "sample_max_depth",
     "site_lat_start_decimal",
     "site_lon_start_decimal",
     "sample_volume_filtered",
