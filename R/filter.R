@@ -35,8 +35,6 @@ reshape_forcis <- function(data){
 #' @return A `data.frame`.
 #' @export
 #'
-#' @import lubridate
-#'
 #' @examples
 #' ## ADD EXAMPLE ----
 
@@ -61,8 +59,6 @@ filter_by_year <- function(data,years){
 #'
 #' @return A `data.frame`.
 #' @export
-#'
-#' @import lubridate
 #' 
 #' @examples
 #' ## ADD EXAMPLE ----
