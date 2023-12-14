@@ -165,3 +165,55 @@ check_multiple_taxonomies <- function(data) {
   
   invisible(NULL)
 }
+
+
+
+#' Check Zenodo version
+#' 
+#' @noRd
+
+check_zen_version <- function(version) {
+  
+  
+  if (!is.null(version)) {
+    
+    if (!is.character(version)) {
+      stop("Argument 'version' must be character", call. = FALSE)
+    }
+    
+    if (length(version) != 1) {
+      stop("Argument 'version' must be character of length 1", call. = FALSE)
+    }
+  }
+  
+  invisible(NULL)
+}
+
+
+
+#' Set Zenodo version to latest is missing
+#' 
+#' @noRd
+
+set_zen_version <- function(version) {
+  
+  check_zen_version(version)
+  
+  versions <- zen_list_versions()
+  
+  if (is.null(version)) {
+    
+    version <- versions[which.max(as.Date(versions$"publication_date")), 
+                        "version"]
+    
+  } else {
+    
+    if (!(version %in% versions$"version")) {
+      
+      stop("The required version is not available. Please run ", 
+           "`zen_list_versions()` to list available versions.", call. = FALSE)
+    }
+  }
+  
+  version
+}

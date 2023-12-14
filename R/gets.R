@@ -5,7 +5,8 @@
 #' Zenodo (\url{https://zenodo.org/record/7936568}). 
 #'
 #' @param path a `character` of length 1. The folder in which the FORCIS 
-#'   database will be saved.
+#'   database will be saved. Note that a subdirectory will be created in the
+#'   version number.
 #'   
 #' @param version a `character` of length 1. The version number of the 
 #'   FORCIS database. Default is the latest version.
@@ -16,13 +17,7 @@
 #' @param timeout a `integer`. The timeout for downloading files from the 
 #'   FORCIS database. Default is `60`.
 #'
-#' @return No return value. The five `csv` files will be saved in the `path`
-#' folder.
-#' 
-#' @details
-#' If user is interested in only one type of data (e.g. plankton nets), the 
-#' function `get_plankton_nets_data()` (and others) is a better choice as it 
-#' will download only one `csv` file.
+#' @return No return value. The FORCIS files will be saved in the `path` folder.
 #' 
 #' @export
 #' 
@@ -35,19 +30,36 @@
 #' forcis::get_forcis_db(path = path_to_save_db)
 #' 
 #' # Check the content of the folder ----
-#' list.files(path_to_save_db)
+#' list.files(path_to_save_db, recursive = TRUE)
 #' }
 
-get_forcis_db <- function(path = ".", version = forcis_db_version(), 
+get_forcis_db <- function(path = ".", version = NULL, 
                           overwrite = FALSE, timeout = 60) {
   
   ## Check args ----
   
   is_character(path)
-  is_character(version)
+  
+  if (!is.null(version)) {
+    
+    if (!is.character(version)) {
+      stop("Argument 'version' must be character", call. = FALSE)
+    }
+    
+    if (length(version) != 1) {
+      stop("Argument 'version' must be character of length 1", call. = FALSE)
+    }
+  }
+  
+  
+  ## Check/set version ----
+  
+  version <- set_zen_version(version)
   
   
   ## Create outputs directory if required ----
+  
+  path <- file.path(path, paste0("version-", version))
   
   if (!dir.exists(path)) {
     dir.create(path, recursive = TRUE)
@@ -56,11 +68,17 @@ get_forcis_db <- function(path = ".", version = forcis_db_version(),
   
   ## Download files from Zenodo ----
   
-  download_csv(path, plankton_net_filename(), overwrite, timeout)
-  download_csv(path, pump_filename(), overwrite, timeout)
-  download_csv(path, cpr_north_filename(), overwrite, timeout)
-  download_csv(path, cpr_south_filename(), overwrite, timeout)
-  download_csv(path, sediment_trap_filename(), overwrite, timeout)
+  forcis_meta  <- zen_get_version_info(version = version)
+  forcis_files <- forcis_meta$"files"
+  
+  for (i in 1:nrow(forcis_files)) {
+    
+    download_file(url       = forcis_files[i, "links"]$"self",
+                  path      = path, 
+                  file      = forcis_files[i, "key"], 
+                  overwrite = overwrite, 
+                  timeout   = timeout)
+  }
   
   invisible(NULL)
 }
@@ -100,29 +118,60 @@ NULL
 #' @rdname get_data
 #' @export
 
-get_plankton_nets_data <- function(path = ".", version = forcis_db_version(), 
+get_plankton_nets_data <- function(path = ".", version = NULL, 
                                    overwrite = FALSE, timeout = 60) {
   
   ## Check args ----
   
   is_character(path)
-  is_character(version)
-  
-  check_if_path_exists(path)
+  check_zen_version(version)
   
   
-  ## Download csv (if required) ----
+  ## Check/set version ----
+  
+  version <- set_zen_version(version)
+  
+  
+  ## Build outputs directory ----
+  
+  path <- file.path(path, paste0("version-", version))
+  
+  if (!dir.exists(path)) {
+    dir.create(path, recursive = TRUE)
+  }
+  
+  
+  ## Download file (if required) ----
   
   file_name <- list.files(path, pattern = plankton_net_filename())
   
   if (!length(file_name)) {
-    download_csv(path, plankton_net_filename(), overwrite, timeout)
+    
+    forcis_meta  <- zen_get_version_info(version = version)
+    forcis_files <- forcis_meta$"files"
+    
+    pos <- grep(plankton_net_filename(), forcis_files$"key")
+    
+    if (length(pos) == 1) {
+      
+      download_file(url       = forcis_files[pos, "links"]$"self",
+                    path      = path, 
+                    file      = forcis_files[pos, "key"], 
+                    overwrite = overwrite, 
+                    timeout   = timeout)
+      
+    } else {
+      
+      stop("Unable to download the 'Plankton nets' dataset", call. = FALSE)
+    }
   }
   
   
   ## Read data ----
 
-  data <- vroom::vroom(file.path(path, plankton_net_filename()), delim = ";")
+  file_name <- list.files(path, pattern = plankton_net_filename())
+  
+  data <- vroom::vroom(file.path(path, file_name), delim = ";")
   
   
   ## Check for data_type column ----
@@ -150,29 +199,60 @@ get_plankton_nets_data <- function(path = ".", version = forcis_db_version(),
 #' @rdname get_data
 #' @export
 
-get_pump_data <- function(path = ".", version = forcis_db_version(), 
+get_pump_data <- function(path = ".", version = NULL, 
                           overwrite = FALSE, timeout = 60) {
   
   ## Check args ----
   
   is_character(path)
-  is_character(version)
-  
-  check_if_path_exists(path)
+  check_zen_version(version)
   
   
-  ## Download csv (if required) ----
+  ## Check/set version ----
+  
+  version <- set_zen_version(version)
+  
+  
+  ## Build outputs directory ----
+  
+  path <- file.path(path, paste0("version-", version))
+  
+  if (!dir.exists(path)) {
+    dir.create(path, recursive = TRUE)
+  }
+  
+  
+  ## Download file (if required) ----
   
   file_name <- list.files(path, pattern = pump_filename())
   
   if (!length(file_name)) {
-    download_csv(path, pump_filename(), overwrite, timeout)
+    
+    forcis_meta  <- zen_get_version_info(version = version)
+    forcis_files <- forcis_meta$"files"
+    
+    pos <- grep(pump_filename(), forcis_files$"key")
+    
+    if (length(pos) == 1) {
+      
+      download_file(url       = forcis_files[pos, "links"]$"self",
+                    path      = path, 
+                    file      = forcis_files[pos, "key"], 
+                    overwrite = overwrite, 
+                    timeout   = timeout)
+      
+    } else {
+      
+      stop("Unable to download the 'Pumps' dataset", call. = FALSE)
+    }
   }
   
   
   ## Read data ----
-
-  data <- vroom::vroom(file.path(path, pump_filename()), delim = ";")
+  
+  file_name <- list.files(path, pattern = pump_filename())
+  
+  data <- vroom::vroom(file.path(path, file_name), delim = ";")
   
   
   ## Check for data_type column ----
@@ -200,29 +280,60 @@ get_pump_data <- function(path = ".", version = forcis_db_version(),
 #' @rdname get_data
 #' @export
 
-get_cpr_north_data <- function(path = ".", version = forcis_db_version(), 
+get_cpr_north_data <- function(path = ".", version = NULL, 
                                overwrite = FALSE, timeout = 60) {
   
   ## Check args ----
   
   is_character(path)
-  is_character(version)
-  
-  check_if_path_exists(path)
+  check_zen_version(version)
   
   
-  ## Download csv (if required) ----
+  ## Check/set version ----
+  
+  version <- set_zen_version(version)
+  
+  
+  ## Build outputs directory ----
+  
+  path <- file.path(path, paste0("version-", version))
+  
+  if (!dir.exists(path)) {
+    dir.create(path, recursive = TRUE)
+  }
+  
+  
+  ## Download file (if required) ----
   
   file_name <- list.files(path, pattern = cpr_north_filename())
   
   if (!length(file_name)) {
-    download_csv(path, cpr_north_filename(), overwrite, timeout)
+    
+    forcis_meta  <- zen_get_version_info(version = version)
+    forcis_files <- forcis_meta$"files"
+    
+    pos <- grep(cpr_north_filename(), forcis_files$"key")
+    
+    if (length(pos) == 1) {
+      
+      download_file(url       = forcis_files[pos, "links"]$"self",
+                    path      = path, 
+                    file      = forcis_files[pos, "key"], 
+                    overwrite = overwrite, 
+                    timeout   = timeout)
+      
+    } else {
+      
+      stop("Unable to download the 'CPR North' dataset", call. = FALSE)
+    }
   }
   
   
   ## Read data ----
   
-  data <- vroom::vroom(file.path(path, cpr_north_filename()), delim = ";")
+  file_name <- list.files(path, pattern = cpr_north_filename())
+  
+  data <- vroom::vroom(file.path(path, file_name), delim = ";")
   
   
   ## Check for data_type column ----
@@ -249,29 +360,60 @@ get_cpr_north_data <- function(path = ".", version = forcis_db_version(),
 #' @rdname get_data
 #' @export
 
-get_cpr_south_data <- function(path = ".", version = forcis_db_version(),
+get_cpr_south_data <- function(path = ".", version = NULL,
                                overwrite = FALSE, timeout = 60) {
   
   ## Check args ----
   
   is_character(path)
-  is_character(version)
-  
-  check_if_path_exists(path)
+  check_zen_version(version)
   
   
-  ## Download csv (if required) ----
+  ## Check/set version ----
+  
+  version <- set_zen_version(version)
+  
+  
+  ## Build outputs directory ----
+  
+  path <- file.path(path, paste0("version-", version))
+  
+  if (!dir.exists(path)) {
+    dir.create(path, recursive = TRUE)
+  }
+  
+  
+  ## Download file (if required) ----
   
   file_name <- list.files(path, pattern = cpr_south_filename())
   
   if (!length(file_name)) {
-    download_csv(path, cpr_south_filename(), overwrite, timeout)
+    
+    forcis_meta  <- zen_get_version_info(version = version)
+    forcis_files <- forcis_meta$"files"
+    
+    pos <- grep(cpr_south_filename(), forcis_files$"key")
+    
+    if (length(pos) == 1) {
+      
+      download_file(url       = forcis_files[pos, "links"]$"self",
+                    path      = path, 
+                    file      = forcis_files[pos, "key"], 
+                    overwrite = overwrite, 
+                    timeout   = timeout)
+      
+    } else {
+      
+      stop("Unable to download the 'CPR South' dataset", call. = FALSE)
+    }
   }
   
   
   ## Read data ----
   
-  data <- vroom::vroom(file.path(path, cpr_south_filename()), delim = ";")
+  file_name <- list.files(path, pattern = cpr_south_filename())
+  
+  data <- vroom::vroom(file.path(path, file_name), delim = ";")
   
   
   ## Check for data_type column ----
@@ -299,29 +441,60 @@ get_cpr_south_data <- function(path = ".", version = forcis_db_version(),
 #' @rdname get_data
 #' @export
 
-get_sediment_trap_data <- function(path = ".", version = forcis_db_version(), 
+get_sediment_trap_data <- function(path = ".", version = NULL, 
                                    overwrite = FALSE, timeout = 60) {
   
   ## Check args ----
   
   is_character(path)
-  is_character(version)
-  
-  check_if_path_exists(path)
+  check_zen_version(version)
   
   
-  ## Download csv (if required) ----
+  ## Check/set version ----
+  
+  version <- set_zen_version(version)
+  
+  
+  ## Build outputs directory ----
+  
+  path <- file.path(path, paste0("version-", version))
+  
+  if (!dir.exists(path)) {
+    dir.create(path, recursive = TRUE)
+  }
+  
+  
+  ## Download file (if required) ----
   
   file_name <- list.files(path, pattern = sediment_trap_filename())
   
   if (!length(file_name)) {
-    download_csv(path, sediment_trap_filename(), overwrite, timeout)
+    
+    forcis_meta  <- zen_get_version_info(version = version)
+    forcis_files <- forcis_meta$"files"
+    
+    pos <- grep(sediment_trap_filename(), forcis_files$"key")
+    
+    if (length(pos) == 1) {
+      
+      download_file(url       = forcis_files[pos, "links"]$"self",
+                    path      = path, 
+                    file      = forcis_files[pos, "key"], 
+                    overwrite = overwrite, 
+                    timeout   = timeout)
+      
+    } else {
+      
+      stop("Unable to download the 'Sediment traps' dataset", call. = FALSE)
+    }
   }
   
   
   ## Read data ----
-
-  data <- vroom::vroom(file.path(path, sediment_trap_filename()), delim = ";")
+  
+  file_name <- list.files(path, pattern = sediment_trap_filename())
+  
+  data <- vroom::vroom(file.path(path, file_name), delim = ";")
   
   
   ## Check for data_type column ----
@@ -350,24 +523,26 @@ get_sediment_trap_data <- function(path = ".", version = forcis_db_version(),
 #' 
 #' @param file a `character` of length 1. The name of the csv to download.
 #' 
-#' @inheritParams get_forcis_db
-#' 
 #' @noRd
 
-download_csv <- function(path, file, overwrite = FALSE, timeout = 60) {
+download_file <- function(url, path, file, overwrite = FALSE, timeout = 60) {
+  
+  url  <- utils::URLencode(url)
+  file <- gsub("\\s", "_", file)
   
   check_if_path_exists(path)
   
-  ## Check if the file is already exists ----
+  
+  ## Check if the file already exists ----
   
   destination  <- file.path(path, file)
-  download_url <- paste0(forcis_db_url(), file, "?download=1")
   
   if (!overwrite && file.exists(destination)) {
     message("The file '", file, "' already exists. If you want to download ",
             "again this file please use the argument 'overwrite'.")
     return(invisible(NULL))
   }
+  
   
   ## Download the file if 'overwrite' is TRUE or it doesn't exist ----
   
@@ -377,7 +552,7 @@ download_csv <- function(path, file, overwrite = FALSE, timeout = 60) {
   options(timeout = max(timeout, getOption("timeout")))
   
   tryCatch({
-    utils::download.file(url = download_url, destfile = destination, 
+    utils::download.file(url = url, destfile = destination, 
                          mode = "wb")
   
     message("The file '", file, "' has been successfully downloaded")
@@ -389,7 +564,7 @@ download_csv <- function(path, file, overwrite = FALSE, timeout = 60) {
     if (file.exists(destination)) {
       file.remove(destination)
       
-      message("Temporary file deleted.")
+      message("Temporary file deleted")
     }
   })
   

@@ -2,8 +2,7 @@
 #' 
 #' @noRd
 
-plankton_net_filename <- function() paste0("FORCIS_net_", 
-                                           forcis_db_version(), ".csv")
+plankton_net_filename <- function() "FORCIS_net_"
 
 
 
@@ -11,8 +10,7 @@ plankton_net_filename <- function() paste0("FORCIS_net_",
 #' 
 #' @noRd
 
-pump_filename <- function() paste0("FORCIS_pump_", 
-                                   forcis_db_version(), ".csv")
+pump_filename <- function() "FORCIS_pump_"
 
 
 
@@ -20,8 +18,7 @@ pump_filename <- function() paste0("FORCIS_pump_",
 #' 
 #' @noRd
 
-cpr_north_filename <- function() paste0("FORCIS_cpr_north_", 
-                                        forcis_db_version(), ".csv")
+cpr_north_filename <- function() "FORCIS_cpr_north_"
 
 
 
@@ -29,8 +26,7 @@ cpr_north_filename <- function() paste0("FORCIS_cpr_north_",
 #' 
 #' @noRd
 
-cpr_south_filename <- function() paste0("FORCIS_cpr_south_", 
-                                        forcis_db_version(), ".csv")
+cpr_south_filename <- function() "FORCIS_cpr_south_"
 
 
 
@@ -38,5 +34,4 @@ cpr_south_filename <- function() paste0("FORCIS_cpr_south_",
 #' 
 #' @noRd
 
-sediment_trap_filename <- function() paste0("FORCIS_trap_", 
-                                            forcis_db_version(), ".csv")
+sediment_trap_filename <- function() "FORCIS_trap_"

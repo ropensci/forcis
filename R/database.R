@@ -1,27 +1,3 @@
-#' FORCIS database version
-#' 
-#' @note
-#' This value must be changed each time a new version of the database is 
-#' released on Zenodo.
-#' 
-#' @noRd
-
-forcis_db_version <- function() "v05_14092023"
-
-
-
-#' FORCIS database URL
-#' 
-#' @note
-#' This value must be changed each time a new version of the database is 
-#' released on Zenodo.
-#' 
-#' @noRd
-
-forcis_db_url <- function() "https://zenodo.org/record/8345072/files/"
-
-
-
 #' Vector of device types available in FORCIS database
 #' 
 #' @noRd
@@ -41,18 +17,17 @@ required_columns <- function() {
     "cruise_id",
     "profile_id",
     "sample_id",
-    "sample_min_depth",#new
-    "sample_max_depth",#new
-    "profile_depth_min",#new
-    "profile_depth_max",#new
-    "profile_date_time",#new
-    "cast_net_op_m2",#new
+    "sample_min_depth",
+    "sample_max_depth",
+    "profile_depth_min",
+    "profile_depth_max",
+    "profile_date_time",
+    "cast_net_op_m2",
     "subsample_id",
-    "sample_segment_length",#new
+    "sample_segment_length",
     "subsample_count_type",
-    "subsample_size_fraction_min",#new
-    "subsample_size_fraction_max",#new
-    #    "sample_max_depth",
+    "subsample_size_fraction_min",
+    "subsample_size_fraction_max",
     "site_lat_start_decimal",
     "site_lon_start_decimal",
     "sample_volume_filtered",
