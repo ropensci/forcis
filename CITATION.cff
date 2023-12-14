@@ -85,6 +85,33 @@ references:
     orcid: https://orcid.org/0000-0003-4777-038X
   year: '2023'
 - type: software
+  title: jsonlite
+  abstract: 'jsonlite: A Simple and Robust JSON Parser and Generator for R'
+  notes: Imports
+  url: https://jeroen.r-universe.dev/jsonlite
+  repository: https://CRAN.R-project.org/package=jsonlite
+  authors:
+  - family-names: Ooms
+    given-names: Jeroen
+    email: jeroen@berkeley.edu
+    orcid: https://orcid.org/0000-0002-4035-0289
+  year: '2023'
+- type: software
+  title: lubridate
+  abstract: 'lubridate: Make Dealing with Dates a Little Easier'
+  notes: Imports
+  url: https://lubridate.tidyverse.org
+  repository: https://CRAN.R-project.org/package=lubridate
+  authors:
+  - family-names: Spinu
+    given-names: Vitalie
+    email: spinuvit@gmail.com
+  - family-names: Grolemund
+    given-names: Garrett
+  - family-names: Wickham
+    given-names: Hadley
+  year: '2023'
+- type: software
   title: rlang
   abstract: 'rlang: Functions for Base Types and Core R and ''Tidyverse'' Features'
   notes: Imports
@@ -125,21 +152,6 @@ references:
   year: '2023'
   institution:
     name: R Foundation for Statistical Computing
-- type: software
-  title: lubridate
-  abstract: 'lubridate: Make Dealing with Dates a Little Easier'
-  notes: Imports
-  url: https://lubridate.tidyverse.org
-  repository: https://CRAN.R-project.org/package=lubridate
-  authors:
-  - family-names: Spinu
-    given-names: Vitalie
-    email: spinuvit@gmail.com
-  - family-names: Grolemund
-    given-names: Garrett
-  - family-names: Wickham
-    given-names: Hadley
-  year: '2023'
 - type: software
   title: vroom
   abstract: 'vroom: Read and Write Rectangular Text Data Quickly'
