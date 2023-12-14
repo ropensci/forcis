@@ -4,16 +4,12 @@
 \alias{get_forcis_db}
 \title{Download the entire FORCIS database}
 \usage{
-get_forcis_db(
-  path = ".",
-  version = forcis_db_version(),
-  overwrite = FALSE,
-  timeout = 60
-)
+get_forcis_db(path = ".", version = NULL, overwrite = FALSE, timeout = 60)
 }
 \arguments{
 \item{path}{a \code{character} of length 1. The folder in which the FORCIS
-database will be saved.}
+database will be saved. Note that a subdirectory will be created in the
+version number.}
 
 \item{version}{a \code{character} of length 1. The version number of the
 FORCIS database. Default is the latest version.}
@@ -25,17 +21,11 @@ files of the FORCIS database. Default is \code{FALSE}.}
 FORCIS database. Default is \code{60}.}
 }
 \value{
-No return value. The five \code{csv} files will be saved in the \code{path}
-folder.
+No return value. The FORCIS files will be saved in the \code{path} folder.
 }
 \description{
 Downloads the entire FORCIS database as a collection of five \code{csv} files from
 Zenodo (\url{https://zenodo.org/record/7936568}).
-}
-\details{
-If user is interested in only one type of data (e.g. plankton nets), the
-function \code{get_plankton_nets_data()} (and others) is a better choice as it
-will download only one \code{csv} file.
 }
 \examples{
 \dontrun{
@@ -46,6 +36,6 @@ path_to_save_db <- "data"
 forcis::get_forcis_db(path = path_to_save_db)
 
 # Check the content of the folder ----
-list.files(path_to_save_db)
+list.files(path_to_save_db, recursive = TRUE)
 }
 }

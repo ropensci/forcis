@@ -11,35 +11,20 @@
 \usage{
 get_plankton_nets_data(
   path = ".",
-  version = forcis_db_version(),
+  version = NULL,
   overwrite = FALSE,
   timeout = 60
 )
 
-get_pump_data(
-  path = ".",
-  version = forcis_db_version(),
-  overwrite = FALSE,
-  timeout = 60
-)
+get_pump_data(path = ".", version = NULL, overwrite = FALSE, timeout = 60)
 
-get_cpr_north_data(
-  path = ".",
-  version = forcis_db_version(),
-  overwrite = FALSE,
-  timeout = 60
-)
+get_cpr_north_data(path = ".", version = NULL, overwrite = FALSE, timeout = 60)
 
-get_cpr_south_data(
-  path = ".",
-  version = forcis_db_version(),
-  overwrite = FALSE,
-  timeout = 60
-)
+get_cpr_south_data(path = ".", version = NULL, overwrite = FALSE, timeout = 60)
 
 get_sediment_trap_data(
   path = ".",
-  version = forcis_db_version(),
+  version = NULL,
   overwrite = FALSE,
   timeout = 60
 )
