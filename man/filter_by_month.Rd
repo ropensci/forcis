@@ -17,3 +17,6 @@ A \code{data.frame}.
 \description{
 Filter forcis data by month of sampling
 }
+\examples{
+## ADD EXAMPLE ----
+}

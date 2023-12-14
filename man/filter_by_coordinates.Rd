@@ -18,3 +18,6 @@ A \code{data.frame}.
 \description{
 Filter forcis data by coordinate square
 }
+\examples{
+## ADD EXAMPLE ----
+}

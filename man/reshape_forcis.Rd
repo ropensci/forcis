@@ -15,3 +15,6 @@ A \code{data.frame}
 \description{
 Reshape and simplify forcis data
 }
+\examples{
+## ADD EXAMPLE ----
+}

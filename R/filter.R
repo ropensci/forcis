@@ -6,7 +6,9 @@
 #' @return A `data.frame`
 #' @export
 #'
-#' 
+#' @examples
+#' ## ADD EXAMPLE ----
+
 reshape_forcis <- function(data){
   
   if (get_data_type(data) %in% c("CPR North")) {
@@ -34,7 +36,10 @@ reshape_forcis <- function(data){
 #' @export
 #'
 #' @import lubridate
-#' 
+#'
+#' @examples
+#' ## ADD EXAMPLE ----
+
 filter_by_year <- function(data,years){
   year_vector <- as.numeric(years)
   filtered_dat <- data %>% 
@@ -58,6 +63,10 @@ filter_by_year <- function(data,years){
 #' @export
 #'
 #' @import lubridate
+#' 
+#' @examples
+#' ## ADD EXAMPLE ----
+
 filter_by_month <- function(data,months){
   
   month_vector <- as.numeric(months)
@@ -84,6 +93,8 @@ filter_by_month <- function(data,months){
 #' @export
 #'
 #' @examples
+#' ## ADD EXAMPLE ----
+
 filter_by_coordinates <- function(data, coord_square){
   
   min_lat <- coord_square[1] 
@@ -111,6 +122,8 @@ filter_by_coordinates <- function(data, coord_square){
 #' @export
 #'
 #' @examples
+#' ## ADD EXAMPLE ----
+
 filter_by_species <- function (data,species ){
   my_species <- as.character(species)
   
@@ -120,11 +133,3 @@ filter_by_species <- function (data,species ){
   
   return(filtered_dat)
 }
-
-
-
-
-
-
-
-
