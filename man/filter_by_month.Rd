@@ -7,7 +7,7 @@
 filter_by_month(data, months)
 }
 \arguments{
-\item{data}{forcis data in long format}
+\item{data}{forcis data}
 
 \item{months}{numeric vector of selected months}
 }

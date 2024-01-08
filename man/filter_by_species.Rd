@@ -4,12 +4,14 @@
 \alias{filter_by_species}
 \title{Filter forcis data by species}
 \usage{
-filter_by_species(data, species)
+filter_by_species(data, species, remove_NAs = TRUE)
 }
 \arguments{
 \item{data}{forcis data in long format, except for CPR North data}
 
 \item{species}{a character vector listing species of interest}
+
+\item{remove_NAs}{logical, If FALSE, retains all taxa including those with NA counts}
 }
 \value{
 A \code{data.frame}

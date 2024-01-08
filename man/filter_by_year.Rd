@@ -7,7 +7,7 @@
 filter_by_year(data, years)
 }
 \arguments{
-\item{data}{forcis data in long format}
+\item{data}{forcis data}
 
 \item{years}{numeric vector of selected years}
 }

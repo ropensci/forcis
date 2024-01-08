@@ -7,7 +7,7 @@
 filter_by_coordinates(data, coord_square)
 }
 \arguments{
-\item{data}{forcis data in long format}
+\item{data}{forcis data}
 
 \item{coord_square}{a numeric vector containing in this order minimum latitute,
 minimum longitude, maximum latitude, maximum longitude}
