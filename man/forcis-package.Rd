@@ -6,6 +6,8 @@
 \alias{forcis-package}
 \title{forcis: An R Client to Access the FORCIS Database}
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
 Provides an interface to the FORCIS database on global foraminifera distribution. This package allows to download and to handle FORCIS data. It is part of the FRB-CESAB working group FORCIS. \url{https://www.fondationbiodiversite.fr/en/the-frb-in-action/programs-and-projects/le-cesab/forcis/}.
 }
 \seealso{

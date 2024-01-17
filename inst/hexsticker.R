@@ -14,7 +14,7 @@ hexSticker::sticker(
   
   subplot   = p,
   package   = "forcis",
-  filename  = here::here("man", "figures", "hexsticker.png"),
+  filename  = here::here("man", "figures", "logo.png"),
   dpi       = 600,
   
   p_size    = 36.0,         # Title

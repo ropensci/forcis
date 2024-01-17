@@ -1,0 +1,6 @@
+url: https://frbcesab.github.io/forcis
+
+template:
+  bootstrap: 5
+  bslib:
+    primary: "#2b4370"

@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# forcis <img src="man/figures/hexsticker.png" height="120px" align="right" style="float:right; height:120px;"/>
+# forcis <img src="man/figures/logo.png" height="120px" align="right" style="float:right; height:120px;"/>
 
 <!-- badges: start -->
 
