@@ -2,18 +2,18 @@
 % Please edit documentation in R/filter.R
 \name{reshape_forcis}
 \alias{reshape_forcis}
-\title{Reshape and simplify forcis data}
+\title{Reshape and simplify FORCIS data}
 \usage{
 reshape_forcis(data)
 }
 \arguments{
-\item{data}{forcis data}
+\item{data}{a \code{data.frame}, i.e. a FORCIS dataset, except for CPR North data.}
 }
 \value{
-A \code{data.frame}
+A \code{data.frame} reshaped in a long format.
 }
 \description{
-Reshape and simplify forcis data
+A short description...
 }
 \examples{
 ## ADD EXAMPLE ----

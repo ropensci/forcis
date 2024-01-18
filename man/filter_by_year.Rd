@@ -2,20 +2,20 @@
 % Please edit documentation in R/filter.R
 \name{filter_by_year}
 \alias{filter_by_year}
-\title{Filter forcis data by year of sampling}
+\title{Filter FORCIS data by year of sampling}
 \usage{
 filter_by_year(data, years)
 }
 \arguments{
-\item{data}{forcis data}
+\item{data}{a \code{data.frame}, i.e. a FORCIS dataset.}
 
-\item{years}{numeric vector of selected years}
+\item{years}{a \code{numeric} containing one or several years.}
 }
 \value{
-A \code{data.frame}.
+A \code{data.frame} containing a subset of \code{data} for the desired years.
 }
 \description{
-Filter forcis data by year of sampling
+This function can be used to filter FORCIS data by year of sampling.
 }
 \examples{
 ## ADD EXAMPLE ----

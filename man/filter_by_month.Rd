@@ -2,20 +2,20 @@
 % Please edit documentation in R/filter.R
 \name{filter_by_month}
 \alias{filter_by_month}
-\title{Filter forcis data by month of sampling}
+\title{Filter FORCIS data by month of sampling}
 \usage{
 filter_by_month(data, months)
 }
 \arguments{
-\item{data}{forcis data}
+\item{data}{a \code{data.frame}, i.e. a FORCIS dataset.}
 
-\item{months}{numeric vector of selected months}
+\item{months}{a \code{numeric} containing one or several months.}
 }
 \value{
-A \code{data.frame}.
+A \code{data.frame} containing a subset of \code{data} for the desired months.
 }
 \description{
-Filter forcis data by month of sampling
+This function can be used to filter FORCIS data by month of sampling.
 }
 \examples{
 ## ADD EXAMPLE ----

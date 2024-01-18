@@ -2,22 +2,22 @@
 % Please edit documentation in R/filter.R
 \name{filter_by_species}
 \alias{filter_by_species}
-\title{Filter forcis data by species}
+\title{Filter FORCIS data by species}
 \usage{
-filter_by_species(data, species, remove_NAs = TRUE)
+filter_by_species(data, species, rm_na = FALSE)
 }
 \arguments{
-\item{data}{forcis data in long format, except for CPR North data}
+\item{data}{a \code{data.frame}, i.e. a FORCIS dataset, except for CPR North data.}
 
-\item{species}{a character vector listing species of interest}
+\item{species}{a \code{character} vector listing species of interest.}
 
-\item{remove_NAs}{logical, If FALSE, retains all taxa including those with NA counts}
+\item{rm_na}{a \code{logical} value. If \code{FALSE}, keeps taxa with \code{NA} counts.}
 }
 \value{
-A \code{data.frame}
+A \code{data.frame} containing a subset of \code{data}.
 }
 \description{
-Filter forcis data by species
+A short description...
 }
 \examples{
 ## ADD EXAMPLE ----
