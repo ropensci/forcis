@@ -44,7 +44,7 @@ filter_by_year <- function(data,years){
   if (get_data_type(data)=="Sediment trap"){
     filtered_dat <- data %>%
       filter(! is.na(.data$sample_date_time_start)) %>%
-      mutate(new_sample_date_start=gsub(' .*','',sample_date_time_start)) %>% 
+      mutate(new_sample_date_start=gsub(' .*','', .data$sample_date_time_start)) %>% 
       mutate(new_sample_date_start = dmy(.data$new_sample_date_start)) %>%
       mutate(year=year(.data$new_sample_date_start)) %>% 
       filter(.data$year %in% year_vector) %>%
@@ -80,7 +80,7 @@ filter_by_month <- function(data,months){
   if (get_data_type(data)=="Sediment trap"){
     filtered_dat <- data %>%
       filter(! is.na(.data$sample_date_time_start)) %>%
-      mutate(new_sample_date_start=gsub(' .*','',sample_date_time_start)) %>% 
+      mutate(new_sample_date_start=gsub(' .*','', .data$sample_date_time_start)) %>% 
       mutate(new_sample_date_start = dmy(.data$new_sample_date_start)) %>%
       mutate(month=month(.data$new_sample_date_start)) %>% 
       filter(.data$month %in% month_vector) %>%
