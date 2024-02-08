@@ -35,3 +35,11 @@ cpr_south_filename <- function() "FORCIS_cpr_south_"
 #' @noRd
 
 sediment_trap_filename <- function() "FORCIS_trap_"
+
+
+
+#' Sediment Traps file name
+#' 
+#' @noRd
+
+iho_oceans_filename <- function() "iho_oceans_boundaries"

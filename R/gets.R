@@ -528,6 +528,72 @@ get_sediment_trap_data <- function(path = ".", version = NULL,
 
 
 
+#' Download and read IHO spatial layer
+#' 
+#' Used in the `spatial_filter_*()` functions
+#' 
+#' @noRd
+
+get_iho_data <- function(path = ".", version = NULL, 
+                         check_for_update = TRUE, overwrite = FALSE, 
+                         timeout = 60) {
+  
+  ## Check args ----
+  
+  is_character(path)
+  check_zen_version(version)
+  
+  
+  ## Check/set version ----
+  
+  version <- set_zen_version(version, ask = check_for_update)
+  
+  
+  ## Build outputs directory ----
+  
+  path <- file.path(path, "forcis-db", paste0("version-", version))
+  
+  if (!dir.exists(path)) {
+    dir.create(path, recursive = TRUE)
+  }
+  
+  
+  ## Download file (if required) ----
+  
+  file_name <- list.files(path, pattern = iho_oceans_filename())
+  
+  if (!length(file_name)) {
+    
+    forcis_meta  <- zen_get_version_info(version = version)
+    forcis_files <- forcis_meta$"files"
+    
+    pos <- grep(iho_oceans_filename(), forcis_files$"key")
+    
+    if (length(pos) == 1) {
+      
+      download_file(url       = forcis_files[pos, "links"]$"self",
+                    path      = path, 
+                    file      = forcis_files[pos, "key"], 
+                    overwrite = overwrite, 
+                    timeout   = timeout)
+      
+    } else {
+      
+      stop("Unable to download the 'IHO' dataset", call. = FALSE)
+    }
+  }
+  
+  
+  ## Read data ----
+  
+  file_name <- list.files(path, pattern = iho_oceans_filename())
+  
+  data <- readRDS(file.path(path, file_name))
+  sf::st_as_sf(data)
+}
+
+
+
 #' Download a csv file
 #' 
 #' @param file a `character` of length 1. The name of the csv to download.

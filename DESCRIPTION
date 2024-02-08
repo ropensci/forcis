@@ -41,6 +41,7 @@ Imports:
     jsonlite,
     lubridate,
     rlang,
+    sf,
     tidyr,
     utils,
     vroom
