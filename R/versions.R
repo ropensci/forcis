@@ -23,9 +23,7 @@ get_in_use_version <- function() {
 #' 
 #' @noRd
 
-set_in_use_version <- function(version = NULL) {
-  
-  version <- set_zen_version(version)
+set_in_use_version <- function(version) {
   
   saved_version <- get_in_use_version()
   

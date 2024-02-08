@@ -199,12 +199,17 @@ set_zen_version <- function(version) {
   
   check_zen_version(version)
   
-  versions <- zen_list_versions()
+  versions       <- zen_list_versions()
+  latest_version <- get_zen_latest_version()
   
   if (is.null(version)) {
     
-    version <- versions[which.max(as.Date(versions$"publication_date")), 
-                        "version"]
+    version <- get_in_use_version()
+    
+    if (is.null(version)) {
+    
+      version <- latest_version
+    }
     
   } else {
     
@@ -215,5 +220,38 @@ set_zen_version <- function(version) {
     }
   }
   
+  if (version != latest_version) {
+    
+    answer <- readline(paste0("A newer version of the FORCIS database is ", 
+                              "available. Do you want to download it [Y/n]? "))
+    
+    if (answer == "") answer <- "y"
+    
+    answer <- tolower(answer)
+    
+    if (!(answer %in% c("y", "n"))) {
+      stop("Please type 'y' or 'n'", call. = FALSE)
+    }
+    
+    if (answer == "y") {
+      version <- latest_version
+    }
+  }
+  
+  set_in_use_version(version)
+  
   version
+}
+
+
+
+#' Get Zenodo latest version
+#' 
+#' @noRd
+
+get_zen_latest_version <- function() {
+  
+  versions <- zen_list_versions()
+  
+  versions[which.max(as.Date(versions$"publication_date")), "version"]
 }
