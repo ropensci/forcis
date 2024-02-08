@@ -63,7 +63,7 @@ get_forcis_db <- function(path = ".", version = NULL, check_for_update = TRUE,
   
   ## Create outputs directory if required ----
   
-  path <- file.path(path, paste0("version-", version))
+  path <- file.path(path, "forcis-db", paste0("version-", version))
   
   if (!dir.exists(path)) {
     dir.create(path, recursive = TRUE)
@@ -139,7 +139,7 @@ get_plankton_nets_data <- function(path = ".", version = NULL,
   
   ## Build outputs directory ----
   
-  path <- file.path(path, paste0("version-", version))
+  path <- file.path(path, "forcis-db", paste0("version-", version))
   
   if (!dir.exists(path)) {
     dir.create(path, recursive = TRUE)
@@ -221,7 +221,7 @@ get_pump_data <- function(path = ".", version = NULL,
   
   ## Build outputs directory ----
   
-  path <- file.path(path, paste0("version-", version))
+  path <- file.path(path, "forcis-db", paste0("version-", version))
   
   if (!dir.exists(path)) {
     dir.create(path, recursive = TRUE)
@@ -303,7 +303,7 @@ get_cpr_north_data <- function(path = ".", version = NULL,
   
   ## Build outputs directory ----
   
-  path <- file.path(path, paste0("version-", version))
+  path <- file.path(path, "forcis-db", paste0("version-", version))
   
   if (!dir.exists(path)) {
     dir.create(path, recursive = TRUE)
@@ -384,7 +384,7 @@ get_cpr_south_data <- function(path = ".", version = NULL,
   
   ## Build outputs directory ----
   
-  path <- file.path(path, paste0("version-", version))
+  path <- file.path(path, "forcis-db", paste0("version-", version))
   
   if (!dir.exists(path)) {
     dir.create(path, recursive = TRUE)
@@ -466,7 +466,7 @@ get_sediment_trap_data <- function(path = ".", version = NULL,
   
   ## Build outputs directory ----
   
-  path <- file.path(path, paste0("version-", version))
+  path <- file.path(path, "forcis-db", paste0("version-", version))
   
   if (!dir.exists(path)) {
     dir.create(path, recursive = TRUE)
