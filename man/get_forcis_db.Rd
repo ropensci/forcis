@@ -4,7 +4,13 @@
 \alias{get_forcis_db}
 \title{Download the entire FORCIS database}
 \usage{
-get_forcis_db(path = ".", version = NULL, overwrite = FALSE, timeout = 60)
+get_forcis_db(
+  path = ".",
+  version = NULL,
+  check_for_update = TRUE,
+  overwrite = FALSE,
+  timeout = 60
+)
 }
 \arguments{
 \item{path}{a \code{character} of length 1. The folder in which the FORCIS
@@ -13,6 +19,10 @@ version number.}
 
 \item{version}{a \code{character} of length 1. The version number of the
 FORCIS database. Default is the latest version.}
+
+\item{check_for_update}{a \code{logical}. If \code{TRUE} (default) it will check if a
+newer version of the FORCIS database is available on Zenodo and ask user
+to download it.}
 
 \item{overwrite}{a \code{logical}. If \code{TRUE} it will override the downloaded
 files of the FORCIS database. Default is \code{FALSE}.}

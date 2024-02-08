@@ -195,7 +195,7 @@ check_zen_version <- function(version) {
 #' 
 #' @noRd
 
-set_zen_version <- function(version) {
+set_zen_version <- function(version, ask = TRUE) {
   
   check_zen_version(version)
   
@@ -220,21 +220,25 @@ set_zen_version <- function(version) {
     }
   }
   
-  if (version != latest_version) {
-    
-    answer <- readline(paste0("A newer version of the FORCIS database is ", 
-                              "available. Do you want to download it [Y/n]? "))
-    
-    if (answer == "") answer <- "y"
-    
-    answer <- tolower(answer)
-    
-    if (!(answer %in% c("y", "n"))) {
-      stop("Please type 'y' or 'n'", call. = FALSE)
-    }
-    
-    if (answer == "y") {
-      version <- latest_version
+  if (ask) {
+  
+    if (version != latest_version) {
+      
+      answer <- readline(paste0("A newer version of the FORCIS database is ", 
+                                "available. ", 
+                                "Do you want to download it [Y/n]? "))
+      
+      if (answer == "") answer <- "y"
+      
+      answer <- tolower(answer)
+      
+      if (!(answer %in% c("y", "n"))) {
+        stop("Please type 'y' or 'n'", call. = FALSE)
+      }
+      
+      if (answer == "y") {
+        version <- latest_version
+      }
     }
   }
   

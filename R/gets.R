@@ -10,6 +10,10 @@
 #'   
 #' @param version a `character` of length 1. The version number of the 
 #'   FORCIS database. Default is the latest version.
+#' 
+#' @param check_for_update a `logical`. If `TRUE` (default) it will check if a
+#'   newer version of the FORCIS database is available on Zenodo and ask user
+#'   to download it.
 #'
 #' @param overwrite a `logical`. If `TRUE` it will override the downloaded 
 #'   files of the FORCIS database. Default is `FALSE`.
@@ -33,7 +37,7 @@
 #' list.files(path_to_save_db, recursive = TRUE)
 #' }
 
-get_forcis_db <- function(path = ".", version = NULL, 
+get_forcis_db <- function(path = ".", version = NULL, check_for_update = TRUE,
                           overwrite = FALSE, timeout = 60) {
   
   ## Check args ----
@@ -54,7 +58,7 @@ get_forcis_db <- function(path = ".", version = NULL,
   
   ## Check/set version ----
   
-  version <- set_zen_version(version)
+  version <- set_zen_version(version, ask = check_for_update)
   
   
   ## Create outputs directory if required ----
@@ -119,7 +123,8 @@ NULL
 #' @export
 
 get_plankton_nets_data <- function(path = ".", version = NULL, 
-                                   overwrite = FALSE, timeout = 60) {
+                                   check_for_update = TRUE, overwrite = FALSE, 
+                                   timeout = 60) {
   
   ## Check args ----
   
@@ -129,7 +134,7 @@ get_plankton_nets_data <- function(path = ".", version = NULL,
   
   ## Check/set version ----
   
-  version <- set_zen_version(version)
+  version <- set_zen_version(version, ask = check_for_update)
   
   
   ## Build outputs directory ----
@@ -200,7 +205,8 @@ get_plankton_nets_data <- function(path = ".", version = NULL,
 #' @export
 
 get_pump_data <- function(path = ".", version = NULL, 
-                          overwrite = FALSE, timeout = 60) {
+                          check_for_update = TRUE, overwrite = FALSE, 
+                          timeout = 60) {
   
   ## Check args ----
   
@@ -210,7 +216,7 @@ get_pump_data <- function(path = ".", version = NULL,
   
   ## Check/set version ----
   
-  version <- set_zen_version(version)
+  version <- set_zen_version(version, ask = check_for_update)
   
   
   ## Build outputs directory ----
@@ -281,7 +287,8 @@ get_pump_data <- function(path = ".", version = NULL,
 #' @export
 
 get_cpr_north_data <- function(path = ".", version = NULL, 
-                               overwrite = FALSE, timeout = 60) {
+                               check_for_update = TRUE, overwrite = FALSE, 
+                               timeout = 60) {
   
   ## Check args ----
   
@@ -291,7 +298,7 @@ get_cpr_north_data <- function(path = ".", version = NULL,
   
   ## Check/set version ----
   
-  version <- set_zen_version(version)
+  version <- set_zen_version(version, ask = check_for_update)
   
   
   ## Build outputs directory ----
@@ -360,8 +367,9 @@ get_cpr_north_data <- function(path = ".", version = NULL,
 #' @rdname get_data
 #' @export
 
-get_cpr_south_data <- function(path = ".", version = NULL,
-                               overwrite = FALSE, timeout = 60) {
+get_cpr_south_data <- function(path = ".", version = NULL, 
+                               check_for_update = TRUE, overwrite = FALSE, 
+                               timeout = 60) {
   
   ## Check args ----
   
@@ -371,7 +379,7 @@ get_cpr_south_data <- function(path = ".", version = NULL,
   
   ## Check/set version ----
   
-  version <- set_zen_version(version)
+  version <- set_zen_version(version, ask = check_for_update)
   
   
   ## Build outputs directory ----
@@ -442,7 +450,8 @@ get_cpr_south_data <- function(path = ".", version = NULL,
 #' @export
 
 get_sediment_trap_data <- function(path = ".", version = NULL, 
-                                   overwrite = FALSE, timeout = 60) {
+                                   check_for_update = TRUE, overwrite = FALSE, 
+                                   timeout = 60) {
   
   ## Check args ----
   
@@ -452,7 +461,7 @@ get_sediment_trap_data <- function(path = ".", version = NULL,
   
   ## Check/set version ----
   
-  version <- set_zen_version(version)
+  version <- set_zen_version(version, ask = check_for_update)
   
   
   ## Build outputs directory ----
