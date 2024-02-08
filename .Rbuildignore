@@ -12,3 +12,5 @@
 ^CODE_OF_CONDUCT\.md$
 ^NEWS\.md$
 ^codemeta\.json$
+^\.forcis$
+^forcis-db$
