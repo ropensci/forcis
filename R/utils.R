@@ -259,3 +259,14 @@ get_zen_latest_version <- function() {
   
   versions[which.max(as.Date(versions$"publication_date")), "version"]
 }
+
+
+
+#' Robinson coordinate system
+#' 
+#' @noRd
+
+crs_robinson <- function() {
+  paste0("+proj=robin +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84", 
+         " +units=m +no_defs")
+}

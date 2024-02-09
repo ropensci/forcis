@@ -4,14 +4,17 @@
 \alias{filter_by_bbox}
 \title{Filter FORCIS data by a spatial bounding box}
 \usage{
-filter_by_bbox(data, coord_square)
+filter_by_bbox(data, bbox)
 }
 \arguments{
 \item{data}{a \code{data.frame}, i.e. a FORCIS dataset.}
 
-\item{coord_square}{a vector of four \code{numeric} values defining a square
-bounding box. Values must follow this order: minimum latitude, minimum
-longitude, maximum latitude, and maximum longitude.}
+\item{bbox}{an object of class \code{bbox} (package \code{sf}) or a vector of four
+\code{numeric} values defining a square bounding box. Values must follow this
+order: minimum longitude (\code{xmin}), minimum latitude (\code{ymin}), maximum
+longitude (\code{xmax}), and maximum latitude (\code{ymax}).
+\strong{Important:} if a vector of numeric values is provided, coordinates must
+be defined in the system WGS 84 (\code{epsg=4326}).}
 }
 \value{
 A \code{data.frame} containing a subset of \code{data}.
