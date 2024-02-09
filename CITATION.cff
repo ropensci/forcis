@@ -115,6 +115,18 @@ references:
     email: hadley@posit.co
   year: '2024'
 - type: software
+  title: sf
+  abstract: 'sf: Simple Features for R'
+  notes: Imports
+  url: https://r-spatial.github.io/sf/
+  repository: https://CRAN.R-project.org/package=sf
+  authors:
+  - family-names: Pebesma
+    given-names: Edzer
+    email: edzer.pebesma@uni-muenster.de
+    orcid: https://orcid.org/0000-0001-8049-7069
+  year: '2024'
+- type: software
   title: tidyr
   abstract: 'tidyr: Tidy Messy Data'
   notes: Imports
