@@ -5,8 +5,6 @@ on:
     branches: [master, main]
     paths:
       - DESCRIPTION
-      - inst/CITATION
-      - README.md
   workflow_dispatch:
 
 name: Update codemeta.json
