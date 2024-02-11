@@ -16,28 +16,51 @@
 
 filter_by_month <- function(data, months) {
   
-  month_vector <- as.numeric(months)
+  ## Check data object ----
+  
+  check_if_not_df(data)
+  
+  
+  ## Check months object ----
+  
+  if (missing(months)) {
+    stop("Argument 'months' is required", call. = FALSE)
+  }
+  
+  if (!is.numeric(months)) {
+    stop("Argument 'months' must be a numeric of length >= 1", call. = FALSE)
+  }
+  
   
   if (get_data_type(data) == "Sediment trap") {
     
-    filtered_dat <- data %>%
-      filter(!is.na(.data$sample_date_time_start)) %>%
-      mutate(new_sample_date_start = gsub(' .*','', 
-                                          .data$sample_date_time_start)) %>% 
-      mutate(new_sample_date_start = dmy(.data$new_sample_date_start)) %>%
-      mutate(month=month(.data$new_sample_date_start)) %>% 
-      filter(.data$month %in% month_vector) %>%
-      select(-c(.data$month,.data$new_sample_date_start))
+    check_field_in_data(data, "sample_date_time_start")
+    
+    data <- data[!is.na(data$"sample_date_time_start"), ]
+    
+    start_dates <- unlist(lapply(strsplit(data$"sample_date_time_start", "\\s"),
+                                 function(x) x[1]))
+    
+    start_dates  <- as.Date(start_dates, format = "%d/%m/%Y")
+    start_months <- as.numeric(format(start_dates, "%m"))
+    
+    pos <- which(start_months %in% as.numeric(months))
+    
+    data <- data[pos, ]
     
   } else {
     
-    filtered_dat <- data %>% 
-      filter(!is.na(.data$profile_date_time)) %>% 
-      mutate(new_profile_date_time = dmy(.data$profile_date_time)) %>% 
-      mutate(month = month(.data$new_profile_date_time)) %>% 
-      filter(.data$month %in% month_vector)%>% 
-      select(-c(.data$month, .data$new_profile_date_time))
+    check_field_in_data(data, "profile_date_time")
+    
+    data <- data[!is.na(data$"profile_date_time"), ]
+    
+    start_dates  <- as.Date(start_dates, format = "%d/%m/%Y")
+    start_months <- as.numeric(format(start_dates, "%m"))
+    
+    pos <- which(start_months %in% as.numeric(months))
+    
+    data <- data[pos, ]
   }
   
-  filtered_dat
+  data
 }

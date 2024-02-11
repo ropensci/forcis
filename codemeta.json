@@ -121,18 +121,6 @@
     },
     "4": {
       "@type": "SoftwareApplication",
-      "identifier": "lubridate",
-      "name": "lubridate",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=lubridate"
-    },
-    "5": {
-      "@type": "SoftwareApplication",
       "identifier": "rlang",
       "name": "rlang",
       "provider": {
@@ -143,7 +131,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=rlang"
     },
-    "6": {
+    "5": {
       "@type": "SoftwareApplication",
       "identifier": "sf",
       "name": "sf",
@@ -155,7 +143,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=sf"
     },
-    "7": {
+    "6": {
       "@type": "SoftwareApplication",
       "identifier": "tidyr",
       "name": "tidyr",
@@ -167,12 +155,12 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=tidyr"
     },
-    "8": {
+    "7": {
       "@type": "SoftwareApplication",
       "identifier": "utils",
       "name": "utils"
     },
-    "9": {
+    "8": {
       "@type": "SoftwareApplication",
       "identifier": "vroom",
       "name": "vroom",
@@ -186,7 +174,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "1057.276KB",
+  "fileSize": "1057.776KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",

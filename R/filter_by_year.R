@@ -16,28 +16,59 @@
 
 filter_by_year <- function(data, years) {
   
-  year_vector <- as.numeric(years)
+  ## Check data object ----
+  
+  check_if_not_df(data)
+  
+  
+  ## Check years object ----
+  
+  if (missing(years)) {
+    stop("Argument 'years' is required", call. = FALSE)
+  }
+  
+  if (!is.numeric(years)) {
+    stop("Argument 'years' must be a numeric of length >= 1", call. = FALSE)
+  }
+  
   
   if (get_data_type(data) == "Sediment trap") {
     
-    filtered_dat <- data %>%
-      filter(!is.na(.data$sample_date_time_start)) %>%
-      mutate(new_sample_date_start = gsub(' .*','', 
-                                          .data$sample_date_time_start)) %>% 
-      mutate(new_sample_date_start = dmy(.data$new_sample_date_start)) %>%
-      mutate(year = year(.data$new_sample_date_start)) %>% 
-      filter(.data$year %in% year_vector) %>%
-      select(-c(.data$year, .data$new_sample_date_start))
+    check_field_in_data(data, "sample_date_time_start")
+    
+    data <- data[!is.na(data$"sample_date_time_start"), ]
+    
+    start_dates <- unlist(lapply(strsplit(data$"sample_date_time_start", "\\s"),
+                                 function(x) x[1]))
+    
+    start_dates <- as.Date(start_dates, format = "%d/%m/%Y")
+    start_years <- as.numeric(format(start_dates, "%Y"))
+    
+    if (all(!(as.numeric(years) %in% unique(start_years)))) {
+      stop("The years provided are out of FORCIS temporal range", call. = FALSE)
+    }
+    
+    pos <- which(start_years %in% as.numeric(years))
+    
+    data <- data[pos, ]
     
   } else {
     
-    filtered_dat <- data %>% 
-      filter(!is.na(.data$profile_date_time)) %>% 
-      mutate(new_profile_date_time = dmy(.data$profile_date_time)) %>% 
-      mutate(year = year(.data$new_profile_date_time)) %>% 
-      filter(.data$year %in% year_vector) %>% 
-      select(-c(.data$year, .data$new_profile_date_time))
+    check_field_in_data(data, "profile_date_time")
+    
+    data <- data[!is.na(data$"profile_date_time"), ]
+    
+    start_dates <- as.Date(start_dates, format = "%d/%m/%Y")
+    start_years <- as.numeric(format(start_dates, "%Y"))
+    
+    if (all(!(as.numeric(years) %in% unique(start_years)))) {
+      stop("The years provided are out of FORCIS temporal range", call. = FALSE)
+    }
+    
+    pos <- which(start_years %in% as.numeric(years))
+    
+    data <- data[pos, ]
   }
   
-  filtered_dat
+  data
 }

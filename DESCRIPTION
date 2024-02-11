@@ -39,7 +39,6 @@ Depends:
 Imports: 
     dplyr,
     jsonlite,
-    lubridate,
     rlang,
     sf,
     tidyr,
