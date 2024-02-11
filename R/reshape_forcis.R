@@ -14,19 +14,22 @@
 
 reshape_forcis <- function(data) {
   
+  ## Check data object ----
+  
+  check_if_not_df(data)
+  
   if (get_data_type(data) == "CPR North") {
     stop("This function is not designed to work with 'CPR North' data", 
          call. = FALSE) 
   }
   
-  taxa_cols    <- get_species_names(data) 
-  metadat_cols <- get_required_columns()
+  taxa_cols     <- get_species_names(data) 
+  metadata_cols <- get_required_columns()
   
-  dat_reshaped <- data %>% 
-    select(all_of(taxa_cols), metadat_cols) %>% 
-    pivot_longer(all_of(taxa_cols), 
-                 names_to  = "taxa", 
-                 values_to = "counts")
-  
-  dat_reshaped
+  data <- data[ , c(taxa_cols, metadata_cols)]
+
+  tidyr::pivot_longer(data,
+                      tidyr::all_of(taxa_cols), 
+                      names_to  = "taxa", 
+                      values_to = "counts")
 }
