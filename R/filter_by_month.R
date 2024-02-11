@@ -41,7 +41,7 @@ filter_by_month <- function(data, months) {
     start_dates <- unlist(lapply(strsplit(data$"sample_date_time_start", "\\s"),
                                  function(x) x[1]))
     
-    start_dates  <- as.Date(start_dates, format = "%d/%m/%Y")
+    start_dates  <- as.Date(start_dates, format = date_format())
     start_months <- as.numeric(format(start_dates, "%m"))
     
     pos <- which(start_months %in% as.numeric(months))
@@ -54,7 +54,7 @@ filter_by_month <- function(data, months) {
     
     data <- data[!is.na(data$"profile_date_time"), ]
     
-    start_dates  <- as.Date(start_dates, format = "%d/%m/%Y")
+    start_dates  <- as.Date(start_dates, format = date_format())
     start_months <- as.numeric(format(start_dates, "%m"))
     
     pos <- which(start_months %in% as.numeric(months))

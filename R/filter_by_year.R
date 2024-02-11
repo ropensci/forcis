@@ -41,7 +41,7 @@ filter_by_year <- function(data, years) {
     start_dates <- unlist(lapply(strsplit(data$"sample_date_time_start", "\\s"),
                                  function(x) x[1]))
     
-    start_dates <- as.Date(start_dates, format = "%d/%m/%Y")
+    start_dates <- as.Date(start_dates, format = date_format())
     start_years <- as.numeric(format(start_dates, "%Y"))
     
     if (all(!(as.numeric(years) %in% unique(start_years)))) {
@@ -58,7 +58,7 @@ filter_by_year <- function(data, years) {
     
     data <- data[!is.na(data$"profile_date_time"), ]
     
-    start_dates <- as.Date(start_dates, format = "%d/%m/%Y")
+    start_dates <- as.Date(start_dates, format = date_format())
     start_years <- as.numeric(format(start_dates, "%Y"))
     
     if (all(!(as.numeric(years) %in% unique(start_years)))) {
