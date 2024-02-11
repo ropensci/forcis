@@ -30,7 +30,7 @@ library("forcis")
 
 ```{r 'to-develop'}
 # Define the path to store data ----
-path       <- here::here()
+# path       <- here::here()
 
 # Download the latest version of FORCIS database (from Zenodo) ----
 get_forcis_db(path = path)

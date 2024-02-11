@@ -46,6 +46,5 @@ Imports:
     utils,
     vroom
 Suggests: 
-    here,
     knitr,
     rmarkdown
