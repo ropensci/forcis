@@ -32,6 +32,10 @@ filter_by_polygon <- function(data, polygon) {
          call. = FALSE)
   }
   
+  if (is.na(sf::st_crs(polygon))) {
+    stop("The object 'polygon' must have a CRS", call. = FALSE)
+  }
+  
   
   ## Check data object ----
   
@@ -43,22 +47,14 @@ filter_by_polygon <- function(data, polygon) {
   
   ## Convert data into sf object -----
   
-  data <- data %>% 
-    dplyr::filter(!is.na(.data$site_lat_start_decimal)) %>% 
-    dplyr::filter(!is.na(.data$site_lon_start_decimal))
+  data <- data[!is.na(data$"site_lon_start_decimal"), ]
+  data <- data[!is.na(data$"site_lat_start_decimal"), ]
   
   data_sf <- sf::st_as_sf(data, 
                           coords = c("site_lon_start_decimal", 
                                      "site_lat_start_decimal"),
                           crs = sf::st_crs(4326))
-  
-  
-  ## Check polygon CRS ----
-  
-  if (is.na(sf::st_crs(polygon))) {
-    stop("The object 'polygon' must have a CRS", call. = FALSE)
-  }
-  
+
   
   ## Project spatial objects into Robinson system ----
   

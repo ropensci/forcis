@@ -43,9 +43,8 @@ filter_by_ocean <- function(data, ocean) {
   
   ## Convert data into sf object -----
   
-  data <- data %>% 
-    dplyr::filter(!is.na(.data$site_lat_start_decimal)) %>% 
-    dplyr::filter(!is.na(.data$site_lon_start_decimal))
+  data <- data[!is.na(data$"site_lon_start_decimal"), ]
+  data <- data[!is.na(data$"site_lat_start_decimal"), ]
   
   data_sf <- sf::st_as_sf(data, 
                           coords = c("site_lon_start_decimal", 

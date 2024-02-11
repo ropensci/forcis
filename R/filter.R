@@ -157,12 +157,9 @@ filter_by_bbox <- function(data, bbox) {
   
   ## Convert into sf object -----
   
-  data <- data %>% 
-    dplyr::filter(!is.na(.data$site_lat_start_decimal)) %>% 
-    dplyr::filter(!is.na(.data$site_lon_start_decimal))
-  
-  data$"noid" <- 1:nrow(data)
-  
+  data <- data[!is.na(data$"site_lon_start_decimal"), ]
+  data <- data[!is.na(data$"site_lat_start_decimal"), ]
+
   data_sf <- sf::st_as_sf(data, 
                           coords = c("site_lon_start_decimal", 
                                      "site_lat_start_decimal"),
@@ -176,6 +173,9 @@ filter_by_bbox <- function(data, bbox) {
                           xmax = bbox[3], ymax = bbox[4]),
                         crs = sf::st_crs(4326))  
   }
+  
+  
+  ## Check bbox object ----
   
   if (!inherits(bbox, "bbox")) {
     stop("The object 'bbox' must a numeric or a bbox object", call. = FALSE)
@@ -199,11 +199,9 @@ filter_by_bbox <- function(data, bbox) {
 
   ## Spatial filter ----
   
-  data_sf <- suppressWarnings(sf::st_intersection(data_sf, bbox))
- 
-  data <- data[which(data$"noid" %in% data_sf$"noid"), ]
+  inter <- suppressWarnings(sf::st_intersects(data_sf, bbox, sparse = FALSE))
   
-  data[ , -ncol(data)]
+  data[which(apply(inter, 1, any)), ]
 }
 
 
