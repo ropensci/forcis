@@ -68,7 +68,7 @@ filter_by_ocean <- function(data, ocean) {
   
   ## Read IHO layer ----
   
-  iho <- get_iho_data()
+  iho <- get_iho_data(check_for_update = FALSE)
   iho <- iho[iho$"NAME" %in% ocean, ]
   
   
