@@ -35,23 +35,10 @@ filter_by_ocean <- function(data, ocean) {
   
   ## Check data object ----
   
-  if (missing(data)) {
-    stop("Argument 'data' is required", call. = FALSE)
-  }
+  check_if_not_df(data)
   
-  if (!is.data.frame(data)) {
-    stop("Argument 'data' must be a data.frame", call. = FALSE)
-  }
-  
-  if (!("site_lat_start_decimal" %in% colnames(data))) {
-    stop("The column 'site_lat_start_decimal' is missing from 'data'", 
-         call. = FALSE)
-  }
-  
-  if (!("site_lon_start_decimal" %in% colnames(data))) {
-    stop("The column 'site_lon_start_decimal' is missing from 'data'", 
-         call. = FALSE)
-  }
+  check_field_in_data(data, "site_lon_start_decimal")
+  check_field_in_data(data, "site_lat_start_decimal")
   
   
   ## Convert data into sf object -----

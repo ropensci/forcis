@@ -58,6 +58,10 @@ check_if_path_exists <- function(path) {
 
 check_if_not_df <- function(data) {
   
+  if (missing(data)) {
+    stop("Argument 'data' is required", call. = FALSE)
+  }
+  
   if (!is.data.frame(data)) {
     stop("Argument 'data' must be a data.frame", call. = FALSE)
   }
@@ -68,6 +72,26 @@ check_if_not_df <- function(data) {
   
   if (!ncol(data)) {
     stop("Argument 'data' must have at least one column", call. = FALSE)
+  }
+  
+  invisible(NULL)
+}
+
+
+
+#' Check if a column is present in a data.frame
+#' 
+#' @noRd
+
+check_field_in_data <- function(data, field) {
+  
+  if (!is.data.frame(data)) {
+    stop("Argument 'data' must be a data.frame", call. = FALSE)
+  }
+  
+  if (!(field %in% colnames(data))) {
+    stop("The column '", deparse(substitute(field)), "' is missing from 'data'",
+         call. = FALSE)
   }
   
   invisible(NULL)
