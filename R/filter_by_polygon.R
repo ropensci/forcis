@@ -83,5 +83,5 @@ filter_by_polygon <- function(data, polygon) {
   
   inter <- suppressWarnings(sf::st_intersects(data_sf, polygon, sparse = FALSE))
   
-  data[which(inter), ]
+  data[which(apply(inter, 1, any)), ]
 }

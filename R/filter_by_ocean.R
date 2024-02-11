@@ -82,5 +82,5 @@ filter_by_ocean <- function(data, ocean) {
   
   inter <- suppressWarnings(sf::st_intersects(data_sf, iho, sparse = FALSE))
   
-  data[which(inter), ]
+  data[which(apply(inter, 1, any)), ]
 }
