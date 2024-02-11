@@ -11,40 +11,40 @@
 \usage{
 get_plankton_nets_data(
   path = ".",
-  version = NULL,
-  check_for_update = TRUE,
+  version = options()$forcis_version,
+  check_for_update = options()$check_for_update,
   overwrite = FALSE,
   timeout = 60
 )
 
 get_pump_data(
   path = ".",
-  version = NULL,
-  check_for_update = TRUE,
+  version = options()$forcis_version,
+  check_for_update = options()$check_for_update,
   overwrite = FALSE,
   timeout = 60
 )
 
 get_cpr_north_data(
   path = ".",
-  version = NULL,
-  check_for_update = TRUE,
+  version = options()$forcis_version,
+  check_for_update = options()$check_for_update,
   overwrite = FALSE,
   timeout = 60
 )
 
 get_cpr_south_data(
   path = ".",
-  version = NULL,
-  check_for_update = TRUE,
+  version = options()$forcis_version,
+  check_for_update = options()$check_for_update,
   overwrite = FALSE,
   timeout = 60
 )
 
 get_sediment_trap_data(
   path = ".",
-  version = NULL,
-  check_for_update = TRUE,
+  version = options()$forcis_version,
+  check_for_update = options()$check_for_update,
   overwrite = FALSE,
   timeout = 60
 )
@@ -53,18 +53,27 @@ get_sediment_trap_data(
 \item{path}{a \code{character} of length 1. The folder in which the FORCIS
 database has been (or will be) saved.}
 
-\item{version}{a \code{character} of length 1. The version number of the
-FORCIS database. Default is the latest version.}
+\item{version}{a \code{character} of length 1. The version number (with two
+numbers, e.g. \code{08} instead of \code{8}) of the FORCIS database to download.
+Default is the latest version. Note that this argument can be handle with
+the global option \code{forcis_version}. For example, if user calls
+\code{options(forcis_version = "07")}, the version \code{07} will be used by default
+for the current R session. It is recommended to use the latest version of
+the database.}
 
-\item{check_for_update}{a \code{logical}. If \code{TRUE} (default) it will check if a
-newer version of the FORCIS database is available on Zenodo and ask user
-to download it.}
+\item{check_for_update}{a \code{logical}. If \code{TRUE} (default) the function will
+check if a newer version of the FORCIS database is available on Zenodo and
+ask user to download it. Note that this argument can be handle with
+the global option \code{check_for_update}. For example, if user calls
+\code{options(check_for_update = FALSE)}, invitation to download the latest
+version will be disable for the current R session.}
 
 \item{overwrite}{a \code{logical}. If \code{TRUE} it will override the downloaded
 files of the FORCIS database. Default is \code{FALSE}.}
 
 \item{timeout}{a \code{integer}. The timeout for downloading files from the
-FORCIS database. Default is \code{60}.}
+FORCIS database. Default is \code{60}. This number can be increased for low
+Internet connection.}
 }
 \value{
 A \code{data.frame}. See \url{https://zenodo.org/record/7390792} for a

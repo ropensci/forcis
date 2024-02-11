@@ -2,24 +2,34 @@
 #'
 #' @description 
 #' Downloads the entire FORCIS database as a collection of five `csv` files from
-#' Zenodo (\url{https://zenodo.org/record/7936568}). 
+#' Zenodo (\url{https://zenodo.org/record/7936568}). Additional files are also
+#' downloaded (see \url{https://zenodo.org/record/7936568}).
 #'
 #' @param path a `character` of length 1. The folder in which the FORCIS 
-#'   database will be saved. Note that a subdirectory will be created in the
-#'   version number.
+#'   database will be saved. Note that a subdirectory will be created, e.g.
+#'   `forcis-db/version-99/` (with `99` the version number).
 #'   
-#' @param version a `character` of length 1. The version number of the 
-#'   FORCIS database. Default is the latest version.
+#' @param version a `character` of length 1. The version number (with two 
+#'   numbers, e.g. `08` instead of `8`) of the FORCIS database to download. 
+#'   Default is the latest version. Note that this argument can be handle with
+#'   the global option `forcis_version`. For example, if user calls
+#'   `options(forcis_version = "07")`, the version `07` will be used by default
+#'   for the current R session. It is recommended to use the latest version of
+#'   the database.
 #' 
-#' @param check_for_update a `logical`. If `TRUE` (default) it will check if a
-#'   newer version of the FORCIS database is available on Zenodo and ask user
-#'   to download it.
+#' @param check_for_update a `logical`. If `TRUE` (default) the function will 
+#'   check if a newer version of the FORCIS database is available on Zenodo and
+#'   ask user to download it. Note that this argument can be handle with
+#'   the global option `check_for_update`. For example, if user calls
+#'   `options(check_for_update = FALSE)`, invitation to download the latest 
+#'   version will be disable for the current R session.
 #'
 #' @param overwrite a `logical`. If `TRUE` it will override the downloaded 
 #'   files of the FORCIS database. Default is `FALSE`.
 #'
 #' @param timeout a `integer`. The timeout for downloading files from the 
-#'   FORCIS database. Default is `60`.
+#'   FORCIS database. Default is `60`. This number can be increased for low 
+#'   Internet connection.
 #'
 #' @return No return value. The FORCIS files will be saved in the `path` folder.
 #' 
@@ -37,7 +47,8 @@
 #' list.files(path_to_save_db, recursive = TRUE)
 #' }
 
-get_forcis_db <- function(path = ".", version = NULL, check_for_update = TRUE,
+get_forcis_db <- function(path = ".", version = options()$"forcis_version", 
+                          check_for_update = options()$"check_for_update",
                           overwrite = FALSE, timeout = 60) {
   
   ## Check args ----
@@ -57,6 +68,10 @@ get_forcis_db <- function(path = ".", version = NULL, check_for_update = TRUE,
   
   
   ## Check/set version ----
+  
+  if (is.null(check_for_update)) {
+    check_for_update <- TRUE
+  }
   
   version <- set_zen_version(version, ask = check_for_update)
   
@@ -122,9 +137,10 @@ NULL
 #' @rdname get_data
 #' @export
 
-get_plankton_nets_data <- function(path = ".", version = NULL, 
-                                   check_for_update = TRUE, overwrite = FALSE, 
-                                   timeout = 60) {
+get_plankton_nets_data <- function(path = ".", 
+                                   version = options()$"forcis_version", 
+                                   check_for_update = options()$"check_for_update", 
+                                   overwrite = FALSE, timeout = 60) {
   
   ## Check args ----
   
@@ -133,6 +149,10 @@ get_plankton_nets_data <- function(path = ".", version = NULL,
   
   
   ## Check/set version ----
+  
+  if (is.null(check_for_update)) {
+    check_for_update <- TRUE
+  }
   
   version <- set_zen_version(version, ask = check_for_update)
   
@@ -204,9 +224,10 @@ get_plankton_nets_data <- function(path = ".", version = NULL,
 #' @rdname get_data
 #' @export
 
-get_pump_data <- function(path = ".", version = NULL, 
-                          check_for_update = TRUE, overwrite = FALSE, 
-                          timeout = 60) {
+get_pump_data <- function(path = ".", 
+                          version = options()$"forcis_version", 
+                          check_for_update = options()$"check_for_update", 
+                          overwrite = FALSE, timeout = 60) {
   
   ## Check args ----
   
@@ -215,6 +236,10 @@ get_pump_data <- function(path = ".", version = NULL,
   
   
   ## Check/set version ----
+  
+  if (is.null(check_for_update)) {
+    check_for_update <- TRUE
+  }
   
   version <- set_zen_version(version, ask = check_for_update)
   
@@ -286,9 +311,10 @@ get_pump_data <- function(path = ".", version = NULL,
 #' @rdname get_data
 #' @export
 
-get_cpr_north_data <- function(path = ".", version = NULL, 
-                               check_for_update = TRUE, overwrite = FALSE, 
-                               timeout = 60) {
+get_cpr_north_data <- function(path = ".", 
+                               version = options()$"forcis_version", 
+                               check_for_update = options()$"check_for_update", 
+                               overwrite = FALSE, timeout = 60) {
   
   ## Check args ----
   
@@ -297,6 +323,10 @@ get_cpr_north_data <- function(path = ".", version = NULL,
   
   
   ## Check/set version ----
+  
+  if (is.null(check_for_update)) {
+    check_for_update <- TRUE
+  }
   
   version <- set_zen_version(version, ask = check_for_update)
   
@@ -367,9 +397,10 @@ get_cpr_north_data <- function(path = ".", version = NULL,
 #' @rdname get_data
 #' @export
 
-get_cpr_south_data <- function(path = ".", version = NULL, 
-                               check_for_update = TRUE, overwrite = FALSE, 
-                               timeout = 60) {
+get_cpr_south_data <- function(path = ".", 
+                               version = options()$"forcis_version", 
+                               check_for_update = options()$"check_for_update", 
+                               overwrite = FALSE, timeout = 60) {
   
   ## Check args ----
   
@@ -378,6 +409,10 @@ get_cpr_south_data <- function(path = ".", version = NULL,
   
   
   ## Check/set version ----
+  
+  if (is.null(check_for_update)) {
+    check_for_update <- TRUE
+  }
   
   version <- set_zen_version(version, ask = check_for_update)
   
@@ -449,9 +484,10 @@ get_cpr_south_data <- function(path = ".", version = NULL,
 #' @rdname get_data
 #' @export
 
-get_sediment_trap_data <- function(path = ".", version = NULL, 
-                                   check_for_update = TRUE, overwrite = FALSE, 
-                                   timeout = 60) {
+get_sediment_trap_data <- function(path = ".", 
+                                   version = options()$"forcis_version", 
+                                   check_for_update = options()$"check_for_update", 
+                                   overwrite = FALSE, timeout = 60) {
   
   ## Check args ----
   
@@ -460,6 +496,10 @@ get_sediment_trap_data <- function(path = ".", version = NULL,
   
   
   ## Check/set version ----
+  
+  if (is.null(check_for_update)) {
+    check_for_update <- TRUE
+  }
   
   version <- set_zen_version(version, ask = check_for_update)
   
@@ -534,9 +574,10 @@ get_sediment_trap_data <- function(path = ".", version = NULL,
 #' 
 #' @noRd
 
-get_iho_data <- function(path = ".", version = NULL, 
-                         check_for_update = TRUE, overwrite = FALSE, 
-                         timeout = 60) {
+get_iho_data <- function(path = ".", 
+                         version = options()$"forcis_version", 
+                         check_for_update = options()$"check_for_update", 
+                         overwrite = FALSE, timeout = 60) {
   
   ## Check args ----
   
@@ -545,6 +586,10 @@ get_iho_data <- function(path = ".", version = NULL,
   
   
   ## Check/set version ----
+  
+  if (is.null(check_for_update)) {
+    check_for_update <- TRUE
+  }
   
   version <- set_zen_version(version, ask = check_for_update)
   
