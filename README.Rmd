@@ -49,7 +49,7 @@ forcis <img src="man/figures/logo.png" height="120px" align="right" style="float
 
 ## Overview
 
-The goal of the R package `forcis` is to provide an interface to the FORCIS database on global foraminifera distribution (Chaabane _et al._ 2023). This package allows to download, handle, homogenize and visualize FORCIS data.
+The goal of the R package `forcis` is to provide an interface to the [FORCIS database](https://zenodo.org/doi/10.5281/zenodo.7390791) on global foraminifera distribution (Chaabane _et al._ 2023). This package allows to download, handle, homogenize and visualize FORCIS data.
 
 
 
