@@ -173,18 +173,6 @@ references:
     orcid: https://orcid.org/0000-0002-6983-2759
   year: '2024'
 - type: software
-  title: here
-  abstract: 'here: A Simpler Way to Find Your Files'
-  notes: Suggests
-  url: https://here.r-lib.org/
-  repository: https://CRAN.R-project.org/package=here
-  authors:
-  - family-names: Müller
-    given-names: Kirill
-    email: krlmlr+r@mailbox.org
-    orcid: https://orcid.org/0000-0002-1416-3412
-  year: '2024'
-- type: software
   title: knitr
   abstract: 'knitr: A General-Purpose Package for Dynamic Report Generation in R'
   notes: Suggests
