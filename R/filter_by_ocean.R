@@ -33,23 +33,7 @@ filter_by_ocean <- function(data, ocean) {
   }
   
   
-  ## Check data object ----
-  
-  check_if_not_df(data)
-  
-  check_field_in_data(data, "site_lon_start_decimal")
-  check_field_in_data(data, "site_lat_start_decimal")
-  
-  
-  ## Convert data into sf object -----
-  
-  data <- data[!is.na(data$"site_lon_start_decimal"), ]
-  data <- data[!is.na(data$"site_lat_start_decimal"), ]
-  
-  data_sf <- sf::st_as_sf(data, 
-                          coords = c("site_lon_start_decimal", 
-                                     "site_lat_start_decimal"),
-                          crs = sf::st_crs(4326))
+  data_sf <- data_to_sf(data)
   
   
   ## Read IHO layer ----
@@ -61,7 +45,6 @@ filter_by_ocean <- function(data, ocean) {
   ## Project spatial objects into Robinson system ----
   
   iho     <- sf::st_transform(iho, sf::st_crs(crs_robinson()))
-  data_sf <- sf::st_transform(data_sf, sf::st_crs(crs_robinson()))
   
   
   ## Spatial filter ----
