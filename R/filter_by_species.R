@@ -29,7 +29,7 @@ filter_by_species <- function (data, species, rm_na = FALSE) {
   
   if (length(get_species_names(data)) > 0) {
     stop("This function requires data in long format. Please use the function ",
-         "'reshape_forcis()'", call. = FALSE) 
+         "'reshape_data()'", call. = FALSE) 
   }
   
   

@@ -3,7 +3,7 @@
 #' @description
 #' __ADD DESCRIPTION__
 #'
-#' @param data a `data.frame`. One obtained by `get_*_data()` functions.
+#' @param data a `data.frame`. One obtained by `read_*_data()` functions.
 #' 
 #' @param aggregate a `logical` of length 1. If `FALSE` counts will be derived
 #'   for each subsample. If `TRUE` (default) subsample counts will be 

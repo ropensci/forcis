@@ -21,9 +21,9 @@ zen_record_id <- function() "7390791"
 #' @examples
 #' ## Versions of the FORCIS database ----
 #' 
-#' zen_list_versions()
+#' available_versions()
 
-zen_list_versions <- function(record_id = zen_record_id()) {
+available_versions <- function(record_id = zen_record_id()) {
   
   ## Check argument ----
   
@@ -72,7 +72,7 @@ zen_list_versions <- function(record_id = zen_record_id()) {
 #'   in the Zenodo database.
 #'   
 #' @param version a `character` of length 1. The label of the version. Use 
-#'   [zen_list_versions()] to list available versions. If `NULL` (default) the
+#'   [available_versions()] to list available versions. If `NULL` (default) the
 #'   latest version is used.
 #'
 #' @return A `list` with all information about the version, including: `title`,
@@ -84,9 +84,9 @@ zen_list_versions <- function(record_id = zen_record_id()) {
 #' @examples
 #' ## Get information for the latest version of the FORCIS database ----
 #' 
-#' zen_get_version_info()
+#' version_info()
 
-zen_get_version_info <- function(record_id = zen_record_id(), version = NULL) {
+version_info <- function(record_id = zen_record_id(), version = NULL) {
   
   ## Check arguments ----
   
@@ -140,7 +140,7 @@ zen_get_version_info <- function(record_id = zen_record_id(), version = NULL) {
     if (length(pos) == 0) {
       
       stop("The required version is not available. Please run ", 
-           "`zen_list_versions()` to list available versions.")
+           "'available_versions()' to list available versions.")
     }
   }
   

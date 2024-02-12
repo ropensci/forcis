@@ -12,7 +12,7 @@
 #' @examples
 #' ## ADD EXAMPLE ----
 
-reshape_forcis <- function(data) {
+reshape_data <- function(data) {
   
   ## Check data object ----
   

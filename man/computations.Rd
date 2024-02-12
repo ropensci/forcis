@@ -17,7 +17,7 @@ compute_abundances(data, aggregate = TRUE)
 compute_concentration_bins_CPR_n(data)
 }
 \arguments{
-\item{data}{a \code{data.frame}. One obtained by \verb{get_*_data()} functions.}
+\item{data}{a \code{data.frame}. One obtained by \verb{read_*_data()} functions.}
 
 \item{aggregate}{a \code{logical} of length 1. If \code{FALSE} counts will be derived
 for each subsample. If \code{TRUE} (default) subsample counts will be

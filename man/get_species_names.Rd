@@ -7,7 +7,7 @@
 get_species_names(data)
 }
 \arguments{
-\item{data}{a \code{data.frame}. One obtained by \verb{get_*_data()} functions.}
+\item{data}{a \code{data.frame}. One obtained by \verb{read_*_data()} functions.}
 }
 \value{
 A \code{data.frame}.
@@ -22,7 +22,7 @@ easily retrieve taxon names.
 path_to_db <- "data"
 
 # Download and read the plankton nets data ----
-nets <- forcis::get_plankton_nets_data(path_to_db)
+nets <- forcis::read_plankton_nets_data(path_to_db)
 
 # Select a taxonomy ----
 nets <- forcis::select_taxonomy(nets, taxonomy = "OT")

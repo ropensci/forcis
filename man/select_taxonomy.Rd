@@ -7,7 +7,7 @@
 select_taxonomy(data, taxonomy)
 }
 \arguments{
-\item{data}{a \code{data.frame}. One obtained by \verb{get_*_data()} functions.}
+\item{data}{a \code{data.frame}. One obtained by \verb{read_*_data()} functions.}
 
 \item{taxonomy}{a \code{character} of length 1. One among \code{"LT"}, \code{"VT"}, \code{"OT"}.}
 }
@@ -26,7 +26,7 @@ further information.
 path_to_db <- "data"
 
 # Download and read the plankton nets data ----
-nets <- forcis::get_plankton_nets_data(path_to_db)
+nets <- forcis::read_plankton_nets_data(path_to_db)
 
 # Select a taxonomy ----
 nets <- forcis::select_taxonomy(nets, taxonomy = "OT")

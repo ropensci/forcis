@@ -16,7 +16,7 @@ get_data_type <- function(data) {
   
   if (!("data_type" %in% colnames(data))) {
     stop(paste0("The column 'data_type' is absent from 'data'. Did you use ", 
-                "the functions 'get_*_data()' to import data?"),
+                "the functions 'read_*_data()' to import data?"),
          call. = FALSE)
   }
   
@@ -37,7 +37,7 @@ get_data_type <- function(data) {
 #' 
 #' If the path `path` does not exist, returns an error.
 #' 
-#' @inheritParams get_forcis_db
+#' @inheritParams download_forcis_db
 #' 
 #' @noRd
 
@@ -223,7 +223,7 @@ set_zen_version <- function(version, ask = TRUE) {
   
   check_zen_version(version)
   
-  versions       <- zen_list_versions()
+  versions       <- available_versions()
   latest_version <- get_zen_latest_version()
   
   if (is.null(version)) {
@@ -240,7 +240,7 @@ set_zen_version <- function(version, ask = TRUE) {
     if (!(version %in% versions$"version")) {
       
       stop("The required version is not available. Please run ", 
-           "`zen_list_versions()` to list available versions.", call. = FALSE)
+           "'available_versions()' to list available versions.", call. = FALSE)
     }
   }
   
@@ -279,7 +279,7 @@ set_zen_version <- function(version, ask = TRUE) {
 
 get_zen_latest_version <- function() {
   
-  versions <- zen_list_versions()
+  versions <- available_versions()
   
   versions[which.max(as.Date(versions$"publication_date")), "version"]
 }

@@ -41,15 +41,15 @@
 #' path_to_save_db <- "data"
 #' 
 #' # Download the database ----
-#' forcis::get_forcis_db(path = path_to_save_db)
+#' download_forcis_db(path = path_to_save_db)
 #' 
 #' # Check the content of the folder ----
 #' list.files(path_to_save_db, recursive = TRUE)
 #' }
 
-get_forcis_db <- function(path = ".", version = options()$"forcis_version", 
-                          check_for_update = options()$"check_for_update",
-                          overwrite = FALSE, timeout = 60) {
+download_forcis_db <- function(path = ".", version = options()$"forcis_version", 
+                               check_for_update = options()$"check_for_update",
+                               overwrite = FALSE, timeout = 60) {
   
   ## Check args ----
   
@@ -87,7 +87,7 @@ get_forcis_db <- function(path = ".", version = options()$"forcis_version",
   
   ## Download files from Zenodo ----
   
-  forcis_meta  <- zen_get_version_info(version = version)
+  forcis_meta  <- version_info(version = version)
   forcis_files <- forcis_meta$"files"
   
   for (i in 1:nrow(forcis_files)) {
@@ -114,33 +114,33 @@ get_forcis_db <- function(path = ".", version = options()$"forcis_version",
 #' @param path a `character` of length 1. The folder in which the FORCIS 
 #'   database has been (or will be) saved.
 #'   
-#' @inheritParams get_forcis_db
+#' @inheritParams download_forcis_db
 #' 
 #' @details
 #' 
-#' - `get_plankton_nets_data()` imports the FORCIS plankton nets data
-#' - `get_pump_data()` imports the FORCIS pump data
-#' - `get_cpr_north_data()` imports the FORCIS CPR North data
-#' - `get_cpr_south_data()` imports the FORCIS CPR South data
-#' - `get_sediment_trap_data()` imports the FORCIS sediment traps data
+#' - `read_plankton_nets_data()` imports the FORCIS plankton nets data
+#' - `read_pump_data()` imports the FORCIS pump data
+#' - `read_cpr_north_data()` imports the FORCIS CPR North data
+#' - `read_cpr_south_data()` imports the FORCIS CPR South data
+#' - `read_sediment_trap_data()` imports the FORCIS sediment traps data
 #'
 #' @return A `data.frame`. See \url{https://zenodo.org/record/7390792} for a
 #'   preview of the dataset.
 #' 
-#' @seealso [get_forcis_db()] to download the complete FORCIS database.
+#' @seealso [download_forcis_db()] to download the complete FORCIS database.
 #'
-#' @name get_data
+#' @name read_data
 NULL
 
 
 
-#' @rdname get_data
+#' @rdname read_data
 #' @export
 
-get_plankton_nets_data <- function(path = ".", 
-                                   version = options()$"forcis_version", 
-                                   check_for_update = options()$"check_for_update", 
-                                   overwrite = FALSE, timeout = 60) {
+read_plankton_nets_data <- function(path = ".", 
+                                    version = options()$"forcis_version", 
+                                    check_for_update = options()$"check_for_update", 
+                                    overwrite = FALSE, timeout = 60) {
   
   ## Check args ----
   
@@ -172,7 +172,7 @@ get_plankton_nets_data <- function(path = ".",
   
   if (!length(file_name)) {
     
-    forcis_meta  <- zen_get_version_info(version = version)
+    forcis_meta  <- version_info(version = version)
     forcis_files <- forcis_meta$"files"
     
     pos <- grep(plankton_net_filename(), forcis_files$"key")
@@ -221,13 +221,13 @@ get_plankton_nets_data <- function(path = ".",
 
 
 
-#' @rdname get_data
+#' @rdname read_data
 #' @export
 
-get_pump_data <- function(path = ".", 
-                          version = options()$"forcis_version", 
-                          check_for_update = options()$"check_for_update", 
-                          overwrite = FALSE, timeout = 60) {
+read_pump_data <- function(path = ".", 
+                           version = options()$"forcis_version", 
+                           check_for_update = options()$"check_for_update", 
+                           overwrite = FALSE, timeout = 60) {
   
   ## Check args ----
   
@@ -259,7 +259,7 @@ get_pump_data <- function(path = ".",
   
   if (!length(file_name)) {
     
-    forcis_meta  <- zen_get_version_info(version = version)
+    forcis_meta  <- version_info(version = version)
     forcis_files <- forcis_meta$"files"
     
     pos <- grep(pump_filename(), forcis_files$"key")
@@ -308,13 +308,13 @@ get_pump_data <- function(path = ".",
 
 
 
-#' @rdname get_data
+#' @rdname read_data
 #' @export
 
-get_cpr_north_data <- function(path = ".", 
-                               version = options()$"forcis_version", 
-                               check_for_update = options()$"check_for_update", 
-                               overwrite = FALSE, timeout = 60) {
+read_cpr_north_data <- function(path = ".", 
+                                version = options()$"forcis_version", 
+                                check_for_update = options()$"check_for_update", 
+                                overwrite = FALSE, timeout = 60) {
   
   ## Check args ----
   
@@ -346,7 +346,7 @@ get_cpr_north_data <- function(path = ".",
   
   if (!length(file_name)) {
     
-    forcis_meta  <- zen_get_version_info(version = version)
+    forcis_meta  <- version_info(version = version)
     forcis_files <- forcis_meta$"files"
     
     pos <- grep(cpr_north_filename(), forcis_files$"key")
@@ -394,13 +394,13 @@ get_cpr_north_data <- function(path = ".",
 
 
 
-#' @rdname get_data
+#' @rdname read_data
 #' @export
 
-get_cpr_south_data <- function(path = ".", 
-                               version = options()$"forcis_version", 
-                               check_for_update = options()$"check_for_update", 
-                               overwrite = FALSE, timeout = 60) {
+read_cpr_south_data <- function(path = ".", 
+                                version = options()$"forcis_version", 
+                                check_for_update = options()$"check_for_update", 
+                                overwrite = FALSE, timeout = 60) {
   
   ## Check args ----
   
@@ -432,7 +432,7 @@ get_cpr_south_data <- function(path = ".",
   
   if (!length(file_name)) {
     
-    forcis_meta  <- zen_get_version_info(version = version)
+    forcis_meta  <- version_info(version = version)
     forcis_files <- forcis_meta$"files"
     
     pos <- grep(cpr_south_filename(), forcis_files$"key")
@@ -481,13 +481,13 @@ get_cpr_south_data <- function(path = ".",
 
 
 
-#' @rdname get_data
+#' @rdname read_data
 #' @export
 
-get_sediment_trap_data <- function(path = ".", 
-                                   version = options()$"forcis_version", 
-                                   check_for_update = options()$"check_for_update", 
-                                   overwrite = FALSE, timeout = 60) {
+read_sediment_trap_data <- function(path = ".", 
+                                    version = options()$"forcis_version", 
+                                    check_for_update = options()$"check_for_update", 
+                                    overwrite = FALSE, timeout = 60) {
   
   ## Check args ----
   
@@ -519,7 +519,7 @@ get_sediment_trap_data <- function(path = ".",
   
   if (!length(file_name)) {
     
-    forcis_meta  <- zen_get_version_info(version = version)
+    forcis_meta  <- version_info(version = version)
     forcis_files <- forcis_meta$"files"
     
     pos <- grep(sediment_trap_filename(), forcis_files$"key")
@@ -574,10 +574,10 @@ get_sediment_trap_data <- function(path = ".",
 #' 
 #' @noRd
 
-get_iho_data <- function(path = ".", 
-                         version = options()$"forcis_version", 
-                         check_for_update = options()$"check_for_update", 
-                         overwrite = FALSE, timeout = 60) {
+read_iho_data <- function(path = ".", 
+                          version = options()$"forcis_version", 
+                          check_for_update = options()$"check_for_update", 
+                          overwrite = FALSE, timeout = 60) {
   
   ## Check args ----
   
@@ -609,7 +609,7 @@ get_iho_data <- function(path = ".",
   
   if (!length(file_name)) {
     
-    forcis_meta  <- zen_get_version_info(version = version)
+    forcis_meta  <- version_info(version = version)
     forcis_files <- forcis_meta$"files"
     
     pos <- grep(iho_oceans_filename(), forcis_files$"key")

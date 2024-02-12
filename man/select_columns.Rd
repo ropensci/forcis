@@ -7,7 +7,7 @@
 select_columns(data, cols = NULL)
 }
 \arguments{
-\item{data}{a \code{data.frame}. One obtained by \verb{get_*_data()} functions.}
+\item{data}{a \code{data.frame}. One obtained by \verb{read_*_data()} functions.}
 
 \item{cols}{a \code{character} vector of column names to keep in addition to the
 required ones (see \code{\link[=get_required_columns]{get_required_columns()}}) and to the taxa columns.}
@@ -26,7 +26,7 @@ handle it and to speed up some computations.
 path_to_db <- "data"
 
 # Download and read the plankton nets data ----
-nets <- forcis::get_plankton_nets_data(path_to_db)
+nets <- forcis::read_plankton_nets_data(path_to_db)
 
 # Select a taxonomy ----
 nets <- forcis::select_taxonomy(nets, taxonomy = "OT")

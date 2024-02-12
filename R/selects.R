@@ -5,7 +5,7 @@
 #' columns, this function can be used to lighten the `data.frame` to easily 
 #' handle it and to speed up some computations.
 #' 
-#' @param data a `data.frame`. One obtained by `get_*_data()` functions.
+#' @param data a `data.frame`. One obtained by `read_*_data()` functions.
 #'
 #' @param cols a `character` vector of column names to keep in addition to the 
 #'   required ones (see [get_required_columns()]) and to the taxa columns.
@@ -20,7 +20,7 @@
 #' path_to_db <- "data"
 #' 
 #' # Download and read the plankton nets data ----
-#' nets <- forcis::get_plankton_nets_data(path_to_db)
+#' nets <- forcis::read_plankton_nets_data(path_to_db)
 #' 
 #' # Select a taxonomy ----
 #' nets <- forcis::select_taxonomy(nets, taxonomy = "OT")
@@ -90,7 +90,7 @@ select_columns <- function(data, cols = NULL) {
 #' (original taxonomy). See \url{https://doi.org/10.1038/s41597-023-02264-2} for
 #' further information.
 #' 
-#' @param data a `data.frame`. One obtained by `get_*_data()` functions.
+#' @param data a `data.frame`. One obtained by `read_*_data()` functions.
 #'
 #' @param taxonomy a `character` of length 1. One among `"LT"`, `"VT"`, `"OT"`.
 #' 
@@ -104,7 +104,7 @@ select_columns <- function(data, cols = NULL) {
 #' path_to_db <- "data"
 #' 
 #' # Download and read the plankton nets data ----
-#' nets <- forcis::get_plankton_nets_data(path_to_db)
+#' nets <- forcis::read_plankton_nets_data(path_to_db)
 #' 
 #' # Select a taxonomy ----
 #' nets <- forcis::select_taxonomy(nets, taxonomy = "OT")
@@ -149,7 +149,7 @@ select_taxonomy <- function(data, taxonomy) {
 #' Gets species names from column names. This function is just an utility to
 #' easily retrieve taxon names.
 #' 
-#' @param data a `data.frame`. One obtained by `get_*_data()` functions.
+#' @param data a `data.frame`. One obtained by `read_*_data()` functions.
 #' 
 #' @export
 #'
@@ -161,7 +161,7 @@ select_taxonomy <- function(data, taxonomy) {
 #' path_to_db <- "data"
 #' 
 #' # Download and read the plankton nets data ----
-#' nets <- forcis::get_plankton_nets_data(path_to_db)
+#' nets <- forcis::read_plankton_nets_data(path_to_db)
 #' 
 #' # Select a taxonomy ----
 #' nets <- forcis::select_taxonomy(nets, taxonomy = "OT")
