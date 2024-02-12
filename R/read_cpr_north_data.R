@@ -76,8 +76,6 @@ read_cpr_north_data <- function(path = ".",
     data <- data.frame("data_type" = "CPR North", data)
   }
   
-  
-  data |> 
-    dplyr::mutate(dplyr::across(.data$count_bin_min:.data$count_bin_max, 
-                                as.numeric))
+  dplyr::mutate(data, dplyr::across(.data$count_bin_min:.data$count_bin_max, 
+                                    as.numeric))
 }

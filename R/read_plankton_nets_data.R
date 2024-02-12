@@ -109,6 +109,5 @@ read_plankton_nets_data <- function(
   
   taxa_columns <- get_species_names(data)
   
-  data |> 
-    dplyr::mutate(dplyr::across(dplyr::all_of(taxa_columns), as.numeric))
+  dplyr::mutate(data, dplyr::across(dplyr::all_of(taxa_columns), as.numeric))
 }
