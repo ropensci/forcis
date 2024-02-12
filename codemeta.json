@@ -4,7 +4,7 @@
   "identifier": "forcis",
   "description": "Provides an interface to the FORCIS database on global foraminifera distribution. This package allows to download and to handle FORCIS data. It is part of the FRB-CESAB working group FORCIS. <https://www.fondationbiodiversite.fr/en/the-frb-in-action/programs-and-projects/le-cesab/forcis/>.",
   "name": "forcis: An R Client to Access the FORCIS Database",
-  "codeRepository": "https://github.com/frbcesab/forcis",
+  "codeRepository": "https://github.com/FRBCesab/forcis",
   "issueTracker": "https://github.com/FRBCesab/forcis/issues",
   "license": "https://spdx.org/licenses/GPL-2.0",
   "version": "0.0.0.9000",
@@ -86,6 +86,19 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=rmarkdown"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "testthat",
+      "name": "testthat",
+      "version": ">= 3.0.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=testthat"
     }
   ],
   "softwareRequirements": {
@@ -186,7 +199,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "1063.112KB",
+  "fileSize": "1065.211KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -423,7 +436,7 @@
     }
   ],
   "relatedLink": "https://frbcesab.github.io/forcis",
-  "releaseNotes": "https://github.com/frbcesab/forcis/blob/master/NEWS.md",
+  "releaseNotes": "https://github.com/FRBCesab/forcis/blob/master/NEWS.md",
   "readme": "https://github.com/FRBCesab/forcis/blob/master/README.md",
-  "contIntegration": ["https://github.com/FRBCesab/forcis/actions/workflows/R-CMD-check.yaml", "https://github.com/FRBCesab/forcis/actions/workflows/pkgdown.yaml"]
+  "contIntegration": ["https://github.com/FRBCesab/forcis/actions/workflows/R-CMD-check.yaml", "https://github.com/FRBCesab/forcis/actions/workflows/pkgdown.yaml", "https://github.com/ahasverus/forcis/actions/workflows/test-coverage.yaml"]
 }

@@ -9,6 +9,8 @@
 Check](https://github.com/FRBCesab/forcis/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/FRBCesab/forcis/actions/workflows/R-CMD-check.yaml)
 [![Website
 deployment](https://github.com/FRBCesab/forcis/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/FRBCesab/forcis/actions/workflows/pkgdown.yaml)
+[![Test
+coverage](https://github.com/ahasverus/forcis/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/ahasverus/forcis/actions/workflows/test-coverage.yaml)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/forcis)](https://CRAN.R-project.org/package=forcis)
 [![License: GPL (\>=
