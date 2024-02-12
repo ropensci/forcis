@@ -228,7 +228,7 @@ set_zen_version <- function(version, ask = TRUE) {
   
   if (is.null(version)) {
     
-    version <- get_in_use_version()
+    version <- get_current_version()
     
     if (is.null(version)) {
     
@@ -293,4 +293,22 @@ get_zen_latest_version <- function() {
 crs_robinson <- function() {
   paste0("+proj=robin +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84", 
          " +units=m +no_defs")
+}
+
+
+
+#' Set/update local database version number in an hidden file .forcis
+#' 
+#' @noRd
+
+set_in_use_version <- function(version) {
+  
+  saved_version <- get_current_version()
+  
+  if (is.null(saved_version) || saved_version != version) {
+    version <- paste0("FORCIS_VERSION=", version)
+    cat(version, file = ".forcis", append = FALSE, sep = "\n")
+  }
+  
+  invisible(NULL)
 }
