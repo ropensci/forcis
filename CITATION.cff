@@ -48,7 +48,7 @@ references:
   year: '2024'
   institution:
     name: R Foundation for Statistical Computing
-  version: '>= 4.1.0'
+  version: '>= 2.10'
 - type: software
   title: dplyr
   abstract: 'dplyr: A Grammar of Data Manipulation'
