@@ -22,6 +22,7 @@ geom_basemap <- function() {
       geom_sf(data = ne_countries, fill = "#a6a6a6", col = "#b1b1b1", 
               linewidth = 0.10) +
       geom_sf(data = ne_bbox, fill = NA, col = "#a6a6a6", 
-              linewidth = 0.75)
+              linewidth = 0.75) +
+      theme_void()
     )
 }

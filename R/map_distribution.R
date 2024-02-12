@@ -21,21 +21,8 @@ map_distribution <- function(data, col = "red", ...) {
   
   data_sf <- data_to_sf(data)
   
-  
-  ## Map ----
-  
   ggplot() +
-    
     geom_basemap() +
-    
-    
-    ### Data ---
-    
     geom_sf(data = data_sf, col = col, ...) +
-    
-    
-    ### Theme ----
-  
-    theme_void() +
     theme(plot.title = element_text(hjust = 0.5))
 }
