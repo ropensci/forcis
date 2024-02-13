@@ -11,8 +11,8 @@ get_version_info(record_id = zen_record_id(), version = NULL)
 in the Zenodo database.}
 
 \item{version}{a \code{character} of length 1. The label of the version. Use
-\code{\link[=available_versions]{available_versions()}} to list available versions. If \code{NULL} (default) the
-latest version is used.}
+\code{\link[=get_available_versions]{get_available_versions()}} to list available versions. If \code{NULL} (default)
+the latest version is used.}
 }
 \value{
 A \code{list} with all information about the version, including: \code{title},

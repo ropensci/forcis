@@ -4,8 +4,8 @@
 #'   in the Zenodo database.
 #'   
 #' @param version a `character` of length 1. The label of the version. Use 
-#'   [available_versions()] to list available versions. If `NULL` (default) the
-#'   latest version is used.
+#'   [get_available_versions()] to list available versions. If `NULL` (default)
+#'   the latest version is used.
 #'
 #' @return A `list` with all information about the version, including: `title`,
 #' `doi`, `publication_date`, `description`, `access_right`, `creators`, 
@@ -56,7 +56,7 @@ get_version_info <- function(record_id = zen_record_id(), version = NULL) {
     if (length(pos) == 0) {
       
       stop("The required version is not available. Please run ", 
-           "'available_versions()' to list available versions.")
+           "'get_available_versions()' to list available versions.")
     }
   }
   

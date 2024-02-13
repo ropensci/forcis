@@ -736,7 +736,7 @@ set_zen_version <- function(version, ask = TRUE) {
   
   check_zen_version(version)
   
-  versions       <- available_versions()
+  versions       <- get_available_versions()
   latest_version <- get_zen_latest_version()
   
   if (is.null(version)) {
@@ -753,7 +753,8 @@ set_zen_version <- function(version, ask = TRUE) {
     if (!(version %in% versions$"version")) {
       
       stop("The required version is not available. Please run ", 
-           "'available_versions()' to list available versions.", call. = FALSE)
+           "'get_available_versions()' to list available versions.", 
+           call. = FALSE)
     }
   }
   
@@ -792,7 +793,7 @@ set_zen_version <- function(version, ask = TRUE) {
 
 get_zen_latest_version <- function() {
   
-  versions <- available_versions()
+  versions <- get_available_versions()
   
   versions[which.max(as.Date(versions$"publication_date")), "version"]
 }

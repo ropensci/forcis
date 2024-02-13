@@ -13,9 +13,9 @@
 #' @examples
 #' ## Versions of the FORCIS database ----
 #' 
-#' available_versions()
+#' get_available_versions()
 
-available_versions <- function(record_id = zen_record_id()) {
+get_available_versions <- function(record_id = zen_record_id()) {
   
   ## Check argument ----
   
