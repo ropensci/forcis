@@ -16,9 +16,9 @@
 #' @examples
 #' ## Get information for the latest version of the FORCIS database ----
 #' 
-#' version_info()
+#' get_version_info()
 
-version_info <- function(record_id = zen_record_id(), version = NULL) {
+get_version_info <- function(record_id = zen_record_id(), version = NULL) {
   
   ## Check arguments ----
   

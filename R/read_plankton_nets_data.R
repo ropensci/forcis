@@ -66,7 +66,7 @@ read_plankton_nets_data <- function(
   
   if (!length(file_name)) {
     
-    forcis_meta  <- version_info(version = version)
+    forcis_meta  <- get_version_info(version = version)
     forcis_files <- forcis_meta$"files"
     
     pos <- grep(plankton_net_filename(), forcis_files$"key")

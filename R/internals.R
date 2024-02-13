@@ -37,7 +37,7 @@ read_iho_data <- function(path = ".",
   
   if (!length(file_name)) {
     
-    forcis_meta  <- version_info(version = version)
+    forcis_meta  <- get_version_info(version = version)
     forcis_files <- forcis_meta$"files"
     
     pos <- grep(iho_oceans_filename(), forcis_files$"key")
@@ -708,6 +708,9 @@ check_multiple_taxonomies <- function(data) {
 
 check_zen_version <- function(version) {
   
+  if (missing(version)) {
+    stop("Argument 'version' is required", call. = FALSE)
+  }
   
   if (!is.null(version)) {
     

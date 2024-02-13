@@ -87,7 +87,7 @@ download_forcis_db <- function(path = ".", version = options()$"forcis_version",
   
   ## Download files from Zenodo ----
   
-  forcis_meta  <- version_info(version = version)
+  forcis_meta  <- get_version_info(version = version)
   forcis_files <- forcis_meta$"files"
   
   for (i in 1:nrow(forcis_files)) {

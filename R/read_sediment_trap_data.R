@@ -36,7 +36,7 @@ read_sediment_trap_data <- function(
   
   if (!length(file_name)) {
     
-    forcis_meta  <- version_info(version = version)
+    forcis_meta  <- get_version_info(version = version)
     forcis_files <- forcis_meta$"files"
     
     pos <- grep(sediment_trap_filename(), forcis_files$"key")
