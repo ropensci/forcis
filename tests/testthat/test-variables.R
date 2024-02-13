@@ -140,20 +140,6 @@ test_that("Test crs_robinson() for success", {
 
 
 
-## zen_record_id() ----
-
-test_that("Test zen_record_id() for success", {
-  
-  x <- zen_record_id()
-  
-  expect_equal(x, "7390791")
-  
-  expect_equal(class(x), "character")
-  expect_equal(length(x), 1L)
-})
-
-
-
 ## species_list() ----
 
 test_that("Test species_list() for success", {
