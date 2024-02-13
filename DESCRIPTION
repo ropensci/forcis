@@ -34,7 +34,8 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
 VignetteBuilder: knitr
-Depends: R (>= 2.10)
+Depends: 
+    R (>= 2.10)
 Imports: 
     dplyr,
     ggplot2,
@@ -45,7 +46,9 @@ Imports:
     utils,
     vroom
 Suggests: 
+    fs,
     knitr,
     rmarkdown,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    withr
 Config/testthat/edition: 3
