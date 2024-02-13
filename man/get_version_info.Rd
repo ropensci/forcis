@@ -4,12 +4,9 @@
 \alias{get_version_info}
 \title{Print information of a specific version of a Zenodo repository}
 \usage{
-get_version_info(record_id = zen_record_id(), version = NULL)
+get_version_info(version = NULL)
 }
 \arguments{
-\item{record_id}{a \code{character} of length 1. The identifier of the repository
-in the Zenodo database.}
-
 \item{version}{a \code{character} of length 1. The label of the version. Use
 \code{\link[=get_available_versions]{get_available_versions()}} to list available versions. If \code{NULL} (default)
 the latest version is used.}

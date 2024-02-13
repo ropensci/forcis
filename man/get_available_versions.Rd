@@ -4,11 +4,7 @@
 \alias{get_available_versions}
 \title{Retrieve all versions of a Zenodo repository}
 \usage{
-get_available_versions(record_id = zen_record_id())
-}
-\arguments{
-\item{record_id}{a \code{character} of length 1. The identifier of the repository
-in the Zenodo database.}
+get_available_versions()
 }
 \value{
 A \code{data.frame} with three columns:

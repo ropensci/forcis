@@ -508,7 +508,7 @@ species_list <- function() {
 #' 
 #' @noRd
 
-zen_record_id <- function() "7390791"
+zenodo_id <- function() "7390791"
 
 
 

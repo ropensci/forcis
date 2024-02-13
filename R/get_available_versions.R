@@ -1,8 +1,5 @@
 #' Retrieve all versions of a Zenodo repository
 #'
-#' @param record_id a `character` of length 1. The identifier of the repository
-#'   in the Zenodo database.
-#'
 #' @return A `data.frame` with three columns:
 #'   - `publication_date`: the date of the release of the version
 #'   - `version`: the label of the version
@@ -15,22 +12,18 @@
 #' 
 #' get_available_versions()
 
-get_available_versions <- function(record_id = zen_record_id()) {
+get_available_versions <- function() {
   
-  ## Check argument ----
-  
-  is_character(record_id)
-  
-  
+
   ## Retrieve information ----
   
   res <- jsonlite::read_json(path = paste0("https://zenodo.org/api/records/", 
-                                           "?q=conceptrecid:", record_id, 
+                                           "?q=conceptrecid:", zenodo_id(), 
                                            "&all_versions=true"),
                              simplifyVector = TRUE)
   
   if (res$"hits"$"total" == 0) {
-    stop("No information available for the Zenodo record '", record_id, "'", 
+    stop("No information available for the Zenodo record '", zenodo_id(), "'", 
          call. = FALSE)
   }
   
