@@ -24,16 +24,7 @@ get_version_info <- function(version = NULL) {
   
   ## Retrieve information ----
   
-  res <- jsonlite::read_json(path = paste0("https://zenodo.org/api/records/", 
-                                           "?q=conceptrecid:", zenodo_id(), 
-                                           "&all_versions=true"),
-                             simplifyVector = TRUE)
-  
-  if (res$"hits"$"total" == 0) {
-    stop("No information available for the Zenodo record '", zenodo_id(), "'", 
-         call. = FALSE)
-  }
-  
+  res <- get_metadata()
   
   meta  <- res$"hits"$"hits"$"metadata"
   files <- res$"hits"$"hits"$"files"
@@ -50,7 +41,6 @@ get_version_info <- function(version = NULL) {
     pos <- which(meta$"version" == version)
     
     if (length(pos) == 0) {
-      
       stop("The required version is not available. Please run ", 
            "'get_available_versions()' to list available versions.")
     }

@@ -826,3 +826,26 @@ save_version <- function(version) {
   
   invisible(NULL)
 }
+
+
+
+#' Set/update local database version number in an hidden file .forcis
+#' 
+#' @noRd
+
+get_metadata <- function() {
+  
+  ## Retrieve information ----
+  
+  res <- jsonlite::read_json(path = paste0("https://zenodo.org/api/records/", 
+                                           "?q=conceptrecid:", zenodo_id(), 
+                                           "&all_versions=true"),
+                             simplifyVector = TRUE)
+  
+  if (res$"hits"$"total" == 0) {
+    stop("No information available for the Zenodo record '", zenodo_id(), "'", 
+         call. = FALSE)
+  }
+  
+  res
+}
