@@ -737,7 +737,7 @@ set_zen_version <- function(version, ask = TRUE) {
   check_version(version)
   
   versions       <- get_available_versions()
-  latest_version <- get_zen_latest_version()
+  latest_version <- get_latest_version()
   
   if (is.null(version)) {
     
@@ -791,7 +791,7 @@ set_zen_version <- function(version, ask = TRUE) {
 #' 
 #' @noRd
 
-get_zen_latest_version <- function() {
+get_latest_version <- function() {
   
   versions <- get_available_versions()
   
