@@ -780,7 +780,7 @@ set_zen_version <- function(version, ask = TRUE) {
     }
   }
   
-  set_in_use_version(version)
+  save_version(version)
   
   version
 }
@@ -815,7 +815,7 @@ crs_robinson <- function() {
 #' 
 #' @noRd
 
-set_in_use_version <- function(version) {
+save_version <- function(version) {
   
   saved_version <- get_current_version()
   
