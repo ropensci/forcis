@@ -30,16 +30,7 @@ get_version_info <- function(record_id = zen_record_id(), version = NULL) {
     stop("Argument 'record_id' must be character of length 1", call. = FALSE)
   }
   
-  if (!is.null(version)) {
-    
-    if (!is.character(version)) {
-      stop("Argument 'version' must be character", call. = FALSE)
-    }
-    
-    if (length(version) != 1) {
-      stop("Argument 'version' must be character of length 1", call. = FALSE)
-    }
-  }
+  check_zen_version(version)
   
   
   ## Retrieve information ----

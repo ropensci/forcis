@@ -54,17 +54,7 @@ download_forcis_db <- function(path = ".", version = options()$"forcis_version",
   ## Check args ----
   
   is_character(path)
-  
-  if (!is.null(version)) {
-    
-    if (!is.character(version)) {
-      stop("Argument 'version' must be character", call. = FALSE)
-    }
-    
-    if (length(version) != 1) {
-      stop("Argument 'version' must be character of length 1", call. = FALSE)
-    }
-  }
+  check_zen_version(version)
   
   
   ## Check/set version ----
