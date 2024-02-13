@@ -19,13 +19,7 @@ available_versions <- function(record_id = zen_record_id()) {
   
   ## Check argument ----
   
-  if (!is.character(record_id)) {
-    stop("Argument 'record_id' must be character", call. = FALSE)
-  }
-  
-  if (length(record_id) != 1) {
-    stop("Argument 'record_id' must be character of length 1", call. = FALSE)
-  }
+  is_character(record_id)
   
   
   ## Retrieve information ----
