@@ -9,7 +9,7 @@ read_cpr_north_data <- function(path = ".",
   ## Check args ----
   
   is_character(path)
-  check_zen_version(version)
+  check_version(version)
   
   
   ## Check/set version ----

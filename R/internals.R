@@ -10,7 +10,7 @@ read_iho_data <- function(path = ".",
   ## Check args ----
   
   is_character(path)
-  check_zen_version(version)
+  check_version(version)
   
   
   ## Check/set version ----
@@ -706,7 +706,7 @@ check_multiple_taxonomies <- function(data) {
 #' 
 #' @noRd
 
-check_zen_version <- function(version) {
+check_version <- function(version) {
   
   if (missing(version)) {
     stop("Argument 'version' is required", call. = FALSE)
@@ -734,7 +734,7 @@ check_zen_version <- function(version) {
 
 set_zen_version <- function(version, ask = TRUE) {
   
-  check_zen_version(version)
+  check_version(version)
   
   versions       <- get_available_versions()
   latest_version <- get_zen_latest_version()

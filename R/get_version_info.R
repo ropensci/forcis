@@ -19,7 +19,7 @@ get_version_info <- function(version = NULL) {
   
   ## Check arguments ----
   
-  check_zen_version(version)
+  check_version(version)
   
   
   ## Retrieve information ----

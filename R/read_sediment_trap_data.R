@@ -9,7 +9,7 @@ read_sediment_trap_data <- function(
   ## Check args ----
   
   is_character(path)
-  check_zen_version(version)
+  check_version(version)
   
   
   ## Check/set version ----

@@ -39,7 +39,7 @@ read_plankton_nets_data <- function(
   ## Check args ----
   
   is_character(path)
-  check_zen_version(version)
+  check_version(version)
   
   
   ## Check/set version ----
