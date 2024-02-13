@@ -835,12 +835,16 @@ save_version <- function(version) {
 
 get_metadata <- function() {
   
-  ## Retrieve information ----
+  repo_url <- paste0("https://zenodo.org/api/records/", 
+                     "?q=conceptrecid:", zenodo_id(), 
+                     "&all_versions=true")
   
-  res <- jsonlite::read_json(path = paste0("https://zenodo.org/api/records/", 
-                                           "?q=conceptrecid:", zenodo_id(), 
-                                           "&all_versions=true"),
-                             simplifyVector = TRUE)
+  res <- tryCatch(jsonlite::read_json(path = repo_url, simplifyVector = TRUE),
+                  error = function(e) NULL)
+    
+  if (is.null(res)) {
+    stop("Unable to reach <https://zenodo.org>", call. = FALSE)  
+  }
   
   if (res$"hits"$"total" == 0) {
     stop("No information available for the Zenodo record '", zenodo_id(), "'", 
