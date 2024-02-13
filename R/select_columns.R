@@ -70,11 +70,11 @@ select_columns <- function(data, cols = NULL) {
   
   if (is.null(cols)) {
     
-    data <- data[ , c(required_columns(), species_cols)]
+    data <- data[ , c(get_required_columns(), species_cols)]
     
   } else {
     
-    data <- data[ , c(required_columns(), cols, species_cols)]
+    data <- data[ , c(get_required_columns(), cols, species_cols)]
   }
   
   data

@@ -95,11 +95,11 @@ test_that("Test iho_oceans_filename() for success", {
 
 
 
-## required_columns() ----
+## get_required_columns() ----
 
-test_that("Test required_columns() for success", {
+test_that("Test get_required_columns() for success", {
   
-  x <- required_columns()
+  x <- get_required_columns()
   
   expect_equal(x[1], "data_type") 
   expect_equal(class(x), "character")

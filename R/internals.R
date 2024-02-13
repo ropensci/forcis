@@ -175,37 +175,6 @@ data_types <- function() c("Net", "Pump", "Sediment trap",
                            "CPR South", "CPR North")
 
 
-# 
-#' Vector of required columns names
-#' 
-#' @noRd
-
-required_columns <- function() {
-  
-  c("data_type",
-    "cruise_id",
-    "profile_id",
-    "sample_id",
-    "sample_min_depth",
-    "sample_max_depth",
-    "profile_depth_min",
-    "profile_depth_max",
-    "profile_date_time",
-    "cast_net_op_m2",
-    "subsample_id",
-    "sample_segment_length",
-    "subsample_count_type",
-    "subsample_size_fraction_min",
-    "subsample_size_fraction_max",
-    "site_lat_start_decimal",
-    "site_lon_start_decimal",
-    "sample_volume_filtered",
-    "subsample_all_shells_present_were_counted",
-    "total_of_forams_counted_ind",
-    "sampling_device_type")
-}
-
-
 
 #' Species names and taxonomy name
 #' 
@@ -674,7 +643,7 @@ check_required_columns <- function(data) {
   
   check_if_not_df(data)
   
-  if (any(!(required_columns() %in% colnames(data)))) {
+  if (any(!(get_required_columns() %in% colnames(data)))) {
     stop("Some required columns are absent from data", call. = FALSE)
   }
   
