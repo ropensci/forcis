@@ -19,7 +19,7 @@ read_iho_data <- function(path = ".",
     check_for_update <- TRUE
   }
   
-  version <- set_zen_version(version, ask = check_for_update)
+  version <- set_version(version, ask = check_for_update)
   
   
   ## Build outputs directory ----
@@ -732,7 +732,7 @@ check_version <- function(version) {
 #' 
 #' @noRd
 
-set_zen_version <- function(version, ask = TRUE) {
+set_version <- function(version, ask = TRUE) {
   
   check_version(version)
   

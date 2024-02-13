@@ -63,7 +63,7 @@ download_forcis_db <- function(path = ".", version = options()$"forcis_version",
     check_for_update <- TRUE
   }
   
-  version <- set_zen_version(version, ask = check_for_update)
+  version <- set_version(version, ask = check_for_update)
   
   
   ## Create outputs directory if required ----

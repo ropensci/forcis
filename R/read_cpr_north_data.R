@@ -18,7 +18,7 @@ read_cpr_north_data <- function(path = ".",
     check_for_update <- TRUE
   }
   
-  version <- set_zen_version(version, ask = check_for_update)
+  version <- set_version(version, ask = check_for_update)
   
   
   ## Build outputs directory ----

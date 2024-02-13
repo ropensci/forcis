@@ -48,7 +48,7 @@ read_plankton_nets_data <- function(
     check_for_update <- TRUE
   }
   
-  version <- set_zen_version(version, ask = check_for_update)
+  version <- set_version(version, ask = check_for_update)
   
   
   ## Build outputs directory ----
