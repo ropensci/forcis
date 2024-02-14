@@ -673,7 +673,7 @@ check_if_valid_taxonomy <- function(taxonomy) {
 #' 
 #' @noRd
 
-check_multiple_taxonomies <- function(data) {
+check_unique_taxonomy <- function(data) {
   
   check_if_df(data)
   

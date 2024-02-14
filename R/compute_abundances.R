@@ -12,7 +12,7 @@ compute_abundances <- function(data, aggregate = TRUE) {
                 "'Sediment trap' data"), call. = FALSE) 
   }
   
-  check_multiple_taxonomies(data)
+  check_unique_taxonomy(data)
   
   
   taxa_cols <- get_species_names(data)
