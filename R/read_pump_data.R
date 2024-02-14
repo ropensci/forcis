@@ -8,7 +8,7 @@ read_pump_data <- function(path = ".",
   
   ## Check args ----
   
-  is_character(path)
+  check_if_character(path)
   check_version(version)
   
   

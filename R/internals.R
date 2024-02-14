@@ -9,7 +9,7 @@ read_iho_data <- function(path = ".",
   
   ## Check args ----
   
-  is_character(path)
+  check_if_character(path)
   check_version(version)
   
   
@@ -547,7 +547,7 @@ get_data_type <- function(data) {
 
 check_if_path_exists <- function(path) {
   
-  is_character(path)
+  check_if_character(path)
   
   if (!dir.exists(path)) {
     stop("The directory '", path, "' does not exist", call. = FALSE)
@@ -592,7 +592,7 @@ check_if_df <- function(data) {
 check_field_in_data <- function(data, field) {
   
   check_if_df(data)
-  is_character(field)
+  check_if_character(field)
   
   if (!(field %in% colnames(data))) {
     stop("The column '", deparse(substitute(field)), "' is missing from 'data'",
@@ -608,7 +608,7 @@ check_field_in_data <- function(data, field) {
 #' 
 #' @noRd
 
-is_character <- function(str) {
+check_if_character <- function(str) {
   
   if (missing(str)) {
     stop("Argument '", deparse(substitute(str)), "' is required", 
@@ -653,7 +653,7 @@ check_required_columns <- function(data) {
 
 check_if_valid_taxonomy <- function(taxonomy) {
   
-  is_character(taxonomy)
+  check_if_character(taxonomy)
   taxonomy   <- tolower(taxonomy)
   
   taxonomies <- unique(species_list()[ , "taxonomy"])

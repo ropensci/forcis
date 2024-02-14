@@ -53,7 +53,7 @@ download_forcis_db <- function(path = ".", version = options()$"forcis_version",
   
   ## Check args ----
   
-  is_character(path)
+  check_if_character(path)
   check_version(version)
   
   
