@@ -157,3 +157,43 @@ test_that("Test get_current_version() for success", {
 
 
 ## set_version() ----
+
+test_that("Test set_version() for error", {
+  
+  expect_error(set_version(version = "999", ask = FALSE),
+               paste0("The required version is not available. Please run ", 
+                      "'get_available_versions()' to list available versions."),
+               fixed = TRUE)
+})
+
+test_that("Test set_version() for success", {
+  
+  create_tempdir()
+  
+  y <- get_latest_version()
+  x <- set_version(version = NULL, ask = FALSE)
+  
+  expect_equal(class(x), "character")
+  expect_equal(length(x), 1L)
+  expect_equal(x, y)
+  expect_true(file.exists(".forcis"))
+})
+
+test_that("Test set_version() for success", {
+  
+  create_tempdir()
+  
+  x <- set_version(version = "07", ask = FALSE)
+
+  expect_equal(class(x), "character")
+  expect_equal(length(x), 1L)
+  expect_equal(x, "07")
+  expect_true(file.exists(".forcis"))
+  
+  x <- set_version(version = NULL, ask = FALSE)
+  
+  expect_equal(class(x), "character")
+  expect_equal(length(x), 1L)
+  expect_equal(x, "07")
+  expect_true(file.exists(".forcis"))
+})
