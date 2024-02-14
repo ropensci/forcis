@@ -576,10 +576,6 @@ check_if_df <- function(data) {
     stop("Argument 'data' must have at least one row", call. = FALSE)
   }
   
-  if (!ncol(data)) {
-    stop("Argument 'data' must have at least one column", call. = FALSE)
-  }
-  
   invisible(NULL)
 }
 
