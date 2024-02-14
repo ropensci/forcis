@@ -31,7 +31,7 @@ select_taxonomy <- function(data, taxonomy) {
   
   ## Check args ----
   
-  check_if_not_df(data)
+  check_if_df(data)
   check_if_valid_taxonomy(taxonomy)
   
   

@@ -526,7 +526,7 @@ date_format <- function() "%d/%m/%Y"
 
 get_data_type <- function(data) {
   
-  check_if_not_df(data)
+  check_if_df(data)
   check_field_in_data(data, "data_type")
 
   data_type <- unique(data$"data_type")
@@ -562,7 +562,7 @@ check_if_path_exists <- function(path) {
 #' 
 #' @noRd
 
-check_if_not_df <- function(data) {
+check_if_df <- function(data) {
   
   if (missing(data)) {
     stop("Argument 'data' is required", call. = FALSE)
@@ -591,7 +591,7 @@ check_if_not_df <- function(data) {
 
 check_field_in_data <- function(data, field) {
   
-  check_if_not_df(data)
+  check_if_df(data)
   is_character(field)
   
   if (!(field %in% colnames(data))) {
@@ -636,7 +636,7 @@ is_character <- function(str) {
 
 check_required_columns <- function(data) {
   
-  check_if_not_df(data)
+  check_if_df(data)
   
   if (any(!(get_required_columns() %in% colnames(data)))) {
     stop("Some required columns are absent from data", call. = FALSE)
@@ -675,7 +675,7 @@ check_if_valid_taxonomy <- function(taxonomy) {
 
 check_multiple_taxonomies <- function(data) {
   
-  check_if_not_df(data)
+  check_if_df(data)
   
   if (get_data_type(data) != "CPR North") {
     

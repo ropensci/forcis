@@ -5,7 +5,7 @@ compute_abundances <- function(data, aggregate = TRUE) {
   
   ## Check data ----
   
-  check_if_not_df(data)
+  check_if_df(data)
   
   if (get_data_type(data) %in% c("CPR North", "Sediment trap")) {
     stop(paste0("This function is not designed to work with 'CPR North' or ", 

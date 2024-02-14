@@ -34,7 +34,7 @@ select_columns <- function(data, cols = NULL) {
   
   # Check args ----
   
-  check_if_not_df(data)
+  check_if_df(data)
   
   if (!is.null(cols)) {
     if (!is.character(cols)) {

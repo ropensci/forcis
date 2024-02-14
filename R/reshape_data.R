@@ -16,7 +16,7 @@ reshape_data <- function(data) {
   
   ## Check data object ----
   
-  check_if_not_df(data)
+  check_if_df(data)
   
   if (get_data_type(data) == "CPR North") {
     stop("This function is not designed to work with 'CPR North' data", 

@@ -18,7 +18,7 @@ filter_by_year <- function(data, years) {
   
   ## Check data object ----
   
-  check_if_not_df(data)
+  check_if_df(data)
   
   
   ## Check years object ----

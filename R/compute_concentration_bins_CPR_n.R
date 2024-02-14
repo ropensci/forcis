@@ -5,7 +5,7 @@ compute_concentration_bins_CPR_n <- function(data) {
   
   ## Check data ----
   
-  check_if_not_df(data)
+  check_if_df(data)
   
   if (get_data_type(data)!="CPR North") {
     stop(paste0("This function is designed to work only with CPR North data"), 

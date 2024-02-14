@@ -18,7 +18,7 @@ filter_by_month <- function(data, months) {
   
   ## Check data object ----
   
-  check_if_not_df(data)
+  check_if_df(data)
   
   
   ## Check months object ----

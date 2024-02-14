@@ -17,7 +17,7 @@ data_to_sf <- function(data) {
   
   ## Check data object ----
   
-  check_if_not_df(data)
+  check_if_df(data)
   
   check_field_in_data(data, "site_lon_start_decimal")
   check_field_in_data(data, "site_lat_start_decimal")

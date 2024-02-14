@@ -27,7 +27,7 @@
 
 get_species_names <- function(data) {
   
-  check_if_not_df(data)
+  check_if_df(data)
   
   
   ## Special case for CPR North ----
