@@ -88,22 +88,19 @@ read_plankton_nets_data <- function(
   
   data <- vroom::vroom(file.path(path, file_name), delim = ";")
   
+  data <- add_data_type(data, "Net")
   
-  ## Check for data_type column ----
   
-  pos <- which("data_type" %in% colnames(data))
-  
-  if (length(pos) > 0) {
-    
-    data$"data_type" <- "Net"
-    
-  } else {
-    
-    data <- data.frame("data_type" = "Net", data)  
-  }
-  
+  ## Check and convert columns ----
   
   taxa_columns <- get_species_names(data)
   
-  dplyr::mutate(data, dplyr::across(dplyr::all_of(taxa_columns), as.numeric))
+  for (i in 1:length(taxa_columns)) {
+    
+    check_field_in_data(data, taxa_columns[i])
+    
+    data[ , taxa_columns[i]] <- as.numeric(data[ , taxa_columns[i]])
+  }
+  
+  data
 }

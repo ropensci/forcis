@@ -58,20 +58,19 @@ read_cpr_north_data <- function(
   
   data <- vroom::vroom(file.path(path, file_name), delim = ";")
   
+  data <- add_data_type(data, "CPR North")
   
-  ## Check for data_type column ----
   
-  pos <- which("data_type" %in% colnames(data))
+  ## Check and convert columns ----
   
-  if (length(pos) > 0) {
+  taxa_columns <- c("count_bin_min", "count_bin_max")
+  
+  for (i in 1:length(taxa_columns)) {
     
-    data$"data_type" <- "CPR North"
+    check_field_in_data(data, taxa_columns[i])
     
-  } else {
-    
-    data <- data.frame("data_type" = "CPR North", data)
+    data[ , taxa_columns[i]] <- as.numeric(data[ , taxa_columns[i]])
   }
   
-  dplyr::mutate(data, dplyr::across(.data$count_bin_min:.data$count_bin_max, 
-                                    as.numeric))
+  data
 }

@@ -846,3 +846,26 @@ get_metadata <- function() {
   
   res
 }
+
+
+
+#' Add a column 'data_type' in data.frame (if required)
+#' 
+#' @noRd
+
+add_data_type <- function(data, type) {
+  
+  check_if_df(data)
+  check_if_character(type)
+  
+  if ("data_type" %in% colnames(data)) {
+    
+    data$"data_type" <- type
+    
+  } else {
+    
+    data <- data.frame("data_type" = type, data)
+  }
+  
+  data
+}
