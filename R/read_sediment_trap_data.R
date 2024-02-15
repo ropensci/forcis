@@ -3,8 +3,7 @@
 
 read_sediment_trap_data <- function(
     path = ".", version = options()$"forcis_version", 
-    check_for_update = options()$"check_for_update", 
-    overwrite = FALSE, timeout = 60) {
+    check_for_update = options()$"check_for_update") {
   
   ## Check args ----
   
@@ -21,38 +20,24 @@ read_sediment_trap_data <- function(
   version <- set_version(version, ask = check_for_update)
   
   
-  ## Build outputs directory ----
+  ## Check local database ----
   
   path <- file.path(path, "forcis-db", paste0("version-", version))
   
   if (!dir.exists(path)) {
-    dir.create(path, recursive = TRUE)
+    stop("The directory '", path, "' does not exist. Please check the ",
+         "argument 'path' or use the function 'download_forcis_db()'.",
+         call. = FALSE)
   }
   
   
-  ## Download file (if required) ----
+  ## Check file ----
   
   file_name <- list.files(path, pattern = sediment_trap_filename())
   
   if (!length(file_name)) {
-    
-    forcis_meta  <- get_version_info(version = version)
-    forcis_files <- forcis_meta$"files"
-    
-    pos <- grep(sediment_trap_filename(), forcis_files$"key")
-    
-    if (length(pos) == 1) {
-      
-      download_file(url       = forcis_files[pos, "links"]$"self",
-                    path      = path, 
-                    file      = forcis_files[pos, "key"], 
-                    overwrite = overwrite, 
-                    timeout   = timeout)
-      
-    } else {
-      
-      stop("Unable to download the 'Sediment traps' dataset", call. = FALSE)
-    }
+    stop("The Sediment trap dataset does not exist. Please use the function ", 
+         "'download_forcis_db()'.", call. = FALSE)
   }
   
   

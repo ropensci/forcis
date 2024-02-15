@@ -8,51 +8,41 @@
 \alias{read_plankton_nets_data}
 \alias{read_pump_data}
 \alias{read_sediment_trap_data}
-\title{Import FORCIS data}
+\title{Read FORCIS data}
 \usage{
 read_cpr_north_data(
   path = ".",
   version = options()$forcis_version,
-  check_for_update = options()$check_for_update,
-  overwrite = FALSE,
-  timeout = 60
+  check_for_update = options()$check_for_update
 )
 
 read_cpr_south_data(
   path = ".",
   version = options()$forcis_version,
-  check_for_update = options()$check_for_update,
-  overwrite = FALSE,
-  timeout = 60
+  check_for_update = options()$check_for_update
 )
 
 read_plankton_nets_data(
   path = ".",
   version = options()$forcis_version,
-  check_for_update = options()$check_for_update,
-  overwrite = FALSE,
-  timeout = 60
+  check_for_update = options()$check_for_update
 )
 
 read_pump_data(
   path = ".",
   version = options()$forcis_version,
-  check_for_update = options()$check_for_update,
-  overwrite = FALSE,
-  timeout = 60
+  check_for_update = options()$check_for_update
 )
 
 read_sediment_trap_data(
   path = ".",
   version = options()$forcis_version,
-  check_for_update = options()$check_for_update,
-  overwrite = FALSE,
-  timeout = 60
+  check_for_update = options()$check_for_update
 )
 }
 \arguments{
 \item{path}{a \code{character} of length 1. The folder in which the FORCIS
-database has been (or will be) saved.}
+database has been saved.}
 
 \item{version}{a \code{character} of length 1. The version number (with two
 numbers, e.g. \code{08} instead of \code{8}) of the FORCIS database to download.
@@ -68,30 +58,23 @@ ask user to download it. Note that this argument can be handle with
 the global option \code{check_for_update}. For example, if user calls
 \code{options(check_for_update = FALSE)}, invitation to download the latest
 version will be disable for the current R session.}
-
-\item{overwrite}{a \code{logical}. If \code{TRUE} it will override the downloaded
-files of the FORCIS database. Default is \code{FALSE}.}
-
-\item{timeout}{a \code{integer}. The timeout for downloading files from the
-FORCIS database. Default is \code{60}. This number can be increased for low
-Internet connection.}
 }
 \value{
 A \code{data.frame}. See \url{https://zenodo.org/record/7390792} for a
-preview of the dataset.
+preview of the datasets.
 }
 \description{
-These functions import one specific \code{csv} file of the FORCIS database
-(see below) stored in the folder \code{path}. If the \code{csv} file does not exist
-it will be downloaded from Zenodo (\url{https://zenodo.org/record/7936568}).
+These functions read one specific \code{csv} file of the FORCIS database
+(see below) stored in the folder \code{path}. The function \code{\link[=download_forcis_db]{download_forcis_db()}}
+must be used first to store locally the database.
 }
 \details{
 \itemize{
-\item \code{read_plankton_nets_data()} imports the FORCIS plankton nets data
-\item \code{read_pump_data()} imports the FORCIS pump data
-\item \code{read_cpr_north_data()} imports the FORCIS CPR North data
-\item \code{read_cpr_south_data()} imports the FORCIS CPR South data
-\item \code{read_sediment_trap_data()} imports the FORCIS sediment traps data
+\item \code{read_plankton_nets_data()} reads the FORCIS plankton nets data
+\item \code{read_pump_data()} reads the FORCIS pump data
+\item \code{read_cpr_north_data()} reads the FORCIS CPR North data
+\item \code{read_cpr_south_data()} reads the FORCIS CPR South data
+\item \code{read_sediment_trap_data()} reads the FORCIS sediment traps data
 }
 }
 \seealso{

@@ -1,25 +1,25 @@
-#' Import FORCIS data
+#' Read FORCIS data
 #' 
 #' @description 
-#' These functions import one specific `csv` file of the FORCIS database 
-#' (see below) stored in the folder `path`. If the `csv` file does not exist 
-#' it will be downloaded from Zenodo (\url{https://zenodo.org/record/7936568}).
+#' These functions read one specific `csv` file of the FORCIS database 
+#' (see below) stored in the folder `path`. The function [download_forcis_db()]
+#' must be used first to store locally the database.
 #'
 #' @param path a `character` of length 1. The folder in which the FORCIS 
-#'   database has been (or will be) saved.
+#'   database has been saved.
 #'   
 #' @inheritParams download_forcis_db
 #' 
 #' @details
 #' 
-#' - `read_plankton_nets_data()` imports the FORCIS plankton nets data
-#' - `read_pump_data()` imports the FORCIS pump data
-#' - `read_cpr_north_data()` imports the FORCIS CPR North data
-#' - `read_cpr_south_data()` imports the FORCIS CPR South data
-#' - `read_sediment_trap_data()` imports the FORCIS sediment traps data
+#' - `read_plankton_nets_data()` reads the FORCIS plankton nets data
+#' - `read_pump_data()` reads the FORCIS pump data
+#' - `read_cpr_north_data()` reads the FORCIS CPR North data
+#' - `read_cpr_south_data()` reads the FORCIS CPR South data
+#' - `read_sediment_trap_data()` reads the FORCIS sediment traps data
 #'
 #' @return A `data.frame`. See \url{https://zenodo.org/record/7390792} for a
-#'   preview of the dataset.
+#'   preview of the datasets.
 #' 
 #' @seealso [download_forcis_db()] to download the complete FORCIS database.
 #'
@@ -32,9 +32,9 @@ NULL
 #' @export
 
 read_plankton_nets_data <- function(
-    path = ".", version = options()$"forcis_version", 
-    check_for_update = options()$"check_for_update", 
-    overwrite = FALSE, timeout = 60) {
+    path = ".", 
+    version = options()$"forcis_version", 
+    check_for_update = options()$"check_for_update") {
   
   ## Check args ----
   
@@ -51,38 +51,24 @@ read_plankton_nets_data <- function(
   version <- set_version(version, ask = check_for_update)
   
   
-  ## Build outputs directory ----
+  ## Check local database ----
   
   path <- file.path(path, "forcis-db", paste0("version-", version))
   
   if (!dir.exists(path)) {
-    dir.create(path, recursive = TRUE)
+    stop("The directory '", path, "' does not exist. Please check the ",
+         "argument 'path' or use the function 'download_forcis_db()'.",
+         call. = FALSE)
   }
   
   
-  ## Download file (if required) ----
+  ## Check file ----
   
   file_name <- list.files(path, pattern = plankton_net_filename())
   
   if (!length(file_name)) {
-    
-    forcis_meta  <- get_version_info(version = version)
-    forcis_files <- forcis_meta$"files"
-    
-    pos <- grep(plankton_net_filename(), forcis_files$"key")
-    
-    if (length(pos) == 1) {
-      
-      download_file(url       = forcis_files[pos, "links"]$"self",
-                    path      = path, 
-                    file      = forcis_files[pos, "key"], 
-                    overwrite = overwrite, 
-                    timeout   = timeout)
-      
-    } else {
-      
-      stop("Unable to download the 'Plankton nets' dataset", call. = FALSE)
-    }
+    stop("The Plankton net dataset does not exist. Please use the function ", 
+         "'download_forcis_db()'.", call. = FALSE)
   }
   
   
