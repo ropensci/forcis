@@ -66,9 +66,6 @@ read_cpr_south_data <- function(
   taxa_columns <- get_species_names(data)
   
   for (i in 1:length(taxa_columns)) {
-    
-    check_field_in_data(data, taxa_columns[i])
-    
     data[ , taxa_columns[i]] <- as.numeric(data[ , taxa_columns[i]])
   }
   
