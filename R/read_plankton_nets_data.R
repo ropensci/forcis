@@ -86,7 +86,8 @@ read_plankton_nets_data <- function(
   
   file_name <- list.files(path, pattern = plankton_net_filename())
   
-  data <- vroom::vroom(file.path(path, file_name), delim = ";")
+  data <- vroom::vroom(file.path(path, file_name), delim = ";",
+                       altrep = FALSE, show_col_types = FALSE)
   
   data <- add_data_type(data, "Net")
   

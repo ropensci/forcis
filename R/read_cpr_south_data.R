@@ -56,7 +56,8 @@ read_cpr_south_data <- function(
   
   file_name <- list.files(path, pattern = cpr_south_filename())
   
-  data <- vroom::vroom(file.path(path, file_name), delim = ";")
+  data <- vroom::vroom(file.path(path, file_name), delim = ";",
+                       altrep = FALSE, show_col_types = FALSE)
   
   data <- add_data_type(data, "CPR South")
   
