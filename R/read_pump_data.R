@@ -13,12 +13,8 @@ read_pump_data <- function(
   
   
   ## Check/set version ----
-  
-  if (is.null(check_for_update)) {
-    check_for_update <- TRUE
-  }
-  
-  version <- set_version(version, ask = check_for_update)
+
+  version <- set_version(version, ask = FALSE)
   
   
   ## Check local database ----
@@ -39,6 +35,20 @@ read_pump_data <- function(
   if (!length(file_name)) {
     stop("The Pump dataset does not exist. Please use the function ", 
          "'download_forcis_db()'.", call. = FALSE)
+  }
+  
+  
+  ## Check for update ----
+  
+  if (is.null(check_for_update)) {
+    check_for_update <- TRUE
+  }
+  
+  if (check_for_update) {
+    if (version != get_latest_version()) {
+      message("A newer version of the FORCIS database is available. Use ", 
+              "'download_forcis_db(version = NULL)' to download it.")
+    }  
   }
   
   
