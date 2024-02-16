@@ -18,6 +18,10 @@ get_current_version <- function() {
     config_file <- readLines(".forcis")
     in_use_version <- gsub("FORCIS_VERSION=", "", config_file)
     
+    if (length(in_use_version) == 0) { # Empty file
+      in_use_version <- NULL
+    }
+    
   } else {
     
     in_use_version <- NULL
