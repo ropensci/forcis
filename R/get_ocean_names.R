@@ -20,5 +20,5 @@
 
 get_ocean_names <- function() {
   
-  read_iho_data(check_for_update = FALSE)$"NAME"
+  iho_boundaries$"NAME"
 }

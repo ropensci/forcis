@@ -34,22 +34,12 @@ filter_by_ocean <- function(data, ocean) {
   
   
   data_sf <- data_to_sf(data)
-  
-  
-  ## Read IHO layer ----
-  
-  iho <- read_iho_data(check_for_update = FALSE)
-  iho <- iho[iho$"NAME" %in% ocean, ]
-  
-  
-  ## Project spatial objects into Robinson system ----
-  
-  iho     <- sf::st_transform(iho, sf::st_crs(crs_robinson()))
-  
+
   
   ## Spatial filter ----
   
-  inter <- suppressWarnings(sf::st_intersects(data_sf, iho, sparse = FALSE))
+  inter <- suppressWarnings(sf::st_intersects(data_sf, iho_boundaries, 
+                                              sparse = FALSE))
   
   data[which(apply(inter, 1, any)), ]
 }

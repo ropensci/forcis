@@ -82,19 +82,6 @@ test_that("Test sediment_trap_filename() for success", {
 
 
 
-## iho_oceans_filename() ----
-
-test_that("Test iho_oceans_filename() for success", {
-  
-  x <- iho_oceans_filename()
-  
-  expect_equal(x, "iho_oceans_boundaries")
-  expect_equal(class(x), "character")
-  expect_equal(length(x), 1L)
-})
-
-
-
 ## get_required_columns() ----
 
 test_that("Test get_required_columns() for success", {
