@@ -64,9 +64,6 @@ Then you can attach the package `forcis`:
 library("forcis")
 ```
 
-**N.B.** The `forcis` package requires at least the version of **4.1.0
-of R**. Please update R if you are using an older version.
-
 ## Get started
 
 For an overview of the main features of `forcis`, please read the [Get
