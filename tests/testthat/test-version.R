@@ -152,6 +152,12 @@ test_that("Test get_current_version() for success", {
   expect_equal(class(x), "character")
   expect_equal(length(x), 1L)
   expect_equal(x, "07")
+  
+  invisible(file.remove(".forcis"))
+  invisible(file.create(".forcis"))
+  
+  x <- get_current_version()
+  expect_null(x)
 })
 
 
