@@ -11,7 +11,7 @@ A \code{character} vector with World ocean names.
 }
 \description{
 This function returns the name of World oceans according to the IHO Sea Areas
-dataset version 3 (Flanders Marine Institute, 2018).#'
+dataset version 3 (Flanders Marine Institute, 2018).
 }
 \examples{
 \dontrun{
