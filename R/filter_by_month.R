@@ -54,6 +54,7 @@ filter_by_month <- function(data, months) {
     
     data <- data[!is.na(data$"profile_date_time"), ]
     
+    start_dates  <- as.character(data$"profile_date_time")
     start_dates  <- as.Date(start_dates, format = date_format())
     start_months <- as.numeric(format(start_dates, "%m"))
     

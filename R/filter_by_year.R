@@ -58,6 +58,7 @@ filter_by_year <- function(data, years) {
     
     data <- data[!is.na(data$"profile_date_time"), ]
     
+    start_dates <- as.character(data$"profile_date_time")
     start_dates <- as.Date(start_dates, format = date_format())
     start_years <- as.numeric(format(start_dates, "%Y"))
     
