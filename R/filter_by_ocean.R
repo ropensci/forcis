@@ -31,6 +31,11 @@ filter_by_ocean <- function(data, ocean) {
     stop("Some ocean names are mispelled. Please use 'get_ocean_names()' ",
          "to find the correct spelling", call. = FALSE)
   }
+
+  
+  ## Select ocean polygons in IHO layer ----  
+  
+  iho <- iho_boundaries[which(iho_boundaries$"NAME" %in% ocean), ]
   
   
   data_sf <- data_to_sf(data)
@@ -38,8 +43,7 @@ filter_by_ocean <- function(data, ocean) {
   
   ## Spatial filter ----
   
-  inter <- suppressWarnings(sf::st_intersects(data_sf, iho_boundaries, 
-                                              sparse = FALSE))
+  inter <- suppressWarnings(sf::st_intersects(data_sf, iho, sparse = FALSE))
   
   data[which(apply(inter, 1, any)), ]
 }
