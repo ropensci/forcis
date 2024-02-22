@@ -21,6 +21,10 @@
 
 filter_by_bbox <- function(data, bbox) {
   
+  if (missing(bbox)) {
+    stop("Argument 'bbox' is required", call. = FALSE)
+  }
+  
   data <- data[!is.na(data$"site_lon_start_decimal"), ]
   data <- data[!is.na(data$"site_lat_start_decimal"), ]
   
@@ -30,6 +34,12 @@ filter_by_bbox <- function(data, bbox) {
   ## Convert clip region into bbox object ----
   
   if (inherits(bbox, "numeric")) {
+    
+    if (length(bbox) != 4) {
+      stop("The object 'bbox' must a numeric of length 4 or a bbox object", 
+           call. = FALSE)
+    }
+    
     bbox <- sf::st_bbox(c(xmin = bbox[1], ymin = bbox[2], 
                           xmax = bbox[3], ymax = bbox[4]),
                         crs = sf::st_crs(4326))  
@@ -39,7 +49,8 @@ filter_by_bbox <- function(data, bbox) {
   ## Check bbox object ----
   
   if (!inherits(bbox, "bbox")) {
-    stop("The object 'bbox' must a numeric or a bbox object", call. = FALSE)
+    stop("The object 'bbox' must a numeric of length 4 or a bbox object", 
+         call. = FALSE)
   }
   
   if (is.na(sf::st_crs(bbox))) {
