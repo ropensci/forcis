@@ -21,6 +21,9 @@
 
 filter_by_bbox <- function(data, bbox) {
   
+  data <- data[!is.na(data$"site_lon_start_decimal"), ]
+  data <- data[!is.na(data$"site_lat_start_decimal"), ]
+  
   data_sf <- data_to_sf(data)
   
   

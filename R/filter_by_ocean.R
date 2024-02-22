@@ -38,6 +38,9 @@ filter_by_ocean <- function(data, ocean) {
   iho <- iho_boundaries[which(iho_boundaries$"NAME" %in% ocean), ]
   
   
+  data <- data[!is.na(data$"site_lon_start_decimal"), ]
+  data <- data[!is.na(data$"site_lat_start_decimal"), ]
+  
   data_sf <- data_to_sf(data)
 
   
