@@ -38,11 +38,20 @@ filter_by_month <- function(data, months) {
     
     data <- data[!is.na(data$"sample_date_time_start"), ]
     
+    if (nrow(data) == 0) {
+      stop("The column 'sample_date_time_start' contain only NA", call. = FALSE)
+    }
+    
     start_dates <- unlist(lapply(strsplit(data$"sample_date_time_start", "\\s"),
                                  function(x) x[1]))
     
     start_dates  <- as.Date(start_dates, format = date_format())
     start_months <- as.numeric(format(start_dates, "%m"))
+    
+    if (all(!(as.numeric(months) %in% unique(start_months)))) {
+      stop("The months provided are out of FORCIS temporal range", 
+           call. = FALSE)
+    }
     
     pos <- which(start_months %in% as.numeric(months))
     
@@ -54,9 +63,18 @@ filter_by_month <- function(data, months) {
     
     data <- data[!is.na(data$"profile_date_time"), ]
     
+    if (nrow(data) == 0) {
+      stop("The column 'profile_date_time' contain only NA", call. = FALSE)
+    }
+    
     start_dates  <- as.character(data$"profile_date_time")
     start_dates  <- as.Date(start_dates, format = date_format())
     start_months <- as.numeric(format(start_dates, "%m"))
+    
+    if (all(!(as.numeric(months) %in% unique(start_months)))) {
+      stop("The months provided are out of FORCIS temporal range", 
+           call. = FALSE)
+    }
     
     pos <- which(start_months %in% as.numeric(months))
     

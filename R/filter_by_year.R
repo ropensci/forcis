@@ -38,6 +38,10 @@ filter_by_year <- function(data, years) {
     
     data <- data[!is.na(data$"sample_date_time_start"), ]
     
+    if (nrow(data) == 0) {
+      stop("The column 'sample_date_time_start' contain only NA", call. = FALSE)
+    }
+    
     start_dates <- unlist(lapply(strsplit(data$"sample_date_time_start", "\\s"),
                                  function(x) x[1]))
     
@@ -57,6 +61,10 @@ filter_by_year <- function(data, years) {
     check_field_in_data(data, "profile_date_time")
     
     data <- data[!is.na(data$"profile_date_time"), ]
+    
+    if (nrow(data) == 0) {
+      stop("The column 'profile_date_time' contain only NA", call. = FALSE)
+    }
     
     start_dates <- as.character(data$"profile_date_time")
     start_dates <- as.Date(start_dates, format = date_format())
