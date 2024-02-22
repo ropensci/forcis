@@ -51,7 +51,11 @@ select_taxonomy <- function(data, taxonomy) {
   pos <- which(colnames(data) %in% species_to_del)
   
   if (length(pos) > 0) {
-    data <- data[ , -pos]
+    data <- data[ , -pos, drop = FALSE]
+  }
+  
+  if (length(get_species_names(data)) == 0) {
+    stop("No species match the desired taxonomy", call. = FALSE)
   }
   
   data
