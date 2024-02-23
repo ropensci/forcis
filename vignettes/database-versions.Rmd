@@ -62,4 +62,6 @@ If you want to be sure to use a specific version of the database, you can use th
 options(forcis_version = "99")
 ```
 
-But again, it is **recommended to use the latest version** of the database.
+At any time, user can run the function `get_current_version()` to check the version of the database currently in use.
+
+> But again, it is **recommended to use the latest version** of the database.
