@@ -4,3 +4,58 @@ template:
   bootstrap: 5
   bslib:
     primary: "#2b4370"
+
+reference:
+
+- title: Database tools
+  desc: >
+    Functions to download and import FORCIS database and to get version information
+  contents:
+    - download_forcis_db
+    - get_available_versions
+    - get_current_version
+    - get_version_info
+    - read_cpr_north_data
+    - read_cpr_south_data
+    - read_plankton_nets_data
+    - read_pump_data
+    - read_sediment_trap_data
+
+- title: Select and filters tools
+  desc: >
+    Function to select and filter FORCIS data
+  contents:
+    - select_columns
+    - select_taxonomy
+    - filter_by_species
+    - filter_by_month
+    - filter_by_year
+    - filter_by_bbox
+    - filter_by_ocean
+    - filter_by_polygon
+
+- title: Standardization functions
+  desc: >
+    Functions to homogenize, compute, and aggregate FORCIS data
+  contents:
+    - compute_abundances
+    - compute_concentrations
+    - compute_frequencies
+
+- title: Visualization tools
+  desc: >
+    Functions to visualize FORCIS data
+  contents:
+    - geom_basemap
+    - map_distribution
+
+- title: Utilities
+  desc: >
+    Helper functions
+  contents:
+    - data_to_sf
+    - get_ocean_names
+    - get_required_columns
+    - get_species_names
+    - reshape_data
+  
