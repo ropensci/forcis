@@ -77,19 +77,25 @@ vignette.
 
 ## Long-form documentations
 
-`forcis` provides five vignettes to learn more about the package: - the
-[Get started](https://frbcesab.github.io/forcis/articles/forcis.html)
-vignette describes the core features of the package - the [Database
-versions](https://frbcesab.github.io/forcis/articles/database-versions.html)
-vignette provides information on how to deal with the versioning of the
-database - the [Select and filter
-data](https://frbcesab.github.io/forcis/articles/select-and-filter-data.html)
-vignette shows examples to handle the FORCIS data - the [Data
-conversion](https://frbcesab.github.io/forcis/articles/data-conversion.html)
-vignette describes the conversion functions available in `forcis` to
-compute abundances, concentrations, and frequencies - the [Data
-visualization](https://frbcesab.github.io/forcis/articles/data-visualization.html)
-vignette describes the plotting functions available in `forcis`
+`forcis` provides five vignettes to learn more about the package:
+
+- the [Get
+  started](https://frbcesab.github.io/forcis/articles/forcis.html)
+  vignette describes the core features of the package
+- the [Database
+  versions](https://frbcesab.github.io/forcis/articles/database-versions.html)
+  vignette provides information on how to deal with the versioning of
+  the database
+- the [Select and filter
+  data](https://frbcesab.github.io/forcis/articles/select-and-filter-data.html)
+  vignette shows examples to handle the FORCIS data
+- the [Data
+  conversion](https://frbcesab.github.io/forcis/articles/data-conversion.html)
+  vignette describes the conversion functions available in `forcis` to
+  compute abundances, concentrations, and frequencies
+- the [Data
+  visualization](https://frbcesab.github.io/forcis/articles/data-visualization.html)
+  vignette describes the plotting functions available in `forcis`
 
 ## Citation
 
