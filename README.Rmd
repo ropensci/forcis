@@ -50,17 +50,13 @@ forcis <img src="man/figures/logo.png" height="120px" align="right" style="float
 
 ## Overview
 
-The goal of the R package `forcis` is to provide an interface to the [FORCIS database](https://zenodo.org/doi/10.5281/zenodo.7390791) on global foraminifera distribution (Chaabane _et al._ 2023). This package allows to download, handle, homogenize and visualize FORCIS data.
+The goal of the R package `forcis` is to provide an interface to the [FORCIS database](https://zenodo.org/doi/10.5281/zenodo.7390791) on global foraminifera distribution (Chaabane _et al._ 2023). This database includes data on living planktonic foraminifera diversity and distribution in the global oceans from 1910 until 2018 collected using plankton tows, continuous plankton recorder, sediment traps and plankton pump from the global ocean.
 
 
 
 ## Features
 
-The main purpose of `forcis` is to...
-
-
-**__LIST HERE THE MAIN FEATURES__**
-
+The main purpose of the `forcis` package is to download, select, filter, homogenize, and visualize FORCIS data. The [References](https://frbcesab.github.io/forcis/reference/index.html) page provides a full description of the features available in the package.
 
 
 ## Installation
@@ -92,7 +88,13 @@ For an overview of the main features of `forcis`, please read the [Get started](
 
 ## Long-form documentations
 
-Additional vignettes will be available soon.
+`forcis` provides five vignettes to learn more about the package:
+- the [Get started](https://frbcesab.github.io/forcis/articles/forcis.html) vignette describes the core features of the package
+- the [Database versions](https://frbcesab.github.io/forcis/articles/database-versions.html) vignette provides information on how to deal with the versioning of the database
+- the [Select and filter data](https://frbcesab.github.io/forcis/articles/select-and-filter-data.html) vignette shows examples to handle the FORCIS data
+- the [Data conversion](https://frbcesab.github.io/forcis/articles/data-conversion.html) vignette describes the conversion functions available in `forcis` to compute abundances, concentrations, and frequencies
+- the [Data visualization](https://frbcesab.github.io/forcis/articles/data-visualization.html) vignette describes the plotting functions available in `forcis`
+
 
 
 
