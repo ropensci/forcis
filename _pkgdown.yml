@@ -47,7 +47,7 @@ reference:
     Functions to visualize FORCIS data
   contents:
     - geom_basemap
-    - map_distribution
+    - ggmap_data
 
 - title: Utilities
   desc: >

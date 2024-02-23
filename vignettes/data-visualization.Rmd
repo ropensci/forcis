@@ -9,15 +9,80 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  eval     = FALSE,
-  echo     = TRUE,
-  comment  = "#>"
+  collapse  = TRUE,
+  eval      = TRUE,
+  echo      = TRUE,
+  comment   = "#>",
+  dpi       = 150,
+  fig.align = "center",
+  out.width = "90%"
 )
 ```
 
+> **NOTE:** THIS IS A WORK IN PROGRESS.
+
+The package `forcis` provides [a lot of functions](https://frbcesab.github.io/forcis/reference/index.html#visualization-tools) to visualize FORCIS data. This vignette shows how to use and customize these functions.
+
+
+## Setup
+
+First, let's import the required packages.
+
 ```{r setup}
 library(forcis)
+library(ggplot2)
 ```
 
-Work in progress...
+Before going any further, we will download the latest version of the FORCIS database.
+
+```{r 'download-db', eval=FALSE}
+## Create a data/ folder ----
+download_forcis_db(path = "data", version = NULL)
+```
+
+The vignette will use the PUMP data of the FORCIS database. Let's import the latest release of the data.
+
+```{r 'load-data', echo=FALSE}
+file_name <- system.file(file.path("extdata", "FORCIS_pump_sample.csv"), package = "forcis")
+pump_data <- vroom::vroom(file_name, delim = ";", show_col_types = FALSE)
+```
+
+```{r 'load-data-user', eval=FALSE}
+pump_data <- read_pump_data(path = "data")
+```
+
+**NB** In this vignette, we use a subset of the PUMP data, not the whole dataset.
+
+
+## World base map
+
+The function `geom_basemap()` can be used to easily add World countries, oceans and bounding box to a `ggplot2` object.
+
+```{r 'geom-basemap', echo=TRUE, fig.height=11, fig.width=20}
+# World basemap ----
+ggplot() +
+  geom_basemap()
+```
+
+These layers come from the [Natural Earth](https://www.naturalearthdata.com/) website and are defined in the [Robinson projection](https://epsg.io/54030).
+
+
+
+## Map FORCIS data
+
+The function `ggmap_data()` can be used to plot FORCIS data on a World map. Let's map the PUMP data.
+
+```{r 'ggmap-raw-data', echo=TRUE, fig.height=11, fig.width=20}
+# Map raw pump data ----
+ggmap_data(pump_data)
+```
+
+This function works on the output of various functions available in the `forcis` package. For example:
+
+```{r 'ggmap-filtered-data', echo=TRUE, fig.height=11, fig.width=20}
+# Filter pump data ----
+indian_pump_data <- filter_by_ocean(pump_data, ocean = "Indian Ocean")
+
+# Map filtered data ----
+ggmap_data(indian_pump_data)
+```

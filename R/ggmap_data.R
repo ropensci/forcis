@@ -17,7 +17,7 @@
 #' @examples
 #' ## ADD EXAMPLE ----
 
-map_distribution <- function(data, col = "red", ...) {
+ggmap_data <- function(data, col = "red", ...) {
   
   data_sf <- data_to_sf(data)
   

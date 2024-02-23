@@ -4,11 +4,11 @@ df <- data.frame(matrix(1:21, nrow = 1))
 colnames(df) <- get_required_columns()
 
 
-## map_distribution() ----
+## ggmap_data() ----
 
-test_that("Test map_distribution() for success", {
+test_that("Test ggmap_data() for success", {
   
-  expect_silent({ gg <- map_distribution(df) })
+  expect_silent({ gg <- ggmap_data(df) })
   
   expect_true("gg" %in% class(gg))
   expect_true("ggplot" %in% class(gg))
