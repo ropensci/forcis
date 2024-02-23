@@ -31,9 +31,21 @@ compute_concentrations <- function(data, aggregate = TRUE) {
   
   check_if_df(data)
   
-  if (get_data_type(data) %in% c("CPR North", "Sediment trap")) {
-    stop(paste0("This function is not designed to work with 'CPR North' or ", 
+  if (get_data_type(data) == "Sediment trap") {
+    stop(paste0("This function is not designed to work with ", 
                 "'Sediment trap' data"), call. = FALSE) 
+  }
+  
+  if (get_data_type(data) == "CPR North") {
+      
+    return(
+      data %>% 
+        mutate(min_conc_binned = .data$count_bin_min / 
+                 .data$sample_volume_filtered,
+               max_conc_binned = .data$count_bin_max / 
+                 .data$sample_volume_filtered) %>% 
+        select(-c(.data$count_bin_min,
+                  .data$count_bin_max)))
   }
   
   check_unique_taxonomy(data)
