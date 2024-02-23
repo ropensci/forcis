@@ -1,8 +1,8 @@
 ---
-title: "Data filtering"
+title: "Select and filter data"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Data filtering}
+  %\VignetteIndexEntry{Select and filter data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
