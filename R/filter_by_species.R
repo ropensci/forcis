@@ -16,7 +16,7 @@
 #' @examples
 #' ## ADD EXAMPLE ----
 
-filter_by_species <- function (data, species, rm_na = FALSE) {
+filter_by_species <- function(data, species, rm_na = FALSE) {
   
   ## Check data object ----
   
@@ -44,6 +44,11 @@ filter_by_species <- function (data, species, rm_na = FALSE) {
   }
 
 
+  if (all(!(species %in% unique(data$"taxa")))) {
+    stop("The species provided are absent from 'data'", call. = FALSE)
+  }
+  
+  
   ## Filter by species ----
   
   data <- data[data$"taxa" %in% species, ]
