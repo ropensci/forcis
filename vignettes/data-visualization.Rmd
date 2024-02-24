@@ -36,7 +36,10 @@ library(ggplot2)
 Before going any further, we will download the latest version of the FORCIS database.
 
 ```{r 'download-db', eval=FALSE}
-## Create a data/ folder ----
+# Create a data/ folder ----
+dir.create("data")
+
+# Download latest version of the database ----
 download_forcis_db(path = "data", version = NULL)
 ```
 
@@ -48,10 +51,11 @@ pump_data <- vroom::vroom(file_name, delim = ";", show_col_types = FALSE)
 ```
 
 ```{r 'load-data-user', eval=FALSE}
+# Import pump data ----
 pump_data <- read_pump_data(path = "data")
 ```
 
-**NB** In this vignette, we use a subset of the PUMP data, not the whole dataset.
+**NB:** In this vignette, we use a subset of the PUMP data, not the whole dataset.
 
 
 ## World base map
@@ -77,7 +81,7 @@ The function `ggmap_data()` can be used to plot FORCIS data on a World map. Let'
 ggmap_data(pump_data)
 ```
 
-This function works on the output of various functions available in the `forcis` package. For example:
+This function works with the output of various functions available in the `forcis` package. For example:
 
 ```{r 'ggmap-filtered-data', echo=TRUE, fig.height=11, fig.width=20}
 # Filter pump data ----

@@ -42,13 +42,13 @@ Note that the FORCIS database is saved in `forcis-db/version-99/`, where `99` is
 
 If for some reasons the user wants to freeze the version he/she uses, it is possible to disable this message by setting the argument `check_for_update` to `FALSE` in the `read_*_data()` functions.
 
-It is also possible to disable this message globally with the following line:
+It is also possible to disable this message globally for the current session:
 
 ```{r 'disable-message'}
 options(check_for_update = FALSE)
 ```
 
-The package `forcis` "knows" which version of the database you used last time. A hidden file `.forcis` is created/updated each time the function `download_forcis_db()` or `read_*_data()` is called. This hidden file contains one line:
+The package `forcis` _"knows"_ which version of the database you used last time. A hidden file `.forcis` is created/updated each time the function `download_forcis_db()` or `read_*_data()` is called. This hidden file contains one line:
 
 ```
 FORCIS_VERSION=99
