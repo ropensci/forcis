@@ -48,6 +48,10 @@ reference:
   contents:
     - geom_basemap
     - ggmap_data
+    - plot_record_by_year
+    - plot record_by_month
+    - plot_record_by_season
+    - plot_record_by_depth
 
 - title: Utilities
   desc: >
