@@ -10,7 +10,7 @@
 #' @import tidyr
 #' @import rlang
 #' @importFrom stats reorder
-#' 
+
 plot_record_by_depth <- function(data) {
   if (get_data_type(data) %in% c("CPR North","CPR South","Sediment trap","Pump")) {
     stop("This function is designed to work only with Net data", call. = FALSE) 

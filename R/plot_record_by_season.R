@@ -8,7 +8,7 @@
 #' @import ggplot2
 #' @import dplyr
 #' @import rlang
-#' 
+ 
 plot_record_by_season <- function(data) {
   if (get_data_type(data)=="Sediment trap"){
     data$sampling_month=as.numeric(sub("^\\d{2}/(\\d{2})/\\d{4}$", "\\1",
