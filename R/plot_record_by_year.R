@@ -17,16 +17,21 @@ plot_record_by_year <- function(data) {
   ## Check data object ----
   
   check_if_df(data)
+  check_field_in_data(data, "sample_id")
   
   
   ## Extract year ----
   
   if (get_data_type(data) == "Sediment trap") {
     
+    check_field_in_data(data, "sample_date_time_start")
+    
     data$"sampling_year" <- as.numeric(sub("^\\d{2}/\\d{2}/(\\d{4})$", "\\1",
                                        data$"sample_date_time_start"))
   
   } else {
+    
+    check_field_in_data(data, "profile_date_time")
     
     data$"sampling_year" <- as.numeric(sub("^\\d{2}/\\d{2}/(\\d{4})$", "\\1", 
                                        data$"profile_date_time"))

@@ -22,6 +22,10 @@ plot_record_by_depth <- function(data) {
     stop("This function is designed to work only with Net data", call. = FALSE) 
   }
   
+  check_field_in_data(data, "sample_id")
+  check_field_in_data(data, "sample_min_depth")
+  check_field_in_data(data, "sample_max_depth")
+  
   
   ## Prepare data ----
   
