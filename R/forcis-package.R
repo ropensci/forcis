@@ -5,7 +5,7 @@
 #' @import dplyr
 #' @import rlang
 #' @import tidyr
-#' @importFrom ggplot2 ggplot geom_sf theme theme_void element_text
+#' @import ggplot2
 # Imports: end ----
 
 NULL

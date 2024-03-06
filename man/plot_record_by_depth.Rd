@@ -2,16 +2,19 @@
 % Please edit documentation in R/plot_record_by_depth.R
 \name{plot_record_by_depth}
 \alias{plot_record_by_depth}
-\title{Plot sample record by depth of collection}
+\title{Plot sample records by depth of collection}
 \usage{
 plot_record_by_depth(data)
 }
 \arguments{
-\item{data}{forcis data}
+\item{data}{a \code{data.frame}, i.e. a FORCIS dataset.}
 }
 \value{
-barplot with sample counts by depth interval
+A \code{ggplot} object.
 }
 \description{
-Plot sample record by depth of collection
+This function produces a barplot of FORCIS sample records by depth.
+}
+\examples{
+## ADD EXAMPLE ----
 }

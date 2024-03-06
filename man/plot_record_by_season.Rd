@@ -2,16 +2,19 @@
 % Please edit documentation in R/plot_record_by_season.R
 \name{plot_record_by_season}
 \alias{plot_record_by_season}
-\title{Plot sample record by season}
+\title{Plot sample records by season}
 \usage{
 plot_record_by_season(data)
 }
 \arguments{
-\item{data}{forcis data}
+\item{data}{a \code{data.frame}, i.e. a FORCIS dataset.}
 }
 \value{
-barplot with sample counts by season
+A \code{ggplot} object.
 }
 \description{
-Plot sample record by season
+This function produces a barplot of FORCIS sample records by season.
+}
+\examples{
+## ADD EXAMPLE ----
 }

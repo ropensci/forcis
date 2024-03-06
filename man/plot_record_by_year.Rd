@@ -2,16 +2,19 @@
 % Please edit documentation in R/plot_record_by_year.R
 \name{plot_record_by_year}
 \alias{plot_record_by_year}
-\title{Plot sample record by year}
+\title{Plot sample records by year}
 \usage{
 plot_record_by_year(data)
 }
 \arguments{
-\item{data}{forcis data}
+\item{data}{a \code{data.frame}, i.e. a FORCIS dataset.}
 }
 \value{
-barplot with sample counts by year
+A \code{ggplot} object.
 }
 \description{
-Plot sample record by year
+This function produces a barplot of FORCIS sample records by year.
+}
+\examples{
+## ADD EXAMPLE ----
 }

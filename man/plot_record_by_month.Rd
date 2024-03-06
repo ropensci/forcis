@@ -2,16 +2,19 @@
 % Please edit documentation in R/plot_record_by_month.R
 \name{plot_record_by_month}
 \alias{plot_record_by_month}
-\title{Plot sample record by month}
+\title{Plot sample records by month}
 \usage{
 plot_record_by_month(data)
 }
 \arguments{
-\item{data}{forcis data}
+\item{data}{a \code{data.frame}, i.e. a FORCIS dataset.}
 }
 \value{
-barplot with sample counts by month
+A \code{ggplot} object.
 }
 \description{
-Plot sample record by month
+This function produces a barplot of FORCIS sample records by month.
+}
+\examples{
+## ADD EXAMPLE ----
 }

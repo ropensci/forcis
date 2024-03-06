@@ -1,72 +1,79 @@
-#' Plot sample record by season
+#' Plot sample records by season
+#' 
+#' @description
+#' This function produces a barplot of FORCIS sample records by season.
+#' 
+#' @param data a `data.frame`, i.e. a FORCIS dataset.
 #'
-#' @param data forcis data
-#'
-#' @return barplot with sample counts by season
+#' @return A `ggplot` object.
+#' 
 #' @export
 #'
-#' @import ggplot2
-#' @import dplyr
-#' @import rlang
+#' @examples
+#' ## ADD EXAMPLE ----
  
 plot_record_by_season <- function(data) {
-  if (get_data_type(data)=="Sediment trap"){
-    data$sampling_month=as.numeric(sub("^\\d{2}/(\\d{2})/\\d{4}$", "\\1",
-                                       data$sample_date_time_start))
+  
+  ## Check data object ----
+  
+  check_if_df(data)
+  
+  
+  ## Extract month ----
+  
+  if (get_data_type(data) == "Sediment trap") {
     
-    data$season = ifelse(data$site_lat_start_decimal > 0 & data$sampling_month %in% c(6, 7, 8, 9),
-                         'Summer',
-                         ifelse(data$site_lat_start_decimal < 0 & data$sampling_month %in% c(12, 1, 2),
-                                'Summer',
-                                ifelse(data$site_lat_start_decimal < 0 & data$sampling_month %in% c(6, 7),
-                                       'Winter',
-                                       ifelse(data$site_lat_start_decimal > 0 & data$sampling_month %in% c(12, 1, 2, 3),
-                                              'Winter',
-                                              ifelse(data$site_lat_start_decimal > 0 & data$sampling_month %in% c(3, 4, 5),
-                                                     'Spring',
-                                                     ifelse(data$site_lat_start_decimal > 0 & data$sampling_month %in% c(9, 10, 11),
-                                                            'Fall',
-                                                            ifelse(data$site_lat_start_decimal < 0 & data$sampling_month %in% c(3, 4, 5),
-                                                                   'Fall',
-                                                                   ifelse(data$site_lat_start_decimal < 0 & data$sampling_month %in% c(9, 10, 11),
-                                                                          'Spring', 'Unknown'))))))))
-    
-    # Plotting
-    ggplot(data %>% 
-             select(.data$sample_id, .data$season) %>% 
-             distinct(), aes(x = .data$season)) + 
-      geom_bar(width = 0.7, col = 'black', stat = "count") +  
-      theme_classic() +
-      xlab('Season') + 
-      ylab('Number of Samples')   
+    data$"sampling_month" <- as.numeric(sub("^\\d{2}/(\\d{2})/\\d{4}$", "\\1",
+                                            data$"sample_date_time_start"))
     
   } else {
-    data$sampling_month=as.numeric(sub("^\\d{2}/(\\d{2})/\\d{4}$", "\\1", 
-                                       data$profile_date_time))
-    data$season = ifelse(data$site_lat_start_decimal > 0 & data$sampling_month %in% c(6, 7, 8, 9), 
-                         'Summer',
-                         ifelse(data$site_lat_start_decimal < 0 & data$sampling_month %in% c(12, 1, 2),
-                                'Summer',
-                                ifelse(data$site_lat_start_decimal < 0 & data$sampling_month %in% c(6, 7),
-                                       'Winter',
-                                       ifelse(data$site_lat_start_decimal > 0 & data$sampling_month %in% c(12, 1, 2, 3),
-                                              'Winter',
-                                              ifelse(data$site_lat_start_decimal > 0 & data$sampling_month %in% c(3, 4, 5),
-                                                     'Spring',
-                                                     ifelse(data$site_lat_start_decimal > 0 & data$sampling_month %in% c(9, 10, 11),
-                                                            'Fall',
-                                                            ifelse(data$site_lat_start_decimal < 0 & data$sampling_month %in% c(3, 4, 5),
-                                                                   'Fall',
-                                                                   ifelse(data$site_lat_start_decimal < 0 & data$sampling_month %in% c(9, 10, 11),
-                                                                          'Spring', 'Unknown'))))))))
     
-    # Plotting
-    ggplot(data %>% 
-             select(.data$sample_id,.data$season) %>% 
-             distinct(), aes(x = .data$season)) + 
-      geom_bar(width = 0.7, col = 'black', stat = "count") +  
-      theme_classic() +
-      xlab('Season') + 
-      ylab('Number of Samples')  
+    data$"sampling_month" <- as.numeric(sub("^\\d{2}/(\\d{2})/\\d{4}$", "\\1", 
+                                            data$"profile_date_time"))
   }
+  
+    
+  ## Identify season ----
+  
+  data$"season" <- ifelse(data$"site_lat_start_decimal" > 0 & 
+                          data$"sampling_month" %in% c(6, 7, 8, 9),
+                          "Summer",
+                   ifelse(data$"site_lat_start_decimal" < 0 & 
+                          data$"sampling_month" %in% c(12, 1, 2),
+                          "Summer",
+                   ifelse(data$"site_lat_start_decimal" < 0 & 
+                          data$"sampling_month" %in% c(6, 7),
+                          "Winter",
+                   ifelse(data$"site_lat_start_decimal" > 0 & 
+                          data$"sampling_month" %in% c(12, 1, 2, 3),
+                          "Winter",
+                   ifelse(data$"site_lat_start_decimal" > 0 & 
+                          data$"sampling_month" %in% c(3, 4, 5),
+                          "Spring",
+                   ifelse(data$"site_lat_start_decimal" > 0 & 
+                          data$"sampling_month" %in% c(9, 10, 11),
+                          "Fall",
+                   ifelse(data$"site_lat_start_decimal" < 0 & 
+                          data$"sampling_month" %in% c(3, 4, 5),
+                          "Fall",
+                   ifelse(data$"site_lat_start_decimal" < 0 & 
+                          data$"sampling_month" %in% c(9, 10, 11),
+                          "Spring", 
+                   "Unknown"))))))))
+    
+  
+  ## Get distinct values ----
+  
+  data <- data %>% 
+    select(.data$sample_id, .data$season) %>% 
+    distinct()
+  
+  
+  ## Plot ----
+
+  ggplot(data, aes(x = .data$season)) + 
+    geom_bar(width = 0.7, col = "black", stat = "count") +  
+    theme_classic() +
+    xlab("Season") + 
+    ylab("Number of FORCIS samples")   
 }
