@@ -16,8 +16,50 @@ knitr::opts_chunk$set(
 )
 ```
 
+
+> **NOTE:** THIS IS A WORK IN PROGRESS.
+
+Add an good introduction of the package.
+
+
+## Setup
+
+First, let's import the required packages.
+
 ```{r setup}
 library(forcis)
 ```
 
-Work in progress...
+## Download FORCIS database
+
+Before going any further, we will download the latest version of the FORCIS database.
+
+```{r 'download-db', eval=FALSE}
+# Create a data/ folder ----
+dir.create("data")
+
+# Download latest version of the database ----
+download_forcis_db(path = "data", version = NULL)
+```
+
+
+## Import FORCIS data
+
+The vignette will use the PUMP data of the FORCIS database. Let's import the latest release of the data.
+
+```{r 'load-data', echo=FALSE}
+file_name <- system.file(file.path("extdata", "FORCIS_pump_sample.csv"), package = "forcis")
+pump_data <- vroom::vroom(file_name, delim = ";", show_col_types = FALSE)
+```
+
+```{r 'load-data-user', eval=FALSE}
+# Import pump data ----
+pump_data <- read_pump_data(path = "data")
+```
+
+**NB:** In this vignette, we use a subset of the PUMP data, not the whole dataset.
+
+
+## Another section
+
+[...]

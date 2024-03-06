@@ -58,7 +58,7 @@ pump_data <- read_pump_data(path = "data")
 **NB:** In this vignette, we use a subset of the PUMP data, not the whole dataset.
 
 
-## World base map
+## `geom_basemap()`
 
 The function `geom_basemap()` can be used to easily add World countries, oceans and bounding box to a `ggplot2` object.
 
@@ -72,7 +72,7 @@ These layers come from the [Natural Earth](https://www.naturalearthdata.com/) we
 
 
 
-## Map FORCIS data
+## `ggmap_data()`
 
 The function `ggmap_data()` can be used to plot FORCIS data on a World map. Let's map the PUMP data.
 
@@ -135,3 +135,34 @@ ggsave(indian_pump_data_map,
        scale    = 1.5,
        bg       = "white")
 ```
+
+
+## `plot_record_by_year()`
+
+Add an illustration of `plot_record_by_year()`
+
+[...]
+
+
+
+## `plot_record_by_month()`
+
+Add an illustration of `plot_record_by_month()`
+
+[...]
+
+
+
+## `plot_record_by_season()`
+
+Add an illustration of `plot_record_by_season()`
+
+[...]
+
+
+
+## `plot_record_by_depth()`
+
+Add an illustration of `plot_record_by_depth()`
+
+[...]
