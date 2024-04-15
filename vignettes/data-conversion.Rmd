@@ -17,63 +17,81 @@ knitr::opts_chunk$set(
 ```
 
 
-> **NOTE:** THIS IS A WORK IN PROGRESS.
+<!-- > **NOTE:** THIS IS A WORK IN PROGRESS. -->
 
-The package `forcis` provides [functions](https://frbcesab.github.io/forcis/reference/index.html#standardization-functions) to homogenize FORCIS data and compute abundances, concentrations, and frequencies of foraminifera. This vignette shows how to use these functions.
+The package `forcis` provides [functions](https://frbcesab.github.io/forcis/reference/index.html#standardization-functions) to homogenize FORCIS data and compute abundances, concentrations, and frequencies of foraminifera counts.
+This vignette shows how to use these functions.
 
+## Count formats within FORCIS
+ 
+ The FORCIS database includes counts of foraminifera species collected with multiple devices. These counts are reported in
+ different formats: 
+ 
+ * Raw abundance: number of specimens counted within a sampling unit.
+ * Number concentration: number of specimens per cubic meter.
+ * Relative abundance: percentage of specimens relative to the total counted
+ * Fluxes: number of specimens per square meter per day.
+ * Binned counts: Number of specimens categorized into  a specific range (minimum and maximum) within a sampling unit.
+ 
+ 
+## Conversion Functions
 
-## Setup
+The functions detailed in this vignette allow to convert counts between the following formats **Raw abundance**, **Relative abundance** and **Number concentration**. 
 
-First, let's import the required packages.
+> **NOTE:** FORCIS data from *Sediment traps* and the *CPR North* are not supported by
+these functions.
 
-```{r setup}
-library(forcis)
+### Usage 
+
+The vignette will use the PUMP data of the FORCIS database. Let’s import the latest release of the data as described in the [Get started vignette](https://frbcesab.github.io/forcis/articles/forcis.html).
+
+```{r, eval=FALSE}
+# Import pump data 
+ pump_data <- read_pump_data(path = "data")
 ```
 
-Before going any further, we will download the latest version of the FORCIS database.
+After obtaining the data, the initial step involves choosing the taxonomic level for our analyses, 
+(the different taxonomic levels are described in the [original FORCIS database paper](https://www.nature.com/articles/s41597-023-02264-2) ).
+This selection is made using the `select_taxonomy()` function.
 
-```{r 'download-db', eval=FALSE}
-# Create a data/ folder ----
-dir.create("data")
-
-# Download latest version of the database ----
-download_forcis_db(path = "data", version = NULL)
+```{r, eval=FALSE}
+# Select taxonomy
+OT_pump_data <- select_taxonomy(pump_data,'OT')
 ```
 
-The vignette will use the PUMP data of the FORCIS database. Let's import the latest release of the data.
+Once the data contains counts from the same taxonomic level for all the samples we can proceed with the conversion functions.
 
-```{r 'load-data', echo=FALSE}
-file_name <- system.file(file.path("extdata", "FORCIS_pump_sample.csv"), package = "forcis")
-pump_data <- vroom::vroom(file_name, delim = ";", show_col_types = FALSE)
+#### `compute_abundances()`
+
+This function converts all counts into raw abundances, using sampling metadata such as sample volume and total assemblage counts. It calculates the raw abundance for each species whose counts are reported as either relative abundance or number concentrations.
+
+```{r, eval=FALSE}
+# Convert species counts in raw abundance
+OT_pump_data_raw_ab=compute_abundances(OT_pump_data,aggregate = TRUE)
+
 ```
 
-```{r 'load-data-user', eval=FALSE}
-# Import pump data ----
-pump_data <- read_pump_data(path = "data")
+#### `compute_concentrations()`
+This function transforms all counts into number concentration abundances. It also leverages sampling metadata such as sample volume and total assemblage counts to compute the number concentration for each species.
+
+```{r, eval=FALSE}
+# Convert species counts in number concentration
+OT_pump_data_n_conc=compute_concentrations(OT_pump_data,aggregate = TRUE)
+
 ```
 
-**NB:** In this vignette, we use a subset of the PUMP data, not the whole dataset.
+#### `compute_frequencies()`
+
+This function computes relative abundance for each species using total assemblage counts when available.
+
+```{r, eval=FALSE}
+# Convert species counts in relative abundance 
+OT_pump_data_rel_ab=compute_frequencies(OT_pump_data,aggregate = TRUE)
+
+```
+
+The functions accept two arguments: the input data and the aggregate argument. If `aggregate` is set to **TRUE**, the function will return the transformed counts of each species using the sample as the unit. If **FALSE**, it will re-calculate the species' abundance by subsample.
+
+The functions output a table (long-format) as well as a message reporting the amount of data that could not be converted because of missing metadata.
 
 
-
-## `compute_abundances()`
-
-Add an illustration of `compute_abundances()`
-
-[...]
-
-
-
-## `compute_concentrations()`
-
-Add an illustration of `compute_concentrations()`
-
-[...]
-
-
-
-## `compute_frequencies()`
-
-Add an illustration of `compute_frequencies()`
-
-[...]
