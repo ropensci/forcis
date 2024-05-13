@@ -64,7 +64,8 @@ compute_concentrations <- function(data, aggregate = TRUE) {
               .data$subsample_count_type,
               .data$subsample_all_shells_present_were_counted,
               .data$total_of_forams_counted_ind,
-              .data$sampling_device_type))
+              .data$sampling_device_type))%>% 
+    rename('counts_n_conc' = 'counts') 
   
   abs_data_to_convert <- data %>%
     filter(.data$sample_volume_filtered > 0) %>% 
@@ -81,7 +82,7 @@ compute_concentrations <- function(data, aggregate = TRUE) {
               .data$subsample_all_shells_present_were_counted,
               .data$total_of_forams_counted_ind,
               .data$sampling_device_type)) %>% 
-    rename('counts' = 'new_counts') %>% 
+    rename('counts_n_conc' = 'new_counts') %>% 
     distinct()
   
   rel_data_to_convert <- data %>%
@@ -104,7 +105,7 @@ compute_concentrations <- function(data, aggregate = TRUE) {
               .data$subsample_all_shells_present_were_counted,
               .data$total_of_forams_counted_ind,
               .data$sampling_device_type)) %>%
-    rename('counts' = 'new_counts') %>%
+    rename('counts_n_conc' = 'new_counts') %>%
     distinct()
   
   excluded_samples_volume <- data %>%
@@ -140,18 +141,18 @@ compute_concentrations <- function(data, aggregate = TRUE) {
     tot_dat <- tot_dat %>%
       filter(!is.na(.data$sample_volume_filtered)) %>%
       mutate(abs_sub_tot = floor(.data$sample_volume_filtered * 
-                                   .data$counts)) %>%
+                                   .data$counts_n_conc)) %>%
       group_by(.data$sample_id, .data$taxa) %>%
       mutate(new_counts = sum(.data$abs_sub_tot, na.rm = TRUE)) %>%
       ungroup() %>%
-      select(-c(.data$counts, .data$abs_sub_tot, .data$subsample_id,
+      select(-c(.data$counts_n_conc, .data$abs_sub_tot, .data$subsample_id,
                 .data$subsample_size_fraction_min,
                 .data$subsample_size_fraction_max)) %>%
       distinct() %>%
       mutate(conc_counts = .data$new_counts / .data$sample_volume_filtered) %>%
       select(-.data$new_counts) %>%
       distinct() %>%
-      rename('counts' = 'conc_counts')
+      rename('counts_n_conc' = 'conc_counts')
   }
   
   tot_dat

@@ -109,7 +109,8 @@ compute_frequencies <- function(data, aggregate = TRUE) {
     mutate(counts = (.data$counts / .data$tot_subsample) * 100) %>% 
     select(-c(.data$tot_subsample, .data$tot_sample))
   
-  tot_dat <- rbind(partial_data, ready_dat)
+  tot_dat <- rbind(partial_data, ready_dat)%>%
+    rename('counts_rel_ab' = 'counts')
   
   
   if (!aggregate) {
@@ -126,7 +127,8 @@ compute_frequencies <- function(data, aggregate = TRUE) {
       select(-c(.data$subsample_id,
                 .data$subsample_size_fraction_min,
                 .data$subsample_size_fraction_max)) %>% 
-      distinct()
+      distinct()%>%
+      rename('counts_rel_ab' = 'counts')
     
     return(aggregated_dat)
   }

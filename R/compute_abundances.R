@@ -28,7 +28,8 @@ compute_abundances <- function(data, aggregate = TRUE) {
               .data$subsample_count_type,
               .data$subsample_all_shells_present_were_counted,
               .data$total_of_forams_counted_ind,
-              .data$sampling_device_type))
+              .data$sampling_device_type)) %>% 
+    rename('counts_raw_ab' = 'counts')
   
   conc_data_to_convert <- data %>%
     filter(.data$sample_volume_filtered > 0) %>% 
@@ -44,7 +45,7 @@ compute_abundances <- function(data, aggregate = TRUE) {
               .data$total_of_forams_counted_ind)) %>% 
     mutate(new_counts = floor(.data$counts * .data$sample_volume_filtered)) %>% 
     select(-c(.data$counts, .data$subsample_count_type)) %>% 
-    rename('counts' = 'new_counts') %>% 
+    rename('counts_raw_ab' = 'new_counts') %>% 
     distinct()
   
   rel_data_to_convert <- data %>%
@@ -65,7 +66,7 @@ compute_abundances <- function(data, aggregate = TRUE) {
               .data$subsample_all_shells_present_were_counted,
               .data$total_of_forams_counted_ind,
               .data$sampling_device_type)) %>% 
-    rename('counts' = 'new_counts') %>% 
+    rename('counts_raw_ab' = 'new_counts') %>% 
     distinct()
   
   excluded_samples_volume <- data %>%
@@ -98,13 +99,13 @@ compute_abundances <- function(data, aggregate = TRUE) {
     
     tot_dat <- tot_dat %>% 
       group_by(.data$sample_id, .data$taxa) %>% 
-      mutate(new_counts = sum(.data$counts, na.rm = TRUE)) %>% 
+      mutate(new_counts = sum(.data$counts_raw_ab, na.rm = TRUE)) %>% 
       ungroup() %>% 
-      select(-c(.data$counts, .data$subsample_id,
+      select(-c(.data$counts_raw_ab, .data$subsample_id,
                 .data$subsample_size_fraction_min,
                 .data$subsample_size_fraction_max)) %>%
       distinct() %>% 
-      rename('counts' = 'new_counts')
+      rename('counts_raw_ab' = 'new_counts')
   }
   
   tot_dat

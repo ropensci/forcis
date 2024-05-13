@@ -57,7 +57,10 @@ filter_by_species <- function(data, species, rm_na = FALSE) {
   ## Remove lines w/ NA counts (if required) ----
   
   if (rm_na) {
-    data <- data[!is.na(data$"counts"), ]
+    count_columns <- grepl("counts", names(data))
+    #data <- data[!is.na(data$"counts"), ]
+    data <- data[!is.na(data[, count_columns]), ]
+    
   }
   
   data

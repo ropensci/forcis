@@ -72,6 +72,8 @@ plot_record_by_season <- function(data) {
     select(.data$sample_id, .data$season) %>% 
     distinct()
   
+  data$season <-factor(data$season, levels = c("Fall", "Winter", "Spring", "Summer", "Unknown"))
+  
   
   ## Plot ----
 
