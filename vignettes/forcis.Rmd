@@ -22,9 +22,27 @@ knitr::opts_chunk$set(
 Add an good introduction of the package.
 
 
+## Installation
+
+To install the `forcis` package, run:
+
+```{r 'installation', eval=FALSE}
+## Install < remotes > package (if not already installed) ----
+if (!requireNamespace("remotes", quietly = TRUE)) {
+  install.packages("remotes")
+}
+
+## Install dev version of < forcis > from GitHub ----
+remotes::install_github("FRBCesab/forcis")
+```
+
+The `forcis` package depends on the [`sf`](https://r-spatial.github.io/sf/) package which requires some spatial system libraries (GDAL and PROJ). Please read [this page](https://github.com/r-spatial/sf?tab=readme-ov-file#installing) if you have any trouble to install `forcis`.
+
+
+
 ## Setup
 
-First, let's import the required packages.
+First, let's attach the required packages.
 
 ```{r setup}
 library(forcis)

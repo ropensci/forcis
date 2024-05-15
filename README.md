@@ -62,7 +62,13 @@ if (!requireNamespace("remotes", quietly = TRUE)) {
 remotes::install_github("FRBCesab/forcis")
 ```
 
-Then you can attach the package `forcis`:
+**N.B.** The `forcis` package depends on the
+[`sf`](https://r-spatial.github.io/sf/) package which requires some
+spatial system libraries (GDAL and PROJ). Please read [this
+page](https://github.com/r-spatial/sf?tab=readme-ov-file#installing) if
+you have any trouble to install `forcis`.
+
+Finally you can attach the package `forcis` with:
 
 ``` r
 library("forcis")
