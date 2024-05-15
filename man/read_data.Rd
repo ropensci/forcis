@@ -78,6 +78,21 @@ must be used first to store locally the database.
 \item \code{read_sediment_trap_data()} reads the FORCIS sediment traps data
 }
 }
+\examples{
+\dontrun{
+# Attach the package ----
+library("forcis")
+
+# Folder in which the database will be saved ----
+path_to_save_db <- "data"
+
+# Download the database ----
+download_forcis_db(path = path_to_save_db)
+
+# Import plankton nets data ----
+plankton_nets_data <- read_plankton_nets_data(path = path_to_save_db)
+}
+}
 \seealso{
 \code{\link[=download_forcis_db]{download_forcis_db()}} to download the complete FORCIS database.
 }

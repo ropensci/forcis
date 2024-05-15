@@ -19,7 +19,9 @@ Gets all available versions of the FORCIS database by querying the Zenodo API
 (\url{https://developers.zenodo.org}).
 }
 \examples{
-## Versions of the FORCIS database ----
+# Attach the package ----
+library("forcis")
 
+# Versions of the FORCIS database ----
 get_available_versions()
 }

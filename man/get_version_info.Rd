@@ -21,7 +21,9 @@ Prints information of a specific version of the FORCIS database by querying
 the Zenodo API (\url{https://developers.zenodo.org}).
 }
 \examples{
-## Get information for the latest version of the FORCIS database ----
+# Attach the package ----
+library("forcis")
 
+# Get information for the latest version of the FORCIS database ----
 get_version_info()
 }
