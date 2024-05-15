@@ -36,5 +36,5 @@ pump_data$"data_type" <- "Pump"
 ggmap_data(pump_data)
 
 # Map data ----
-ggmap_data(pump_data, col = "black", fill = "red", shape = 21, size = 4)
+ggmap_data(pump_data, col = "black", fill = "red", shape = 21, size = 2)
 }
