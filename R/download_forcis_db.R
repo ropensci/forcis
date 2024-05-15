@@ -46,6 +46,11 @@
 #' 
 #' @seealso [read_plankton_nets_data()] to import the FORCIS database.
 #' 
+#' @references 
+#' Chaabane S, De Garidel-Thoron T, Giraud X, _et al._ (2023) The FORCIS 
+#' database: A global census of planktonic Foraminifera from ocean waters. 
+#' **Scientific Data**, 10, 354. DOI: <https://doi.org/10.1038/s41597-023-02264-2>.
+#' 
 #' @export
 #' 
 #' @examples
