@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_version_info.R
 \name{get_version_info}
 \alias{get_version_info}
-\title{Print information of a specific version of a Zenodo repository}
+\title{Print information of a specific version of the FORCIS database}
 \usage{
 get_version_info(version = NULL)
 }
@@ -17,7 +17,8 @@ A \code{list} with all information about the version, including: \code{title},
 \code{keywords}, \code{version}, \code{resource_type}, \code{license}, and \code{files}.
 }
 \description{
-Print information of a specific version of a Zenodo repository
+Prints information of a specific version of the FORCIS database by querying
+the Zenodo API (\url{https://developers.zenodo.org}).
 }
 \examples{
 ## Get information for the latest version of the FORCIS database ----

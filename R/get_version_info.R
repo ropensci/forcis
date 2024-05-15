@@ -1,4 +1,8 @@
-#' Print information of a specific version of a Zenodo repository
+#' Print information of a specific version of the FORCIS database
+#' 
+#' @description
+#' Prints information of a specific version of the FORCIS database by querying 
+#' the Zenodo API (\url{https://developers.zenodo.org}).
 #'   
 #' @param version a `character` of length 1. The label of the version. Use 
 #'   [get_available_versions()] to list available versions. If `NULL` (default)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_available_versions.R
 \name{get_available_versions}
 \alias{get_available_versions}
-\title{Retrieve all versions of a Zenodo repository}
+\title{Get available versions of the FORCIS database}
 \usage{
 get_available_versions()
 }
@@ -15,7 +15,8 @@ A \code{data.frame} with three columns:
 }
 }
 \description{
-Retrieve all versions of a Zenodo repository
+Gets all available versions of the FORCIS database by querying the Zenodo API
+(\url{https://developers.zenodo.org}).
 }
 \examples{
 ## Versions of the FORCIS database ----

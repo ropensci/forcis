@@ -1,5 +1,9 @@
-#' Retrieve all versions of a Zenodo repository
-#'
+#' Get available versions of the FORCIS database
+#' 
+#' @description
+#' Gets all available versions of the FORCIS database by querying the Zenodo API
+#' (\url{https://developers.zenodo.org}).
+#' 
 #' @return A `data.frame` with three columns:
 #'   - `publication_date`: the date of the release of the version
 #'   - `version`: the label of the version
