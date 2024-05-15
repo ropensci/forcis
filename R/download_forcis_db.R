@@ -1,10 +1,9 @@
-#' Download the entire FORCIS database
+#' Download the FORCIS database
 #'
 #' @description 
 #' Downloads the entire FORCIS database as a collection of five `csv` files from
 #' Zenodo (\url{https://zenodo.org/doi/10.5281/zenodo.7390791}). Additional 
-#' files are also downloaded (see 
-#' \url{https://zenodo.org/doi/10.5281/zenodo.7390791}).
+#' files will be also downloaded.
 #'
 #' @param path a `character` of length 1. The folder in which the FORCIS 
 #'   database will be saved. Note that a subdirectory will be created, e.g.
@@ -33,6 +32,19 @@
 #'   Internet connection.
 #'
 #' @return No return value. The FORCIS files will be saved in the `path` folder.
+#' 
+#' @details
+#' The FORCIS database is regularly updated. The global structure of the tables
+#' doesn’t change between versions but some bugs can be fixed and new records 
+#' can be added. This is why it is recommended to use the latest version of the 
+#' database. The package is designed to handle the versioning of the database on
+#' Zenodo and will inform the user if a new version is available each time 
+#' he/she uses one of the `read_*_data()`.
+#' 
+#' For more information, please read the vignette available at
+#' \url{https://frbcesab.github.io/forcis/articles/database-versions.html}.
+#' 
+#' @seealso [read_plankton_nets_data()] to import the FORCIS database.
 #' 
 #' @export
 #' 
