@@ -7,7 +7,7 @@
 filter_by_month(data, months)
 }
 \arguments{
-\item{data}{a \code{data.frame}, i.e. a FORCIS dataset.}
+\item{data}{a \code{data.frame}. One obtained by \verb{read_*_data()} functions.}
 
 \item{months}{a \code{numeric} containing one or several months.}
 }
@@ -15,8 +15,27 @@ filter_by_month(data, months)
 A \code{data.frame} containing a subset of \code{data} for the desired months.
 }
 \description{
-This function can be used to filter FORCIS data by month of sampling.
+Filters FORCIS data by month of sampling.
 }
 \examples{
-## ADD EXAMPLE ----
+# Attach the package ----
+library("forcis")
+
+# Import example dataset ----
+file_name <- system.file(file.path("extdata", "FORCIS_pump_sample.csv"), 
+                         package = "forcis")
+
+pump_data <- vroom::vroom(file_name, delim = ";", show_col_types = FALSE)
+
+# Add 'data_type' column ----
+pump_data$"data_type" <- "Pump"
+
+# Dimensions of the data.frame ----
+dim(pump_data)
+
+# Filter by months ----
+pump_data_sub <- filter_by_month(pump_data, months = 1:2)
+
+# Dimensions of the data.frame ----
+dim(pump_data_sub)
 }

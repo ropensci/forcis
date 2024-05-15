@@ -10,7 +10,8 @@ select_columns(data, cols = NULL)
 \item{data}{a \code{data.frame}. One obtained by \verb{read_*_data()} functions.}
 
 \item{cols}{a \code{character} vector of column names to keep in addition to the
-required ones (see \code{\link[=get_required_columns]{get_required_columns()}}) and to the taxa columns.}
+required ones (see \code{\link[=get_required_columns]{get_required_columns()}}) and to the taxa columns. Can
+be \code{NULL} (default).}
 }
 \value{
 A \code{data.frame}.
@@ -21,17 +22,30 @@ columns, this function can be used to lighten the \code{data.frame} to easily
 handle it and to speed up some computations.
 }
 \examples{
-\dontrun{
-# Folder in which the database is stored ----
-path_to_db <- "data"
+# Attach the package ----
+library("forcis")
 
-# Download and read the plankton nets data ----
-nets <- forcis::read_plankton_nets_data(path_to_db)
+# Import example dataset ----
+file_name <- system.file(file.path("extdata", "FORCIS_pump_sample.csv"), 
+                         package = "forcis")
+
+pump_data <- vroom::vroom(file_name, delim = ";", show_col_types = FALSE)
+
+# Add 'data_type' column ----
+pump_data$"data_type" <- "Pump"
+
+# Dimensions of the data.frame ----
+dim(pump_data)
 
 # Select a taxonomy ----
-nets <- forcis::select_taxonomy(nets, taxonomy = "OT")
+pump_data <- select_taxonomy(pump_data, taxonomy = "OT")
 
-# Select required columns (and taxa) ----
-nets <- forcis::select_columns(nets)
-}
+# Dimensions of the data.frame ----
+dim(pump_data)
+
+# Select only required columns (and taxa) ----
+pump_data <- select_columns(pump_data)
+
+# Dimensions of the data.frame ----
+dim(pump_data)
 }

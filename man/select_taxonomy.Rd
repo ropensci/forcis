@@ -21,14 +21,24 @@ taxonomies: \code{"LT"} (lumped taxonomy), \code{"VT"} (validated taxonomy) and 
 further information.
 }
 \examples{
-\dontrun{
-# Folder in which the database is stored ----
-path_to_db <- "data"
+# Attach the package ----
+library("forcis")
 
-# Download and read the plankton nets data ----
-nets <- forcis::read_plankton_nets_data(path_to_db)
+# Import example dataset ----
+file_name <- system.file(file.path("extdata", "FORCIS_pump_sample.csv"), 
+                         package = "forcis")
+
+pump_data <- vroom::vroom(file_name, delim = ";", show_col_types = FALSE)
+
+# Add 'data_type' column ----
+pump_data$"data_type" <- "Pump"
+
+# Dimensions of the data.frame ----
+dim(pump_data)
 
 # Select a taxonomy ----
-nets <- forcis::select_taxonomy(nets, taxonomy = "OT")
-}
+pump_data <- select_taxonomy(pump_data, taxonomy = "OT")
+
+# Dimensions of the data.frame ----
+dim(pump_data)
 }

@@ -7,18 +7,56 @@
 filter_by_species(data, species, rm_na = FALSE)
 }
 \arguments{
-\item{data}{a \code{data.frame}, i.e. a FORCIS dataset, except for CPR North data.}
+\item{data}{a \code{data.frame}. Must be the output of the function
+\code{reshape_data()}, i.e. a FORCIS dataset in long format.}
 
 \item{species}{a \code{character} vector listing species of interest.}
 
-\item{rm_na}{a \code{logical} value. If \code{FALSE}, keeps taxa with \code{NA} counts.}
+\item{rm_na}{a \code{logical} value. If \code{FALSE} (default), keeps taxa with \code{NA}
+counts.}
 }
 \value{
 A \code{data.frame} containing a subset of \code{data}.
 }
 \description{
-A short description...
+Filters FORCIS data by a species list.
 }
 \examples{
-## ADD EXAMPLE ----
+# Import example dataset ----
+file_name <- system.file(file.path("extdata", "FORCIS_pump_sample.csv"), 
+                         package = "forcis")
+
+pump_data <- vroom::vroom(file_name, delim = ";", show_col_types = FALSE)
+
+# Add 'data_type' column ----
+pump_data$"data_type" <- "Pump"
+
+# Select a taxonomy ----
+pump_data <- select_taxonomy(pump_data, taxonomy = "OT")
+
+# Select only required columns (and taxa) ----
+pump_data <- select_columns(pump_data)
+
+# Dimensions of the data.frame ----
+dim(pump_data)
+
+# Convert data into long format ----
+pump_data <- reshape_data(pump_data)
+
+# Dimensions of the data.frame ----
+dim(pump_data)
+
+# Total number of species ----
+length(unique(pump_data$"taxa"))
+
+# Select records for three species ----
+pump_data_sub <- filter_by_species(data    = pump_data, 
+                                   species = c("g_inflata", "g_ruber", 
+                                               "g_glutinata"))
+
+# Dimensions of the data.frame ----
+dim(pump_data_sub)
+
+# Total number of species ----
+length(unique(pump_data_sub$"taxa"))
 }

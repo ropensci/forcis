@@ -7,17 +7,39 @@
 filter_by_ocean(data, ocean)
 }
 \arguments{
-\item{data}{a \code{data.frame}, i.e. a FORCIS dataset.}
+\item{data}{a \code{data.frame}. One obtained by \verb{read_*_data()} functions.}
 
 \item{ocean}{a \code{character} vector of one or several ocean names. Use the
 function \code{get_ocean_names()} to find the correct spelling.}
 }
 \value{
-A \code{data.frame} containing a subset of \code{data}.
+A \code{data.frame} containing a subset of \code{data} for the desired oceans.
 }
 \description{
-This function can be used to filter FORCIS data by one or several oceans.
+Filters FORCIS data by one or several oceans.
 }
 \examples{
-## ADD EXAMPLE ----
+# Attach the package ----
+library("forcis")
+
+# Import example dataset ----
+file_name <- system.file(file.path("extdata", "FORCIS_pump_sample.csv"), 
+                         package = "forcis")
+
+pump_data <- vroom::vroom(file_name, delim = ";", show_col_types = FALSE)
+
+# Add 'data_type' column ----
+pump_data$"data_type" <- "Pump"
+
+# Dimensions of the data.frame ----
+dim(pump_data)
+
+# Get ocean names ----
+get_ocean_names()
+
+# Filter by oceans ----
+pump_data_sub <- filter_by_ocean(pump_data, ocean = "Indian Ocean")
+
+# Dimensions of the data.frame ----
+dim(pump_data_sub)
 }

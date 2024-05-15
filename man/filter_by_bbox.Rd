@@ -7,7 +7,7 @@
 filter_by_bbox(data, bbox)
 }
 \arguments{
-\item{data}{a \code{data.frame}, i.e. a FORCIS dataset.}
+\item{data}{a \code{data.frame}. One obtained by \verb{read_*_data()} functions.}
 
 \item{bbox}{an object of class \code{bbox} (package \code{sf}) or a vector of four
 \code{numeric} values defining a square bounding box. Values must follow this
@@ -17,11 +17,34 @@ longitude (\code{xmax}), and maximum latitude (\code{ymax}).
 be defined in the system WGS 84 (\code{epsg=4326}).}
 }
 \value{
-A \code{data.frame} containing a subset of \code{data}.
+A \code{data.frame} containing a subset of \code{data} for the desired
+bounding box.
 }
 \description{
-This function can be used to filter FORCIS data by a spatial bounding box.
+Filters FORCIS data by a spatial bounding box.
 }
 \examples{
-## ADD EXAMPLE ----
+# Attach the package ----
+library("forcis")
+
+# Import example dataset ----
+file_name <- system.file(file.path("extdata", "FORCIS_pump_sample.csv"), 
+                         package = "forcis")
+
+pump_data <- vroom::vroom(file_name, delim = ";", show_col_types = FALSE)
+
+# Add 'data_type' column ----
+pump_data$"data_type" <- "Pump"
+
+# Dimensions of the data.frame ----
+dim(pump_data)
+
+# Get ocean names ----
+get_ocean_names()
+
+# Filter by oceans ----
+pump_data_sub <- filter_by_bbox(pump_data, bbox = c(35, 0, 45, 30))
+
+# Dimensions of the data.frame ----
+dim(pump_data_sub)
 }

@@ -1,9 +1,9 @@
 #' Filter FORCIS data by month of sampling
 #'
 #' @description
-#' This function can be used to filter FORCIS data by month of sampling.
+#' Filters FORCIS data by month of sampling.
 #' 
-#' @param data a `data.frame`, i.e. a FORCIS dataset.
+#' @param data a `data.frame`. One obtained by `read_*_data()` functions.
 #' 
 #' @param months a `numeric` containing one or several months.
 #'
@@ -12,7 +12,26 @@
 #' @export
 #' 
 #' @examples
-#' ## ADD EXAMPLE ----
+#' # Attach the package ----
+#' library("forcis")
+#' 
+#' # Import example dataset ----
+#' file_name <- system.file(file.path("extdata", "FORCIS_pump_sample.csv"), 
+#'                          package = "forcis")
+#' 
+#' pump_data <- vroom::vroom(file_name, delim = ";", show_col_types = FALSE)
+#' 
+#' # Add 'data_type' column ----
+#' pump_data$"data_type" <- "Pump"
+#' 
+#' # Dimensions of the data.frame ----
+#' dim(pump_data)
+#' 
+#' # Filter by months ----
+#' pump_data_sub <- filter_by_month(pump_data, months = 1:2)
+#' 
+#' # Dimensions of the data.frame ----
+#' dim(pump_data_sub)
 
 filter_by_month <- function(data, months) {
   

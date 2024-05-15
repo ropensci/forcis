@@ -1,18 +1,44 @@
 #' Filter FORCIS data by a spatial polygon
 #'
 #' @description
-#' This function can be used to filter FORCIS data by a spatial polygon.
+#' Filters FORCIS data by a spatial polygon.
 #' 
-#' @param data a `data.frame`, i.e. a FORCIS dataset.
+#' @param data a `data.frame`. One obtained by `read_*_data()` functions.
 #' 
 #' @param polygon an `sf POLYGON` object.
 #'
-#' @return A `data.frame` containing a subset of `data`.
+#' @return A `data.frame` containing a subset of `data` for the desired spatial
+#'   polygon.
 #' 
 #' @export
 #'
 #' @examples
-#' ## ADD EXAMPLE ----
+#' # Attach the package ----
+#' library("forcis")
+#' 
+#' # Import example dataset ----
+#' file_name <- system.file(file.path("extdata", "FORCIS_pump_sample.csv"), 
+#'                          package = "forcis")
+#' 
+#' pump_data <- vroom::vroom(file_name, delim = ";", show_col_types = FALSE)
+#' 
+#' # Add 'data_type' column ----
+#' pump_data$"data_type" <- "Pump"
+#' 
+#' # Dimensions of the data.frame ----
+#' dim(pump_data)
+#' 
+#' # Import Indian Ocean spatial polygons ----
+#' file_name <- system.file(file.path("extdata", "IHO_Indian_ocean_polygon.gpkg"), 
+#'                          package = "forcis")
+#'
+#' indian_ocean <- sf::st_read(file_name)
+#' 
+#' # Filter by polygon ----
+#' pump_data_sub <- filter_by_polygon(pump_data, polygon = indian_ocean)
+#' 
+#' # Dimensions of the data.frame ----
+#' dim(pump_data_sub)
 
 filter_by_polygon <- function(data, polygon) {
   

@@ -1,19 +1,41 @@
 #' Filter FORCIS data by ocean
 #'
 #' @description
-#' This function can be used to filter FORCIS data by one or several oceans.
+#' Filters FORCIS data by one or several oceans.
 #' 
-#' @param data a `data.frame`, i.e. a FORCIS dataset.
+#' @param data a `data.frame`. One obtained by `read_*_data()` functions.
 #' 
 #' @param ocean a `character` vector of one or several ocean names. Use the
 #'   function `get_ocean_names()` to find the correct spelling.
 #'
-#' @return A `data.frame` containing a subset of `data`.
+#' @return A `data.frame` containing a subset of `data` for the desired oceans.
 #' 
 #' @export
 #'
 #' @examples
-#' ## ADD EXAMPLE ----
+#' # Attach the package ----
+#' library("forcis")
+#' 
+#' # Import example dataset ----
+#' file_name <- system.file(file.path("extdata", "FORCIS_pump_sample.csv"), 
+#'                          package = "forcis")
+#' 
+#' pump_data <- vroom::vroom(file_name, delim = ";", show_col_types = FALSE)
+#' 
+#' # Add 'data_type' column ----
+#' pump_data$"data_type" <- "Pump"
+#' 
+#' # Dimensions of the data.frame ----
+#' dim(pump_data)
+#' 
+#' # Get ocean names ----
+#' get_ocean_names()
+#' 
+#' # Filter by oceans ----
+#' pump_data_sub <- filter_by_ocean(pump_data, ocean = "Indian Ocean")
+#' 
+#' # Dimensions of the data.frame ----
+#' dim(pump_data_sub)
 
 filter_by_ocean <- function(data, ocean) {
   

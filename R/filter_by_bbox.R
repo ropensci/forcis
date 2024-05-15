@@ -1,9 +1,9 @@
 #' Filter FORCIS data by a spatial bounding box 
 #'
 #' @description
-#' This function can be used to filter FORCIS data by a spatial bounding box.
+#' Filters FORCIS data by a spatial bounding box.
 #' 
-#' @param data a `data.frame`, i.e. a FORCIS dataset.
+#' @param data a `data.frame`. One obtained by `read_*_data()` functions.
 #' 
 #' @param bbox an object of class `bbox` (package `sf`) or a vector of four 
 #'   `numeric` values defining a square bounding box. Values must follow this 
@@ -12,12 +12,35 @@
 #'   **Important:** if a vector of numeric values is provided, coordinates must
 #'   be defined in the system WGS 84 (`epsg=4326`).
 #'
-#' @return A `data.frame` containing a subset of `data`.
+#' @return A `data.frame` containing a subset of `data` for the desired 
+#'   bounding box.
 #' 
 #' @export
 #'
 #' @examples
-#' ## ADD EXAMPLE ----
+#' # Attach the package ----
+#' library("forcis")
+#' 
+#' # Import example dataset ----
+#' file_name <- system.file(file.path("extdata", "FORCIS_pump_sample.csv"), 
+#'                          package = "forcis")
+#' 
+#' pump_data <- vroom::vroom(file_name, delim = ";", show_col_types = FALSE)
+#' 
+#' # Add 'data_type' column ----
+#' pump_data$"data_type" <- "Pump"
+#' 
+#' # Dimensions of the data.frame ----
+#' dim(pump_data)
+#' 
+#' # Get ocean names ----
+#' get_ocean_names()
+#' 
+#' # Filter by oceans ----
+#' pump_data_sub <- filter_by_bbox(pump_data, bbox = c(35, 0, 45, 30))
+#' 
+#' # Dimensions of the data.frame ----
+#' dim(pump_data_sub)
 
 filter_by_bbox <- function(data, bbox) {
   
