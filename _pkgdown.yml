@@ -5,21 +5,48 @@ template:
   bslib:
     primary: "#2b4370"
 
+navbar:
+
+  components:
+  
+    reference:
+      text: Functions
+      href: reference/index.html
+      
+    articles:
+      text: Vignettes
+      menu:
+      - text: Sampling devices
+        href: articles/sampling-devices.html
+      - text: Database versions
+        href: articles/database-versions.html
+      - text: Select and filter data
+        href: articles/select-and-filter-data.html
+      - text: Data conversion
+        href: articles/data-conversion.html
+      - text: Data visualization
+        href: articles/data-visualization.html
+
 reference:
 
 - title: Database tools
   desc: >
-    Functions to download and import FORCIS database and to get version information
+    Functions to download and import FORCIS database
   contents:
     - download_forcis_db
-    - get_available_versions
-    - get_current_version
-    - get_version_info
     - read_cpr_north_data
     - read_cpr_south_data
     - read_plankton_nets_data
     - read_pump_data
     - read_sediment_trap_data
+
+- title: Database versions
+  desc: >
+    Functions to get information on database versions
+  contents:
+    - get_available_versions
+    - get_current_version
+    - get_version_info
 
 - title: Select and filters tools
   desc: >
@@ -62,4 +89,3 @@ reference:
     - get_required_columns
     - get_species_names
     - reshape_data
-  

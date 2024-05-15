@@ -44,9 +44,8 @@ pump from the global ocean.
 
 The main purpose of the `forcis` package is to download, select, filter,
 homogenize, and visualize FORCIS data. The
-[References](https://frbcesab.github.io/forcis/reference/index.html)
-page provides a full description of the features available in the
-package.
+[Functions](https://frbcesab.github.io/forcis/reference/index.html) page
+provides a full description of the features available in the package.
 
 ## Installation
 
