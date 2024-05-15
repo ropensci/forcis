@@ -10,10 +10,17 @@ geom_basemap()
 A \code{ggplot} object.
 }
 \description{
-This function creates a World base map that can be added to a ggplot object.
+Creates a World base map that can be added to a \code{ggplot} object.
 Spatial layers come from the Natural Earth project
-(\url{https://www.naturalearthdata.com/}).
+(\url{https://www.naturalearthdata.com/}) and are defnied in the Robinson
+coordinate system.
 }
 \examples{
-## ADD EXAMPLE ----
+# Attach packages ----
+library("forcis")
+library("ggplot2")
+
+# World basemap ----
+ggplot() +
+  geom_basemap()
 }

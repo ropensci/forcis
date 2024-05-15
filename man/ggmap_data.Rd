@@ -2,13 +2,12 @@
 % Please edit documentation in R/ggmap_data.R
 \name{ggmap_data}
 \alias{ggmap_data}
-\title{Plot a distribution map of FORCIS data}
+\title{Map the spatial distribution of FORCIS data}
 \usage{
 ggmap_data(data, col = "red", ...)
 }
 \arguments{
-\item{data}{a \code{data.frame}, i.e. a FORCIS dataset or the output of a
-\verb{filter_*()} function.}
+\item{data}{a \code{data.frame}. One obtained by \verb{read_*_data()} functions.}
 
 \item{col}{a \code{character} of length 1. The color of data on the map.}
 
@@ -18,8 +17,24 @@ ggmap_data(data, col = "red", ...)
 A \code{ggplot} object.
 }
 \description{
-This function can be used to map FORCIS data.
+Maps the spatial distribution of FORCIS data.
 }
 \examples{
-## ADD EXAMPLE ----
+# Attach the package ----
+library("forcis")
+
+# Import example dataset ----
+file_name <- system.file(file.path("extdata", "FORCIS_pump_sample.csv"), 
+                         package = "forcis")
+
+pump_data <- vroom::vroom(file_name, delim = ";", show_col_types = FALSE)
+
+# Add 'data_type' column ----
+pump_data$"data_type" <- "Pump"
+
+# Map data (default) ----
+ggmap_data(pump_data)
+
+# Map data ----
+ggmap_data(pump_data, col = "black", fill = "red", shape = 21, size = 4)
 }

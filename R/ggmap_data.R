@@ -1,10 +1,9 @@
-#' Plot a distribution map of FORCIS data
+#' Map the spatial distribution of FORCIS data
 #'
 #' @description
-#' This function can be used to map FORCIS data.
+#' Maps the spatial distribution of FORCIS data.
 #' 
-#' @param data a `data.frame`, i.e. a FORCIS dataset or the output of a 
-#'   `filter_*()` function.
+#' @param data a `data.frame`. One obtained by `read_*_data()` functions.
 #' 
 #' @param col a `character` of length 1. The color of data on the map.
 #' 
@@ -15,7 +14,23 @@
 #' @export
 #'
 #' @examples
-#' ## ADD EXAMPLE ----
+#' # Attach the package ----
+#' library("forcis")
+#' 
+#' # Import example dataset ----
+#' file_name <- system.file(file.path("extdata", "FORCIS_pump_sample.csv"), 
+#'                          package = "forcis")
+#' 
+#' pump_data <- vroom::vroom(file_name, delim = ";", show_col_types = FALSE)
+#' 
+#' # Add 'data_type' column ----
+#' pump_data$"data_type" <- "Pump"
+#' 
+#' # Map data (default) ----
+#' ggmap_data(pump_data)
+#' 
+#' # Map data ----
+#' ggmap_data(pump_data, col = "black", fill = "red", shape = 21, size = 4)
 
 ggmap_data <- function(data, col = "red", ...) {
   

@@ -1,16 +1,23 @@
 #' Add a World basemap to a ggplot object
 #'
 #' @description
-#' This function creates a World base map that can be added to a ggplot object.
+#' Creates a World base map that can be added to a `ggplot` object.
 #' Spatial layers come from the Natural Earth project 
-#' (<https://www.naturalearthdata.com/>).
+#' (<https://www.naturalearthdata.com/>) and are defnied in the Robinson 
+#' coordinate system.
 #'
 #' @return A `ggplot` object.
 #' 
 #' @export
 #'
 #' @examples
-#' ## ADD EXAMPLE ----
+#' # Attach packages ----
+#' library("forcis")
+#' library("ggplot2")
+#' 
+#' # World basemap ----
+#' ggplot() +
+#'   geom_basemap()
 
 geom_basemap <- function() {
   
