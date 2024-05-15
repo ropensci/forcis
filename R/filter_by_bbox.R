@@ -33,9 +33,6 @@
 #' # Dimensions of the data.frame ----
 #' dim(pump_data)
 #' 
-#' # Get ocean names ----
-#' get_ocean_names()
-#' 
 #' # Filter by oceans ----
 #' pump_data_sub <- filter_by_bbox(pump_data, bbox = c(35, 0, 45, 30))
 #' 
