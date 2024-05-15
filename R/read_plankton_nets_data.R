@@ -18,8 +18,9 @@
 #' - `read_cpr_south_data()` reads the FORCIS CPR South data
 #' - `read_sediment_trap_data()` reads the FORCIS sediment traps data
 #'
-#' @return A `data.frame`. See \url{https://zenodo.org/record/7390792} for a
-#'   preview of the datasets.
+#' @return A `data.frame`. See 
+#'   \url{https://zenodo.org/doi/10.5281/zenodo.7390791} for a preview of the 
+#'   datasets.
 #' 
 #' @seealso [download_forcis_db()] to download the complete FORCIS database.
 #'

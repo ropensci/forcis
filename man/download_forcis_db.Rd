@@ -44,8 +44,9 @@ No return value. The FORCIS files will be saved in the \code{path} folder.
 }
 \description{
 Downloads the entire FORCIS database as a collection of five \code{csv} files from
-Zenodo (\url{https://zenodo.org/record/7936568}). Additional files are also
-downloaded (see \url{https://zenodo.org/record/7936568}).
+Zenodo (\url{https://zenodo.org/doi/10.5281/zenodo.7390791}). Additional
+files are also downloaded (see
+\url{https://zenodo.org/doi/10.5281/zenodo.7390791}).
 }
 \examples{
 \dontrun{

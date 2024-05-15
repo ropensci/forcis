@@ -60,8 +60,9 @@ the global option \code{check_for_update}. For example, if user calls
 version will be disable for the current R session.}
 }
 \value{
-A \code{data.frame}. See \url{https://zenodo.org/record/7390792} for a
-preview of the datasets.
+A \code{data.frame}. See
+\url{https://zenodo.org/doi/10.5281/zenodo.7390791} for a preview of the
+datasets.
 }
 \description{
 These functions read one specific \code{csv} file of the FORCIS database

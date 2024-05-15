@@ -2,8 +2,9 @@
 #'
 #' @description 
 #' Downloads the entire FORCIS database as a collection of five `csv` files from
-#' Zenodo (\url{https://zenodo.org/record/7936568}). Additional files are also
-#' downloaded (see \url{https://zenodo.org/record/7936568}).
+#' Zenodo (\url{https://zenodo.org/doi/10.5281/zenodo.7390791}). Additional 
+#' files are also downloaded (see 
+#' \url{https://zenodo.org/doi/10.5281/zenodo.7390791}).
 #'
 #' @param path a `character` of length 1. The folder in which the FORCIS 
 #'   database will be saved. Note that a subdirectory will be created, e.g.
