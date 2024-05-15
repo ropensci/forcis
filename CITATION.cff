@@ -1,7 +1,7 @@
-# -----------------------------------------------------------
-# CITATION file created with {cffr} R package, v0.5.0
+# --------------------------------------------
+# CITATION file created with {cffr} R package
 # See also: https://docs.ropensci.org/cffr/
-# -----------------------------------------------------------
+# --------------------------------------------
  
 cff-version: 1.2.0
 message: 'To cite package "forcis" in publications use:'
@@ -9,9 +9,9 @@ type: software
 license: GPL-2.0-or-later
 title: 'forcis: An R Client to Access the FORCIS Database'
 version: 0.0.0.9000
-abstract: Provides an interface to the FORCIS database on global foraminifera distribution.
-  This package allows to download and to handle FORCIS data. It is part of the FRB-CESAB
-  working group FORCIS. <https://www.fondationbiodiversite.fr/en/the-frb-in-action/programs-and-projects/le-cesab/forcis/>.
+abstract: Provides an interface to the FORCIS database (<https://zenodo.org/doi/10.5281/zenodo.7390791>)
+  on global foraminifera distribution. This package allows to download and to handle
+  FORCIS data. It is part of the FRB-CESAB working group FORCIS. <https://www.fondationbiodiversite.fr/en/the-frb-in-action/programs-and-projects/le-cesab/forcis/>.
 authors:
 - family-names: Casajus
   given-names: Nicolas
@@ -43,11 +43,10 @@ references:
   url: https://www.R-project.org/
   authors:
   - name: R Core Team
-  location:
-    name: Vienna, Austria
-  year: '2024'
   institution:
     name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2024'
   version: '>= 2.10'
 - type: software
   title: dplyr
@@ -107,6 +106,10 @@ references:
   - family-names: Dunnington
     given-names: Dewey
     orcid: https://orcid.org/0000-0002-9415-4582
+  - family-names: Brand
+    given-names: Teun
+    name-particle: van den
+    orcid: https://orcid.org/0000-0002-9335-7468
   year: '2024'
 - type: software
   title: jsonlite
@@ -168,11 +171,10 @@ references:
   notes: Imports
   authors:
   - name: R Core Team
-  location:
-    name: Vienna, Austria
-  year: '2024'
   institution:
     name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2024'
 - type: software
   title: vroom
   abstract: 'vroom: Read and Write Rectangular Text Data Quickly'
@@ -203,7 +205,7 @@ references:
     given-names: Jim
   - family-names: Wickham
     given-names: Hadley
-    email: hadley@rstudio.com
+    email: hadley@posit.co
   - family-names: Csárdi
     given-names: Gábor
     email: csardi.gabor@gmail.com
@@ -299,3 +301,4 @@ references:
   - family-names: Chang
     given-names: Winston
   year: '2024'
+
