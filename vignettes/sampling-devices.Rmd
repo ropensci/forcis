@@ -24,7 +24,7 @@ The [FORCIS](https://zenodo.org/doi/10.5281/zenodo.7390791) (Foraminifera Respon
 -	Sediment traps
 -	Pump
 
-![](devices.jpg)
+![](devices.png)
 
 
 Within the FORCIS database, each subsample is linked through unique identifiers, or primary keys, labeled as `site_id`, `profile_id`, `cast_id`, `sample_id`, and `subsample_id`. These identifiers establish a hierarchical framework, facilitating the exploration and analysis of the data.
