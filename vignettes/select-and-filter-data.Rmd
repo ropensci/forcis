@@ -1,8 +1,8 @@
 ---
-title: "Select and filter data"
+title: "Select, reshape, and filter data"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Select and filter data}
+  %\VignetteIndexEntry{Select, reshape, and filter data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -70,29 +70,33 @@ Add an illustration of `select_taxonomy()`
 [...]
 
 
+## `reshape_data`()`
 
-## `filter_by_species()`
+This function converts FORCIS data in a long format.
 
-Add an illustration of `filter_by_species()`
+```{r, eval=FALSE}
+# Reshape net subset data to long format 
+long_net_data <- reshape_data(net_data)
 
-[...]
-
-
+```
 
 ## `filter_by_month()`
 
-Add an illustration of `filter_by_month()`
+The `filter_by_month()` function filters observations based on the month of sampling. It requires two arguments: the data and a numeric vector with values between 1 and 12.
 
-[...]
+```{r, eval=FALSE}
+net_July_Aug <-filter_by_month(net_data,c(7,8))
 
+```
 
 
 ## `filter_by_year()`
 
-Add an illustration of `filter_by_year()`
+The `filter_by_year()` function filters observations based on the year of sampling. It requires two arguments: the data and a numeric vector with the year of interest.
+```{r, eval=FALSE}
+net_97_2000 <-filter_by_year(net_data,c(1997:2000))
 
-[...]
-
+```
 
 
 ## `filter_by_bbox()`
@@ -116,3 +120,18 @@ Add an illustration of `filter_by_ocean()`
 Add an illustration of `filter_by_polygon()`
 
 [...]
+
+
+## `filter_by_species()`
+
+This function allows to filter the data for one or more species. To work, this function requires data in a long format( see the `reshape_data` function and the [conversion functions](https://frbcesab.github.io/forcis/articles/data-conversion.html)).
+
+The `filter_by_species()` function takes a dataframe and a species name or a vector of species names as input (the list of all the accepted  input species names are presented in the [FORCIS_taxonomy_levels.xlsx file on Zenodo](https://zenodo.org/records/12724286)).
+
+In the example below we subset `long_net_data` to retain only observations on *G. glutinata* and *C. nitida*.
+
+```{r, eval=FALSE}
+# Convert species counts in raw abundance
+glutinata_nitida_subset <- filter_by_species(long_net_data,c('g_glutinata_VT','c_nitida_VT'))
+
+```
