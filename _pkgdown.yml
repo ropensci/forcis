@@ -20,7 +20,7 @@ navbar:
         href: articles/sampling-devices.html
       - text: Database versions
         href: articles/database-versions.html
-      - text: Select and filter data
+      - text: Select, reshape, and filter data
         href: articles/select-and-filter-data.html
       - text: Data conversion
         href: articles/data-conversion.html

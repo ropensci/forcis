@@ -67,7 +67,7 @@ The vignette will use the PUMP data of the FORCIS database. Let's import the lat
 
 ```{r 'load-data', echo=FALSE}
 file_name <- system.file(file.path("extdata", "FORCIS_pump_sample.csv"), package = "forcis")
-pump_data <- vroom::vroom(file_name, delim = ";", show_col_types = FALSE)
+pump_data <- read.csv2(file_name, dec = ",")
 ```
 
 ```{r 'load-data-user', eval=FALSE}

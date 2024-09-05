@@ -43,19 +43,19 @@ dir.create("data")
 download_forcis_db(path = "data", version = NULL)
 ```
 
-The vignette will use the PUMP data of the FORCIS database. Let's import the latest release of the data.
+The vignette will use the plankton nets data of the FORCIS database. Let's import the latest release of the data.
 
 ```{r 'load-data', echo=FALSE}
-file_name <- system.file(file.path("extdata", "FORCIS_pump_sample.csv"), package = "forcis")
-pump_data <- vroom::vroom(file_name, delim = ";", show_col_types = FALSE)
+file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"), package = "forcis")
+net_data <- read.csv2(file_name, dec = ",")
 ```
 
 ```{r 'load-data-user', eval=FALSE}
-# Import pump data ----
-pump_data <- read_pump_data(path = "data")
+# Import net data ----
+net_data <- read_plankton_nets_data(path = "data")
 ```
 
-**NB:** In this vignette, we use a subset of the PUMP data, not the whole dataset.
+**NB:** In this vignette, we use a subset of the plankton nets data, not the whole dataset.
 
 
 ## `geom_basemap()`
@@ -74,43 +74,43 @@ These layers come from the [Natural Earth](https://www.naturalearthdata.com/) we
 
 ## `ggmap_data()`
 
-The function `ggmap_data()` can be used to plot FORCIS data on a World map. Let's map the PUMP data.
+The function `ggmap_data()` can be used to plot FORCIS data on a World map. Let's map the plankton nets data.
 
 ```{r 'ggmap-raw-data', echo=TRUE, fig.height=11, fig.width=20}
-# Map raw pump data ----
-ggmap_data(pump_data)
+# Map raw net data ----
+ggmap_data(net_data)
 ```
 
 User can customize the aesthetic of the data:
 
 ```{r 'ggmap-raw-data-2', echo=TRUE, fig.height=11, fig.width=20}
 # Customize map ----
-ggmap_data(pump_data, col = "black", fill = "red", shape = 21, size = 5)
+ggmap_data(net_data, col = "black", fill = "red", shape = 21, size = 5)
 ```
 
 And add a title:
 
 ```{r 'ggmap-raw-data-3', echo=TRUE, fig.height=11, fig.width=20}
 # Add a title ----
-ggmap_data(pump_data) +
-  ggtitle("FORCIS Pump data")
+ggmap_data(net_data) +
+  ggtitle("FORCIS net data")
 ```
 
 This function works with the output of various functions available in the `forcis` package. For example:
 
 ```{r 'ggmap-filtered-data', echo=TRUE, fig.height=11, fig.width=20}
-# Filter pump data ----
-indian_pump_data <- filter_by_ocean(pump_data, ocean = "Indian Ocean")
+# Filter net data ----
+indian_net_data <- filter_by_ocean(net_data, ocean = "Indian Ocean")
 
 # Map filtered data ----
-ggmap_data(indian_pump_data)
+ggmap_data(indian_net_data)
 ```
 
 Note that the `forcis` package is pipe-friendly.
 
 ```{r 'ggmap-filtered-data-pipe', eval=FALSE}
 # Same as before, but w/ the pipe ----
-pump_data %>%
+net_data %>%
   filter_by_ocean(ocean = "Indian Ocean") %>%
   ggmap_data()
 ```
@@ -120,14 +120,14 @@ You can export this map with the function `ggsave()` of the package `ggplot2`.
 
 ```{r 'ggmap-save', eval=FALSE}
 # Map filtered data ----
-indian_pump_data_map <- pump_data %>%
+indian_net_data_map <- net_data %>%
   filter_by_ocean(ocean = "Indian Ocean") %>%
   ggmap_data() +
-  ggtitle("FORCIS Pump data - Indian Ocean")
+  ggtitle("FORCIS net data - Indian Ocean")
 
 # Save as PNG ----
-ggsave(indian_pump_data_map, 
-       filename = "indian_pump_data_map.png",
+ggsave(indian_net_data_map, 
+       filename = "indian_net_data_map.png",
        width    = 20, 
        height   = 11, 
        units    = "cm", 

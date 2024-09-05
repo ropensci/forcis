@@ -39,19 +39,19 @@ dir.create("data")
 download_forcis_db(path = "data", version = NULL)
 ```
 
-The vignette will use the PUMP data of the FORCIS database. Let's import the latest release of the data.
+The vignette will use the plankton nets data of the FORCIS database. Let's import the latest release of the data.
 
 ```{r 'load-data', echo=FALSE}
-file_name <- system.file(file.path("extdata", "FORCIS_pump_sample.csv"), package = "forcis")
-pump_data <- vroom::vroom(file_name, delim = ";", show_col_types = FALSE)
+file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"), package = "forcis")
+net_data <- read.csv2(file_name, dec = ",")
 ```
 
 ```{r 'load-data-user', eval=FALSE}
-# Import pump data ----
-pump_data <- read_pump_data(path = "data")
+# Import net data ----
+net_data <- read_plankton_nets_data(path = "data")
 ```
 
-**NB:** In this vignette, we use a subset of the PUMP data, not the whole dataset.
+**NB:** In this vignette, we use a subset of the plankton nets data, not the whole dataset.
 
 
 
