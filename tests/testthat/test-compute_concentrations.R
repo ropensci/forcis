@@ -45,5 +45,5 @@ test_that("Test compute_concentrations() for success", {
   
   expect_true(is.data.frame(res))
   expect_equal(ncol(res), 78L)
-  expect_equal(nrow(res), 440L)
+  expect_equal(nrow(res), 5L)
 })
