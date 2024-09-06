@@ -26,11 +26,11 @@ test_that("Test compute_abundances() for success", {
   
   expect_true(is.data.frame(res))
   expect_equal(ncol(res), 16L)
-  expect_equal(nrow(res), 38952L)
+  expect_equal(nrow(res), 39032L)
   
   expect_message(res <- compute_abundances(df, aggregate = FALSE))
   
   expect_true(is.data.frame(res))
   expect_equal(ncol(res), 19L)
-  expect_equal(nrow(res), 133922L)
+  expect_equal(nrow(res), 134008L)
 })

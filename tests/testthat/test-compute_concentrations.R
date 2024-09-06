@@ -32,13 +32,13 @@ test_that("Test compute_concentrations() for success", {
   
   expect_true(is.data.frame(res))
   expect_equal(ncol(res), 16L)
-  expect_equal(nrow(res), 38952L)
+  expect_equal(nrow(res), 39032L)
   
   expect_message(res <- compute_concentrations(df, aggregate = FALSE))
   
   expect_true(is.data.frame(res))
   expect_equal(ncol(res), 19L)
-  expect_equal(nrow(res), 134587L)
+  expect_equal(nrow(res), 134680L)
   
   res <- compute_concentrations(df3)
   

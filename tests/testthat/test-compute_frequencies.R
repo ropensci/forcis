@@ -26,11 +26,11 @@ test_that("Test compute_frequencies() for success", {
   
   expect_true(is.data.frame(res))
   expect_equal(ncol(res), 15L)
-  expect_equal(nrow(res), 46249L)
+  expect_equal(nrow(res), 46324L)
   
   expect_message(res <- compute_frequencies(df, aggregate = FALSE))
   
   expect_true(is.data.frame(res))
   expect_equal(ncol(res), 18L)
-  expect_equal(nrow(res), 135258L)
+  expect_equal(nrow(res), 135352L)
 })
