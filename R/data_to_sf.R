@@ -13,8 +13,9 @@
 #' @export
 #'
 #' @examples
-#' # Attach the package ----
+#' # Attach packages ----
 #' library("forcis")
+#' library("ggplot2")
 #' 
 #' # Import example dataset ----
 #' file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"), 
