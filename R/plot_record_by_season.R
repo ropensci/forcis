@@ -10,7 +10,20 @@
 #' @export
 #'
 #' @examples
-#' ## ADD EXAMPLE ----
+#' # Attach the package ----
+#' library("forcis")
+#' 
+#' # Import example dataset ----
+#' file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"), 
+#'                          package = "forcis")
+#' 
+#' net_data <- read.table(file_name, dec = ".", sep = ";")
+#' 
+#' # Add 'data_type' column ----
+#' net_data$"data_type" <- "Net"
+#' 
+#' # Plot data by year (example dataset) ----
+#' plot_record_by_season(net_data)
  
 plot_record_by_season <- function(data) {
   
@@ -69,16 +82,31 @@ plot_record_by_season <- function(data) {
   ## Get distinct values ----
   
   data <- data %>% 
-    select(.data$sample_id, .data$season) %>% 
-    distinct()
+    select(.data$sample_id, .data$season) %>%
+    group_by(.data$season) %>%
+    summarise(count = n_distinct(.data$sample_id))
   
-  data$season <-factor(data$season, levels = c("Fall", "Winter", "Spring", "Summer", "Unknown"))
+  
+  ## Ensure to have all months ----
+  
+  season <- data.frame("season" = c("Fall", "Winter", "Spring", 
+                                    "Summer", "Unknown"))
+  
+  data <- merge(data, season, by = "season", all = TRUE)
+  
+  data$"count" <- replace_na(data$"count", 0)
+  
+  
+  ## Trick for ggplot2 ----
+  
+  data$season <- factor(data$season, levels = c("Fall", "Winter", "Spring", 
+                                                "Summer", "Unknown"))
   
   
   ## Plot ----
 
-  ggplot(data, aes(x = .data$season)) + 
-    geom_bar(width = 0.7, col = "black", stat = "count") +  
+  ggplot(data, aes(x = .data$season, y = .data$count)) +  
+    geom_bar(width = 0.7, col = "black", stat = "identity") + 
     theme_classic() +
     xlab("Season") + 
     ylab("Number of FORCIS samples")   
