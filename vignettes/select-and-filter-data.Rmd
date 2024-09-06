@@ -43,7 +43,7 @@ The vignette will use the plankton nets data of the FORCIS database. Let's impor
 
 ```{r 'load-data', echo=FALSE}
 file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"), package = "forcis")
-net_data <- read.csv2(file_name, dec = ",")
+net_data <- read.table(file_name, dec = ".", sep = ";")
 ```
 
 ```{r 'load-data-user', eval=FALSE}

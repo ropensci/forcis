@@ -1,10 +1,9 @@
 ## Data for test ----
 
-df <- vroom::vroom(system.file(file.path("extdata", "FORCIS_pump_sample.csv"),
-                               package = "forcis"), 
-                   delim = ";", altrep = FALSE, show_col_types = FALSE)
+df <- read.table(system.file(file.path("extdata", "FORCIS_net_sample.csv"),
+                             package = "forcis"), dec = ".", sep = ";")
 
-df <- add_data_type(df, "Pump")
+df <- add_data_type(df, "Net")
 df <- select_taxonomy(df, "VT")
 
 df2 <- df
@@ -26,12 +25,12 @@ test_that("Test compute_frequencies() for success", {
   expect_message(res <- compute_frequencies(df))
   
   expect_true(is.data.frame(res))
-  expect_equal(ncol(res), 68L)
-  expect_equal(nrow(res), 6832L)
+  expect_equal(ncol(res), 15L)
+  expect_equal(nrow(res), 46249L)
   
   expect_message(res <- compute_frequencies(df, aggregate = FALSE))
   
   expect_true(is.data.frame(res))
-  expect_equal(ncol(res), 71L)
-  expect_equal(nrow(res), 6832L)
+  expect_equal(ncol(res), 18L)
+  expect_equal(nrow(res), 135258L)
 })
