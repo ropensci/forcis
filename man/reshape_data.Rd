@@ -13,8 +13,32 @@ reshape_data(data)
 A \code{data.frame} reshaped in a long format.
 }
 \description{
-A short description...
+Reshapes FORCIS data by pivoting species columns into two columns: \code{taxa}
+(taxon names) and \code{counts} (taxon abundances). It converts wider \code{data.frame}
+to a long format.
 }
 \examples{
-## ADD EXAMPLE ----
+# Attach the package ----
+library("forcis")
+
+# Import example dataset ----
+file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"), 
+                         package = "forcis")
+
+net_data <- read.table(file_name, dec = ".", sep = ";")
+
+# Add 'data_type' column ----
+net_data$"data_type" <- "Net"
+
+# Dimensions of the data.frame ----
+dim(net_data)
+
+# Reshape data ----
+net_data <- reshape_data(net_data)
+
+# Dimensions of the data.frame ----
+dim(net_data)
+
+# Column names ----
+colnames(net_data)
 }

@@ -1,7 +1,9 @@
 #' Reshape and simplify FORCIS data
 #'
 #' @description
-#' A short description...
+#' Reshapes FORCIS data by pivoting species columns into two columns: `taxa` 
+#' (taxon names) and `counts` (taxon abundances). It converts wider `data.frame`
+#' to a long format.
 #' 
 #' @param data a `data.frame`, i.e. a FORCIS dataset, except for CPR North data.
 #'
@@ -10,7 +12,29 @@
 #' @export
 #'
 #' @examples
-#' ## ADD EXAMPLE ----
+#' # Attach the package ----
+#' library("forcis")
+#' 
+#' # Import example dataset ----
+#' file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"), 
+#'                          package = "forcis")
+#' 
+#' net_data <- read.table(file_name, dec = ".", sep = ";")
+#' 
+#' # Add 'data_type' column ----
+#' net_data$"data_type" <- "Net"
+#' 
+#' # Dimensions of the data.frame ----
+#' dim(net_data)
+#' 
+#' # Reshape data ----
+#' net_data <- reshape_data(net_data)
+#' 
+#' # Dimensions of the data.frame ----
+#' dim(net_data)
+#' 
+#' # Column names ----
+#' colnames(net_data)
 
 reshape_data <- function(data) {
   
