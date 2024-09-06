@@ -23,40 +23,41 @@ Filters FORCIS data by a species list.
 }
 \examples{
 # Import example dataset ----
-file_name <- system.file(file.path("extdata", "FORCIS_pump_sample.csv"), 
+file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"), 
                          package = "forcis")
 
-pump_data <- vroom::vroom(file_name, delim = ";", show_col_types = FALSE)
+net_data <- read.table(file_name, dec = ".", sep = ";")
 
 # Add 'data_type' column ----
-pump_data$"data_type" <- "Pump"
+net_data$"data_type" <- "Net"
 
 # Select a taxonomy ----
-pump_data <- select_taxonomy(pump_data, taxonomy = "OT")
+net_data <- select_taxonomy(net_data, taxonomy = "VT")
 
 # Select only required columns (and taxa) ----
-pump_data <- select_columns(pump_data)
+net_data <- select_columns(net_data)
 
 # Dimensions of the data.frame ----
-dim(pump_data)
+dim(net_data)
 
 # Convert data into long format ----
-pump_data <- reshape_data(pump_data)
+net_data <- reshape_data(net_data)
 
 # Dimensions of the data.frame ----
-dim(pump_data)
+dim(net_data)
 
 # Total number of species ----
-length(unique(pump_data$"taxa"))
+length(unique(net_data$"taxa"))
 
 # Select records for three species ----
-pump_data_sub <- filter_by_species(data    = pump_data, 
-                                   species = c("g_inflata", "g_ruber", 
-                                               "g_glutinata"))
+net_data_sub <- filter_by_species(data    = net_data, 
+                                  species = c("g_inflata_VT", 
+                                              "g_elongatus_VT", 
+                                              "g_glutinata_VT"))
 
 # Dimensions of the data.frame ----
-dim(pump_data_sub)
+dim(net_data_sub)
 
 # Total number of species ----
-length(unique(pump_data_sub$"taxa"))
+length(unique(net_data_sub$"taxa"))
 }

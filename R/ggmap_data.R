@@ -18,19 +18,19 @@
 #' library("forcis")
 #' 
 #' # Import example dataset ----
-#' file_name <- system.file(file.path("extdata", "FORCIS_pump_sample.csv"), 
+#' file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"), 
 #'                          package = "forcis")
 #' 
-#' pump_data <- vroom::vroom(file_name, delim = ";", show_col_types = FALSE)
+#' net_data <- read.table(file_name, dec = ".", sep = ";")
 #' 
 #' # Add 'data_type' column ----
-#' pump_data$"data_type" <- "Pump"
+#' net_data$"data_type" <- "Net"
 #' 
 #' # Map data (default) ----
-#' ggmap_data(pump_data)
+#' ggmap_data(net_data)
 #' 
 #' # Map data ----
-#' ggmap_data(pump_data, col = "black", fill = "red", shape = 21, size = 2)
+#' ggmap_data(net_data, col = "black", fill = "red", shape = 21, size = 2)
 
 ggmap_data <- function(data, col = "red", ...) {
   

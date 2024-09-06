@@ -17,25 +17,25 @@
 #' library("forcis")
 #' 
 #' # Import example dataset ----
-#' file_name <- system.file(file.path("extdata", "FORCIS_pump_sample.csv"), 
+#' file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"), 
 #'                          package = "forcis")
 #' 
-#' pump_data <- vroom::vroom(file_name, delim = ";", show_col_types = FALSE)
+#' net_data <- read.table(file_name, dec = ".", sep = ";")
 #' 
 #' # Add 'data_type' column ----
-#' pump_data$"data_type" <- "Pump"
+#' net_data$"data_type" <- "Net"
 #' 
 #' # Dimensions of the data.frame ----
-#' dim(pump_data)
+#' dim(net_data)
 #' 
 #' # Get ocean names ----
 #' get_ocean_names()
 #' 
 #' # Filter by oceans ----
-#' pump_data_sub <- filter_by_ocean(pump_data, ocean = "Indian Ocean")
+#' net_data_sub <- filter_by_ocean(net_data, ocean = "Indian Ocean")
 #' 
 #' # Dimensions of the data.frame ----
-#' dim(pump_data_sub)
+#' dim(net_data_sub)
 
 filter_by_ocean <- function(data, ocean) {
   
