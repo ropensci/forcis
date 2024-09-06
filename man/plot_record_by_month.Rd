@@ -16,5 +16,18 @@ A \code{ggplot} object.
 This function produces a barplot of FORCIS sample records by month.
 }
 \examples{
-## ADD EXAMPLE ----
+# Attach the package ----
+library("forcis")
+
+# Import example dataset ----
+file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"), 
+                         package = "forcis")
+
+net_data <- read.table(file_name, dec = ".", sep = ";")
+
+# Add 'data_type' column ----
+net_data$"data_type" <- "Net"
+
+# Plot data by year (example dataset) ----
+plot_record_by_month(net_data)
 }

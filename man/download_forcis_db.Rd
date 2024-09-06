@@ -35,9 +35,8 @@ version will be disabled for the current R session.}
 \item{overwrite}{a \code{logical}. If \code{TRUE} it will override the downloaded
 files of the FORCIS database. Default is \code{FALSE}.}
 
-\item{timeout}{a \code{integer}. The timeout for downloading files from the
-FORCIS database. Default is \code{60}. This number can be increased for low
-Internet connection.}
+\item{timeout}{an \code{integer}. The timeout for downloading files from Zenodo.
+Default is \code{60}. This number can be increased for low Internet connection.}
 }
 \value{
 No return value. The FORCIS files will be saved in the \code{path} folder.

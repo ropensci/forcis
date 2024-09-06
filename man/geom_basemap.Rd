@@ -12,7 +12,7 @@ A \code{ggplot} object.
 \description{
 Creates a World base map that can be added to a \code{ggplot} object.
 Spatial layers come from the Natural Earth project
-(\url{https://www.naturalearthdata.com/}) and are defnied in the Robinson
+(\url{https://www.naturalearthdata.com/}) and are defined in the Robinson
 coordinate system.
 }
 \examples{

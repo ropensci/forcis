@@ -16,13 +16,13 @@
 #' path_to_db <- "data"
 #' 
 #' # Download and read the plankton nets data ----
-#' nets <- forcis::read_plankton_nets_data(path_to_db)
+#' plankton_nets_data <- read_plankton_nets_data(path_to_db)
 #' 
 #' # Select a taxonomy ----
-#' nets <- forcis::select_taxonomy(nets, taxonomy = "OT")
+#' plankton_nets_data <- select_taxonomy(plankton_nets_data, taxonomy = "OT")
 #' 
 #' # Retrieve taxon names ----
-#' forcis::get_species_names(nets)
+#' get_species_names(nets)
 #' }
 
 get_species_names <- function(data) {

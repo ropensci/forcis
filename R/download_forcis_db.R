@@ -27,9 +27,8 @@
 #' @param overwrite a `logical`. If `TRUE` it will override the downloaded 
 #'   files of the FORCIS database. Default is `FALSE`.
 #'
-#' @param timeout a `integer`. The timeout for downloading files from the 
-#'   FORCIS database. Default is `60`. This number can be increased for low 
-#'   Internet connection.
+#' @param timeout an `integer`. The timeout for downloading files from Zenodo. 
+#'   Default is `60`. This number can be increased for low Internet connection.
 #'
 #' @return No return value. The FORCIS files will be saved in the `path` folder.
 #' 

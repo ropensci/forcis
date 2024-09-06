@@ -10,10 +10,8 @@
 #' @return A `character`.
 #' 
 #' @examples
-#' \dontrun{
 #' # Get required column names (expect taxa names) ----
-#' forcis::get_required_columns()
-#' }
+#' get_required_columns()
 
 get_required_columns <- function() {
   

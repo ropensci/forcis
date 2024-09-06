@@ -15,8 +15,6 @@ function is designed to help users to add additional columns in
 \code{\link[=select_columns]{select_columns()}} (argument \code{cols}) if missing from this list.
 }
 \examples{
-\dontrun{
 # Get required column names (expect taxa names) ----
-forcis::get_required_columns()
-}
+get_required_columns()
 }

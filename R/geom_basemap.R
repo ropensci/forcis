@@ -3,7 +3,7 @@
 #' @description
 #' Creates a World base map that can be added to a `ggplot` object.
 #' Spatial layers come from the Natural Earth project 
-#' (<https://www.naturalearthdata.com/>) and are defnied in the Robinson 
+#' (<https://www.naturalearthdata.com/>) and are defined in the Robinson 
 #' coordinate system.
 #'
 #' @return A `ggplot` object.

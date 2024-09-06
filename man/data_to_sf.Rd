@@ -14,8 +14,34 @@ data_to_sf(data)
 An \verb{sf POINTS} object.
 }
 \description{
-This function can be used to convert a data frame into an sf object.
+This function can be used to convert a \code{data.frame} into an \code{sf} object.
+Note that coordinates (columns \code{site_lon_start_decimal} and
+\code{site_lat_start_decimal}) are projected in the Robinson coordinate system.
 }
 \examples{
-## ADD EXAMPLE ----
+# Attach the package ----
+library("forcis")
+
+# Import example dataset ----
+file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"), 
+                         package = "forcis")
+
+net_data <- read.table(file_name, dec = ".", sep = ";")
+
+# Add 'data_type' column ----
+net_data$"data_type" <- "Net"
+
+# Dimensions of the data.frame ----
+dim(net_data)
+
+# Filter by years ----
+net_data_sub <- filter_by_year(net_data, years = 1992)
+
+# Convert to an sf object ----
+net_data_sub_sf <- data_to_sf(net_data_sub)
+
+# World basemap ----
+ggplot() +
+  geom_basemap() +
+  geom_sf(data = net_data_sub_sf)
 }
