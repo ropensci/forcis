@@ -10,15 +10,16 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  eval     = FALSE,
+  eval     = TRUE,
   echo     = TRUE,
-  comment  = "#>"
+  comment  = "#>",
+  dpi       = 150,
+  fig.align = "center",
+  out.width = "90%"
 )
 ```
 
-> **NOTE:** THIS IS A WORK IN PROGRESS.
-
-The package `forcis` provides [a lot of functions](https://frbcesab.github.io/forcis/reference/index.html#select-and-filters-tools) to filter and select FORCIS data. This vignette shows how to use these functions.
+The package `forcis` provides [a lot of functions](https://frbcesab.github.io/forcis/reference/index.html#select-and-filters-tools) to filter, reshape, and select FORCIS data. This vignette shows how to use these functions.
 
 
 ## Setup
@@ -55,22 +56,36 @@ net_data <- read_plankton_nets_data(path = "data")
 
 
 
-## `select_columns()`
-
-Add an illustration of `select_columns()`
-
-[...]
-
-
-
 ## `select_taxonomy()`
 
-Add an illustration of `select_taxonomy()`
+The FORCIS database provides three different taxonomies: `LT` (lumped taxonomy), `VT` (validated taxonomy) and `OT` (original taxonomy). See the [associated data paper](https://doi.org/10.1038/s41597-023-02264-2) for further information.
 
-[...]
+After importing the data and before going any further, the next step involves choosing the taxonomic level for the analyses. Let's use the function `select_taxonomy()` to select the **VT** taxonomy (validated taxonomy):
+
+```{r 'select-taxo'}
+# Select taxonomy ----
+net_data <- select_taxonomy(net_data, taxonomy = "VT")
+```
 
 
-## `reshape_data`()`
+
+## `select_columns()`
+
+Because FORCIS data contains more than 100 columns, the function `select_columns()` can be used to lighten the `data.frame` to easily handle it and to speed up some computations. 
+
+By default, only required columns listed in `get_required_columns()` and species columns will be kept.
+
+
+```{r 'select-columns'}
+# Select taxonomy ----
+net_data <- select_columns(net_data)
+```
+
+You can also use the argument `cols` to keep additional columns.
+
+
+
+## `reshape_data()`
 
 This function converts FORCIS data in a long format.
 
@@ -80,22 +95,50 @@ long_net_data <- reshape_data(net_data)
 
 ```
 
+
+
 ## `filter_by_month()`
 
-The `filter_by_month()` function filters observations based on the month of sampling. It requires two arguments: the data and a numeric vector with values between 1 and 12.
+The `filter_by_month()` function filters observations based on the **month of sampling**. It requires two arguments: the data and a numeric vector with values between 1 and 12.
 
-```{r, eval=FALSE}
-net_July_Aug <-filter_by_month(net_data,c(7,8))
-
+```{r 'filter-by-month'}
+# Filter data by sampling month ----
+net_july_aug <- filter_by_month(net_data, months = 7:8)
 ```
+
+
+```{r 'plot-by-month-original', fig.height=4, fig.width=7, fig.cap='Original record'}
+# Plot original record by sampling month ----
+plot_record_by_month(net_data)
+```
+
+
+```{r 'plot-by-month-filtered', fig.height=4, fig.width=7, fig.cap='Filtered record'}
+# Plot filtered record by sampling month ----
+plot_record_by_month(net_july_aug)
+```
+
 
 
 ## `filter_by_year()`
 
-The `filter_by_year()` function filters observations based on the year of sampling. It requires two arguments: the data and a numeric vector with the year of interest.
-```{r, eval=FALSE}
-net_97_2000 <-filter_by_year(net_data,c(1997:2000))
+The `filter_by_year()` function filters observations based on the **year of sampling**. It requires two arguments: the data and a numeric vector with the years of interest.
 
+```{r 'filter-by-year'}
+# Filter data by sampling year ----
+net_90_20 <- filter_by_year(net_data, years = 1990:2020)
+```
+
+
+```{r 'plot-by-year-original', fig.height=4, fig.width=7, fig.cap='Original record'}
+# Plot original record by sampling year ----
+plot_record_by_year(net_data)
+```
+
+
+```{r 'plot-by-year-filtered', fig.height=4, fig.width=7, fig.cap='Filtered record'}
+# Plot filtered record by sampling year ----
+plot_record_by_year(net_90_20)
 ```
 
 
