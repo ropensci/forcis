@@ -13,9 +13,9 @@ knitr::opts_chunk$set(
   eval     = TRUE,
   echo     = TRUE,
   comment  = "#>",
-  dpi       = 150,
+  dpi       = 120,
   fig.align = "center",
-  out.width = "90%"
+  out.width = "80%"
 )
 ```
 
@@ -81,19 +81,7 @@ By default, only required columns listed in `get_required_columns()` and species
 net_data <- select_columns(net_data)
 ```
 
-You can also use the argument `cols` to keep additional columns.
-
-
-
-## `reshape_data()`
-
-This function converts FORCIS data in a long format.
-
-```{r, eval=FALSE}
-# Reshape net subset data to long format 
-long_net_data <- reshape_data(net_data)
-
-```
+But you can also use the argument `cols` to keep additional columns.
 
 
 
@@ -104,20 +92,13 @@ The `filter_by_month()` function filters observations based on the **month of sa
 ```{r 'filter-by-month'}
 # Filter data by sampling month ----
 net_july_aug <- filter_by_month(net_data, months = 7:8)
+
+# Number of original records ----
+nrow(net_data)
+
+# Number of filtered records ----
+nrow(net_july_aug)
 ```
-
-
-```{r 'plot-by-month-original', fig.height=4, fig.width=7, fig.cap='Original record'}
-# Plot original record by sampling month ----
-plot_record_by_month(net_data)
-```
-
-
-```{r 'plot-by-month-filtered', fig.height=4, fig.width=7, fig.cap='Filtered record'}
-# Plot filtered record by sampling month ----
-plot_record_by_month(net_july_aug)
-```
-
 
 
 ## `filter_by_year()`
@@ -127,54 +108,126 @@ The `filter_by_year()` function filters observations based on the **year of samp
 ```{r 'filter-by-year'}
 # Filter data by sampling year ----
 net_90_20 <- filter_by_year(net_data, years = 1990:2020)
-```
 
+# Number of original records ----
+nrow(net_data)
 
-```{r 'plot-by-year-original', fig.height=4, fig.width=7, fig.cap='Original record'}
-# Plot original record by sampling year ----
-plot_record_by_year(net_data)
-```
-
-
-```{r 'plot-by-year-filtered', fig.height=4, fig.width=7, fig.cap='Filtered record'}
-# Plot filtered record by sampling year ----
-plot_record_by_year(net_90_20)
+# Number of filtered records ----
+nrow(net_90_20)
 ```
 
 
 ## `filter_by_bbox()`
 
-Add an illustration of `filter_by_bbox()`
+The function `filter_by_bbox()` can be used to filter FORCIS data by a spatial bounding box (argument `bbox`).
 
-[...]
+Let's filter the plankton net data by a spatial rectangle located in the Indian ocean.
+
+```{r 'filter-by-bbox'}
+# Filter by spatial bounding box ----
+net_data_bbox <- filter_by_bbox(net_data, bbox = c(45, -61, 82, -24))
+
+# Number of original records ----
+nrow(net_data)
+
+# Number of filtered records ----
+nrow(net_data_bbox)
+```
+
+Note that the argument `bbox` can be an object of class `bbox` (package `sf`) or a vector of four numeric values defining a square bounding box. If a vector of numeric values is provided, coordinates must be defined in the system WGS 84 (`epsg=4326`).
 
 
 
 ## `filter_by_ocean()`
 
-Add an illustration of `filter_by_ocean()`
+The function `filter_by_ocean()` can be used to filter FORCIS data by one or several oceans (argument `ocean`).
 
-[...]
+Let's filter the plankton net data located in the Indian ocean.
 
+```{r 'filter-by-ocean'}
+# Filter by ocean name ----
+net_data_indian <- filter_by_ocean(net_data, ocean = "Indian Ocean")
+
+# Number of original records ----
+nrow(net_data)
+
+# Number of filtered records ----
+nrow(net_data_indian)
+```
+
+Use the function `get_ocean_names()` to retrieve the name of World oceans according to the IHO Sea Areas dataset version 3 (used in this package).
+
+```{r 'get-ocean-names'}
+# Get ocean names ----
+get_ocean_names()
+```
 
 
 ## `filter_by_polygon()`
 
-Add an illustration of `filter_by_polygon()`
+The function `filter_by_polygon()` can be used to filter FORCIS data a spatial polygon (argument `polygon`).
 
-[...]
+Let's filter the plankton net data by a spatial polygon defining boundaries of the Indian ocean.
+
+```{r 'filter-by-polygon'}
+# Import spatial polygon ----
+file_name <- system.file(file.path("extdata", "IHO_Indian_ocean_polygon.gpkg"), 
+                         package = "forcis")
+indian_ocean <- sf::st_read(file_name, quiet = TRUE)
+
+# Filter by polygon ----
+net_data_poly <- filter_by_polygon(net_data, polygon = indian_ocean)
+
+# Number of original records ----
+nrow(net_data)
+
+# Number of filtered records ----
+nrow(net_data_poly)
+```
+
+
+## `reshape_data()`
+
+The function `reshape_data()` converts FORCIS data into a long format.
+
+```{r 'reshape-data'}
+# Convert to long format ----
+net_data_long <- reshape_data(net_data)
+
+# Dimensions of original data ----
+dim(net_data)
+
+# Dimensions of reshaped data ----
+dim(net_data_long)
+```
+
+Two columns have been created: `taxa` (taxon names) and `counts` (taxa counts).
+
+```{r 'reshape-data-2'}
+# Column names ----
+colnames(net_data_long)
+```
+
 
 
 ## `filter_by_species()`
 
-This function allows to filter the data for one or more species. To work, this function requires data in a long format( see the `reshape_data` function and the [conversion functions](https://frbcesab.github.io/forcis/articles/data-conversion.html)).
+The function `filter_by_species()` allows to filter FORCIS data for one or more species.
 
-The `filter_by_species()` function takes a dataframe and a species name or a vector of species names as input (the list of all the accepted  input species names are presented in the [FORCIS_taxonomy_levels.xlsx file on Zenodo](https://zenodo.org/records/12724286)).
+**Note:** this function requires data in a long format (see `reshape_data()`).
 
-In the example below we subset `long_net_data` to retain only observations on *G. glutinata* and *C. nitida*.
+It takes a `data.frame` and a vector of species names (argument `species`).
 
-```{r, eval=FALSE}
-# Convert species counts in raw abundance
-glutinata_nitida_subset <- filter_by_species(long_net_data,c('g_glutinata_VT','c_nitida_VT'))
+Let's subset plankton net data (in long format)to only keep observations for *G. glutinata* and *C. nitida*.
 
+```{r 'filter-by-species'}
+# Filter by species ----
+glutinata_nitida <- filter_by_species(net_data_long, 
+                                      species = c("g_glutinata_VT", "c_nitida_VT"))
+
+# Dimensions of original data ----
+dim(net_data_long)
+
+# Dimensions of filtered data ----
+dim(glutinata_nitida)
 ```
