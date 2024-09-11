@@ -9,17 +9,17 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse  = TRUE,
-  eval      = TRUE,
-  echo      = TRUE,
-  comment   = "#>",
-  dpi       = 150,
-  fig.align = "center",
-  out.width = "90%"
+  collapse   = TRUE,
+  eval       = TRUE,
+  echo       = TRUE,
+  comment    = "#>",
+  dpi        = 150,
+  fig.align  = "center",
+  out.width  = "80%",
+  fig.height = 4,
+  fig.width  = 7
 )
 ```
-
-> **NOTE:** THIS IS A WORK IN PROGRESS.
 
 The package `forcis` provides [a lot of functions](https://frbcesab.github.io/forcis/reference/index.html#visualization-tools) to visualize FORCIS data. This vignette shows how to use and customize these functions.
 
@@ -62,7 +62,7 @@ net_data <- read_plankton_nets_data(path = "data")
 
 The function `geom_basemap()` can be used to easily add World countries, oceans and bounding box to a `ggplot2` object.
 
-```{r 'geom-basemap', echo=TRUE, fig.height=11, fig.width=20}
+```{r 'geom-basemap'}
 # World basemap ----
 ggplot() +
   geom_basemap()
@@ -76,29 +76,21 @@ These layers come from the [Natural Earth](https://www.naturalearthdata.com/) we
 
 The function `ggmap_data()` can be used to plot FORCIS data on a World map. Let's map the plankton nets data.
 
-```{r 'ggmap-raw-data', echo=TRUE, fig.height=11, fig.width=20}
+```{r 'ggmap-raw-data'}
 # Map raw net data ----
 ggmap_data(net_data)
 ```
 
 User can customize the aesthetic of the data:
 
-```{r 'ggmap-raw-data-2', echo=TRUE, fig.height=11, fig.width=20}
+```{r 'ggmap-raw-data-2'}
 # Customize map ----
-ggmap_data(net_data, col = "black", fill = "red", shape = 21, size = 5)
-```
-
-And add a title:
-
-```{r 'ggmap-raw-data-3', echo=TRUE, fig.height=11, fig.width=20}
-# Add a title ----
-ggmap_data(net_data) +
-  ggtitle("FORCIS net data")
+ggmap_data(net_data, col = "#ff0000", fill = NA, shape = 21, size = 3)
 ```
 
 This function works with the output of various functions available in the `forcis` package. For example:
 
-```{r 'ggmap-filtered-data', echo=TRUE, fig.height=11, fig.width=20}
+```{r 'ggmap-filtered-data', echo=TRUE, eval=FALSE}
 # Filter net data ----
 indian_net_data <- filter_by_ocean(net_data, ocean = "Indian Ocean")
 
@@ -139,30 +131,45 @@ ggsave(indian_net_data_map,
 
 ## `plot_record_by_year()`
 
-Add an illustration of `plot_record_by_year()`
+The function `plot_record_by_year()` plots the number of records (y-axis) by year (x-axis).
 
-[...]
+
+```{r 'plot-record-by-year'}
+# Plot number of records by year ----
+plot_record_by_year(net_data)
+```
 
 
 
 ## `plot_record_by_month()`
 
-Add an illustration of `plot_record_by_month()`
+The function `plot_record_by_month()` plots the number of records (y-axis) by month (x-axis).
 
-[...]
+```{r 'plot-record-by-month'}
+# Plot number of records by month ----
+plot_record_by_month(net_data)
+```
 
 
 
 ## `plot_record_by_season()`
 
-Add an illustration of `plot_record_by_season()`
+The function `plot_record_by_season()` plots the number of records (y-axis) by season (x-axis).
 
-[...]
+
+```{r 'plot-record-by-season'}
+# Plot number of records by season ----
+plot_record_by_season(net_data)
+```
 
 
 
 ## `plot_record_by_depth()`
 
-Add an illustration of `plot_record_by_depth()`
+The function `plot_record_by_depth()` plots the number of records (x-axis) by depth (y-axis).
 
-[...]
+
+```{r 'plot-record-by-depth', eval=FALSE}
+# Plot number of records by depth ----
+plot_record_by_depth(net_data)
+```
