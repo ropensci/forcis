@@ -201,7 +201,7 @@ dim(net_data)
 dim(net_data_long)
 ```
 
-Two columns have been created: `taxa` (taxon names) and `counts` (taxa counts).
+Two columns have been created: `taxa` (taxon names) and `counts` (taxon counts).
 
 ```{r 'reshape-data-2'}
 # Column names ----
