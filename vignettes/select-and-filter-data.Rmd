@@ -186,6 +186,29 @@ nrow(net_data_poly)
 ```
 
 
+
+## `filter_by_species()`
+
+The function `filter_by_species()` allows to filter FORCIS data for one or more species.
+
+It takes a `data.frame` and a vector of species names (argument `species`).
+
+Let's subset plankton net data to only keep observations for *G. glutinata* and *C. nitida*.
+
+```{r 'filter-by-species'}
+# Filter by species ----
+glutinata_nitida <- filter_by_species(net_data, 
+                                      species = c("g_glutinata_VT", "c_nitida_VT"))
+
+# Dimensions of original data ----
+dim(net_data)
+
+# Dimensions of filtered data ----
+dim(glutinata_nitida)
+```
+
+
+
 ## `reshape_data()`
 
 The function `reshape_data()` converts FORCIS data into a long format.
@@ -206,28 +229,4 @@ Two columns have been created: `taxa` (taxon names) and `counts` (taxon counts).
 ```{r 'reshape-data-2'}
 # Column names ----
 colnames(net_data_long)
-```
-
-
-
-## `filter_by_species()`
-
-The function `filter_by_species()` allows to filter FORCIS data for one or more species.
-
-**Note:** this function requires data in a long format (see `reshape_data()`).
-
-It takes a `data.frame` and a vector of species names (argument `species`).
-
-Let's subset plankton net data (in long format)to only keep observations for *G. glutinata* and *C. nitida*.
-
-```{r 'filter-by-species'}
-# Filter by species ----
-glutinata_nitida <- filter_by_species(net_data_long, 
-                                      species = c("g_glutinata_VT", "c_nitida_VT"))
-
-# Dimensions of original data ----
-dim(net_data_long)
-
-# Dimensions of filtered data ----
-dim(glutinata_nitida)
 ```

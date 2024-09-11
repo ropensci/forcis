@@ -3,13 +3,9 @@
 #' @description
 #' Filters FORCIS data by a species list.
 #' 
-#' @param data a `data.frame`. Must be the output of the function 
-#'   `reshape_data()`, i.e. a FORCIS dataset in long format.
+#' @param data a `data.frame`. One obtained by `read_*_data()` functions.
 #' 
 #' @param species a `character` vector listing species of interest.
-#' 
-#' @param rm_na a `logical` value. If `FALSE` (default), keeps taxa with `NA` 
-#'   counts.
 #' 
 #' @return A `data.frame` containing a subset of `data`.
 #' 
@@ -34,14 +30,8 @@
 #' # Dimensions of the data.frame ----
 #' dim(net_data)
 #' 
-#' # Convert data into long format ----
-#' net_data <- reshape_data(net_data)
-#' 
-#' # Dimensions of the data.frame ----
-#' dim(net_data)
-#' 
-#' # Total number of species ----
-#' length(unique(net_data$"taxa"))
+#' # Get species names ----
+#' get_species_names(net_data)
 #' 
 #' # Select records for three species ----
 #' net_data_sub <- filter_by_species(data    = net_data, 
@@ -52,10 +42,10 @@
 #' # Dimensions of the data.frame ----
 #' dim(net_data_sub)
 #' 
-#' # Total number of species ----
-#' length(unique(net_data_sub$"taxa"))
+#' # Get species names ----
+#' get_species_names(net_data_sub)
 
-filter_by_species <- function(data, species, rm_na = FALSE) {
+filter_by_species <- function(data, species) {
   
   ## Check data object ----
   
@@ -66,9 +56,13 @@ filter_by_species <- function(data, species, rm_na = FALSE) {
          call. = FALSE) 
   }
   
-  if (length(get_species_names(data)) > 0) {
-    stop("This function requires data in long format. Please use the function ",
-         "'reshape_data()'", call. = FALSE) 
+  if (length(grep("^taxa$", colnames(data))) == 1) {
+    stop("This function is not designed to work on long format data.frame", 
+         call. = FALSE) 
+  }
+  
+  if (length(get_species_names(data)) == 0) {
+    stop("No species columns detected", call. = FALSE) 
   }
   
   
@@ -83,23 +77,18 @@ filter_by_species <- function(data, species, rm_na = FALSE) {
   }
 
 
-  if (all(!(species %in% unique(data$"taxa")))) {
+  if (all(!(species %in% get_species_names(data)))) {
     stop("The species provided are absent from 'data'", call. = FALSE)
   }
   
   
   ## Filter by species ----
   
-  data <- data[data$"taxa" %in% species, ]
+  species_to_del <- get_species_names(data)[!(get_species_names(data) %in% 
+                                                species)]
   
-  
-  ## Remove lines w/ NA counts (if required) ----
-  
-  if (rm_na) {
-    count_columns <- grepl("counts", names(data))
-    #data <- data[!is.na(data$"counts"), ]
-    data <- data[!is.na(data[, count_columns]), ]
-    
+  if (length(species_to_del) > 0) {
+    data <- data[ , -which(colnames(data) %in% species_to_del), drop = FALSE]
   }
   
   data

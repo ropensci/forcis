@@ -4,16 +4,12 @@
 \alias{filter_by_species}
 \title{Filter FORCIS data by species}
 \usage{
-filter_by_species(data, species, rm_na = FALSE)
+filter_by_species(data, species)
 }
 \arguments{
-\item{data}{a \code{data.frame}. Must be the output of the function
-\code{reshape_data()}, i.e. a FORCIS dataset in long format.}
+\item{data}{a \code{data.frame}. One obtained by \verb{read_*_data()} functions.}
 
 \item{species}{a \code{character} vector listing species of interest.}
-
-\item{rm_na}{a \code{logical} value. If \code{FALSE} (default), keeps taxa with \code{NA}
-counts.}
 }
 \value{
 A \code{data.frame} containing a subset of \code{data}.
@@ -40,14 +36,8 @@ net_data <- select_columns(net_data)
 # Dimensions of the data.frame ----
 dim(net_data)
 
-# Convert data into long format ----
-net_data <- reshape_data(net_data)
-
-# Dimensions of the data.frame ----
-dim(net_data)
-
-# Total number of species ----
-length(unique(net_data$"taxa"))
+# Get species names ----
+get_species_names(net_data)
 
 # Select records for three species ----
 net_data_sub <- filter_by_species(data    = net_data, 
@@ -58,6 +48,6 @@ net_data_sub <- filter_by_species(data    = net_data,
 # Dimensions of the data.frame ----
 dim(net_data_sub)
 
-# Total number of species ----
-length(unique(net_data_sub$"taxa"))
+# Get species names ----
+get_species_names(net_data_sub)
 }
