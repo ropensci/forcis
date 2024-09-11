@@ -17,9 +17,10 @@ knitr::opts_chunk$set(
 ```
 
 
-> **NOTE:** THIS IS A WORK IN PROGRESS.
+The R package `forcis` is an interface to the [FORCIS database](https://zenodo.org/doi/10.5281/zenodo.7390791) on global foraminifera distribution (Chaabane et al. 2023). This database includes data on living planktonic foraminifera diversity and distribution in the global oceans from 1910 until 2018 collected using plankton tows, continuous plankton recorder, sediment traps and plankton pump from the global ocean.
 
-Add an good introduction of the package.
+This vignette is an overview of the main features.
+
 
 
 ## Installation
@@ -36,7 +37,7 @@ if (!requireNamespace("remotes", quietly = TRUE)) {
 remotes::install_github("FRBCesab/forcis")
 ```
 
-The `forcis` package depends on the [`sf`](https://r-spatial.github.io/sf/) package which requires some spatial system libraries (GDAL and PROJ). Please read [this page](https://github.com/r-spatial/sf?tab=readme-ov-file#installing) if you have any trouble to install `forcis`.
+> The `forcis` package depends on the [`sf`](https://r-spatial.github.io/sf/) package which requires some spatial system libraries (GDAL and PROJ). Please read [this page](https://github.com/r-spatial/sf?tab=readme-ov-file#installing) if you have any trouble to install `forcis`.
 
 
 
@@ -48,9 +49,13 @@ First, let's attach the required packages.
 library(forcis)
 ```
 
+
+
 ## Download FORCIS database
 
-Before going any further, we will download the latest version of the FORCIS database.
+The FORCIS database consists of a collection of five `csv` files hosted on [Zenodo](https://zenodo.org/doi/10.5281/zenodo.7390791). These `csv` are regularly updated and we recommend to use the latest version
+
+Let's download the latest version of the FORCIS database with `download_forcis_db()`:
 
 ```{r 'download-db', eval=FALSE}
 # Create a data/ folder ----
@@ -60,10 +65,17 @@ dir.create("data")
 download_forcis_db(path = "data", version = NULL)
 ```
 
+By default (`version = NULL`), this function downloads the latest version of the database. The database is saved in `data/forcis-db/version-99/`, where `99` is the version number.
+
+**N.B.** The package `forcis` is designed to handle the versioning of the database on Zenodo. Read the [Database versions](https://frbcesab.github.io/forcis/articles/database-versions.html) for more information.
+
+
+
+
 
 ## Import FORCIS data
 
-The vignette will use the plankton nets data of the FORCIS database. Let's import the latest release of the data.
+In this vignette, we will use the plankton nets data of the FORCIS database. Let's import the latest release of the data.
 
 ```{r 'load-data', echo=FALSE}
 file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"), package = "forcis")
@@ -75,9 +87,41 @@ net_data <- read.table(file_name, dec = ".", sep = ";")
 net_data <- read_plankton_nets_data(path = "data")
 ```
 
-**NB:** In this vignette, we use a subset of the plankton nets data, not the whole dataset.
+**N.B.** Here we use a subset of the plankton nets data, not the whole dataset.
 
 
-## Another section
 
-[...]
+## Select a taxonomy
+
+The FORCIS database provides three different taxonomies: 
+
+- `LT`: lumped taxonomy
+- `VT`: validated taxonomy
+- `OT`: original taxonomy
+
+See the associated [data paper](https://doi.org/10.1038/s41597-023-02264-2) for further information.
+
+After importing the data and before going any further, the next step involves choosing the taxonomic level for the analyses.
+
+Let's use the function `select_taxonomy()` to select the **VT** taxonomy (validated taxonomy):
+
+```{r 'select-taxo'}
+# Select taxonomy ----
+net_data_vt <- select_taxonomy(net_data, taxonomy = "VT")
+```
+
+
+## To go further
+
+Additional vignettes are available depending on user wishes:
+
+- the [Database versions](https://frbcesab.github.io/forcis/articles/database-versions.html) vignette provides information on how to deal with the versioning of the database
+- the [Select, reshape, and filter data](https://frbcesab.github.io/forcis/articles/select-and-filter-data.html) vignette shows examples to select, filter and reshape the FORCIS data
+- the [Data conversion](https://frbcesab.github.io/forcis/articles/data-conversion.html) vignette describes the conversion functions available in `forcis` to compute abundances, concentrations, and frequencies
+- the [Data visualization](https://frbcesab.github.io/forcis/articles/data-visualization.html) vignette describes the plotting functions available in `forcis`
+
+
+## References
+
+Chaabane S, De Garidel-Thoron T, Giraud X, Schiebel R, Beaugrand G, Brummer G-J, Casajus N, Greco M, Grigoratou M, Howa H, Jonkers L, Kucera M, Kuroyanagi A, Meilland J, Monteiro F, Mortyn G, Almogi-Labin A, Asahi H, Avnaim-Katav S, Bassinot F, Davis CV, Field DB, Hernández-Almeida I, Herut B, Hosie G, Howard W, Jentzen A, Johns DG, Keigwin L, Kitchener J, Kohfeld KE, Lessa DVO, Manno C, Marchant M, Ofstad S, Ortiz JD, Post A, Rigual-Hernandez A, Rillo MC, Robinson K, Sagawa T, Sierro F, Takahashi KT, Torfstein A, Venancio I, Yamasaki M & Ziveri P (2023) The FORCIS database: A global census of planktonic Foraminifera from ocean waters. **Scientific Data**, 10, 354.
+DOI: [10.1038/s41597-023-02264-2](https://doi.org/10.1038/s41597-023-02264-2). 
