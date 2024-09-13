@@ -44,18 +44,27 @@ plot_record_by_depth <- function(data) {
   
   data <- data %>% 
     select(.data$sample_id, .data$sample_min_depth, .data$sample_max_depth) %>%
-    unite('sampling_interval', c(.data$sample_min_depth, 
-                                 .data$sample_max_depth), sep = '-', 
-          remove = TRUE) %>%
+    mutate(sampling_interval = ifelse(
+      .data$sample_min_depth == 0 | (.data$sample_min_depth <= 100 & .data$sample_max_depth <= 100),
+      'Surface - 100m',
+      ifelse(.data$sample_min_depth >= 100 & .data$sample_max_depth <= 300, '100m-300m',
+             ifelse(.data$sample_min_depth >= 300 & .data$sample_max_depth <= 500, '300m-500m',
+                    ifelse(.data$sample_min_depth >= 500, 'Below 500m', 'Unknown'))))) %>% 
+    select(-c(.data$sample_min_depth, .data$sample_max_depth)) %>%
     distinct() %>% 
     group_by(.data$sampling_interval) %>% 
     count() %>% 
-    ungroup() %>% 
-    mutate(upper_lim = as.numeric(gsub("-.*", "", .data$sampling_interval)))
+    ungroup() 
   
+  data$"sampling_interval" <- factor(data$"sampling_interval",
+                                       levels = c('Unknown',
+                                                  'Below 500m',
+                                                  '300m-500m',
+                                                  '100m-300m',
+                                                  'Surface - 100m'))
+    
   ggplot(data, 
-         aes(stats::reorder(.data$sampling_interval, -.data$upper_lim), 
-             .data$n)) +
+         aes(.data$sampling_interval, .data$n)) +
     geom_col(width = 0.7, col = "black") +
     xlab("Sampling interval") + 
     ylab("Number of FORCIS samples") +

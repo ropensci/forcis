@@ -25,12 +25,13 @@ aggregated by \code{sample_id}.}
 A \code{data.frame}.
 }
 \description{
-\strong{ADD DESCRIPTION}
+Functions to convert species counts between different formats: raw abundance,
+relative abundance, and number concentration, using counts metadata.
 }
 \details{
 \itemize{
-\item \code{compute_concentrations()} \strong{ADD A FEW WORDS}
-\item \code{compute_frequencies()} \strong{ADD A FEW WORDS}
-\item \code{compute_abundances()} \strong{ADD A FEW WORDS}
+\item \code{compute_concentrations()} converts all counts to number concentrations (n specimens/m³).
+\item \code{compute_frequencies()} converts all counts to relative abundances (\% specimens per sampling unit).
+\item \code{compute_abundances()} converts all counts to raw abundances (n specimens/sampling unit).
 }
 }

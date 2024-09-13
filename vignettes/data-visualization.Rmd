@@ -166,10 +166,10 @@ plot_record_by_season(net_data)
 
 ## `plot_record_by_depth()`
 
-The function `plot_record_by_depth()` plots the number of records (x-axis) by depth (y-axis).
+The function `plot_record_by_depth()` plots the number of records (x-axis) by depth intervals (y-axis).
 
 
-```{r 'plot-record-by-depth', eval=FALSE}
+```{r 'plot-record-by-depth'}
 # Plot number of records by depth ----
 plot_record_by_depth(net_data)
 ```
