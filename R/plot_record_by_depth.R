@@ -45,11 +45,12 @@ plot_record_by_depth <- function(data) {
   data <- data %>% 
     select(.data$sample_id, .data$sample_min_depth, .data$sample_max_depth) %>%
     mutate(sampling_interval = ifelse(
-      .data$sample_min_depth == 0 | (.data$sample_min_depth <= 100 & .data$sample_max_depth <= 100),
-      'Surface - 100m',
-      ifelse(.data$sample_min_depth >= 100 & .data$sample_max_depth <= 300, '100m-300m',
-             ifelse(.data$sample_min_depth >= 300 & .data$sample_max_depth <= 500, '300m-500m',
-                    ifelse(.data$sample_min_depth >= 500, 'Below 500m', 'Unknown'))))) %>% 
+      is.na(.data$sample_min_depth), 'Unknown', 
+      ifelse(.data$sample_min_depth <=5, 'from Surface',
+             ifelse(.data$sample_min_depth <= 100, 'from first 100m',
+                    ifelse(.data$sample_min_depth > 100 & .data$sample_min_depth <= 300, 'from 100m-300m',
+                           ifelse(.data$sample_min_depth > 300 & .data$sample_min_depth <= 500, 'from 300m-500m',
+                                  ifelse(.data$sample_min_depth >= 500, 'from below 500m', NA))))))) %>% 
     select(-c(.data$sample_min_depth, .data$sample_max_depth)) %>%
     distinct() %>% 
     group_by(.data$sampling_interval) %>% 
@@ -58,10 +59,12 @@ plot_record_by_depth <- function(data) {
   
   data$"sampling_interval" <- factor(data$"sampling_interval",
                                        levels = c('Unknown',
-                                                  'Below 500m',
-                                                  '300m-500m',
-                                                  '100m-300m',
-                                                  'Surface - 100m'))
+                                                  'from below 500m',
+                                                  'from 300m-500m',
+                                                  'from 100m-300m',
+                                                  'from first 100m',
+                                                  'from Surface'))
+
     
   ggplot(data, 
          aes(.data$sampling_interval, .data$n)) +
