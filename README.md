@@ -106,9 +106,9 @@ vignette.
 
 Please cite this package as:
 
-> Casajus N, Greco M, Giraud X & Chaabane S (2024) forcis: An R client
-> to access the FORCIS database. R package version 0.0.0.9000. URL:
-> <https://frbcesab.github.io/forcis/>.
+> Casajus N, Greco M, Chaabane S, Giraud X & de Garidel-Thoron T (2024)
+> forcis: An R client to access the FORCIS database. R package version
+> 0.0.0.9000. URL: <https://frbcesab.github.io/forcis/>.
 
 You can also run:
 

@@ -23,9 +23,10 @@ Useful links:
 
 Authors:
 \itemize{
-  \item Mattia Greco \email{mgreco@iopan.pl} (\href{https://orcid.org/0000-0003-2416-6235}{ORCID})
+  \item Mattia Greco \email{hasaigreco@gmail.com} (\href{https://orcid.org/0000-0003-2416-6235}{ORCID})
+  \item Sonia Chaabane \email{sonia.chaabane@gmail.com} (\href{https://orcid.org/0000-0002-4653-8610}{ORCID})
   \item Xavier Giraud \email{giraud@cerege.fr} (\href{https://orcid.org/0000-0001-5067-8176}{ORCID})
-  \item Sonia Chaabane \email{sonia.chaabane@fondationbiodiversite.fr} (\href{https://orcid.org/0000-0002-4653-8610}{ORCID})
+  \item Thibault de Garidel-Thoron \email{garidel@cerege.fr} (\href{https://orcid.org/0000-0001-8983-9571}{ORCID})
 }
 
 }

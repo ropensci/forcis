@@ -11,18 +11,23 @@ Authors@R: c(
     person(given   = "Mattia",
            family  = "Greco",
            role    = "aut",
-           email   = "mgreco@iopan.pl",
+           email   = "hasaigreco@gmail.com",
            comment = c(ORCID = "0000-0003-2416-6235")),
+    person(given   = "Sonia",
+           family  = "Chaabane",
+           role    = "aut",
+           email   = "sonia.chaabane@gmail.com",
+           comment = c(ORCID = "0000-0002-4653-8610")),
     person(given   = "Xavier",
            family  = "Giraud",
            role    = "aut",
            email   = "giraud@cerege.fr",
            comment = c(ORCID = "0000-0001-5067-8176")),
-    person(given   = "Sonia",
-           family  = "Chaabane",
+    person(given   = "Thibault",
+           family  = "de Garidel-Thoron",
            role    = "aut",
-           email   = "sonia.chaabane@fondationbiodiversite.fr",
-           comment = c(ORCID = "0000-0002-4653-8610")))
+           email   = "garidel@cerege.fr",
+           comment = c(ORCID = "0000-0001-8983-9571")))
 Description: Provides an interface to the FORCIS database 
     (<https://zenodo.org/doi/10.5281/zenodo.7390791>) on global foraminifera
     distribution. This package allows to download and to handle FORCIS data.

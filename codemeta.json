@@ -2,7 +2,7 @@
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "identifier": "forcis",
-  "description": "Provides an interface to the FORCIS database on global foraminifera distribution. This package allows to download and to handle FORCIS data. It is part of the FRB-CESAB working group FORCIS. <https://www.fondationbiodiversite.fr/en/the-frb-in-action/programs-and-projects/le-cesab/forcis/>.",
+  "description": "Provides an interface to the FORCIS database (<https://zenodo.org/doi/10.5281/zenodo.7390791>) on global foraminifera distribution. This package allows to download and to handle FORCIS data. It is part of the FRB-CESAB working group FORCIS. <https://www.fondationbiodiversite.fr/en/the-frb-in-action/programs-and-projects/le-cesab/forcis/>.",
   "name": "forcis: An R Client to Access the FORCIS Database",
   "codeRepository": "https://github.com/frbcesab/forcis",
   "issueTracker": "https://github.com/FRBCesab/forcis/issues",
@@ -13,7 +13,7 @@
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.3.2 (2023-10-31 ucrt)",
+  "runtimePlatform": "R version 4.4.1 (2024-06-14)",
   "author": [
     {
       "@type": "Person",
@@ -26,8 +26,15 @@
       "@type": "Person",
       "givenName": "Mattia",
       "familyName": "Greco",
-      "email": "mgreco@iopan.pl",
+      "email": "hasaigreco@gmail.com",
       "@id": "https://orcid.org/0000-0003-2416-6235"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Sonia",
+      "familyName": "Chaabane",
+      "email": "sonia.chaabane@gmail.com",
+      "@id": "https://orcid.org/0000-0002-4653-8610"
     },
     {
       "@type": "Person",
@@ -38,10 +45,10 @@
     },
     {
       "@type": "Person",
-      "givenName": "Sonia",
-      "familyName": "Chaabane",
-      "email": "sonia.chaabane@fondationbiodiversite.fr",
-      "@id": "https://orcid.org/0000-0002-4653-8610"
+      "givenName": "Thibault",
+      "familyName": "de Garidel-Thoron",
+      "email": "garidel@cerege.fr",
+      "@id": "https://orcid.org/0000-0001-8983-9571"
     }
   ],
   "copyrightHolder": [
@@ -223,7 +230,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "1069.832KB",
+  "fileSize": "2712.736KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -239,11 +246,15 @@
         },
         {
           "@type": "Organization",
+          "name": "Chaabane Sonia"
+        },
+        {
+          "@type": "Organization",
           "name": "Giraud Xavier"
         },
         {
           "@type": "Organization",
-          "name": "Chaabane Sonia"
+          "name": "de Garidel-Thoron Thibault"
         }
       ],
       "name": "forcis: {An} {R} client to access the {FORCIS} database",
