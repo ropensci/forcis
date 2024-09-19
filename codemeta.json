@@ -7,7 +7,7 @@
   "codeRepository": "https://github.com/frbcesab/forcis",
   "issueTracker": "https://github.com/FRBCesab/forcis/issues",
   "license": "https://spdx.org/licenses/GPL-2.0",
-  "version": "0.0.0.9000",
+  "version": "0.0.1",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -49,6 +49,14 @@
       "familyName": "de Garidel-Thoron",
       "email": "garidel@cerege.fr",
       "@id": "https://orcid.org/0000-0001-8983-9571"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "givenName": "Khalil",
+      "familyName": "Hammami",
+      "email": "khalil.hammami@enetcom.usf.tn"
     }
   ],
   "copyrightHolder": [
@@ -230,7 +238,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "2712.736KB",
+  "fileSize": "2714.577KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -259,7 +267,7 @@
       ],
       "name": "forcis: {An} {R} client to access the {FORCIS} database",
       "url": "https://frbcesab.github.io/forcis",
-      "description": "R package version 0.0.0.9000"
+      "description": "R package version 0.0.1"
     },
     {
       "@type": "ScholarlyArticle",
