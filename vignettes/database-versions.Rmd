@@ -21,13 +21,13 @@ The [FORCIS database](https://zenodo.org/doi/10.5281/zenodo.7390791) is regularl
 
 ## Using the latest version
 
-The package `forcis` is designed to handle the versioning of the database on Zenodo and will inform the user if a new version is available each time he/she uses one of the `read_*_data()` functions. The following message will be displayed:
+The package `forcis` is designed to handle the versioning of the database on Zenodo and will inform users if a new version is available each time they use one of the `read_*_data()` functions. The following message will be displayed:
 
 ```
 A newer version of the FORCIS database is available. Use 'download_forcis_db(version = NULL)' to download it.
 ```
 
-As mentioned in this message, the decision to download and use the latest version of the database is left to the user.
+As mentioned in this message, users can choose whether to download the latest version of the database.
 
 A **good practice** to ensure that the user works with the latest version of the database might be to add this line at the beginning of the script:
 
@@ -35,12 +35,12 @@ A **good practice** to ensure that the user works with the latest version of the
 download_forcis_db(version = NULL, ...)
 ```
 
-Note that the FORCIS database is saved in `forcis-db/version-99/`, where `99` is the label of the version. If you regularly download the new versions, the content of the folder `forcis-db/` can increase with time and it can be interesting to manually delete the folder of the previous versions.
+Note that the FORCIS database is saved in `forcis-db/version-99/`, where `99` is the label of the version. If you regularly download the new versions, the content of the folder `forcis-db/` may grow over time and it can be interesting to manually delete the folder of the previous versions.
 
 
 ## Using a specific version
 
-If for some reasons the user wants to freeze the version he/she uses, it is possible to disable this message by setting the argument `check_for_update` to `FALSE` in the `read_*_data()` functions.
+If for some reason users want to freeze the version they use, it is possible to disable this message by setting the argument `check_for_update` to `FALSE` in the `read_*_data()` functions.
 
 It is also possible to disable this message globally for the current session:
 
@@ -48,13 +48,13 @@ It is also possible to disable this message globally for the current session:
 options(check_for_update = FALSE)
 ```
 
-The package `forcis` _"knows"_ which version of the database you used last time. A hidden file `.forcis` is created/updated each time the function `download_forcis_db()` or `read_*_data()` is called. This hidden file contains one line:
+The package `forcis` _"knows"_ which version of the database you used last time. A hidden file named `.forcis` is created (or updated) each time the function `download_forcis_db()` or `read_*_data()` is called. This hidden file contains one line:
 
 ```
 FORCIS_VERSION=99
 ```
 
-Note that this hidden file is used by some functions of the `forcis` package. User doesn't have to edit it by hand.
+Note that this hidden file is used by some functions of the `forcis` package. Users don't need to edit it manually.
 
 If you want to be sure to use a specific version of the database, you can use the argument `version` of the `read_*_data()` functions, or use the following line:
 

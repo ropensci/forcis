@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-The package `forcis` provides [a lot of functions](https://frbcesab.github.io/forcis/reference/index.html#visualization-tools) to visualize FORCIS data. This vignette shows how to use and customize these functions.
+The package `forcis` provides [numerous functions](https://frbcesab.github.io/forcis/reference/index.html#visualization-tools) to visualize FORCIS data. This vignette shows how to use and customize these functions.
 
 
 ## Setup
@@ -33,7 +33,7 @@ library(forcis)
 library(ggplot2)
 ```
 
-Before going any further, we will download the latest version of the FORCIS database.
+Before proceeding, let's download the latest version of the FORCIS database.
 
 ```{r 'download-db', eval=FALSE}
 # Create a data/ folder ----
@@ -43,7 +43,7 @@ dir.create("data")
 download_forcis_db(path = "data", version = NULL)
 ```
 
-The vignette will use the plankton nets data of the FORCIS database. Let's import the latest release of the data.
+The vignette will use the plankton net data of the FORCIS database. Let's import the latest release of the data.
 
 ```{r 'load-data', echo=FALSE}
 file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"), package = "forcis")
@@ -55,7 +55,7 @@ net_data <- read.table(file_name, dec = ".", sep = ";")
 net_data <- read_plankton_nets_data(path = "data")
 ```
 
-**NB:** In this vignette, we use a subset of the plankton nets data, not the whole dataset.
+**NB:** In this vignette, we use a subset of the plankton net data, not the whole dataset.
 
 
 ## `geom_basemap()`

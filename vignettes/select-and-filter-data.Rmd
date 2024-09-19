@@ -30,7 +30,7 @@ First, let's import the required packages.
 library(forcis)
 ```
 
-Before going any further, we will download the latest version of the FORCIS database.
+Before proceeding, let's download the latest version of the FORCIS database.
 
 ```{r 'download-db', eval=FALSE}
 # Create a data/ folder ----
@@ -71,7 +71,7 @@ net_data <- select_taxonomy(net_data, taxonomy = "VT")
 
 ## `select_columns()`
 
-Because FORCIS data contains more than 100 columns, the function `select_columns()` can be used to lighten the `data.frame` to easily handle it and to speed up some computations. 
+Because FORCIS data contain more than 100 columns, the function `select_columns()` can be used to lighten the `data.frame` to easily handle it and to speed up some computations. 
 
 By default, only required columns listed in `get_required_columns()` and species columns will be kept.
 
@@ -134,7 +134,7 @@ nrow(net_data)
 nrow(net_data_bbox)
 ```
 
-Note that the argument `bbox` can be an object of class `bbox` (package `sf`) or a vector of four numeric values defining a square bounding box. If a vector of numeric values is provided, coordinates must be defined in the system WGS 84 (`epsg=4326`).
+Note that the argument `bbox` can be either an object of class `bbox` (package `sf`) or a vector of four numeric values defining a square bounding box. If a vector of numeric values is provided, coordinates must be defined in the system WGS 84 (`epsg=4326`).
 
 
 
@@ -189,7 +189,7 @@ nrow(net_data_poly)
 
 ## `filter_by_species()`
 
-The function `filter_by_species()` allows to filter FORCIS data for one or more species.
+The `filter_by_species()` function allows users to filter FORCIS data for one or more species.
 
 It takes a `data.frame` and a vector of species names (argument `species`).
 
@@ -211,7 +211,7 @@ dim(glutinata_nitida)
 
 ## `reshape_data()`
 
-The function `reshape_data()` converts FORCIS data into a long format.
+The `reshape_data()` function converts FORCIS data into a long format.
 
 ```{r 'reshape-data'}
 # Convert to long format ----

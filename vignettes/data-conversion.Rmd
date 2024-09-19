@@ -33,18 +33,18 @@ The FORCIS database includes counts of foraminifera species collected with multi
  
 ## Conversion functions
 
-The functions detailed in this vignette allow to convert counts between the following formats **Raw abundance**, **Relative abundance** and **Number concentration**. 
+The functions detailed in this vignette allow users to convert counts between the following formats **Raw abundance**, **Relative abundance** and **Number concentration**. 
 
 > **NOTE:** FORCIS data from *Sediment traps* and the *CPR North* are not supported by
 these functions.
 
-First, let's import the required package.
+First, let's attach the required package.
 
 ```{r setup}
 library(forcis)
 ```
 
-Before going any further, we will download the latest version of the FORCIS database.
+Before proceeding, let's download the latest version of the FORCIS database.
 
 ```{r 'download-db', eval=FALSE}
 # Create a data/ folder ----
@@ -54,7 +54,7 @@ dir.create("data")
 download_forcis_db(path = "data", version = NULL)
 ```
 
-The vignette will use the plankton nets data of the FORCIS database. Let's import the latest release of the data.
+The vignette will use the plankton net data of the FORCIS database. Let's import the latest release of the data.
 
 ```{r 'load-data', echo=FALSE}
 file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"), package = "forcis")
@@ -66,7 +66,7 @@ net_data <- read.table(file_name, dec = ".", sep = ";")
 net_data <- read_plankton_nets_data(path = "data")
 ```
 
-**NB:** In this vignette, we use a subset of the plankton nets data, not the whole dataset.
+**NB:** In this vignette, we use a subset of the plankton net data, not the whole dataset.
 
 
 After importing the data, the initial step involves choosing the taxonomic level for the analyses, (the different taxonomic levels are described in this [data paper](https://www.nature.com/articles/s41597-023-02264-2)).
@@ -78,7 +78,7 @@ Let's use the function `select_taxonomy()` to select the **VT** taxonomy (valida
 net_data <- select_taxonomy(net_data, taxonomy = "VT")
 ```
 
-Once the data contains counts from the same taxonomic level, we can proceed with the conversion functions: `compute_*()`.
+Once the data contain counts from the same taxonomic level, we can proceed with the conversion functions: `compute_*()`.
 
 The functions accept two arguments: the input `data` and the `aggregate` arguments. If `aggregate = TRUE`, the function will return the transformed counts of each species using the sample as the unit. If `aggregate = FALSE`, it will re-calculate the species' abundance by subsample.
 
