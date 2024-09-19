@@ -10,17 +10,43 @@
 #'   for each subsample. If `TRUE` (default) subsample counts will be 
 #'   aggregated by `sample_id`.
 #'
-#' @return A `data.frame`.
+#' @return A `data.frame` in long format with two additional columns: `taxa`, 
+#' the taxon name and `counts_*`, the number concentration (`counts_n_conc`) or
+#' the relative abundance (`counts_rel_ab`) or the raw abundance 
+#' (`counts_raw_ab`).
 #' 
 #' @details
 #' 
-#' - `compute_concentrations()` converts all counts to number concentrations (n specimens/m³).
-#' 
-#' - `compute_frequencies()` converts all counts to relative abundances (% specimens per sampling unit).
-#' 
-#' - `compute_abundances()` converts all counts to raw abundances (n specimens/sampling unit).
+#' - `compute_concentrations()` converts all counts to number concentrations 
+#' (n specimens/m³).
+#' - `compute_frequencies()` converts all counts to relative abundances 
+#' (% specimens per sampling unit).
+#' - `compute_abundances()` converts all counts to raw abundances 
+#' (n specimens/sampling unit).
 #'
 #' @name computations
+#' 
+#' @examples
+#' # Import example dataset ----
+#' file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"), 
+#'                          package = "forcis")
+#' 
+#' net_data <- read.table(file_name, dec = ".", sep = ";")
+#' 
+#' # Add 'data_type' column ----
+#' net_data$"data_type" <- "Net"
+#' 
+#' # Select a taxonomy ----
+#' net_data <- select_taxonomy(net_data, taxonomy = "VT")
+#' 
+#' # Dimensions of the data.frame ----
+#' dim(net_data)
+#' 
+#' # Compute concentration ----
+#' net_data_conc <- compute_concentrations(net_data)
+#' 
+#' # Dimensions of the data.frame ----
+#' dim(net_data_conc)
 NULL
 
 

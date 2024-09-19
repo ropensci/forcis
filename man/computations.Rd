@@ -22,7 +22,10 @@ for each subsample. If \code{TRUE} (default) subsample counts will be
 aggregated by \code{sample_id}.}
 }
 \value{
-A \code{data.frame}.
+A \code{data.frame} in long format with two additional columns: \code{taxa},
+the taxon name and \verb{counts_*}, the number concentration (\code{counts_n_conc}) or
+the relative abundance (\code{counts_rel_ab}) or the raw abundance
+(\code{counts_raw_ab}).
 }
 \description{
 Functions to convert species counts between different formats: raw abundance,
@@ -30,8 +33,33 @@ relative abundance, and number concentration, using counts metadata.
 }
 \details{
 \itemize{
-\item \code{compute_concentrations()} converts all counts to number concentrations (n specimens/m³).
-\item \code{compute_frequencies()} converts all counts to relative abundances (\% specimens per sampling unit).
-\item \code{compute_abundances()} converts all counts to raw abundances (n specimens/sampling unit).
+\item \code{compute_concentrations()} converts all counts to number concentrations
+(n specimens/m³).
+\item \code{compute_frequencies()} converts all counts to relative abundances
+(\% specimens per sampling unit).
+\item \code{compute_abundances()} converts all counts to raw abundances
+(n specimens/sampling unit).
 }
+}
+\examples{
+# Import example dataset ----
+file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"), 
+                         package = "forcis")
+
+net_data <- read.table(file_name, dec = ".", sep = ";")
+
+# Add 'data_type' column ----
+net_data$"data_type" <- "Net"
+
+# Select a taxonomy ----
+net_data <- select_taxonomy(net_data, taxonomy = "VT")
+
+# Dimensions of the data.frame ----
+dim(net_data)
+
+# Compute concentration ----
+net_data_conc <- compute_concentrations(net_data)
+
+# Dimensions of the data.frame ----
+dim(net_data_conc)
 }
