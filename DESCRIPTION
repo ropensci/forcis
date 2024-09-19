@@ -27,7 +27,11 @@ Authors@R: c(
            family  = "de Garidel-Thoron",
            role    = "aut",
            email   = "garidel@cerege.fr",
-           comment = c(ORCID = "0000-0001-8983-9571")))
+           comment = c(ORCID = "0000-0001-8983-9571")),
+    person(given   = "Khalil",
+           family  = "Hammami",
+           role    = "ctb",
+           email   = "khalil.hammami@enetcom.usf.tn"))
 Description: Provides an interface to the FORCIS database 
     (<https://zenodo.org/doi/10.5281/zenodo.7390791>) on global foraminifera
     distribution. This package allows to download and to handle FORCIS data.
