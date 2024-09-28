@@ -19,9 +19,9 @@
 #' library("forcis")
 #' 
 #' # Get information for the latest version of the FORCIS database ----
-#' get_version_info()
+#' get_version_metadata()
 
-get_version_info <- function(version = NULL) {
+get_version_metadata <- function(version = NULL) {
   
   ## Check arguments ----
   

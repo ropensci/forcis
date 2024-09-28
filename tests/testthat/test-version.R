@@ -79,25 +79,25 @@ test_that("Test get_available_versions() for success", {
 
 
 
-## get_version_info() ----
+## get_version_metadata() ----
 
-test_that("Test get_version_info() for error", {
+test_that("Test get_version_metadata() for error", {
   
-  expect_error(get_version_info(version = "999"),
+  expect_error(get_version_metadata(version = "999"),
                paste0("The required version is not available. Please run ", 
                       "'get_available_versions()' to list available versions."),
                fixed = TRUE)
 })
 
-test_that("Test get_version_info() for success", {
+test_that("Test get_version_metadata() for success", {
   
-  x <- get_version_info(version = NULL)
+  x <- get_version_metadata(version = NULL)
   
   expect_equal(class(x), "list")
   expect_true("version" %in% names(x))
   expect_true("files" %in% names(x))
   
-  x <- get_version_info(version = "08")
+  x <- get_version_metadata(version = "08")
   
   expect_equal(class(x), "list")
   expect_true("version" %in% names(x))

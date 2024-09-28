@@ -1,6 +1,6 @@
 ## Data for tests ----
 
-forcis_meta  <- get_version_info(version = "08")
+forcis_meta  <- get_version_metadata(version = "08")
 forcis_files <- forcis_meta$"files"
 
 
