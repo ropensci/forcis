@@ -12,7 +12,7 @@ A \code{character}.
 \description{
 Gets required column names (except taxa names) for the package. This
 function is designed to help users to add additional columns in
-\code{\link[=select_columns]{select_columns()}} (argument \code{cols}) if missing from this list.
+\code{\link[=select_forcis_columns]{select_forcis_columns()}} (argument \code{cols}) if missing from this list.
 }
 \examples{
 # Get required column names (expect taxa names) ----

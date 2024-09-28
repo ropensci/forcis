@@ -25,7 +25,7 @@
 #' net_data <- select_taxonomy(net_data, taxonomy = "VT")
 #' 
 #' # Select only required columns (and taxa) ----
-#' net_data <- select_columns(net_data)
+#' net_data <- select_forcis_columns(net_data)
 #' 
 #' # Dimensions of the data.frame ----
 #' dim(net_data)

@@ -70,16 +70,16 @@ net_data <- select_taxonomy(net_data, taxonomy = "VT")
 
 
 
-## `select_columns()`
+## `select_forcis_columns()`
 
-Because FORCIS data contain more than 100 columns, the function `select_columns()` can be used to lighten the `data.frame` to easily handle it and to speed up some computations. 
+Because FORCIS data contain more than 100 columns, the function `select_forcis_columns()` can be used to lighten the `data.frame` to easily handle it and to speed up some computations. 
 
 By default, only required columns listed in `get_required_columns()` and species columns will be kept.
 
 
 ```{r 'select-columns'}
 # Select taxonomy ----
-net_data <- select_columns(net_data)
+net_data <- select_forcis_columns(net_data)
 ```
 
 But you can also use the argument `cols` to keep additional columns.

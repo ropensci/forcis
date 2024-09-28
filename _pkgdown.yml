@@ -52,7 +52,7 @@ reference:
   desc: >
     Function to select and filter FORCIS data
   contents:
-    - select_columns
+    - select_forcis_columns
     - select_taxonomy
     - filter_by_species
     - filter_by_month

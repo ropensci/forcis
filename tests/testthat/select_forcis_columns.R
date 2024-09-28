@@ -15,41 +15,41 @@ colnames(df_cpr) <- c(req_cols, "species", "count_bin_min", "count_bin_max",
 df_cpr$"data_type" <- "CPR North"
 
 
-## select_columns() ----
+## select_forcis_columns() ----
 
-test_that("Test select_columns() for error", {
+test_that("Test select_forcis_columns() for error", {
   
-  expect_error(select_columns(df_net, col = 2),
+  expect_error(select_forcis_columns(df_net, col = 2),
                "Argument 'cols' must be a character vector",
                fixed = TRUE)
   
-  expect_error(select_columns(df_net, col = "titi"),
+  expect_error(select_forcis_columns(df_net, col = "titi"),
                "Some columns to select are absent from data",
                fixed = TRUE)
 })
 
-test_that("Test select_columns() for success", {
+test_that("Test select_forcis_columns() for success", {
   
-  expect_silent(df <- select_columns(df_net))
+  expect_silent(df <- select_forcis_columns(df_net))
   
   expect_true(is.data.frame(df))
   expect_equal(ncol(df), ncol(df_net) - 1)
   expect_equal(nrow(df), 1L)
   
-  expect_silent(df <- select_columns(df_net, cols = "toto"))
+  expect_silent(df <- select_forcis_columns(df_net, cols = "toto"))
   
   expect_true(is.data.frame(df))
   expect_equal(ncol(df), ncol(df_net))
   expect_equal(nrow(df), 1L)
   expect_equal(colnames(df)[length(req_cols) + 1], "toto")
   
-  expect_silent(df <- select_columns(df_cpr))
+  expect_silent(df <- select_forcis_columns(df_cpr))
   
   expect_true(is.data.frame(df))
   expect_equal(ncol(df), ncol(df_cpr) - 1)
   expect_equal(nrow(df), 1L)
   
-  expect_silent(df <- select_columns(df_cpr, cols = "toto"))
+  expect_silent(df <- select_forcis_columns(df_cpr, cols = "toto"))
   
   expect_true(is.data.frame(df))
   expect_equal(ncol(df), ncol(df_cpr))

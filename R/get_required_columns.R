@@ -3,7 +3,7 @@
 #' @description
 #' Gets required column names (except taxa names) for the package. This 
 #' function is designed to help users to add additional columns in 
-#' [select_columns()] (argument `cols`) if missing from this list.
+#' [select_forcis_columns()] (argument `cols`) if missing from this list.
 #' 
 #' @export
 #'

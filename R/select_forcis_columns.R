@@ -38,12 +38,12 @@
 #' dim(net_data)
 #' 
 #' # Select only required columns (and taxa) ----
-#' net_data <- select_columns(net_data)
+#' net_data <- select_forcis_columns(net_data)
 #' 
 #' # Dimensions of the data.frame ----
 #' dim(net_data)
 
-select_columns <- function(data, cols = NULL) {
+select_forcis_columns <- function(data, cols = NULL) {
   
   
   # Check args ----
