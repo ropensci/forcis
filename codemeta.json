@@ -7,7 +7,7 @@
   "codeRepository": "https://github.com/frbcesab/forcis",
   "issueTracker": "https://github.com/FRBCesab/forcis/issues",
   "license": "https://spdx.org/licenses/GPL-2.0",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -267,7 +267,7 @@
       ],
       "name": "forcis: {An} {R} client to access the {FORCIS} database",
       "url": "https://frbcesab.github.io/forcis",
-      "description": "R package version 0.0.1"
+      "description": "R package version 0.1.0"
     },
     {
       "@type": "ScholarlyArticle",

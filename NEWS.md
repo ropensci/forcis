@@ -1,3 +1,3 @@
-# forcis 0.0.1
+# forcis 0.1.0
 
-First release
+First stable release
