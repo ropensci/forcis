@@ -211,13 +211,13 @@ dim(glutinata_nitida)
 
 
 
-## `reshape_data()`
+## `convert_to_long_format()`
 
-The `reshape_data()` function converts FORCIS data into a long format.
+The `convert_to_long_format()` function converts FORCIS data into a long format.
 
 ```{r 'reshape-data'}
 # Convert to long format ----
-net_data_long <- reshape_data(net_data)
+net_data_long <- convert_to_long_format(net_data)
 
 # Dimensions of original data ----
 dim(net_data)

@@ -15,18 +15,18 @@ colnames(df_cpr) <- c(req_cols, "species", "count_bin_min", "count_bin_max",
 df_cpr$"data_type" <- "CPR North"
 
 
-## reshape_data() ----
+## convert_to_long_format() ----
 
-test_that("Test reshape_data() for error", {
+test_that("Test convert_to_long_format() for error", {
 
-  expect_error(reshape_data(df_cpr),
+  expect_error(convert_to_long_format(df_cpr),
                "This function is not designed to work with 'CPR North' data",
                fixed = TRUE)
 })
 
-test_that("Test reshape_data() for success", {
+test_that("Test convert_to_long_format() for success", {
   
-  expect_silent(df <- reshape_data(df_net))
+  expect_silent(df <- convert_to_long_format(df_net))
   
   expect_true(is.data.frame(df))
   expect_equal(ncol(df), length(req_cols) + 2)

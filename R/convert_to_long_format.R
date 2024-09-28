@@ -28,7 +28,7 @@
 #' dim(net_data)
 #' 
 #' # Reshape data ----
-#' net_data <- reshape_data(net_data)
+#' net_data <- convert_to_long_format(net_data)
 #' 
 #' # Dimensions of the data.frame ----
 #' dim(net_data)
@@ -36,7 +36,7 @@
 #' # Column names ----
 #' colnames(net_data)
 
-reshape_data <- function(data) {
+convert_to_long_format <- function(data) {
   
   ## Check data object ----
   

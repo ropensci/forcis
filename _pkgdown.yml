@@ -84,8 +84,8 @@ reference:
   desc: >
     Helper functions
   contents:
+    - convert_to_long_format
     - data_to_sf
     - get_ocean_names
     - get_required_columns
     - get_species_names
-    - reshape_data
