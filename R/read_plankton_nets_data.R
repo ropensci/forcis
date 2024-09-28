@@ -115,7 +115,7 @@ read_plankton_nets_data <- function(
   
   taxa_columns <- get_species_names(data)
   
-  for (i in 1:length(taxa_columns)) {
+  for (i in seq_len(length(taxa_columns))) {
     
     data[ , taxa_columns[i]] <- as.numeric(data[ , taxa_columns[i]])
   }

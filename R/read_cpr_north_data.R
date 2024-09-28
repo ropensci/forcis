@@ -68,7 +68,7 @@ read_cpr_north_data <- function(
   
   taxa_columns <- c("count_bin_min", "count_bin_max")
   
-  for (i in 1:length(taxa_columns)) {
+  for (i in seq_len(length(taxa_columns))) {
     
     check_field_in_data(data, taxa_columns[i])
     

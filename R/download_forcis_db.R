@@ -101,7 +101,7 @@ download_forcis_db <- function(path = ".", version = options()$"forcis_version",
   forcis_meta  <- get_version_info(version = version)
   forcis_files <- forcis_meta$"files"
   
-  for (i in 1:nrow(forcis_files)) {
+  for (i in seq_len(nrow(forcis_files))) {
     
     download_file(url       = forcis_files[i, "links"]$"self",
                   path      = path, 
