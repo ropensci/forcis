@@ -1,7 +1,7 @@
 #' Compute count conversions
 #'
 #' @description
-#' Functions to convert species counts between different formats: raw abundance, 
+#' Functions to convert species counts between different formats: raw abundance,
 #' relative abundance, and number concentration, using counts metadata.
 #'
 #' @param data a `data.frame`. One obtained by `read_*_data()` functions.

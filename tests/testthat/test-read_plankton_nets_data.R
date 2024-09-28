@@ -19,8 +19,8 @@ test_that("Test read_plankton_nets_data() for error", {
   dir.create(file.path("forcis-db", "version-07"), recursive = TRUE)
   
   expect_error(read_plankton_nets_data(version = "07"),
-               paste0("The Plankton net dataset does not exist. Please use the ", 
-                      "function 'download_forcis_db()'."),
+               paste0("The Plankton net dataset does not exist. Please use ", 
+                      "the function 'download_forcis_db()'."),
                fixed = TRUE)
 })
 

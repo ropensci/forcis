@@ -9,7 +9,8 @@ df <- select_taxonomy(df, "VT")
 df2 <- df
 df2 <- add_data_type(df2, "Sediment trap")
 
-df3 <- vroom::vroom(system.file(file.path("extdata", "FORCIS_cpr_north_sample.csv"),
+df3 <- vroom::vroom(system.file(file.path("extdata", 
+                                          "FORCIS_cpr_north_sample.csv"),
                                 package = "forcis"), 
                     delim = ";", altrep = FALSE, show_col_types = FALSE)
 

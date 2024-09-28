@@ -5,7 +5,8 @@
 foraminifera <- png::readPNG(here::here("inst", "foraminifera.png"))
 
 p <- ggplot2::ggplot() + 
-  rphylopic::add_phylopic(foraminifera, alpha = 1, x = 0.3, y = 0.5, ysize = 1.2) +
+  rphylopic::add_phylopic(foraminifera, alpha = 1, x = 0.3, y = 0.5, 
+                          ysize = 1.2) +
   ggplot2::theme_void() + 
   ggpubr::theme_transparent()
 

@@ -408,12 +408,14 @@ species_list <- function() {
       "adamsi",
       "n_pachyderma",
       "g_ruber_ albus_or_ elongatus",
-      "Globigerinoides_ruber_ruber_&Globigerinoides_ruber_albus&Globigerinoides_elongatus",
+      paste0("Globigerinoides_ruber_ruber_&Globigerinoides_ruber_albus&", 
+             "Globigerinoides_elongatus"),
       "Globoturborotalita_rubescens&_Globigerinoides_tenellus",
       "benthics",
       "reworked_planktic_foraminifera",
       "g_ruber_.albus_or_.elongatus",
-      "Globigerinoides_ruber_ruber_._Globigerinoides_ruber_albus_._Globigerinoides_elongatus",
+      paste0("Globigerinoides_ruber_ruber_._Globigerinoides_ruber_albus_.", 
+             "_Globigerinoides_elongatus"),
       "Globoturborotalita_rubescens_._Globigerinoides_tenellus",
       
       

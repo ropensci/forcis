@@ -48,7 +48,8 @@
 #' @references 
 #' Chaabane S, De Garidel-Thoron T, Giraud X, _et al._ (2023) The FORCIS 
 #' database: A global census of planktonic Foraminifera from ocean waters. 
-#' _Scientific Data_, 10, 354. DOI: <https://doi.org/10.1038/s41597-023-02264-2>.
+#' _Scientific Data_, 10, 354. 
+#' DOI: <https://doi.org/10.1038/s41597-023-02264-2>.
 #' 
 #' @export
 #' 
@@ -67,7 +68,7 @@
 #' list.files(path_to_save_db, recursive = TRUE)
 #' }
 
-download_forcis_db <- function(path = ".", version = options()$"forcis_version", 
+download_forcis_db <- function(path = ".", version = options()$"forcis_version",
                                check_for_update = options()$"check_for_update",
                                overwrite = FALSE, timeout = 60) {
   

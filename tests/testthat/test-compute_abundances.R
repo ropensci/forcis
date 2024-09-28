@@ -15,7 +15,7 @@ df2 <- add_data_type(df2, "CPR North")
 test_that("Test compute_abundances() for error", {
   
   expect_error(compute_abundances(df2),
-               paste0("This function is not designed to work with 'CPR North' ", 
+               paste0("This function is not designed to work with 'CPR North' ",
                 "or 'Sediment trap' data"),
                fixed = TRUE)
 })
