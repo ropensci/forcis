@@ -5,6 +5,9 @@
 #' function is designed to help users to add additional columns in 
 #' [select_forcis_columns()] (argument `cols`) if missing from this list.
 #' 
+#' These columns are required by some functions (`compute_*()`, `plot_*()`, 
+#' etc.) of the package and shouldn't be deleted.
+#' 
 #' @export
 #'
 #' @return A `character`.

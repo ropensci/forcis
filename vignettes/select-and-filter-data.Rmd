@@ -74,7 +74,7 @@ net_data <- select_taxonomy(net_data, taxonomy = "VT")
 
 Because FORCIS data contain more than 100 columns, the function `select_forcis_columns()` can be used to lighten the `data.frame` to easily handle it and to speed up some computations. 
 
-By default, only required columns listed in `get_required_columns()` and species columns will be kept.
+By default, only required columns listed in `get_required_columns()` (required by some functions of the package like `compute_*()` and `plot_*()`) and species columns will be kept.
 
 
 ```{r 'select-columns'}
