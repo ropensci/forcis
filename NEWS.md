@@ -2,9 +2,9 @@
 
 Answers to editor and reviewer comments.
 
-* Improve documentation (#64, #65 & #66)
-* Add funder in `DESCRIPTION` (#69)
-* Improve unit tests (#67 & #68)
+* Improve documentation ([#64](https://github.com/FRBCesab/forcis/issues/64), [#65](https://github.com/FRBCesab/forcis/issues/65), [#66](https://github.com/FRBCesab/forcis/issues/66))
+* Add funder in `DESCRIPTION` ([#69](https://github.com/FRBCesab/forcis/issues/69))
+* Improve unit tests ([#67](https://github.com/FRBCesab/forcis/issues/67), [#68](https://github.com/FRBCesab/forcis/issues/68))
 
 
 
