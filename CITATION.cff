@@ -8,7 +8,7 @@ message: 'To cite package "forcis" in publications use:'
 type: software
 license: GPL-2.0-or-later
 title: 'forcis: An R Client to Access the FORCIS Database'
-version: 0.1.0
+version: 0.1.0.9000
 abstract: Provides an interface to the FORCIS database (<https://zenodo.org/doi/10.5281/zenodo.7390791>)
   on global foraminifera distribution. This package allows to download and to handle
   FORCIS data. It is part of the FRB-CESAB working group FORCIS. <https://www.fondationbiodiversite.fr/en/the-frb-in-action/programs-and-projects/le-cesab/forcis/>.
@@ -44,7 +44,7 @@ preferred-citation:
   - name: Giraud Xavier
   - name: de Garidel-Thoron Thibault
   year: '2024'
-  notes: R package version 0.1.0
+  notes: R package version 0.0.0.9000
   url: https://frbcesab.github.io/forcis
 repository-code: https://github.com/FRBCesab/forcis
 url: https://frbcesab.github.io/forcis
