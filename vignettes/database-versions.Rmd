@@ -35,6 +35,8 @@ A **good practice** to ensure that the user works with the latest version of the
 download_forcis_db(version = NULL, ...)
 ```
 
+By setting `version = NULL`, the function `download_forcis_db()` will download the latest version of the FORCIS database from Zenodo (if not already downloaded). If no newer version has been released on Zenodo and if the latest version of the database has already been downloaded, this step will be ignored.
+
 Note that the FORCIS database is saved in `forcis-db/version-99/`, where `99` is the label of the version. If you regularly download the new versions, the content of the folder `forcis-db/` may grow over time and it can be interesting to manually delete the folder of the previous versions.
 
 
