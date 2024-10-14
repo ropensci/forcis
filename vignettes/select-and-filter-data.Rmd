@@ -56,8 +56,9 @@ net_data <- read_plankton_nets_data(path = "data")
 **NB:** In this vignette, we use a subset of the plankton nets data, not the whole dataset.
 
 
+## Selecting columns
 
-## `select_taxonomy()`
+### Select a taxonomy
 
 The FORCIS database provides three different taxonomies: `LT` (lumped taxonomy), `VT` (validated taxonomy) and `OT` (original taxonomy). See the [associated data paper](https://doi.org/10.1038/s41597-023-02264-2) for further information.
 
@@ -70,7 +71,7 @@ net_data <- select_taxonomy(net_data, taxonomy = "VT")
 
 
 
-## `select_forcis_columns()`
+### Select required columns
 
 Because FORCIS data contain more than 100 columns, the function `select_forcis_columns()` can be used to lighten the `data.frame` to easily handle it and to speed up some computations. 
 
@@ -85,8 +86,10 @@ net_data <- select_forcis_columns(net_data)
 But you can also use the argument `cols` to keep additional columns.
 
 
+## Filtering rows
 
-## `filter_by_month()`
+
+### Filter by month of data collection
 
 The `filter_by_month()` function filters observations based on the **month of sampling**. It requires two arguments: the data and a numeric vector with values between 1 and 12.
 
@@ -102,7 +105,7 @@ nrow(net_july_aug)
 ```
 
 
-## `filter_by_year()`
+### Filter by year of data collection
 
 The `filter_by_year()` function filters observations based on the **year of sampling**. It requires two arguments: the data and a numeric vector with the years of interest.
 
@@ -118,7 +121,7 @@ nrow(net_90_20)
 ```
 
 
-## `filter_by_bbox()`
+### Filter by bounding box
 
 The function `filter_by_bbox()` can be used to filter FORCIS data by a spatial bounding box (argument `bbox`).
 
@@ -139,7 +142,7 @@ Note that the argument `bbox` can be either an object of class `bbox` (package `
 
 
 
-## `filter_by_ocean()`
+### Filter by ocean
 
 The function `filter_by_ocean()` can be used to filter FORCIS data by one or several oceans (argument `ocean`).
 
@@ -164,7 +167,7 @@ get_ocean_names()
 ```
 
 
-## `filter_by_polygon()`
+### Filter by spatial polygon
 
 The function `filter_by_polygon()` can be used to filter FORCIS data a spatial polygon (argument `polygon`).
 
@@ -188,7 +191,7 @@ nrow(net_data_poly)
 
 
 
-## `filter_by_species()`
+### Filter by species
 
 The `filter_by_species()` function allows users to filter FORCIS data for one or more species.
 
@@ -211,7 +214,9 @@ dim(glutinata_nitida)
 
 
 
-## `convert_to_long_format()`
+## Reshaping
+
+### Convert to long format
 
 The `convert_to_long_format()` function converts FORCIS data into a long format.
 

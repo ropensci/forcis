@@ -59,7 +59,9 @@ net_data <- read_plankton_nets_data(path = "data")
 **NB:** In this vignette, we use a subset of the plankton net data, not the whole dataset.
 
 
-## `geom_basemap()`
+## Spatial visualization
+
+### Creating a world map
 
 The function `geom_basemap()` can be used to easily add World countries, oceans and bounding box to a `ggplot2` object.
 
@@ -73,7 +75,7 @@ These layers come from the [Natural Earth](https://www.naturalearthdata.com/) we
 
 
 
-## `ggmap_data()`
+### Mapping FORCIS data
 
 The function `ggmap_data()` can be used to plot FORCIS data on a World map. Let's map the plankton nets data.
 
@@ -130,7 +132,9 @@ ggsave(indian_net_data_map,
 ```
 
 
-## `plot_record_by_year()`
+## Temporal visualization
+
+### Plot data by year of sampling
 
 The function `plot_record_by_year()` plots the number of records (y-axis) by year (x-axis).
 
@@ -142,7 +146,7 @@ plot_record_by_year(net_data)
 
 
 
-## `plot_record_by_month()`
+### Plot data by month of sampling
 
 The function `plot_record_by_month()` plots the number of records (y-axis) by month (x-axis).
 
@@ -153,7 +157,7 @@ plot_record_by_month(net_data)
 
 
 
-## `plot_record_by_season()`
+### Plot data by season
 
 The function `plot_record_by_season()` plots the number of records (y-axis) by season (x-axis).
 
@@ -164,8 +168,9 @@ plot_record_by_season(net_data)
 ```
 
 
+## Vertical visualization
 
-## `plot_record_by_depth()`
+### Plot data by depth of sampling
 
 The function `plot_record_by_depth()` plots the number of records (x-axis) by depth intervals (y-axis).
 
