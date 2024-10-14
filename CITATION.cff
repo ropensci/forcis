@@ -44,7 +44,7 @@ preferred-citation:
   - name: Giraud Xavier
   - name: de Garidel-Thoron Thibault
   year: '2024'
-  notes: R package version 0.0.0.9000
+  notes: R package version 0.1.0.9000
   url: https://frbcesab.github.io/forcis
 repository-code: https://github.com/FRBCesab/forcis
 url: https://frbcesab.github.io/forcis

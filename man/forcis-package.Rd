@@ -32,6 +32,7 @@ Authors:
 Other contributors:
 \itemize{
   \item Khalil Hammami \email{khalil.hammami@enetcom.usf.tn} [contributor]
+  \item FRB-CESAB [funder]
 }
 
 }

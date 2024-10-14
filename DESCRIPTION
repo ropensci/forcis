@@ -31,7 +31,9 @@ Authors@R: c(
     person(given   = "Khalil",
            family  = "Hammami",
            role    = "ctb",
-           email   = "khalil.hammami@enetcom.usf.tn"))
+           email   = "khalil.hammami@enetcom.usf.tn"),
+    person(given   = "FRB-CESAB",
+           role    = "fnd"))
 Description: Provides an interface to the FORCIS database 
     (<https://zenodo.org/doi/10.5281/zenodo.7390791>) on global foraminifera
     distribution. This package allows to download and to handle FORCIS data.

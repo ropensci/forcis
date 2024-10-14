@@ -68,6 +68,12 @@
       "@id": "https://orcid.org/0000-0002-5537-5294"
     }
   ],
+  "funder": [
+    {
+      "@type": "Organization",
+      "name": "FRB-CESAB"
+    }
+  ],
   "maintainer": [
     {
       "@type": "Person",
@@ -238,7 +244,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "2715.442KB",
+  "fileSize": "2716.372KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -267,7 +273,7 @@
       ],
       "name": "forcis: {An} {R} client to access the {FORCIS} database",
       "url": "https://frbcesab.github.io/forcis",
-      "description": "R package version 0.0.0.9000"
+      "description": "R package version 0.1.0.9000"
     },
     {
       "@type": "ScholarlyArticle",
