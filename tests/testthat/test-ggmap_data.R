@@ -12,4 +12,6 @@ test_that("Test ggmap_data() for success", {
   
   expect_true("gg" %in% class(gg))
   expect_true("ggplot" %in% class(gg))
+  
+  vdiffr::expect_doppelganger("Map data", gg)
 })

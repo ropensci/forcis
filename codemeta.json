@@ -135,6 +135,18 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "vdiffr",
+      "name": "vdiffr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=vdiffr"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "withr",
       "name": "withr",
       "provider": {
@@ -244,7 +256,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "2716.372KB",
+  "fileSize": "3718.985KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",

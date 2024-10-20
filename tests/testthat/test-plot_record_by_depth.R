@@ -27,4 +27,6 @@ test_that("Test plot_record_by_depth() for success", {
   
   expect_true("gg" %in% class(gg))
   expect_true("ggplot" %in% class(gg))
+  
+  vdiffr::expect_doppelganger("Plot record by depth", gg)
 })
