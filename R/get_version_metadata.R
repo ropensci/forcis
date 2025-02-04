@@ -32,19 +32,27 @@ get_version_metadata <- function(version = NULL) {
   
   res <- get_metadata()
   
-  meta  <- res$"hits"$"hits"$"metadata"
-  files <- res$"hits"$"hits"$"files"
+  
+  ## Get all versions information ----
+  
+  versions <- lapply(res$"hits"$"hits", function(x) {
+    data.frame("publication_date" = x$"metadata"$"publication_date",
+               "version"          = x$"metadata"$"version",
+               "access_right"     = x$"metadata"$"access_right")
+  })
+  
+  versions <- do.call(rbind.data.frame, versions)
   
   
   ## Subset version ----
   
   if (is.null(version)) {
     
-    pos <- which.max(as.Date(meta$"publication_date"))
+    pos <- which.max(as.Date(versions$"publication_date"))
     
   } else {
     
-    pos <- which(meta$"version" == version)
+    pos <- which(versions$"version" == version)
     
     if (length(pos) == 0) {
       stop("The required version is not available. Please run ", 
@@ -52,8 +60,37 @@ get_version_metadata <- function(version = NULL) {
     }
   }
   
-  meta  <- as.list(meta[pos, ])
+  meta  <- res$"hits"$"hits"$"metadata"
+  files <- res$"hits"$"hits"$"files"
+  
+  meta <- lapply(res$"hits"$"hits", function(x) x$"metadata")
+  meta <- meta[[pos]]
+  
+  meta$"keywords" <- unlist(meta$"keywords")
+  meta$"license" <- unlist(meta$"license"$"id")
+  
+  meta$"creators" <- lapply(meta$"creators", function(x) {
+    data.frame("name"        = x$name, 
+               "affiliation" = ifelse(is.null(x$affiliation), NA, 
+                                      x$affiliation), 
+               "orcid"       = ifelse(is.null(x$orcid), NA, x$orcid))
+  })
+  
+  meta$"creators" <- do.call(rbind.data.frame, meta$"creators")
+  
+  
+  files <- lapply(res$"hits"$"hits", function(x) x$"files")
   files <- files[[pos]]
+  
+  files <- lapply(files, function(x) {
+    data.frame("id"       = x$id, 
+               "key"      = x$key, 
+               "size"     = x$size, 
+               "checksum" = x$checksum,
+               "self"     = x$links$self)
+  })
+  
+  files <- do.call(rbind.data.frame, files)
   
   
   ## Clean output ----

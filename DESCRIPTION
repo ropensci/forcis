@@ -51,7 +51,7 @@ Depends:
 Imports: 
     dplyr,
     ggplot2,
-    jsonlite,
+    httr2,
     rlang,
     sf,
     tidyr,
@@ -59,6 +59,7 @@ Imports:
     vroom
 Suggests: 
     fs,
+    httptest2,
     knitr,
     rmarkdown,
     testthat (>= 3.0.0),

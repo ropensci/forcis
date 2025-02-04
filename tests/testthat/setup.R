@@ -17,3 +17,8 @@ create_tempdir <- function(path = file.path(tempdir(), "sandbox")) {
   
   invisible(path)
 }
+
+
+## Setup httptest2
+
+library(httptest2)

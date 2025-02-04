@@ -753,23 +753,27 @@ save_version <- function(version) {
 
 get_metadata <- function() {
   
-  repo_url <- paste0("https://zenodo.org/api/records/", 
-                     "?q=conceptrecid:", zenodo_id(), 
-                     "&all_versions=true")
+  ## Prepare request ----
   
-  res <- tryCatch(jsonlite::read_json(path = repo_url, simplifyVector = TRUE),
-                  error = function(e) NULL)
-    
-  if (is.null(res)) {
-    stop("Unable to reach <https://zenodo.org>", call. = FALSE)  
-  }
+  endpoint <- "https://zenodo.org/api/records/"
   
-  if (res$"hits"$"total" == 0) {
-    stop("No information available for the Zenodo record '", zenodo_id(), "'", 
-         call. = FALSE)
-  }
+  http_request <- httr2::request(endpoint) |> 
+    httr2::req_url_query(q = paste0("conceptrecid:", zenodo_id())) |> 
+    httr2::req_url_query(all_versions = "true")
   
-  res
+  
+  ## Send HTTP request  ----
+  
+  http_response <- httr2::req_perform(http_request)
+  
+  
+  ## Check response status ----
+  
+  httr2::resp_check_status(http_response)
+  
+  
+  ## Return content ----
+  httr2::resp_body_json(http_response)
 }
 
 

@@ -51,35 +51,40 @@ test_that("Test check_version() for success", {
 
 ## get_metadata() ----
 
-test_that("Test get_metadata() for success", {
+with_mock_dir("get_metadata", {
   
-  x <- get_metadata()
-  
-  expect_equal(class(x), "list")
-  expect_true("hits" %in% names(x))
-  expect_true(x$"hits"$"total" > 0L)
-})
-
+  test_that("Test get_metadata() for success", {
+    
+    x <- get_metadata()
+    
+    expect_equal(class(x), "list")
+    expect_true("hits" %in% names(x))
+    expect_true(x$"hits"$"total" > 0L)
+  })
+}, simplify = FALSE)
 
 
 ## get_available_versions() ----
 
-test_that("Test get_available_versions() for success", {
+with_mock_dir("get_available_versions", {
   
-  x <- get_available_versions()
-  
-  expect_equal(class(x), "data.frame")
-  expect_true(nrow(x) > 0L)
-  expect_equal(ncol(x), 3L)
-  
-  expect_true("publication_date" %in% colnames(x))
-  expect_true("version" %in% colnames(x))
-  expect_true("access_right" %in% colnames(x))
-})
-
+  test_that("Test get_available_versions() for success", {
+    
+    x <- get_available_versions()
+    
+    expect_equal(class(x), "data.frame")
+    expect_true(nrow(x) > 0L)
+    expect_equal(ncol(x), 3L)
+    
+    expect_true("publication_date" %in% colnames(x))
+    expect_true("version" %in% colnames(x))
+    expect_true("access_right" %in% colnames(x))
+  })
+}, simplify = FALSE)
 
 
 ## get_version_metadata() ----
+
 
 test_that("Test get_version_metadata() for error", {
   
@@ -89,35 +94,40 @@ test_that("Test get_version_metadata() for error", {
                fixed = TRUE)
 })
 
-test_that("Test get_version_metadata() for success", {
-  
-  x <- get_version_metadata(version = NULL)
-  
-  expect_equal(class(x), "list")
-  expect_true("version" %in% names(x))
-  expect_true("files" %in% names(x))
-  
-  x <- get_version_metadata(version = "08")
-  
-  expect_equal(class(x), "list")
-  expect_true("version" %in% names(x))
-  expect_true("files" %in% names(x))
-  
-  expect_true(x$"version" == "08")
-  expect_true(x$"publication_date" == "2024-02-09")
-})
 
+with_mock_dir("get_version_metadata", {
+  
+  test_that("Test get_version_metadata() for success", {
+    
+    x <- get_version_metadata(version = NULL)
+    
+    expect_equal(class(x), "list")
+    expect_true("version" %in% names(x))
+    expect_true("files" %in% names(x))
+    
+    x <- get_version_metadata(version = "08")
+    
+    expect_equal(class(x), "list")
+    expect_true("version" %in% names(x))
+    expect_true("files" %in% names(x))
+    
+    expect_true(x$"version" == "08")
+    expect_true(x$"publication_date" == "2024-02-09")
+  })
+}, simplify = FALSE)
 
 
 ## get_latest_version() ----
 
-test_that("Test get_latest_version() for success", {
+with_mock_dir("get_latest_version", {
   
-  x <- get_latest_version()
-  
-  expect_equal(class(x), "character")
+  test_that("Test get_latest_version() for success", {
+    
+    x <- get_latest_version()
+    
+    expect_equal(class(x), "character")
+  })
 })
-
 
 
 ## save_version() ----
