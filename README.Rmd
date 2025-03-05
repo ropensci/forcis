@@ -24,6 +24,7 @@ forcis <img src="man/figures/logo.png" height="120px" align="right" style="float
 =========================================================
 
 <!-- badges: start -->
+[![Status at rOpenSci Software Peer Review](https://badges.ropensci.org/660_status.svg)](https://github.com/ropensci/software-review/issues/660)
 [![R CMD Check](https://github.com/FRBCesab/forcis/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/FRBCesab/forcis/actions/workflows/R-CMD-check.yaml)
 [![Website deployment](https://github.com/FRBCesab/forcis/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/FRBCesab/forcis/actions/workflows/pkgdown.yaml)
 [![codecov](https://codecov.io/gh/frbcesab/forcis/branch/master/graph/badge.svg)](https://codecov.io/gh/frbcesab/forcis)

@@ -5,6 +5,8 @@
 
 <!-- badges: start -->
 
+[![Status at rOpenSci Software Peer
+Review](https://badges.ropensci.org/660_status.svg)](https://github.com/ropensci/software-review/issues/660)
 [![R CMD
 Check](https://github.com/FRBCesab/forcis/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/FRBCesab/forcis/actions/workflows/R-CMD-check.yaml)
 [![Website
