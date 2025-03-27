@@ -2,9 +2,7 @@
 "_PACKAGE"
 
 # Imports: start ---- 
-#' @import dplyr
-#' @import rlang
-#' @import tidyr
+#' @importFrom rlang .data
 #' @import ggplot2
 # Imports: end ----
 
