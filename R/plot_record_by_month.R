@@ -19,9 +19,6 @@
 #' 
 #' net_data <- read.table(file_name, dec = ".", sep = ";")
 #' 
-#' # Add 'data_type' column ----
-#' net_data$"data_type" <- "Net"
-#' 
 #' # Plot data by year (example dataset) ----
 #' plot_record_by_month(net_data)
 
@@ -53,19 +50,24 @@ plot_record_by_month <- function(data) {
   
   ## Get distinct values & count ----
   
-  data <- data %>% 
-    select(.data$sample_id, .data$sampling_month) %>%
-    group_by(.data$sampling_month) %>%
-    summarise(count = n_distinct(.data$sample_id))
+  data <- data[ , c("sample_id", "sampling_month")]
+  data <- data[!duplicated(data), ]
+
+  data <- table(data$"sampling_month") |> 
+    data.frame()
+
+  colnames(data) <- c("sampling_month", "count")
   
-  
+  data$"sampling_month" <- as.numeric(as.character(data$"sampling_month"))
+
+
   ## Ensure to have all months ----
   
   sampling_month <- data.frame("sampling_month" = 1:12)
   
   data <- merge(data, sampling_month, by = "sampling_month", all = TRUE)
   
-  data$"count" <- replace_na(data$"count", 0)
+  data$"count" <- ifelse(is.na(data$"count"), 0, data$"count")
   
   
   ## Trick for ggplot2 ----
@@ -78,6 +80,6 @@ plot_record_by_month <- function(data) {
   ggplot(data, aes(x = .data$sampling_month, y = .data$count)) +  
     geom_bar(width = 0.7, col = "black", stat = "identity") + 
     theme_classic() +
-    xlab("Month") +  
-    ylab("Number of FORCIS samples")
+    xlab(label = "Month") +  
+    ylab(label = "Number of FORCIS samples")
 }

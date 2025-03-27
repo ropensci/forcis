@@ -19,9 +19,6 @@
 #' 
 #' net_data <- read.table(file_name, dec = ".", sep = ";")
 #' 
-#' # Add 'data_type' column ----
-#' net_data$"data_type" <- "Net"
-#' 
 #' # Plot data by year (example dataset) ----
 #' plot_record_by_depth(net_data)
 
@@ -42,37 +39,73 @@ plot_record_by_depth <- function(data) {
   
   ## Prepare data ----
   
-  data <- data %>% 
-    select(.data$sample_id, .data$sample_min_depth, .data$sample_max_depth) %>%
-    mutate(sampling_interval = ifelse(
-      is.na(.data$sample_min_depth), 'Unknown', 
-      ifelse(.data$sample_min_depth <=5, 'from Surface',
-      ifelse(.data$sample_min_depth <= 100, 'from first 100m',
-      ifelse(.data$sample_min_depth > 100 & 
-               .data$sample_min_depth <= 300, 'from 100m-300m',
-      ifelse(.data$sample_min_depth > 300 & 
-               .data$sample_min_depth <= 500, 'from 300m-500m',
-      ifelse(.data$sample_min_depth >= 500, 'from below 500m', NA))))))) %>% 
-    select(-c(.data$sample_min_depth, .data$sample_max_depth)) %>%
-    distinct() %>% 
-    group_by(.data$sampling_interval) %>% 
-    count() %>% 
-    ungroup() 
-  
-  data$"sampling_interval" <- factor(data$"sampling_interval",
-                                       levels = c('Unknown',
-                                                  'from below 500m',
-                                                  'from 300m-500m',
-                                                  'from 100m-300m',
-                                                  'from first 100m',
-                                                  'from Surface'))
+  data <- data[ , c("sample_id", "sample_min_depth", "sample_max_depth")]
 
+  data[["sampling_interval"]] <- NA
+
+  pos <- which(
+    is.na(data[["sample_min_depth"]])
+  )
+  if (length(pos) > 0) {
+    data[pos, "sampling_interval"] <- "Unknown"
+  }
+
+  pos <- which(
+    data[["sample_min_depth"]] <= 5
+  )
+  if (length(pos) > 0) {
+    data[pos, "sampling_interval"] <- "from Surface"
+  }
+
+  pos <- which(
+    data[["sample_min_depth"]] > 5 &
+    data[["sample_min_depth"]] <= 100
+  )
+  if (length(pos) > 0) {
+    data[pos, "sampling_interval"] <- "from first 100m"
+  }
+
+  pos <- which(
+    data[["sample_min_depth"]] > 100 &
+    data[["sample_min_depth"]] <= 300
+  )
+  if (length(pos) > 0) {
+    data[pos, "sampling_interval"] <- "from 100m-300m"
+  }
+
+  pos <- which(
+    data[["sample_min_depth"]] > 500 &
+    data[["sample_min_depth"]] <= 500
+  )
+  if (length(pos) > 0) {
+    data[pos, "sampling_interval"] <- "from 300m-500m"
+  }
+
+  pos <- which(
+    data[["sample_min_depth"]] > 500
+  )
+  if (length(pos) > 0) {
+    data[pos, "sampling_interval"] <- "from below 500m"
+  }
+
+
+  data <- table(data$"sampling_interval") |> 
+    data.frame()
+
+  colnames(data) <- c("sampling_interval", "n")
+
+  data$"sampling_interval" <- factor(
+    x      = data$"sampling_interval",
+    levels = c(
+      "Unknown", "from below 500m", "from 300m-500m", "from 100m-300m",
+      "from first 100m", "from Surface"
+    )
+  )
     
-  ggplot(data, 
-         aes(.data$sampling_interval, .data$n)) +
+  ggplot(data = data, mapping = aes(.data$sampling_interval, .data$n)) +
     geom_col(width = 0.7, col = "black") +
-    xlab("Sampling interval") + 
-    ylab("Number of FORCIS samples") +
+    xlab(label = "Sampling interval") + 
+    ylab(label = "Number of FORCIS samples") +
     coord_flip() +
     theme_classic() 
 }

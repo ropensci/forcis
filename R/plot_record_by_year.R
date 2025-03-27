@@ -19,9 +19,6 @@
 #' 
 #' net_data <- read.table(file_name, dec = ".", sep = ";")
 #' 
-#' # Add 'data_type' column ----
-#' net_data$"data_type" <- "Net"
-#' 
 #' # Plot data by year (example dataset) ----
 #' plot_record_by_year(net_data)
 
@@ -54,9 +51,8 @@ plot_record_by_year <- function(data) {
   
   ## Get distinct values ----
   
-  data <- data %>% 
-    select(.data$sample_id, .data$sampling_year) %>% 
-    distinct()
+  data <- data[ , c("sample_id", "sampling_year")]
+  data <- data[!duplicated(data), ]  
   
   
   ## Plot ----
@@ -64,6 +60,6 @@ plot_record_by_year <- function(data) {
   ggplot(data, aes(x = .data$sampling_year)) +  
     geom_bar(width = 0.7, col = "black", stat = "count") + 
     theme_classic() +
-    xlab("Year") +  
-    ylab("Number of FORCIS samples")
+    xlab(label = "Year") +  
+    ylab(label = "Number of FORCIS samples")
 }

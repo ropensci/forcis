@@ -17,119 +17,206 @@ compute_frequencies <- function(data, aggregate = TRUE) {
   
   taxa_cols <- get_species_names(data)
   
-  ready_dat <- data %>%
-    filter(.data$subsample_count_type == "Relative") %>%    
-    pivot_longer(all_of(taxa_cols), 
-                 names_to  = 'taxa', 
-                 values_to = 'counts') %>% 
-    mutate(to_drop = ifelse(is.na(.data$counts), 'drop', 'keep')) %>% 
-    filter(.data$to_drop == 'keep') %>% 
-    select(-c(.data$to_drop,
-              .data$subsample_count_type,
-              .data$subsample_all_shells_present_were_counted,
-              .data$total_of_forams_counted_ind,
-              .data$sampling_device_type,
-              .data$sample_volume_filtered)) 
+
+  ## Raw data ----
+
+  raw_data <- data[data$"subsample_count_type" == "Relative", ]
+
+  raw_data <- tidyr::pivot_longer(
+    data      = raw_data, 
+    cols      = tidyr::all_of(taxa_cols), 
+    names_to  = "taxa", 
+    values_to = "counts"
+  )
+
+  raw_data <- raw_data[!is.na(raw_data$"counts"), ]
   
-  samples_to_convert <- data$sample_id[
-    which(data$subsample_all_shells_present_were_counted == 1)]
+  cols_to_remove <- c(
+    "subsample_count_type", "subsample_all_shells_present_were_counted", 
+    "total_of_forams_counted_ind", "sampling_device_type", 
+    "sample_volume_filtered"
+  )
+
+  raw_data <- raw_data[ , !(colnames(raw_data) %in% cols_to_remove)]
+
+  samples_to_convert <- data[
+    data$"subsample_all_shells_present_were_counted" == 1, ]
   
-  list_samples <- unique(samples_to_convert)
+  list_samples <- unique(samples_to_convert[["sample_id"]])
   
-  conc_to_frequency <- data %>%
-    filter(.data$subsample_count_type == "Absolute") %>% 
-    pivot_longer(all_of(taxa_cols), 
-                 names_to  = 'taxa', 
-                 values_to = 'counts') %>% 
-    mutate(to_drop = ifelse(is.na(.data$counts), 'drop', 'keep')) %>% 
-    filter(.data$to_drop == 'keep') %>% 
-    select(-c(.data$to_drop,.data$subsample_count_type)) %>% 
-    filter(.data$sample_volume_filtered > 0) %>% 
-    mutate(to_drop = ifelse(.data$sample_id %in% list_samples, 'keep', 
-                            'drop')) %>% 
-    filter(.data$to_drop == 'keep') %>% 
-    select(-.data$to_drop) %>% 
-    mutate(counts = floor(.data$sample_volume_filtered * .data$counts)) %>% 
-    group_by(.data$subsample_id) %>% 
-    mutate(tot_subsample = sum(.data$counts)) %>% 
-    ungroup() %>% 
-    group_by(.data$sample_id) %>% 
-    mutate(tot_sample = sum(.data$counts)) %>% 
-    ungroup() %>% 
-    select(-c(.data$sample_volume_filtered,
-              .data$subsample_all_shells_present_were_counted,
-              .data$total_of_forams_counted_ind,
-              .data$sampling_device_type))
+
+  ## Absolute data ----
+
+  abs_data <- data[data$"sample_volume_filtered" > 0, ]
+  abs_data <- abs_data[abs_data$"subsample_count_type" == "Absolute", ]
+
+  abs_data <- tidyr::pivot_longer(
+    data      = abs_data, 
+    cols      = tidyr::all_of(taxa_cols), 
+    names_to  = 'taxa', 
+    values_to = 'counts'
+  )
+
+  abs_data <- abs_data[!is.na(abs_data$"counts"), ]
+  abs_data <- abs_data[abs_data$"sample_id" %in% list_samples, ]
+
+  abs_data[["counts"]] <- floor(
+    abs_data$"counts" * abs_data$"sample_volume_filtered"
+  )
+
+  col_names <- colnames(abs_data)
+
+  y <- stats::aggregate(
+    counts ~ subsample_id, 
+    data = abs_data, function(x) sum(x, na.rm = TRUE)
+  )
+
+  colnames(y)[2] <- "tot_subsample"
+
+  abs_data <- merge(abs_data, y, by = "subsample_id")
+  abs_data <- abs_data[ , c(col_names, "tot_subsample")]
+
+  col_names <- colnames(abs_data)
+
+  y <- stats::aggregate(
+    counts ~ sample_id, 
+    data = abs_data, function(x) sum(x, na.rm = TRUE)
+  )
+
+  colnames(y)[2] <- "tot_sample"
+
+  abs_data <- merge(abs_data, y, by = "sample_id")
+  abs_data <- abs_data[ , c(col_names, "tot_sample")]
+
+  cols_to_remove <- c(
+    "sample_volume_filtered", "subsample_count_type",
+    "subsample_all_shells_present_were_counted", "total_of_forams_counted_ind",
+    "sampling_device_type"
+  )
+
+  abs_data <- abs_data[ , !(colnames(abs_data) %in% cols_to_remove)]
+
+
+  ## Relative data ----
   
-  abs_to_frequency <- data %>% 
-    filter(.data$subsample_count_type == "Raw") %>% 
-    pivot_longer(all_of(taxa_cols), 
-                 names_to  = 'taxa', 
-                 values_to = 'counts') %>% 
-    mutate(to_drop = ifelse(is.na(.data$counts), 'drop', 'keep')) %>% 
-    filter(.data$to_drop == 'keep') %>% 
-    select(-c(.data$to_drop, .data$subsample_count_type)) %>% 
-    mutate(to_drop = ifelse(.data$sample_id %in% list_samples, 'keep', 
-                            'drop')) %>% 
-    filter(.data$to_drop == 'keep') %>% 
-    select(- c(.data$to_drop,
-               .data$subsample_all_shells_present_were_counted,
-               .data$total_of_forams_counted_ind,
-               .data$sampling_device_type,
-               .data$sample_volume_filtered)) %>% 
-    group_by(.data$subsample_id) %>% 
-    mutate(tot_subsample = sum(.data$counts)) %>% 
-    ungroup() %>% 
-    group_by(.data$sample_id) %>% 
-    mutate(tot_sample = sum(.data$counts)) %>% 
-    ungroup()
+  rel_data <- data[data$"subsample_count_type" == "Raw", ]
+
+  rel_data <- tidyr::pivot_longer(
+    data      = rel_data, 
+    cols      = tidyr::all_of(taxa_cols), 
+    names_to  = 'taxa', 
+    values_to = 'counts'
+  )
+
+  rel_data <- rel_data[!is.na(rel_data$"counts"), ]
+  rel_data <- rel_data[rel_data$"sample_id" %in% list_samples, ]
+
+  col_names <- colnames(rel_data)
+
+  y <- stats::aggregate(
+    counts ~ subsample_id, 
+    data = rel_data, function(x) sum(x, na.rm = TRUE)
+  )
+
+  colnames(y)[2] <- "tot_subsample"
+
+  rel_data <- merge(rel_data, y, by = "subsample_id")
+  rel_data <- rel_data[ , c(col_names, "tot_subsample")]
+
+  col_names <- colnames(rel_data)
+
+  y <- stats::aggregate(
+    counts ~ sample_id, 
+    data = rel_data, function(x) sum(x, na.rm = TRUE)
+  )
+
+  colnames(y)[2] <- "tot_sample"
+
+  rel_data <- merge(rel_data, y, by = "sample_id")
+  rel_data <- rel_data[ , c(col_names, "tot_sample")]
+ 
+  cols_to_remove <- c(
+    "sample_volume_filtered", "subsample_count_type",
+    "subsample_all_shells_present_were_counted", "total_of_forams_counted_ind",
+    "sampling_device_type"
+  )
+
+  rel_data <- rel_data[ , !(colnames(rel_data) %in% cols_to_remove)]
+
+
+  merged_frequency <- rbind(abs_data, rel_data)
   
-  merged_frequency <- rbind(conc_to_frequency, abs_to_frequency)
+
+  ## Compute metrics for messages ----
+
+  missing_volume <- data[data$"subsample_count_type" != "Absolute", ]
   
-  excluded_samples_volume <- data %>% 
-    filter(.data$subsample_count_type == "Absolute") %>% 
-    pivot_longer(all_of(taxa_cols), 
-                 names_to  = 'taxa', 
-                 values_to = 'counts') %>% 
-    filter(is.na(.data$sample_volume_filtered))
+  missing_volume <- tidyr::pivot_longer(
+    data      = missing_volume, 
+    cols      = tidyr::all_of(taxa_cols), 
+    names_to  = 'taxa', 
+    values_to = 'counts'
+  )
+  missing_volume <- missing_volume[
+    is.na(missing_volume$"sample_volume_filtered"), ]
   
-  samples_not_possible__to_convert <- data$sample_id[
-    which(data$subsample_all_shells_present_were_counted == 0)]
+  missing_volume <- length(unique(missing_volume$"sample_id"))
+
+  no_conversion <- data[
+    data$"subsample_all_shells_present_were_counted" == 0, ]
   
-  message("Counts from ", 
-          length(unique(excluded_samples_volume$"sample_id")),
-          " samples could not be converted because of missing volume data")
+    no_conversion <- length(unique(no_conversion$"sample_id"))
+
+  message(
+    "Counts from ", missing_volume, " samples could not be converted ", 
+    "because of missing volume data"
+  )
+
+  message(
+    "Counts from ", no_conversion, " samples could not be converted ", 
+    "because of missing data on total assemblage"
+  )
   
-  message("Counts from ", 
-          length(unique(samples_not_possible__to_convert)),
-          " samples could not be converted because of missing data on total ",
-          "assemblage")
+
+  partial_data <- merged_frequency
+  partial_data[["counts"]] <- 
+    100 * partial_data$"counts" / partial_data$"tot_subsample"
   
-  partial_data <- merged_frequency %>% 
-    mutate(counts = (.data$counts / .data$tot_subsample) * 100) %>% 
-    select(-c(.data$tot_subsample, .data$tot_sample))
+  cols_to_remove <- c("tot_subsample", "tot_sample")
+
+  partial_data <- partial_data[ , !(colnames(partial_data) %in% cols_to_remove)]
+
+  tot_data <- rbind(partial_data, raw_data)
   
-  tot_dat <- rbind(partial_data, ready_dat)%>%
-    rename('counts_rel_ab' = 'counts')
+  colnames(tot_data)[grep("^counts$", colnames(tot_data))] <- 
+    "counts_rel_ab"
   
   
-  if (!aggregate) {
+  if (aggregate) {
     
-    return(tot_dat)
+    partial_data <- merged_frequency
     
-  } else {
+    partial_data[["counts"]] <- 
+      100 * partial_data$"counts" / partial_data$"tot_sample"
     
-    partial_data <- merged_frequency %>% 
-      mutate(counts = (.data$counts / .data$tot_sample) * 100) %>% 
-      select(-c(.data$tot_subsample, .data$tot_sample))
-    
-    aggregated_dat <- rbind(partial_data, ready_dat) %>% 
-      select(-c(.data$subsample_id,
-                .data$subsample_size_fraction_min,
-                .data$subsample_size_fraction_max)) %>% 
-      distinct()%>%
-      rename('counts_rel_ab' = 'counts')
-    
-    return(aggregated_dat)
+    cols_to_remove <- c("tot_subsample", "tot_sample")
+
+    partial_data <- partial_data[ , !(colnames(partial_data) %in% cols_to_remove)]
+  
+    tot_data <- rbind(partial_data, raw_data)
+
+    cols_to_remove <- c(
+      "subsample_id", "subsample_size_fraction_max", 
+      "subsample_size_fraction_min"
+    )
+
+    tot_data <- tot_data[ , !(colnames(tot_data) %in% cols_to_remove)]
+
+    tot_data <- tot_data[!duplicated(tot_data), ]
+
+    colnames(tot_data)[grep("^counts$", colnames(tot_data))] <- 
+      "counts_rel_ab"
   }
+
+  tibble::as_tibble(tot_data)
 }
