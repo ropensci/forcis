@@ -19,9 +19,6 @@
 #' 
 #' net_data <- read.table(file_name, dec = ".", sep = ";")
 #' 
-#' # Add 'data_type' column ----
-#' net_data$"data_type" <- "Net"
-#' 
 #' # Plot data by year (example dataset) ----
 #' plot_record_by_season(net_data)
  
@@ -81,11 +78,14 @@ plot_record_by_season <- function(data) {
   
   ## Get distinct values ----
   
-  data <- data %>% 
-    select(.data$sample_id, .data$season) %>%
-    group_by(.data$season) %>%
-    summarise(count = n_distinct(.data$sample_id))
-  
+  data <- data[ , c("sample_id", "season")]
+  data <- data[!duplicated(data), ]
+       
+  data <- table(data$"season") |> 
+    data.frame()
+   
+  colnames(data) <- c("season", "count")
+       
   
   ## Ensure to have all months ----
   
@@ -94,13 +94,15 @@ plot_record_by_season <- function(data) {
   
   data <- merge(data, season, by = "season", all = TRUE)
   
-  data$"count" <- replace_na(data$"count", 0)
+  data$"count" <- ifelse(is.na(data$"count"), 0, data$"count")
   
   
   ## Trick for ggplot2 ----
   
-  data$season <- factor(data$season, levels = c("Fall", "Winter", "Spring", 
-                                                "Summer", "Unknown"))
+  data$"season" <- factor(
+    x      = data$"season", 
+    levels = c("Fall", "Winter", "Spring", "Summer", "Unknown")
+  )
   
   
   ## Plot ----
@@ -108,6 +110,6 @@ plot_record_by_season <- function(data) {
   ggplot(data, aes(x = .data$season, y = .data$count)) +  
     geom_bar(width = 0.7, col = "black", stat = "identity") + 
     theme_classic() +
-    xlab("Season") + 
-    ylab("Number of FORCIS samples")   
+    xlab(label = "Season") + 
+    ylab(label = "Number of FORCIS samples")   
 }
