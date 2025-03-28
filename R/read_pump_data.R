@@ -4,7 +4,7 @@
 read_pump_data <- function(
   path = ".",
   version = options()$"forcis_version",
-  check_for_update = options()$"check_for_update"
+  check_for_update = options()$"forcis_check_for_update"
 ) {
   ## Check args ----
 

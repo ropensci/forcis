@@ -18,11 +18,11 @@
 #'   version of the database.
 #'
 #' @param check_for_update a `logical`. If `TRUE` (default) the function will
-#'   check if a newer version of the FORCIS database is available on Zenodo and
-#'   will print an informative message. Note that this argument can be handle
-#'   with the global option `check_for_update`. For example, if user calls
-#'   `options(check_for_update = FALSE)`, the message to download the latest
-#'   version will be disabled for the current R session.
+#'   check if a newer version of the FORCIS database is available on Zenodo
+#'   and will print an informative message. Note that this argument can be
+#'   handle with the global option `forcis_check_for_update`. For example, if
+#'   user calls `options(forcis_check_for_update = FALSE)`, the message to
+#'   download the latest version will be disabled for the current R session.
 #'
 #' @param overwrite a `logical`. If `TRUE` it will override the downloaded
 #'   files of the FORCIS database. Default is `FALSE`.
@@ -71,7 +71,7 @@
 download_forcis_db <- function(
   path = ".",
   version = options()$"forcis_version",
-  check_for_update = options()$"check_for_update",
+  check_for_update = options()$"forcis_check_for_update",
   overwrite = FALSE,
   timeout = 60
 ) {
