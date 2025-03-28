@@ -5,8 +5,8 @@
 #' Note that coordinates (columns `site_lon_start_decimal` and
 #' `site_lat_start_decimal`) are projected in the Robinson coordinate system.
 #'
-#' @param data a `data.frame`, i.e. a FORCIS dataset or the output of a
-#'   `filter_*()` function.
+#' @param data a `tibble` or a `data.frame`, i.e. a FORCIS dataset or the
+#'   output of a `filter_*()` function.
 #'
 #' @return An `sf POINTS` object.
 #'

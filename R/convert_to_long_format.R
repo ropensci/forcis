@@ -5,9 +5,10 @@
 #' (taxon names) and `counts` (taxon abundances). It converts wider `data.frame`
 #' to a long format.
 #'
-#' @param data a `data.frame`, i.e. a FORCIS dataset, except for CPR North data.
+#' @param data a `tibble` or a `data.frame`, i.e. a FORCIS dataset, except for
+#'   CPR North data.
 #'
-#' @return A `data.frame` reshaped in a long format.
+#' @return A `tibble` reshaped in a long format.
 #'
 #' @export
 #'

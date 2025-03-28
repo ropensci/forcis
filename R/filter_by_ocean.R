@@ -3,12 +3,13 @@
 #' @description
 #' Filters FORCIS data by one or several oceans.
 #'
-#' @param data a `data.frame`. One obtained by `read_*_data()` functions.
+#' @param data a `tibble` or a `data.frame`. One obtained by `read_*_data()`
+#'   functions.
 #'
 #' @param ocean a `character` vector of one or several ocean names. Use the
 #'   function `get_ocean_names()` to find the correct spelling.
 #'
-#' @return A `data.frame` containing a subset of `data` for the desired oceans.
+#' @return A `tibble` containing a subset of `data` for the desired oceans.
 #'
 #' @export
 #'
@@ -69,5 +70,7 @@ filter_by_ocean <- function(data, ocean) {
 
   inter <- suppressWarnings(sf::st_intersects(data_sf, iho, sparse = FALSE))
 
-  data[which(apply(inter, 1, any)), ]
+  data <- data[which(apply(inter, 1, any)), ]
+
+  tibble::as_tibble(data)
 }

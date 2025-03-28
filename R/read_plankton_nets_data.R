@@ -18,7 +18,7 @@
 #' - `read_cpr_south_data()` reads the FORCIS CPR South data
 #' - `read_sediment_trap_data()` reads the FORCIS sediment traps data
 #'
-#' @return A `data.frame`. See
+#' @return A `tibble`. See
 #'   \url{https://zenodo.org/doi/10.5281/zenodo.7390791} for a preview of the
 #'   datasets.
 #'
@@ -125,5 +125,5 @@ read_plankton_nets_data <- function(
     data[, taxa_columns[i]] <- as.numeric(data[, taxa_columns[i]])
   }
 
-  data
+  tibble::as_tibble(data)
 }

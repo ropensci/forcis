@@ -10,7 +10,7 @@
 #'
 #' @export
 #'
-#' @return A `character`.
+#' @return A `character` vector.
 #'
 #' @examples
 #' # Get required column names (expect taxa names) ----

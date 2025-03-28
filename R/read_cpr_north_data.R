@@ -81,5 +81,5 @@ read_cpr_north_data <- function(
     data[, taxa_columns[i]] <- as.numeric(data[, taxa_columns[i]])
   }
 
-  data
+  tibble::as_tibble(data)
 }

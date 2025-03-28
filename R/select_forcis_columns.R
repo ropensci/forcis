@@ -5,7 +5,8 @@
 #' columns, this function can be used to lighten the `data.frame` to easily
 #' handle it and to speed up some computations.
 #'
-#' @param data a `data.frame`. One obtained by `read_*_data()` functions.
+#' @param data a `tibble` or a `data.frame`. One obtained by `read_*_data()`
+#'   functions.
 #'
 #' @param cols a `character` vector of column names to keep in addition to the
 #'   required ones (see [get_required_columns()]) and to the taxa columns. Can
@@ -13,7 +14,7 @@
 #'
 #' @export
 #'
-#' @return A `data.frame`.
+#' @return A `tibble`.
 #'
 #' @examples
 #' # Attach the package ----
@@ -80,5 +81,5 @@ select_forcis_columns <- function(data, cols = NULL) {
     data <- data[, c(get_required_columns(), cols, species_cols)]
   }
 
-  data
+  tibble::as_tibble(data)
 }

@@ -3,11 +3,12 @@
 #' @description
 #' Filters FORCIS data by month of sampling.
 #'
-#' @param data a `data.frame`. One obtained by `read_*_data()` functions.
+#' @param data a `tibble` or a `data.frame`. One obtained by `read_*_data()`
+#'   functions.
 #'
 #' @param months a `numeric` containing one or several months.
 #'
-#' @return A `data.frame` containing a subset of `data` for the desired months.
+#' @return A `tibble` containing a subset of `data` for the desired months.
 #'
 #' @export
 #'
@@ -100,5 +101,5 @@ filter_by_month <- function(data, months) {
     data <- data[pos, ]
   }
 
-  data
+  tibble::as_tibble(data)
 }

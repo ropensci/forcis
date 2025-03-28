@@ -700,7 +700,11 @@ set_version <- function(version, ask = TRUE) {
 get_latest_version <- function() {
   versions <- get_available_versions()
 
-  versions[which.max(as.Date(versions$"publication_date")), "version"]
+  versions[
+    which.max(as.Date(versions$"publication_date")),
+    "version",
+    drop = TRUE
+  ]
 }
 
 
