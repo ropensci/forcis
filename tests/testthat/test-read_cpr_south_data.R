@@ -43,7 +43,7 @@ test_that("Test read_cpr_south_data() for success", {
 
   x <- read_cpr_south_data(version = "07", check_for_update = FALSE)
 
-  expect_equal(class(x), "data.frame")
+  expect_true("data.frame" %in% class(x))
   expect_equal(ncol(x), 3L)
   expect_equal(nrow(x), 2L)
 

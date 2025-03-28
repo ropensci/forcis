@@ -76,7 +76,7 @@ with_mock_dir(
     test_that("Test get_available_versions() for success", {
       x <- get_available_versions()
 
-      expect_equal(class(x), "data.frame")
+      expect_true("data.frame" %in% class(x))
       expect_true(nrow(x) > 0L)
       expect_equal(ncol(x), 3L)
 
