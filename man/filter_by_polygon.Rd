@@ -23,7 +23,7 @@ Filters FORCIS data by a spatial polygon.
 library("forcis")
 
 # Import example dataset ----
-file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"), 
+file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"),
                          package = "forcis")
 
 net_data <- read.table(file_name, dec = ".", sep = ";")
@@ -35,8 +35,8 @@ net_data$"data_type" <- "Net"
 dim(net_data)
 
 # Import Indian Ocean spatial polygons ----
-file_name <- system.file(file.path("extdata", 
-                         "IHO_Indian_ocean_polygon.gpkg"), 
+file_name <- system.file(file.path("extdata",
+                         "IHO_Indian_ocean_polygon.gpkg"),
                          package = "forcis")
 
 indian_ocean <- sf::st_read(file_name)

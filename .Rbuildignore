@@ -14,3 +14,4 @@
 ^codemeta\.json$
 ^\.forcis$
 ^forcis-db$
+^air\.toml$

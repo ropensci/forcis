@@ -1,24 +1,24 @@
 #' Get required column names
 #'
 #' @description
-#' Gets required column names (except taxa names) for the package. This 
-#' function is designed to help users to add additional columns in 
+#' Gets required column names (except taxa names) for the package. This
+#' function is designed to help users to add additional columns in
 #' [select_forcis_columns()] (argument `cols`) if missing from this list.
-#' 
-#' These columns are required by some functions (`compute_*()`, `plot_*()`, 
+#'
+#' These columns are required by some functions (`compute_*()`, `plot_*()`,
 #' etc.) of the package and shouldn't be deleted.
-#' 
+#'
 #' @export
 #'
 #' @return A `character`.
-#' 
+#'
 #' @examples
 #' # Get required column names (expect taxa names) ----
 #' get_required_columns()
 
 get_required_columns <- function() {
-  
-  c("data_type",
+  c(
+    "data_type",
     "cruise_id",
     "profile_id",
     "sample_id",
@@ -38,5 +38,6 @@ get_required_columns <- function() {
     "sample_volume_filtered",
     "subsample_all_shells_present_were_counted",
     "total_of_forams_counted_ind",
-    "sampling_device_type")
+    "sampling_device_type"
+  )
 }

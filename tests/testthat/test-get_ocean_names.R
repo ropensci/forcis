@@ -1,12 +1,11 @@
 ## get_ocean_names() ----
 
 test_that("Test get_ocean_names() for success", {
-  
   oceans <- get_ocean_names()
-  
+
   expect_true(class(oceans) == "character")
   expect_true(length(oceans) == 8L)
-  
+
   expect_equal(oceans[1], "Arctic Ocean")
   expect_equal(oceans[2], "Indian Ocean")
   expect_equal(oceans[3], "Mediterranean Sea")

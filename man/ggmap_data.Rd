@@ -24,7 +24,7 @@ Maps the spatial distribution of FORCIS data.
 library("forcis")
 
 # Import example dataset ----
-file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"), 
+file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"),
                          package = "forcis")
 
 net_data <- read.table(file_name, dec = ".", sep = ";")
