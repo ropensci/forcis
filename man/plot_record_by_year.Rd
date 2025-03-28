@@ -7,7 +7,7 @@
 plot_record_by_year(data)
 }
 \arguments{
-\item{data}{a \code{data.frame}, i.e. a FORCIS dataset.}
+\item{data}{a \code{tibble} or a \code{data.frame}, i.e. a FORCIS dataset.}
 }
 \value{
 A \code{ggplot} object.

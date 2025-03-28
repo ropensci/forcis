@@ -7,12 +7,13 @@
 filter_by_polygon(data, polygon)
 }
 \arguments{
-\item{data}{a \code{data.frame}. One obtained by \verb{read_*_data()} functions.}
+\item{data}{a \code{tibble} or a \code{data.frame}. One obtained by \verb{read_*_data()}
+functions.}
 
 \item{polygon}{an \verb{sf POLYGON} object.}
 }
 \value{
-A \code{data.frame} containing a subset of \code{data} for the desired spatial
+A \code{tibble} containing a subset of \code{data} for the desired spatial
 polygon.
 }
 \description{

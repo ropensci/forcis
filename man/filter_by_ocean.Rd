@@ -7,13 +7,14 @@
 filter_by_ocean(data, ocean)
 }
 \arguments{
-\item{data}{a \code{data.frame}. One obtained by \verb{read_*_data()} functions.}
+\item{data}{a \code{tibble} or a \code{data.frame}. One obtained by \verb{read_*_data()}
+functions.}
 
 \item{ocean}{a \code{character} vector of one or several ocean names. Use the
 function \code{get_ocean_names()} to find the correct spelling.}
 }
 \value{
-A \code{data.frame} containing a subset of \code{data} for the desired oceans.
+A \code{tibble} containing a subset of \code{data} for the desired oceans.
 }
 \description{
 Filters FORCIS data by one or several oceans.

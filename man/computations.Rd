@@ -15,14 +15,15 @@ compute_concentrations(data, aggregate = TRUE)
 compute_frequencies(data, aggregate = TRUE)
 }
 \arguments{
-\item{data}{a \code{data.frame}. One obtained by \verb{read_*_data()} functions.}
+\item{data}{a \code{tibble} or a \code{data.frame}. One obtained by \verb{read_*_data()}
+functions.}
 
 \item{aggregate}{a \code{logical} of length 1. If \code{FALSE} counts will be derived
 for each subsample. If \code{TRUE} (default) subsample counts will be
 aggregated by \code{sample_id}.}
 }
 \value{
-A \code{data.frame} in long format with two additional columns: \code{taxa},
+A \code{tibble} in long format with two additional columns: \code{taxa},
 the taxon name and \verb{counts_*}, the number concentration (\code{counts_n_conc}) or
 the relative abundance (\code{counts_rel_ab}) or the raw abundance
 (\code{counts_raw_ab}).

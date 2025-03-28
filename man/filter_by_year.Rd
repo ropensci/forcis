@@ -7,12 +7,13 @@
 filter_by_year(data, years)
 }
 \arguments{
-\item{data}{a \code{data.frame}. One obtained by \verb{read_*_data()} functions.}
+\item{data}{a \code{tibble} or a \code{data.frame}. One obtained by \verb{read_*_data()}
+functions.}
 
 \item{years}{a \code{numeric} containing one or several years.}
 }
 \value{
-A \code{data.frame} containing a subset of \code{data} for the desired years.
+A \code{tibble} containing a subset of \code{data} for the desired years.
 }
 \description{
 Filters FORCIS data by year of sampling.

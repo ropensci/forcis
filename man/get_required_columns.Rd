@@ -7,7 +7,7 @@
 get_required_columns()
 }
 \value{
-A \code{character}.
+A \code{character} vector.
 }
 \description{
 Gets required column names (except taxa names) for the package. This

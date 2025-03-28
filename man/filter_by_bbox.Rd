@@ -7,7 +7,8 @@
 filter_by_bbox(data, bbox)
 }
 \arguments{
-\item{data}{a \code{data.frame}. One obtained by \verb{read_*_data()} functions.}
+\item{data}{a \code{tibble} or a \code{data.frame}. One obtained by \verb{read_*_data()}
+functions.}
 
 \item{bbox}{an object of class \code{bbox} (package \code{sf}) or a vector of four
 \code{numeric} values defining a square bounding box. Values must follow this
@@ -17,8 +18,8 @@ longitude (\code{xmax}), and maximum latitude (\code{ymax}).
 be defined in the system WGS 84 (\code{epsg=4326}).}
 }
 \value{
-A \code{data.frame} containing a subset of \code{data} for the desired
-bounding box.
+A \code{tibble} containing a subset of \code{data} for the desired bounding
+box.
 }
 \description{
 Filters FORCIS data by a spatial bounding box.
