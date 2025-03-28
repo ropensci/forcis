@@ -13,31 +13,31 @@
 read_cpr_north_data(
   path = ".",
   version = options()$forcis_version,
-  check_for_update = options()$check_for_update
+  check_for_update = options()$forcis_check_for_update
 )
 
 read_cpr_south_data(
   path = ".",
   version = options()$forcis_version,
-  check_for_update = options()$check_for_update
+  check_for_update = options()$forcis_check_for_update
 )
 
 read_plankton_nets_data(
   path = ".",
   version = options()$forcis_version,
-  check_for_update = options()$check_for_update
+  check_for_update = options()$forcis_check_for_update
 )
 
 read_pump_data(
   path = ".",
   version = options()$forcis_version,
-  check_for_update = options()$check_for_update
+  check_for_update = options()$forcis_check_for_update
 )
 
 read_sediment_trap_data(
   path = ".",
   version = options()$forcis_version,
-  check_for_update = options()$check_for_update
+  check_for_update = options()$forcis_check_for_update
 )
 }
 \arguments{
@@ -53,11 +53,11 @@ for the current R session. Note that it is recommended to use the latest
 version of the database.}
 
 \item{check_for_update}{a \code{logical}. If \code{TRUE} (default) the function will
-check if a newer version of the FORCIS database is available on Zenodo and
-will print an informative message. Note that this argument can be handle
-with the global option \code{check_for_update}. For example, if user calls
-\code{options(check_for_update = FALSE)}, the message to download the latest
-version will be disabled for the current R session.}
+check if a newer version of the FORCIS database is available on Zenodo
+and will print an informative message. Note that this argument can be
+handle with the global option \code{forcis_check_for_update}. For example, if
+user calls \code{options(forcis_check_for_update = FALSE)}, the message to
+download the latest version will be disabled for the current R session.}
 }
 \value{
 A \code{data.frame}. See

@@ -10,9 +10,9 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  eval     = FALSE,
-  echo     = TRUE,
-  comment  = "#>"
+  eval = FALSE,
+  echo = TRUE,
+  comment = "#>"
 )
 ```
 
@@ -42,12 +42,12 @@ Note that the FORCIS database is saved in `forcis-db/version-99/`, where `99` is
 
 ## Using a specific version
 
-If for some reason users want to freeze the version they use, it is possible to disable this message by setting the argument `check_for_update` to `FALSE` in the `read_*_data()` functions.
+If for some reason users want to freeze the version they use, it is possible to disable this message by setting the argument `forcis_check_for_update` to `FALSE` in the `read_*_data()` functions.
 
 It is also possible to disable this message globally for the current session:
 
 ```{r 'disable-message'}
-options(check_for_update = FALSE)
+options(forcis_check_for_update = FALSE)
 ```
 
 The package `forcis` _"knows"_ which version of the database you used last time. A hidden file named `.forcis` is created (or updated) each time the function `download_forcis_db()` or `read_*_data()` is called. This hidden file contains one line:
