@@ -7,8 +7,8 @@
 data_to_sf(data)
 }
 \arguments{
-\item{data}{a \code{data.frame}, i.e. a FORCIS dataset or the output of a
-\verb{filter_*()} function.}
+\item{data}{a \code{tibble} or a \code{data.frame}, i.e. a FORCIS dataset or the
+output of a \verb{filter_*()} function.}
 }
 \value{
 An \verb{sf POINTS} object.

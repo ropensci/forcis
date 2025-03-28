@@ -7,7 +7,7 @@
 get_available_versions()
 }
 \value{
-A \code{data.frame} with three columns:
+A \code{tibble} with three columns:
 \itemize{
 \item \code{publication_date}: the date of the release of the version
 \item \code{version}: the label of the version

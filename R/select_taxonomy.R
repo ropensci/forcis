@@ -6,13 +6,14 @@
 #' (original taxonomy). See \url{https://doi.org/10.1038/s41597-023-02264-2} for
 #' further information.
 #'
-#' @param data a `data.frame`. One obtained by `read_*_data()` functions.
+#' @param data a `tibble` or a `data.frame`. One obtained by `read_*_data()`
+#'   functions.
 #'
 #' @param taxonomy a `character` of length 1. One among `"LT"`, `"VT"`, `"OT"`.
 #'
 #' @export
 #'
-#' @return A `data.frame`.
+#' @return A `tibble`.
 #'
 #' @examples
 #' # Attach the package ----
@@ -71,5 +72,5 @@ select_taxonomy <- function(data, taxonomy) {
     stop("No species match the desired taxonomy", call. = FALSE)
   }
 
-  data
+  tibble::as_tibble(data)
 }

@@ -7,14 +7,15 @@
 select_forcis_columns(data, cols = NULL)
 }
 \arguments{
-\item{data}{a \code{data.frame}. One obtained by \verb{read_*_data()} functions.}
+\item{data}{a \code{tibble} or a \code{data.frame}. One obtained by \verb{read_*_data()}
+functions.}
 
 \item{cols}{a \code{character} vector of column names to keep in addition to the
 required ones (see \code{\link[=get_required_columns]{get_required_columns()}}) and to the taxa columns. Can
 be \code{NULL} (default).}
 }
 \value{
-A \code{data.frame}.
+A \code{tibble}.
 }
 \description{
 Selects columns in FORCIS data. Because FORCIS data contains more than 100

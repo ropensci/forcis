@@ -7,12 +7,13 @@
 filter_by_species(data, species)
 }
 \arguments{
-\item{data}{a \code{data.frame}. One obtained by \verb{read_*_data()} functions.}
+\item{data}{a \code{tibble} or a \code{data.frame}. One obtained by \verb{read_*_data()}
+functions.}
 
 \item{species}{a \code{character} vector listing species of interest.}
 }
 \value{
-A \code{data.frame} containing a subset of \code{data}.
+A \code{tibble} containing a subset of \code{data}.
 }
 \description{
 Filters FORCIS data by a species list.

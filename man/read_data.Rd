@@ -60,7 +60,7 @@ user calls \code{options(forcis_check_for_update = FALSE)}, the message to
 download the latest version will be disabled for the current R session.}
 }
 \value{
-A \code{data.frame}. See
+A \code{tibble}. See
 \url{https://zenodo.org/doi/10.5281/zenodo.7390791} for a preview of the
 datasets.
 }

@@ -3,11 +3,12 @@
 #' @description
 #' Filters FORCIS data by year of sampling.
 #'
-#' @param data a `data.frame`. One obtained by `read_*_data()` functions.
+#' @param data a `tibble` or a `data.frame`. One obtained by `read_*_data()`
+#'   functions.
 #'
 #' @param years a `numeric` containing one or several years.
 #'
-#' @return A `data.frame` containing a subset of `data` for the desired years.
+#' @return A `tibble` containing a subset of `data` for the desired years.
 #'
 #' @export
 #'
@@ -94,5 +95,5 @@ filter_by_year <- function(data, years) {
     data <- data[pos, ]
   }
 
-  data
+  tibble::as_tibble(data)
 }

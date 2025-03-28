@@ -7,12 +7,13 @@
 select_taxonomy(data, taxonomy)
 }
 \arguments{
-\item{data}{a \code{data.frame}. One obtained by \verb{read_*_data()} functions.}
+\item{data}{a \code{tibble} or a \code{data.frame}. One obtained by \verb{read_*_data()}
+functions.}
 
 \item{taxonomy}{a \code{character} of length 1. One among \code{"LT"}, \code{"VT"}, \code{"OT"}.}
 }
 \value{
-A \code{data.frame}.
+A \code{tibble}.
 }
 \description{
 Selects a taxonomy in FORCIS data. FORCIS database provides three different

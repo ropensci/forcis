@@ -4,11 +4,12 @@
 #' Gets species names from column names. This function is just an utility to
 #' easily retrieve taxon names.
 #'
-#' @param data a `data.frame`. One obtained by `read_*_data()` functions.
+#' @param data a `tibble` or a `data.frame`. One obtained by `read_*_data()`
+#'   functions.
 #'
 #' @export
 #'
-#' @return A `data.frame`.
+#' @return A `character` vector of species names.
 #'
 #' @examples
 #' \dontrun{

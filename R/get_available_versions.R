@@ -4,7 +4,7 @@
 #' Gets all available versions of the FORCIS database by querying the Zenodo API
 #' (\url{https://developers.zenodo.org}).
 #'
-#' @return A `data.frame` with three columns:
+#' @return A `tibble` with three columns:
 #'   - `publication_date`: the date of the release of the version
 #'   - `version`: the label of the version
 #'   - `access_right`: is the version open or restricted?
@@ -38,5 +38,5 @@ get_available_versions <- function() {
 
   rownames(meta) <- NULL
 
-  meta
+  tibble::as_tibble(meta)
 }

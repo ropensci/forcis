@@ -7,10 +7,11 @@
 convert_to_long_format(data)
 }
 \arguments{
-\item{data}{a \code{data.frame}, i.e. a FORCIS dataset, except for CPR North data.}
+\item{data}{a \code{tibble} or a \code{data.frame}, i.e. a FORCIS dataset, except for
+CPR North data.}
 }
 \value{
-A \code{data.frame} reshaped in a long format.
+A \code{tibble} reshaped in a long format.
 }
 \description{
 Reshapes FORCIS data by pivoting species columns into two columns: \code{taxa}

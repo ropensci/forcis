@@ -3,11 +3,12 @@
 #' @description
 #' Filters FORCIS data by a spatial polygon.
 #'
-#' @param data a `data.frame`. One obtained by `read_*_data()` functions.
+#' @param data a `tibble` or a `data.frame`. One obtained by `read_*_data()`
+#'   functions.
 #'
 #' @param polygon an `sf POLYGON` object.
 #'
-#' @return A `data.frame` containing a subset of `data` for the desired spatial
+#' @return A `tibble` containing a subset of `data` for the desired spatial
 #'   polygon.
 #'
 #' @export
@@ -81,5 +82,7 @@ filter_by_polygon <- function(data, polygon) {
 
   inter <- suppressWarnings(sf::st_intersects(data_sf, polygon, sparse = FALSE))
 
-  data[which(apply(inter, 1, any)), ]
+  data <- data[which(apply(inter, 1, any)), ]
+
+  tibble::as_tibble(data)
 }

@@ -4,13 +4,14 @@
 #' Functions to convert species counts between different formats: raw abundance,
 #' relative abundance, and number concentration, using counts metadata.
 #'
-#' @param data a `data.frame`. One obtained by `read_*_data()` functions.
+#' @param data a `tibble` or a `data.frame`. One obtained by `read_*_data()`
+#'   functions.
 #'
 #' @param aggregate a `logical` of length 1. If `FALSE` counts will be derived
 #'   for each subsample. If `TRUE` (default) subsample counts will be
 #'   aggregated by `sample_id`.
 #'
-#' @return A `data.frame` in long format with two additional columns: `taxa`,
+#' @return A `tibble` in long format with two additional columns: `taxa`,
 #' the taxon name and `counts_*`, the number concentration (`counts_n_conc`) or
 #' the relative abundance (`counts_rel_ab`) or the raw abundance
 #' (`counts_raw_ab`).

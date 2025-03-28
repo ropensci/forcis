@@ -3,11 +3,12 @@
 #' @description
 #' Filters FORCIS data by a species list.
 #'
-#' @param data a `data.frame`. One obtained by `read_*_data()` functions.
+#' @param data a `tibble` or a `data.frame`. One obtained by `read_*_data()`
+#'   functions.
 #'
 #' @param species a `character` vector listing species of interest.
 #'
-#' @return A `data.frame` containing a subset of `data`.
+#' @return A `tibble` containing a subset of `data`.
 #'
 #' @export
 #'
@@ -93,5 +94,5 @@ filter_by_species <- function(data, species) {
     data <- data[, -which(colnames(data) %in% species_to_del), drop = FALSE]
   }
 
-  data
+  tibble::as_tibble(data)
 }

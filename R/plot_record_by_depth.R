@@ -3,7 +3,7 @@
 #' @description
 #' This function produces a barplot of FORCIS sample records by depth.
 #'
-#' @param data a `data.frame`, i.e. a FORCIS dataset.
+#' @param data a `tibble` or a `data.frame`, i.e. a FORCIS dataset.
 #'
 #' @return A `ggplot` object.
 #'

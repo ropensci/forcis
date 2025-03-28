@@ -7,12 +7,13 @@
 filter_by_month(data, months)
 }
 \arguments{
-\item{data}{a \code{data.frame}. One obtained by \verb{read_*_data()} functions.}
+\item{data}{a \code{tibble} or a \code{data.frame}. One obtained by \verb{read_*_data()}
+functions.}
 
 \item{months}{a \code{numeric} containing one or several months.}
 }
 \value{
-A \code{data.frame} containing a subset of \code{data} for the desired months.
+A \code{tibble} containing a subset of \code{data} for the desired months.
 }
 \description{
 Filters FORCIS data by month of sampling.

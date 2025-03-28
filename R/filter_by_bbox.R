@@ -3,7 +3,8 @@
 #' @description
 #' Filters FORCIS data by a spatial bounding box.
 #'
-#' @param data a `data.frame`. One obtained by `read_*_data()` functions.
+#' @param data a `tibble` or a `data.frame`. One obtained by `read_*_data()`
+#'   functions.
 #'
 #' @param bbox an object of class `bbox` (package `sf`) or a vector of four
 #'   `numeric` values defining a square bounding box. Values must follow this
@@ -12,8 +13,8 @@
 #'   **Important:** if a vector of numeric values is provided, coordinates must
 #'   be defined in the system WGS 84 (`epsg=4326`).
 #'
-#' @return A `data.frame` containing a subset of `data` for the desired
-#'   bounding box.
+#' @return A `tibble` containing a subset of `data` for the desired bounding
+#'   box.
 #'
 #' @export
 #'
@@ -90,5 +91,7 @@ filter_by_bbox <- function(data, bbox) {
 
   inter <- suppressWarnings(sf::st_intersects(data_sf, bbox, sparse = FALSE))
 
-  data[which(apply(inter, 1, any)), ]
+  data <- data[which(apply(inter, 1, any)), ]
+
+  tibble::as_tibble(data)
 }

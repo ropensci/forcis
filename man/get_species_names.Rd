@@ -7,10 +7,11 @@
 get_species_names(data)
 }
 \arguments{
-\item{data}{a \code{data.frame}. One obtained by \verb{read_*_data()} functions.}
+\item{data}{a \code{tibble} or a \code{data.frame}. One obtained by \verb{read_*_data()}
+functions.}
 }
 \value{
-A \code{data.frame}.
+A \code{character} vector of species names.
 }
 \description{
 Gets species names from column names. This function is just an utility to
