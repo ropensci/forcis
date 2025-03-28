@@ -1,7 +1,7 @@
 #' @keywords internal
 "_PACKAGE"
 
-# Imports: start ---- 
+# Imports: start ----
 #' @importFrom rlang .data
 #' @import ggplot2
 # Imports: end ----
