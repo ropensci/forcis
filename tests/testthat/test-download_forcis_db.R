@@ -1,5 +1,5 @@
-with_mock_dir("download_forcis_db", {
-  skip()
+with_mock_dir("tmp/download_forcis_db", {
+  skip_on_cran()
 
   ## Data for tests ----
 

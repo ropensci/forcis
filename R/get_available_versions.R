@@ -21,7 +21,7 @@
 get_available_versions <- function() {
   ## Retrieve information ----
 
-  meta <- get_metadata()
+  meta <- get_metadata(version = "all")
   meta <- lapply(meta$"hits"$"hits", function(x) {
     data.frame(
       "publication_date" = x$"metadata"$"publication_date",

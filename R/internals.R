@@ -426,11 +426,51 @@ species_list <- function() {
 }
 
 
-#' Record identifier in the Zenodo database
+#' Zenodo Concept record identifier
 #'
 #' @noRd
 
-zenodo_id <- function() "7390791"
+zenodo_conceptrecid <- function() "7390791"
+
+
+#' Zenodo Record identifier (for v10)
+#'
+#' @noRd
+
+zenodo_record_id <- function() "12724286"
+
+
+#' Zenodo API base URL
+#'
+#' @noRd
+
+zenodo_api_url <- function() "https://zenodo.org/api"
+
+
+#' Zenodo Records endpoint URL
+#' 
+#' https://zenodo.org/api/records
+#'
+#' @noRd
+
+zenodo_records_endpoint <- function() paste0(zenodo_api_url(),"/records")
+
+#' Zenodo Record Versions endpoint URL
+#' 
+#' https://zenodo.org/api/records/12724286/versions
+#'
+#' @noRd
+
+zenodo_record_versions_endpoint <- function() paste0(zenodo_records_endpoint(),"/",zenodo_record_id(),"/versions")
+
+
+#' Zenodo Latest Version of the record endpoint URL
+#' 
+#' https://zenodo.org/api/records/12724286/versions/latest
+#'
+#' @noRd
+
+zenodo_lastest_version_endpoint <- function() paste0(zenodo_record_versions_endpoint(),"/latest")
 
 
 #' Date format used in raw data
@@ -633,9 +673,12 @@ check_version <- function(version) {
     if (length(version) != 1) {
       stop("Argument 'version' must be character of length 1", call. = FALSE)
     }
+    
+    # Check if version is "latest" or a number
+    if (version != "latest" && version != "all" && is.na(suppressWarnings(as.numeric(version)))) {
+      stop("Argument 'version' must be \"latest\", \"all\" or a number", call. = FALSE)
+    }
   }
-
-  invisible(NULL)
 }
 
 
@@ -740,14 +783,29 @@ save_version <- function(version) {
 #'
 #' @noRd
 
-get_metadata <- function() {
-  ## Prepare request ----
+get_metadata <- function(version = "latest") {
+  ## Build request ----
 
-  endpoint <- "https://zenodo.org/api/records/"
+  if (version == "latest") {
+    http_request <- httr2::request(zenodo_lastest_version_endpoint())
+  } else if(version == "all") {
 
-  http_request <- httr2::request(endpoint) |>
-    httr2::req_url_query(q = paste0("conceptrecid:", zenodo_id())) |>
-    httr2::req_url_query(all_versions = "true")
+    http_request <- httr2::request(zenodo_record_versions_endpoint()) |>
+      httr2::req_url_query(sort = "version")
+
+    # http_request <- httr2::request(zenodo_records_endpoint()) |>
+    # httr2::req_url_query(q = paste0("conceptrecid:", zenodo_conceptrecid())) |>
+    # httr2::req_url_query(all_versions = "true") |>
+    # httr2::req_url_query(size = 999)
+    
+  } else {
+    check_version(version)
+
+    http_request <- httr2::request(zenodo_records_endpoint()) |>
+    httr2::req_url_query(q = paste0("conceptrecid:", zenodo_conceptrecid()," AND version:",version)) |>
+    httr2::req_url_query(all_versions = "true") |>
+    httr2::req_url_query(size = 999)
+  }
 
   ## Send HTTP request  ----
 

@@ -28,7 +28,7 @@ get_version_metadata <- function(version = NULL) {
 
   ## Retrieve information ----
 
-  res <- get_metadata()
+  res <- get_metadata(version = "all")
 
   ## Get all versions information ----
 

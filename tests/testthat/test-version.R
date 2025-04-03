@@ -1,7 +1,7 @@
 ## zenodo_id() ----
 
-test_that("Test zenodo_id() for success", {
-  x <- zenodo_id()
+test_that("Test zenodo_conceptrecid() for success", {
+  x <- zenodo_conceptrecid()
 
   expect_equal(x, "7390791")
 
@@ -22,8 +22,8 @@ test_that("Test check_version() for error", {
   )
 
   expect_error(
-    check_version(6),
-    "Argument 'version' must be character",
+    check_version("06"),
+    "Argument 'version' must be numeric",
     fixed = TRUE
   )
 
@@ -54,10 +54,10 @@ test_that("Test check_version() for success", {
 ## get_metadata() ----
 
 with_mock_dir(
-  "tmp",
+  "tmp/get_metadata",
   {
     test_that("Test get_metadata() for success", {
-      x <- get_metadata()
+      x <- get_metadata(version = "all")
 
       expect_equal(class(x), "list")
       expect_true("hits" %in% names(x))
@@ -71,7 +71,7 @@ with_mock_dir(
 ## get_available_versions() ----
 
 with_mock_dir(
-  "tmp",
+  "tmp/get_available_versions",
   {
     test_that("Test get_available_versions() for success", {
       x <- get_available_versions()
@@ -129,7 +129,7 @@ with_mock_dir(
 
 ## get_latest_version() ----
 
-with_mock_dir("tmp", {
+with_mock_dir("tmp/get_latest_version", {
   test_that("Test get_latest_version() for success", {
     x <- get_latest_version()
 
