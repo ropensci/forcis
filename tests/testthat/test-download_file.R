@@ -1,4 +1,4 @@
-with_mock_dir("download_file", {
+with_mock_dir("tmp", {
   skip_on_cran()
 
   ## Data for tests ----

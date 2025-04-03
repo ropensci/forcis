@@ -54,7 +54,7 @@ test_that("Test check_version() for success", {
 ## get_metadata() ----
 
 with_mock_dir(
-  "get_metadata",
+  "tmp",
   {
     test_that("Test get_metadata() for success", {
       x <- get_metadata()
@@ -71,7 +71,7 @@ with_mock_dir(
 ## get_available_versions() ----
 
 with_mock_dir(
-  "get_available_versions",
+  "tmp",
   {
     test_that("Test get_available_versions() for success", {
       x <- get_available_versions()
@@ -104,7 +104,7 @@ test_that("Test get_version_metadata() for error", {
 
 
 with_mock_dir(
-  "get_version_metadata",
+  "tmp",
   {
     test_that("Test get_version_metadata() for success", {
       x <- get_version_metadata(version = NULL)
@@ -129,7 +129,7 @@ with_mock_dir(
 
 ## get_latest_version() ----
 
-with_mock_dir("get_latest_version", {
+with_mock_dir("tmp", {
   test_that("Test get_latest_version() for success", {
     x <- get_latest_version()
 
