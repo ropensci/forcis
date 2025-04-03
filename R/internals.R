@@ -455,29 +455,31 @@ zenodo_api_url <- function() "https://zenodo.org/api"
 
 
 #' Zenodo Records endpoint URL
-#' 
+#'
 #' https://zenodo.org/api/records
 #'
 #' @noRd
 
-zenodo_records_endpoint <- function() paste0(zenodo_api_url(),"/records")
+zenodo_records_endpoint <- function() paste0(zenodo_api_url(), "/records")
 
 #' Zenodo Record Versions endpoint URL
-#' 
+#'
 #' https://zenodo.org/api/records/12724286/versions
 #'
 #' @noRd
 
-zenodo_record_versions_endpoint <- function() paste0(zenodo_records_endpoint(),"/",zenodo_record_id(),"/versions")
+zenodo_record_versions_endpoint <- function()
+  paste0(zenodo_records_endpoint(), "/", zenodo_record_id(), "/versions")
 
 
 #' Zenodo Latest Version of the record endpoint URL
-#' 
+#'
 #' https://zenodo.org/api/records/12724286/versions/latest
 #'
 #' @noRd
 
-zenodo_lastest_version_endpoint <- function() paste0(zenodo_record_versions_endpoint(),"/latest")
+zenodo_lastest_version_endpoint <- function()
+  paste0(zenodo_record_versions_endpoint(), "/latest")
 
 
 #' Date format used in raw data
@@ -680,10 +682,17 @@ check_version <- function(version) {
     if (length(version) != 1) {
       stop("Argument 'version' must be character of length 1", call. = FALSE)
     }
-    
+
     # Check if version is "latest" or a number
-    if (version != "latest" && version != "all" && is.na(suppressWarnings(as.numeric(version)))) {
-      stop("Argument 'version' must be \"latest\", \"all\" or a number", call. = FALSE)
+    if (
+      version != "latest" &&
+        version != "all" &&
+        is.na(suppressWarnings(as.numeric(version)))
+    ) {
+      stop(
+        "Argument 'version' must be \"latest\", \"all\" or a number",
+        call. = FALSE
+      )
     }
   }
 }
@@ -805,12 +814,17 @@ build_http_request <- function(version) {
     version,
     "latest" = httr2::request(zenodo_lastest_version_endpoint()),
     "all" = httr2::request(zenodo_record_versions_endpoint()) |>
-            httr2::req_url_query(size = zenodo_page_size(), sort = "version"),
+      httr2::req_url_query(size = zenodo_page_size(), sort = "version"),
     {
       check_version(version)
       httr2::request(zenodo_records_endpoint()) |>
         httr2::req_url_query(
-          q = paste0("conceptrecid:", zenodo_conceptrecid(), " AND version:", version),
+          q = paste0(
+            "conceptrecid:",
+            zenodo_conceptrecid(),
+            " AND version:",
+            version
+          ),
           all_versions = "true",
           size = zenodo_page_size()
         )
