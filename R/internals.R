@@ -440,6 +440,13 @@ zenodo_conceptrecid <- function() "7390791"
 zenodo_record_id <- function() "12724286"
 
 
+#' Zenodo Page Size
+#'
+#' @noRd
+
+zenodo_page_size <- function() 999
+
+
 #' Zenodo API base URL
 #'
 #' @noRd
@@ -786,26 +793,24 @@ save_version <- function(version) {
 get_metadata <- function(version = "latest") {
   ## Build request ----
 
-  if (version == "latest") {
-    http_request <- httr2::request(zenodo_lastest_version_endpoint())
-  } else if(version == "all") {
-
-    http_request <- httr2::request(zenodo_record_versions_endpoint()) |>
-      httr2::req_url_query(sort = "version")
-
-    # http_request <- httr2::request(zenodo_records_endpoint()) |>
-    # httr2::req_url_query(q = paste0("conceptrecid:", zenodo_conceptrecid())) |>
-    # httr2::req_url_query(all_versions = "true") |>
-    # httr2::req_url_query(size = 999)
-    
-  } else {
-    check_version(version)
-
-    http_request <- httr2::request(zenodo_records_endpoint()) |>
-    httr2::req_url_query(q = paste0("conceptrecid:", zenodo_conceptrecid()," AND version:",version)) |>
-    httr2::req_url_query(all_versions = "true") |>
-    httr2::req_url_query(size = 999)
-  }
+  # Create request based on version parameter
+  http_request <- switch(
+    version,
+    "latest" = httr2::request(zenodo_lastest_version_endpoint()),
+    "all" = httr2::request(zenodo_record_versions_endpoint()) |>
+            httr2::req_url_query(size = zenodo_page_size(), 
+                                sort = "version"),
+    # Default case for specific version
+    {
+      check_version(version)
+      httr2::request(zenodo_records_endpoint()) |>
+        httr2::req_url_query(
+          q = paste0("conceptrecid:", zenodo_conceptrecid(), " AND version:", version),
+          all_versions = "true",
+          size = zenodo_page_size()
+        )
+    }
+  )
 
   ## Send HTTP request  ----
 

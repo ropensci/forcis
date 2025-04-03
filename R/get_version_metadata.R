@@ -28,7 +28,7 @@ get_version_metadata <- function(version = NULL) {
 
   ## Retrieve information ----
 
-  res <- get_metadata(version = "all")
+  res <- get_metadata(version = version)
 
   ## Get all versions information ----
 
@@ -44,7 +44,7 @@ get_version_metadata <- function(version = NULL) {
 
   ## Subset version ----
 
-  if (is.null(version)) {
+  if (is.null(version) || version == "latest") {
     pos <- which.max(as.Date(versions$"publication_date"))
   } else {
     pos <- which(versions$"version" == version)

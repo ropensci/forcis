@@ -22,8 +22,8 @@ test_that("Test check_version() for error", {
   )
 
   expect_error(
-    check_version("06"),
-    "Argument 'version' must be numeric",
+    check_version("v6"),
+    "Argument 'version' must be \"latest\", \"all\" or a number",
     fixed = TRUE
   )
 
@@ -104,10 +104,10 @@ test_that("Test get_version_metadata() for error", {
 
 
 with_mock_dir(
-  "tmp",
+  "tmp/get_version_metadata",
   {
     test_that("Test get_version_metadata() for success", {
-      x <- get_version_metadata(version = NULL)
+      x <- get_version_metadata(version = "latest")
 
       expect_equal(class(x), "list")
       expect_true("version" %in% names(x))

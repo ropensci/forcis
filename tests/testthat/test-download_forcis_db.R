@@ -1,11 +1,13 @@
-with_mock_dir("tmp/download_forcis_db", {
+with_mock_dir("tmp/download_forcis_meta", {
   skip_on_cran()
 
   ## Data for tests ----
 
   forcis_meta <- get_version_metadata(version = "08")
   forcis_files <- forcis_meta$"files"
+})
 
+with_mock_dir("tmp/download_forcis_db", {
   ## download_forcis_db() ----
 
   test_that("Test download_forcis_db() for success", {
