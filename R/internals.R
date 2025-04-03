@@ -785,22 +785,27 @@ save_version <- function(version) {
   invisible(NULL)
 }
 
-
-#' Set/update local database version number in an hidden file .forcis
+#' Get Records metadata by making call to zenodo API
 #'
 #' @noRd
 
 get_metadata <- function(version = "latest") {
-  ## Build request ----
+  http_request <- build_http_request(version)
+  http_response <- httr2::req_perform(http_request)
+  httr2::resp_check_status(http_response)
+  httr2::resp_body_json(http_response)
+}
 
-  # Create request based on version parameter
-  http_request <- switch(
+#' Build HTTP request to zenodo API
+#'
+#' @noRd
+
+build_http_request <- function(version) {
+  switch(
     version,
     "latest" = httr2::request(zenodo_lastest_version_endpoint()),
     "all" = httr2::request(zenodo_record_versions_endpoint()) |>
-            httr2::req_url_query(size = zenodo_page_size(), 
-                                sort = "version"),
-    # Default case for specific version
+            httr2::req_url_query(size = zenodo_page_size(), sort = "version"),
     {
       check_version(version)
       httr2::request(zenodo_records_endpoint()) |>
@@ -811,17 +816,6 @@ get_metadata <- function(version = "latest") {
         )
     }
   )
-
-  ## Send HTTP request  ----
-
-  http_response <- httr2::req_perform(http_request)
-
-  ## Check response status ----
-
-  httr2::resp_check_status(http_response)
-
-  ## Return content ----
-  httr2::resp_body_json(http_response)
 }
 
 
