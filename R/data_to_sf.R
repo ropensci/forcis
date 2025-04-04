@@ -19,7 +19,8 @@
 #'
 #' # Import example dataset ----
 #' file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"),
-#'                          package = "forcis")
+#'   package = "forcis"
+#' )
 #'
 #' net_data <- read.table(file_name, dec = ".", sep = ";")
 #'
@@ -39,7 +40,6 @@
 #' ggplot() +
 #'   geom_basemap() +
 #'   geom_sf(data = net_data_sub_sf)
-
 data_to_sf <- function(data) {
   ## Check data object ----
 

@@ -15,7 +15,6 @@
 #' @examples
 #' # Get required column names (expect taxa names) ----
 #' get_required_columns()
-
 get_required_columns <- function() {
   c(
     "data_type",

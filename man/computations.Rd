@@ -45,7 +45,8 @@ relative abundance, and number concentration, using counts metadata.
 \examples{
 # Import example dataset ----
 file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"),
-                         package = "forcis")
+  package = "forcis"
+)
 
 net_data <- read.table(file_name, dec = ".", sep = ";")
 

@@ -5,8 +5,8 @@
 #' the Zenodo API (\url{https://developers.zenodo.org}).
 #'
 #' @param version a `character` of length 1. The label of the version. Use
-#'   [get_available_versions()] to list available versions. If `latest` (default)
-#'   the latest version is used.
+#'   [get_available_versions()] to list available versions.
+#'   If `latest` (default) the latest version is used.
 #'
 #' @return A `list` with all information about the version, including: `title`,
 #' `doi`, `publication_date`, `description`, `access_right`, `creators`,
@@ -20,7 +20,6 @@
 #'
 #' # Get information for the latest version of the FORCIS database ----
 #' get_version_metadata()
-
 get_version_metadata <- function(version = "latest") {
   check_version(version)
 

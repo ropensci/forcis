@@ -15,7 +15,8 @@
 #' @examples
 #' # Import example dataset ----
 #' file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"),
-#'                          package = "forcis")
+#'   package = "forcis"
+#' )
 #'
 #' net_data <- read.table(file_name, dec = ".", sep = ";")
 #'
@@ -35,17 +36,20 @@
 #' get_species_names(net_data)
 #'
 #' # Select records for three species ----
-#' net_data_sub <- filter_by_species(data    = net_data,
-#'                                   species = c("g_inflata_VT",
-#'                                               "g_elongatus_VT",
-#'                                               "g_glutinata_VT"))
+#' net_data_sub <- filter_by_species(
+#'   data = net_data,
+#'   species = c(
+#'     "g_inflata_VT",
+#'     "g_elongatus_VT",
+#'     "g_glutinata_VT"
+#'   )
+#' )
 #'
 #' # Dimensions of the data.frame ----
 #' dim(net_data_sub)
 #'
 #' # Get species names ----
 #' get_species_names(net_data_sub)
-
 filter_by_species <- function(data, species) {
   ## Check data object ----
 
@@ -86,8 +90,7 @@ filter_by_species <- function(data, species) {
   ## Filter by species ----
 
   species_to_del <- get_species_names(data)[
-    !(get_species_names(data) %in%
-      species)
+    !(get_species_names(data) %in% species)
   ]
 
   if (length(species_to_del) > 0) {

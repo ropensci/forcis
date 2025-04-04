@@ -52,7 +52,6 @@ species_list <- function() {
       "t_quinqueloba_LT",
       "t_sacculifer_LT",
       "UniD_LT",
-
       "b_digitata_VT",
       "b_pumilio_VT",
       "b_variabilis_VT",
@@ -109,7 +108,6 @@ species_list <- function() {
       "t_sacculifer_no_sac_VT",
       "t_sacculifer_sac_VT",
       "UnID_VT",
-
       "unidentified_specimens",
       "other",
       "pachyderma_incompta",
@@ -319,13 +317,11 @@ species_list <- function() {
         "_Globigerinoides_elongatus"
       ),
       "Globoturborotalita_rubescens_._Globigerinoides_tenellus",
-
       "forams_per_m3",
       "number_of_forams_per_1000m3",
       "number_of_species_counted_VT",
       "number_of_species_counted_LT"
     ),
-
     "taxonomy" = c(rep("LT", 47), rep("VT", 56), rep("OT", 203), rep("ZZ", 4))
   )
 }

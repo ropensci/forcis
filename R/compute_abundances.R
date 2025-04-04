@@ -53,8 +53,8 @@ compute_abundances <- function(data, aggregate = TRUE) {
   abs_data <- tidyr::pivot_longer(
     data = abs_data,
     cols = tidyr::all_of(taxa_cols),
-    names_to = 'taxa',
-    values_to = 'counts'
+    names_to = "taxa",
+    values_to = "counts"
   )
 
   abs_data <- abs_data[!is.na(abs_data$"counts"), ]
@@ -86,8 +86,8 @@ compute_abundances <- function(data, aggregate = TRUE) {
   rel_data <- tidyr::pivot_longer(
     data = rel_data,
     cols = tidyr::all_of(taxa_cols),
-    names_to = 'taxa',
-    values_to = 'counts'
+    names_to = "taxa",
+    values_to = "counts"
   )
 
   rel_data <- rel_data[!is.na(rel_data$"counts"), ]

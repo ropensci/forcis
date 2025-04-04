@@ -57,8 +57,8 @@ compute_frequencies <- function(data, aggregate = TRUE) {
   abs_data <- tidyr::pivot_longer(
     data = abs_data,
     cols = tidyr::all_of(taxa_cols),
-    names_to = 'taxa',
-    values_to = 'counts'
+    names_to = "taxa",
+    values_to = "counts"
   )
 
   abs_data <- abs_data[!is.na(abs_data$"counts"), ]
@@ -111,8 +111,8 @@ compute_frequencies <- function(data, aggregate = TRUE) {
   rel_data <- tidyr::pivot_longer(
     data = rel_data,
     cols = tidyr::all_of(taxa_cols),
-    names_to = 'taxa',
-    values_to = 'counts'
+    names_to = "taxa",
+    values_to = "counts"
   )
 
   rel_data <- rel_data[!is.na(rel_data$"counts"), ]
@@ -163,8 +163,8 @@ compute_frequencies <- function(data, aggregate = TRUE) {
   missing_volume <- tidyr::pivot_longer(
     data = missing_volume,
     cols = tidyr::all_of(taxa_cols),
-    names_to = 'taxa',
-    values_to = 'counts'
+    names_to = "taxa",
+    values_to = "counts"
   )
   missing_volume <- missing_volume[
     is.na(missing_volume$"sample_volume_filtered"),
@@ -213,7 +213,8 @@ compute_frequencies <- function(data, aggregate = TRUE) {
 
     cols_to_remove <- c("tot_subsample", "tot_sample")
 
-    partial_data <- partial_data[,
+    partial_data <- partial_data[
+      ,
       !(colnames(partial_data) %in% cols_to_remove)
     ]
 

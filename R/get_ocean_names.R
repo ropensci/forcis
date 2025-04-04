@@ -17,7 +17,6 @@
 #' \dontrun{
 #' get_ocean_names()
 #' }
-
 get_ocean_names <- function() {
   iho_boundaries$"NAME"
 }

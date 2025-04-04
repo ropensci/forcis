@@ -19,7 +19,8 @@ test_that("Test geom_basemap() for success", {
   expect_true("element_blank" %in% class(geom[[5]][[1]]))
 
   expect_silent({
-    gg <- ggplot2::ggplot() + geom_basemap()
+    gg <- ggplot2::ggplot() +
+      geom_basemap()
   })
 
   vdiffr::expect_doppelganger("Plot with basemap", gg)

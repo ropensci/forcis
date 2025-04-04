@@ -78,8 +78,9 @@ By default (`version = NULL`), this function downloads the latest version of the
 In this vignette, we will use the plankton nets data of the FORCIS database. Let's import the latest release of the data.
 
 ```{r 'load-data', echo=FALSE}
-file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"), 
-                         package = "forcis")
+file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"),
+  package = "forcis"
+)
 net_data <- read.table(file_name, dec = ".", sep = ";")
 ```
 

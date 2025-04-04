@@ -67,14 +67,12 @@
 #' # Check the content of the folder ----
 #' list.files(path_to_save_db, recursive = TRUE)
 #' }
-
 download_forcis_db <- function(
-  path = ".",
-  version = options()$"forcis_version",
-  check_for_update = options()$"forcis_check_for_update",
-  overwrite = FALSE,
-  timeout = 60
-) {
+    path = ".",
+    version = options()$"forcis_version",
+    check_for_update = options()$"forcis_check_for_update",
+    overwrite = FALSE,
+    timeout = 60) {
   ## Check args ----
 
   check_if_character(path)

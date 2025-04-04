@@ -40,7 +40,6 @@
 #' # Import plankton nets data ----
 #' plankton_nets_data <- read_plankton_nets_data(path = path_to_save_db)
 #' }
-
 NULL
 
 
@@ -48,10 +47,9 @@ NULL
 #' @export
 
 read_plankton_nets_data <- function(
-  path = ".",
-  version = options()$"forcis_version",
-  check_for_update = options()$"forcis_check_for_update"
-) {
+    path = ".",
+    version = options()$"forcis_version",
+    check_for_update = options()$"forcis_check_for_update") {
   ## Check args ----
 
   check_if_character(path)

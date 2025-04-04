@@ -46,8 +46,9 @@ download_forcis_db(path = "data", version = NULL)
 The vignette will use the plankton net data of the FORCIS database. Let's import the latest release of the data.
 
 ```{r 'load-data', echo=FALSE}
-file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"), 
-                         package = "forcis")
+file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"),
+  package = "forcis"
+)
 net_data <- read.table(file_name, dec = ".", sep = ";")
 ```
 
@@ -121,14 +122,15 @@ indian_net_data_map <- net_data %>%
   ggtitle("FORCIS net data - Indian Ocean")
 
 # Save as PNG ----
-ggsave(indian_net_data_map, 
-       filename = "indian_net_data_map.png",
-       width    = 20, 
-       height   = 11, 
-       units    = "cm", 
-       dpi      = 300,
-       scale    = 1.5,
-       bg       = "white")
+ggsave(indian_net_data_map,
+  filename = "indian_net_data_map.png",
+  width    = 20,
+  height   = 11,
+  units    = "cm",
+  dpi      = 300,
+  scale    = 1.5,
+  bg       = "white"
+)
 ```
 
 

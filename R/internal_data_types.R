@@ -32,8 +32,9 @@ sediment_trap_filename <- function() "FORCIS_trap_"
 #'
 #' @return Character vector of available data types
 #' @noRd
-data_types <- function()
+data_types <- function() {
   c("Net", "Pump", "Sediment trap", "CPR South", "CPR North")
+}
 
 #' Add a column 'data_type' in data.frame (if required)
 #'

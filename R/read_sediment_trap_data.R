@@ -2,10 +2,9 @@
 #' @export
 
 read_sediment_trap_data <- function(
-  path = ".",
-  version = options()$"forcis_version",
-  check_for_update = options()$"forcis_check_for_update"
-) {
+    path = ".",
+    version = options()$"forcis_version",
+    check_for_update = options()$"forcis_check_for_update") {
   ## Check args ----
 
   check_if_character(path)

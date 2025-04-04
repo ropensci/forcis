@@ -64,5 +64,7 @@ Suggests:
     rmarkdown,
     testthat (>= 3.0.0),
     vdiffr,
-    withr
+    withr,
+    lintr,
+    styler
 Config/testthat/edition: 3

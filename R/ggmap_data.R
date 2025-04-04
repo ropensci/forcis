@@ -19,7 +19,8 @@
 #'
 #' # Import example dataset ----
 #' file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"),
-#'                          package = "forcis")
+#'   package = "forcis"
+#' )
 #'
 #' net_data <- read.table(file_name, dec = ".", sep = ";")
 #'
@@ -31,7 +32,6 @@
 #'
 #' # Map data ----
 #' ggmap_data(net_data, col = "black", fill = "red", shape = 21, size = 2)
-
 ggmap_data <- function(data, col = "red", ...) {
   data_sf <- data_to_sf(data)
 

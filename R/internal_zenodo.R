@@ -32,15 +32,30 @@ zenodo_records_endpoint <- function() paste0(zenodo_api_url(), "/records")
 #'
 #' @return Character string with the Zenodo record versions endpoint URL
 #' @noRd
-zenodo_record_versions_endpoint <- function()
+zenodo_record_versions_url <- function() {
   paste0(zenodo_records_endpoint(), "/", zenodo_record_id(), "/versions")
+}
 
 #' Zenodo Latest Version of the record endpoint URL
 #'
 #' @return Character string with the Zenodo latest version endpoint URL
 #' @noRd
-zenodo_lastest_version_endpoint <- function()
-  paste0(zenodo_record_versions_endpoint(), "/latest")
+zenodo_latest_ver_url <- function() {
+  paste0(zenodo_record_versions_url(), "/latest")
+}
+
+#' Error message when version is unvailable
+#'
+#' @return Character string with the error message
+#' @noRd
+err_msg_missing_version <- function() {
+  paste(
+    "Required version missing.",
+    "Check available versions using get_available_versions()."
+  )
+}
+
+
 
 #' Check Zenodo version
 #'
@@ -106,8 +121,7 @@ set_version <- function(version, ask = TRUE) {
   } else {
     if (!(version %in% versions$"version")) {
       stop(
-        "The required version is not available. Please run ",
-        "'get_available_versions()' to list available versions.",
+        err_msg_missing_version(),
         call. = FALSE
       )
     }
@@ -174,10 +188,9 @@ get_metadata <- function(version = "latest") {
 #' @return httr2 request object
 #' @noRd
 build_http_request <- function(version) {
-  switch(
-    version,
-    "latest" = httr2::request(zenodo_lastest_version_endpoint()),
-    "all" = httr2::request(zenodo_record_versions_endpoint()) |>
+  switch(version,
+    "latest" = httr2::request(zenodo_latest_ver_url()),
+    "all" = httr2::request(zenodo_record_versions_url()) |>
       httr2::req_url_query(size = zenodo_page_size(), sort = "version"),
     {
       check_version(version)
@@ -238,7 +251,7 @@ determine_version_position <- function(version, versions) {
     pos <- which(versions$"version" == version)
     if (length(pos) == 0) {
       stop(
-        "The required version is not available. Please run 'get_available_versions()' to list available versions."
+        err_msg_missing_version()
       )
     }
   }

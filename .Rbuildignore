@@ -15,3 +15,5 @@
 ^\.forcis$
 ^forcis-db$
 ^air\.toml$
+^\.lintr$
+^\.vscode$

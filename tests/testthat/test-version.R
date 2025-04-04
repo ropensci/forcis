@@ -94,10 +94,7 @@ with_mock_dir(
 test_that("Test get_version_metadata() for error", {
   expect_error(
     get_version_metadata(version = "999"),
-    paste0(
-      "The required version is not available. Please run ",
-      "'get_available_versions()' to list available versions."
-    ),
+    err_msg_missing_version(),
     fixed = TRUE
   )
 })
@@ -181,10 +178,7 @@ test_that("Test get_current_version() for success", {
 test_that("Test set_version() for error", {
   expect_error(
     set_version(version = "999", ask = FALSE),
-    paste0(
-      "The required version is not available. Please run ",
-      "'get_available_versions()' to list available versions."
-    ),
+    err_msg_missing_version(),
     fixed = TRUE
   )
 })

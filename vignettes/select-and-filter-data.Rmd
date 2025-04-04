@@ -10,10 +10,10 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  eval     = TRUE,
-  echo     = TRUE,
-  comment  = "#>",
-  dpi       = 120,
+  eval = TRUE,
+  echo = TRUE,
+  comment = "#>",
+  dpi = 120,
   fig.align = "center",
   out.width = "80%"
 )
@@ -43,8 +43,9 @@ download_forcis_db(path = "data", version = NULL)
 The vignette will use the plankton nets data of the FORCIS database. Let's import the latest release of the data.
 
 ```{r 'load-data', echo=FALSE}
-file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"), 
-                         package = "forcis")
+file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"),
+  package = "forcis"
+)
 net_data <- read.table(file_name, dec = ".", sep = ";")
 ```
 
@@ -175,8 +176,9 @@ Let's filter the plankton net data by a spatial polygon defining boundaries of t
 
 ```{r 'filter-by-polygon'}
 # Import spatial polygon ----
-file_name <- system.file(file.path("extdata", "IHO_Indian_ocean_polygon.gpkg"), 
-                         package = "forcis")
+file_name <- system.file(file.path("extdata", "IHO_Indian_ocean_polygon.gpkg"),
+  package = "forcis"
+)
 indian_ocean <- sf::st_read(file_name, quiet = TRUE)
 
 # Filter by polygon ----
@@ -201,9 +203,12 @@ Let's subset plankton net data to only keep observations for *G. glutinata* and 
 
 ```{r 'filter-by-species'}
 # Filter by species ----
-glutinata_nitida <- filter_by_species(net_data, 
-                                      species = c("g_glutinata_VT", 
-                                                  "c_nitida_VT"))
+glutinata_nitida <- filter_by_species(net_data,
+  species = c(
+    "g_glutinata_VT",
+    "c_nitida_VT"
+  )
+)
 
 # Dimensions of original data ----
 dim(net_data)

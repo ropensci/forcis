@@ -34,7 +34,7 @@ unacceptable behavior to <nicolas.casajus@fondationbiodiversite.fr>.
 ## Style guide
 
 We use the [Tidyverse style guide](https://style.tidyverse.org/) for writing R 
-code. You can install [air](https://github.com/posit-dev/air) to automatically 
+code. You can install [styler](https://github.com/r-lib/styler/) to automatically 
 format your R code. Functions are documented with the 
 [roxygen2](https://roxygen2.r-lib.org/articles/roxygen2.html) syntax. 
 `forcis` uses the `lower_snake_case`.
