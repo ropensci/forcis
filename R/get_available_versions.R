@@ -22,15 +22,7 @@ get_available_versions <- function() {
   ## Retrieve information ----
 
   meta <- get_metadata(version = "all")
-  meta <- lapply(meta$"hits"$"hits", function(x) {
-    data.frame(
-      "publication_date" = x$"metadata"$"publication_date",
-      "version" = x$"metadata"$"version",
-      "access_right" = x$"metadata"$"access_right"
-    )
-  })
-
-  meta <- do.call(rbind.data.frame, meta)
+  meta <- extract_versions(meta)
 
   ## Clean output ----
 

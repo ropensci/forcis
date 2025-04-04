@@ -80,13 +80,9 @@ check_version <- function(version) {
 #' @return Character string with the latest version number
 #' @noRd
 get_latest_version <- function() {
-  versions <- get_available_versions()
-
-  versions[
-    which.max(as.Date(versions$"publication_date")),
-    "version",
-    drop = TRUE
-  ]
+  versions <- get_metadata(version = "latest")
+  versions <- extract_single_version(versions)
+  versions <- versions$version
 }
 
 #' Set Zenodo version to latest is missing
