@@ -176,10 +176,20 @@ save_version <- function(version) {
 #' @return List with JSON response from Zenodo API
 #' @noRd
 get_metadata <- function(version = "latest") {
-  http_request <- build_http_request(version)
-  http_response <- httr2::req_perform(http_request)
-  httr2::resp_check_status(http_response)
-  httr2::resp_body_json(http_response)
+  tryCatch(
+    {
+      http_request <- build_http_request(version)
+      http_response <- httr2::req_perform(http_request)
+      httr2::resp_check_status(http_response)
+      httr2::resp_body_json(http_response)
+    },
+    error = function(e) {
+      stop("Zenodo API: Failed to retrieve metadata.",
+        e$message,
+        call. = FALSE
+      )
+    }
+  )
 }
 
 #' Build HTTP request to zenodo API
@@ -215,6 +225,7 @@ build_http_request <- function(version) {
 #' @return Data frame with publication date, version, and access right
 #' @noRd
 extract_single_version <- function(res) {
+  validate_zenodo_response(res, c("metadata"))
   data.frame(
     "publication_date" = res$"metadata"$"publication_date",
     "version" = res$"metadata"$"version",
@@ -228,6 +239,7 @@ extract_single_version <- function(res) {
 #' @return Data frame with publication dates, versions, and access rights
 #' @noRd
 extract_versions <- function(res) {
+  validate_zenodo_response(res, c("hits", "hits$hits"))
   versions <- lapply(res$"hits"$"hits", function(x) {
     data.frame(
       "publication_date" = x$"metadata"$"publication_date",
@@ -272,8 +284,10 @@ determine_version_position <- function(version, versions) {
 #' @noRd
 extract_metadata <- function(res, pos, version) {
   if (version == "latest") {
+    validate_zenodo_response(res, c("metadata"))
     meta <- res$"metadata"
   } else {
+    validate_zenodo_response(res, c("hits", "hits$hits"))
     meta <- lapply(res$"hits"$"hits", function(x) x$"metadata")
     meta <- meta[[pos]]
   }

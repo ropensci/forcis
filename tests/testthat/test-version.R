@@ -54,7 +54,7 @@ test_that("Test check_version() for success", {
 ## get_metadata() ----
 
 with_mock_dir(
-  "tmp/get_metadata",
+  test_path("mockdata", "all"),
   {
     test_that("Test get_metadata() for success", {
       x <- get_metadata(version = "all")
@@ -63,15 +63,14 @@ with_mock_dir(
       expect_true("hits" %in% names(x))
       expect_true(x$"hits"$"total" > 0L)
     })
-  },
-  simplify = FALSE
+  }
 )
 
 
 ## get_available_versions() ----
 
 with_mock_dir(
-  "tmp/get_available_versions",
+  test_path("mockdata", "all"),
   {
     test_that("Test get_available_versions() for success", {
       x <- get_available_versions()
@@ -84,32 +83,42 @@ with_mock_dir(
       expect_true("version" %in% colnames(x))
       expect_true("access_right" %in% colnames(x))
     })
-  },
-  simplify = FALSE
+  }
 )
 
 
 ## get_version_metadata() ----
 
-test_that("Test get_version_metadata() for error", {
-  expect_error(
-    get_version_metadata(version = "999"),
-    err_msg_missing_version(),
-    fixed = TRUE
-  )
-})
-
-
 with_mock_dir(
-  "tmp/get_version_metadata",
+  test_path("mockdata", "v999"),
   {
-    test_that("Test get_version_metadata() for success", {
+    test_that("Test get_version_metadata() for error", {
+      expect_error(
+        get_version_metadata(version = "999"),
+        err_msg_missing_version(),
+        fixed = TRUE
+      )
+    })
+  }
+)
+
+
+
+test_that("Test get_version_metadata() for success", {
+  with_mock_dir(
+    test_path("mockdata", "latest"),
+    {
       x <- get_version_metadata(version = "latest")
 
       expect_equal(class(x), "list")
       expect_true("version" %in% names(x))
       expect_true("files" %in% names(x))
+    }
+  )
 
+  with_mock_dir(
+    test_path("mockdata", "v08"),
+    {
       x <- get_version_metadata(version = "08")
 
       expect_equal(class(x), "list")
@@ -118,21 +127,24 @@ with_mock_dir(
 
       expect_true(x$"version" == "08")
       expect_true(x$"publication_date" == "2024-02-09")
-    })
-  },
-  simplify = FALSE
-)
+    }
+  )
+})
+
 
 
 ## get_latest_version() ----
 
-with_mock_dir("tmp/get_latest_version", {
-  test_that("Test get_latest_version() for success", {
-    x <- get_latest_version()
+with_mock_dir(
+  test_path("mockdata", "latest"),
+  {
+    test_that("Test get_latest_version() for success", {
+      x <- get_latest_version()
 
-    expect_equal(class(x), "character")
-  })
-})
+      expect_equal(class(x), "character")
+    })
+  }
+)
 
 
 ## save_version() ----

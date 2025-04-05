@@ -1,40 +1,47 @@
-with_mock_dir("tmp/download_forcis_meta", {
-  skip_on_cran()
+skip_on_cran()
 
-  ## Data for tests ----
+## Data for tests ----
 
-  forcis_meta <- get_version_metadata(version = "08")
-  forcis_files <- forcis_meta$"files"
-})
+with_mock_dir(
+  test_path("mockdata", "v08"),
+  {
+    forcis_meta <- get_version_metadata(version = "08")
+    forcis_files <- forcis_meta$"files"
+  }
+)
 
-with_mock_dir("tmp/download_forcis_db", {
-  ## download_forcis_db() ----
+## download_forcis_db() ----
 
-  test_that("Test download_forcis_db() for success", {
-    create_tempdir()
 
-    dir.create(file.path("forcis-db", "version-08"), recursive = TRUE)
+test_that("Test download_forcis_db() for success", {
+  create_tempdir()
 
-    for (i in c(1:3, 5:8)) {
-      invisible(file.create(file.path(
-        "forcis-db",
-        "version-08",
-        forcis_files[i, "key"]
-      )))
-    }
+  dir.create(file.path("forcis-db", "version-08"), recursive = TRUE)
 
-    expect_message(download_forcis_db(
-      path = ".",
-      version = "08",
-      check_for_update = FALSE,
-      overwrite = FALSE,
-      timeout = 300
-    ))
-
-    expect_true(file.exists(file.path(
+  for (i in c(1:3, 5:8)) {
+    invisible(file.create(file.path(
       "forcis-db",
       "version-08",
-      forcis_files[4, "key"]
+      forcis_files[i, "key"]
     )))
-  })
+  }
+  with_mock_dir(
+    test_path("mockdata", "all"),
+    {
+      # "download_forcis_db" call "set_version" which make an extra call
+      # with different endpoint "all"
+      expect_message(download_forcis_db(
+        path = ".",
+        version = "08",
+        check_for_update = FALSE,
+        overwrite = FALSE,
+        timeout = 300
+      ))
+    }
+  )
+  expect_true(file.exists(file.path(
+    "forcis-db",
+    "version-08",
+    forcis_files[4, "key"]
+  )))
 })

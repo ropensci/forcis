@@ -86,3 +86,18 @@ check_required_columns <- function(data) {
 
   invisible(NULL)
 }
+
+#' Validate Zenodo API response format
+#'
+#' @param res API response from Zenodo
+#' @param required_fields Character vector of required fields
+#' @return NULL invisibly, raises an error if the required fields are missing
+#' @noRd
+validate_zenodo_response <- function(res, required_fields) {
+  for (field in required_fields) {
+    if (is.null(eval(parse(text = paste0("res$", field))))) {
+      stop("Invalid response format from Zenodo API", call. = FALSE)
+    }
+  }
+  invisible(NULL)
+}

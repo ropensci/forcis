@@ -1,0 +1,37 @@
+{
+    "hits": {
+        "hits": [
+
+        ],
+        "total": 0
+    },
+    "aggregations": {
+        "access_status": {
+            "buckets": [
+
+            ],
+            "label": "Access status"
+        },
+        "resource_type": {
+            "buckets": [
+
+            ],
+            "label": "Resource types"
+        },
+        "subject": {
+            "buckets": [
+
+            ],
+            "label": "Subjects"
+        },
+        "file_type": {
+            "buckets": [
+
+            ],
+            "label": "File type"
+        }
+    },
+    "links": {
+        "self": "https://zenodo.org/api/records?allversions=True&page=1&q=conceptrecid%3A7390791%20AND%20version%3A999&size=999&sort=bestmatch"
+    }
+}
