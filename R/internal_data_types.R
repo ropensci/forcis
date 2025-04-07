@@ -75,3 +75,160 @@ get_data_type <- function(data) {
 
   data_type
 }
+
+#' FORCIS datasets information
+#'
+#' Create a structured list with information for all FORCIS datasets
+#'
+#' @return A named list with information for each dataset type
+#' @noRd
+forcis_datasets_info <- function() {
+  # Define all information in a single list structure
+  metadata <- list(
+    net = list(
+      name = "Net",
+      filename_prefix = "FORCIS_net_",
+      columns = NULL # NULL means use standard species columns
+    ),
+    pump = list(
+      name = "Pump",
+      filename_prefix = "FORCIS_pump_",
+      columns = NULL
+    ),
+    sediment_trap = list(
+      name = "Sediment trap",
+      filename_prefix = "FORCIS_trap_",
+      columns = NULL
+    ),
+    cpr_south = list(
+      name = "CPR South",
+      filename_prefix = "FORCIS_cpr_south_",
+      columns = NULL
+    ),
+    cpr_north = list(
+      name = "CPR North",
+      filename_prefix = "FORCIS_cpr_north_",
+      columns = c("count_bin_min", "count_bin_max") # Special column handling
+    )
+  )
+
+  # Get dataset entries only (exclude helper functions)
+  dataset_entries <- function() {
+    setdiff(names(metadata), c("types", "names", "filename_prefixes"))
+  }
+
+  # Add convenience functions - with swapped naming
+  metadata$names <- function() dataset_entries() # Returns "net", "pump", etc.
+  metadata$types <- function() sapply(metadata[dataset_entries()], function(x) x$name) # Returns "Net", "Pump", etc.
+  metadata$filename_prefixes <- function() sapply(metadata[dataset_entries()], function(x) x$filename_prefix)
+
+  return(metadata)
+}
+
+#' Read a FORCIS dataset by name
+#'
+#' @param path The directory path to read from
+#' @param version Database version to use
+#' @param check_for_update Whether to check for database updates
+#' @param name Key identifying the dataset ("net", "pump", etc.)
+#'
+#' @return A tibble containing the dataset
+#' @noRd
+read_dataset_by_name <- function(
+    name,
+    path = ".",
+    version = options()$"forcis_version",
+    check_for_update = options()$"forcis_check_for_update") {
+  # Get metadata directly from forcis_datasets_info
+  metadata <- forcis_datasets_info()
+
+  # Check if name is valid
+  valid_datasets <- metadata$names()
+  if (!name %in% valid_datasets) {
+    stop(
+      "Invalid dataset name: '", name, "'. ",
+      "Available datasets are: ", paste(valid_datasets, collapse = ", "),
+      call. = FALSE
+    )
+  }
+
+  # Extract dataset-specific information
+  dataset_info <- metadata[[name]]
+  display_name <- dataset_info$name
+  file_pattern <- dataset_info$filename_prefix
+  columns_to_process <- dataset_info$columns
+
+  ## Check args ----
+  check_if_character(path)
+  check_version(version)
+
+  ## Check/set version ----
+  version <- set_version(version, ask = FALSE)
+
+  ## Check local database ----
+  path <- file.path(path, "forcis-db", paste0("version-", version))
+
+  if (!dir.exists(path)) {
+    stop(
+      "The directory '", path,
+      "' does not exist. Please check the ",
+      "argument 'path' or use the function 'download_forcis_db()'.",
+      call. = FALSE
+    )
+  }
+
+  ## Check file ----
+  file_name <- list.files(path, pattern = file_pattern)
+
+  if (!length(file_name)) {
+    stop(
+      "The ", display_name, " dataset does not exist. Please use the function ",
+      "'download_forcis_db()'.",
+      call. = FALSE
+    )
+  }
+
+  ## Check for update ----
+  if (is.null(check_for_update)) {
+    check_for_update <- TRUE
+  }
+
+  if (check_for_update) {
+    if (version != get_latest_version()) {
+      message(
+        "A newer version of the FORCIS database is available. Use ",
+        "'download_forcis_db(version = NULL)' to download it."
+      )
+    }
+  }
+
+  ## Read data ----
+  data <- vroom::vroom(
+    file.path(path, file_name),
+    delim = ";",
+    altrep = FALSE,
+    show_col_types = FALSE
+  )
+
+  data <- as.data.frame(data)
+  data <- add_data_type(data, display_name)
+
+  ## Check and convert columns ----
+  # If we have specific columns to process, use them
+  # Otherwise, get species names from data
+  if (is.null(columns_to_process)) {
+    columns_to_process <- get_species_names(data)
+  } else {
+    # For explicit columns, verify they exist
+    for (col in columns_to_process) {
+      check_field_in_data(data, col)
+    }
+  }
+
+  # Process all columns
+  for (col in columns_to_process) {
+    data[[col]] <- as.numeric(data[[col]])
+  }
+
+  tibble::as_tibble(data)
+}
