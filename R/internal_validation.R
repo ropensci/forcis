@@ -101,3 +101,26 @@ validate_zenodo_response <- function(res, required_fields) {
   }
   invisible(NULL)
 }
+
+#' Validate a dataset name against available datasets.
+#'
+#' This function checks if a given dataset name is valid by comparing it
+#' against the list of available datasets obtained from
+#' `forcis_datasets_info()`.
+#'
+#' @param name A character string representing the dataset name to validate.
+#' @noRd
+validate_dataset_name <- function(name) {
+  # Get metadata directly from forcis_datasets_info
+  metadata <- forcis_datasets_info()
+
+  # Check if name is valid
+  valid_datasets <- metadata$names()
+  if (!name %in% valid_datasets) {
+    stop(
+      "Invalid dataset name: '", name, "'. ",
+      "Available datasets are: ", paste(valid_datasets, collapse = ", "),
+      call. = FALSE
+    )
+  }
+}

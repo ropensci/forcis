@@ -150,21 +150,13 @@ read_dataset_by_name <- function(
     name,
     path = ".",
     version = options()$"forcis_version",
-    check_for_update = options()$"forcis_check_for_update") {
-  # Get metadata directly from forcis_datasets_info
-  metadata <- forcis_datasets_info()
-
+    check_for_update = options()$"forcis_check_for_update",
+    cached = TRUE) {
   # Check if name is valid
-  valid_datasets <- metadata$names()
-  if (!name %in% valid_datasets) {
-    stop(
-      "Invalid dataset name: '", name, "'. ",
-      "Available datasets are: ", paste(valid_datasets, collapse = ", "),
-      call. = FALSE
-    )
-  }
+  validate_dataset_name(name = name)
 
   # Extract dataset-specific information
+  metadata <- forcis_datasets_info()
   dataset_info <- metadata[[name]]
   display_name <- dataset_info$name
   file_pattern <- dataset_info$filename_prefix
