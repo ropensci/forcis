@@ -125,6 +125,8 @@ forcis_datasets_info <- function() {
   return(metadata)
 }
 
+# TODO: read_dataset_by_name -> load_dataset() or load_forcis()
+
 #' Read a FORCIS dataset by name
 #'
 #' @param path The directory path to read from
@@ -165,6 +167,10 @@ read_dataset_by_name <- function(
   ## Check/set version ----
   version <- set_version(version, ask = FALSE)
 
+
+  # TODO: download only files related to the specified dataset
+  # TODO: debate whether to download the extra files like the boubdries file
+
   ## Check local database ----
   path <- file.path(path, "forcis-db", paste0("version-", version))
 
@@ -178,6 +184,7 @@ read_dataset_by_name <- function(
   }
 
   ## Check file ----
+
   file_name <- list.files(path, pattern = file_pattern)
 
   if (!length(file_name)) {
@@ -189,6 +196,7 @@ read_dataset_by_name <- function(
   }
 
   ## Check for update ----
+  # TODO: remove the check for update
   if (is.null(check_for_update)) {
     check_for_update <- TRUE
   }
