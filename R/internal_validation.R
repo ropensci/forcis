@@ -124,3 +124,54 @@ validate_dataset_name <- function(name) {
     )
   }
 }
+
+#' Calculate and compare the MD5 checksum of a file to a given checksum.
+#'
+#' This function calculates the MD5 checksum of a file located at the specified path
+#' and compares it to a provided checksum string.
+#'
+#' @param file_path A character string specifying the path to the file.
+#' @param expected_checksum A character string representing the expected MD5 checksum,
+#'    prefixed with "md5:".
+#' @return A logical value: \code{TRUE} if the calculated checksum matches the
+#'   expected checksum, \code{FALSE} otherwise. Returns \code{NA} if the file
+#'   does not exist or an error occurs during calculation.
+#'
+#' @noRd
+compare_md5_checksum <- function(file_path, expected_checksum) {
+  calculated_checksum <- calculate_md5_checksum(file_path)
+
+  if (is.na(calculated_checksum)) {
+    return(NA)
+  }
+
+  # Remove "md5:" prefix
+  expected_checksum_value <- gsub("^md5:", "", tolower(expected_checksum))
+
+  # Compare the checksums
+  calculated_checksum_value <- tolower(calculated_checksum)
+
+  return(calculated_checksum_value == expected_checksum_value)
+}
+
+#' Calculate the MD5 checksum of a file.
+#'
+#' This function calculates the MD5 checksum of a file located at the specified path.
+#'
+#' @param file_path A character string specifying the path to the file.
+#' @return A character string representing the MD5 checksum of the file,
+#'   or \code{NA} if the file does not exist or an error occurs.
+#' @noRd
+calculate_md5_checksum <- function(file_path) {
+  if (!file.exists(file_path)) {
+    warning(paste("File not found:", file_path))
+    return(NA)
+  }
+  tryCatch(
+    tools::md5sum(file_path),
+    error = function(e) {
+      warning(paste("Error calculating MD5 checksum for:", file_path, "-", e$message))
+      return(NA)
+    }
+  )
+}
