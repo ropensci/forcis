@@ -23,7 +23,7 @@ test_that("Test read_cpr_south_data() for error", {
   expect_error(
     read_cpr_south_data(version = "07"),
     paste0(
-      "The South CPR dataset does not exist. Please use the ",
+      "The CPR South dataset does not exist. Please use the ",
       "function 'download_forcis_db()'."
     ),
     fixed = TRUE
