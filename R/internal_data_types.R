@@ -132,7 +132,7 @@ forcis_datasets_info <- function() {
     )
   }
 
-  return(metadata)
+  metadata
 }
 
 # TODO: read_dataset_by_name -> load_dataset() or load_forcis()
