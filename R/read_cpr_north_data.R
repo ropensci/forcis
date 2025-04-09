@@ -1,6 +1,7 @@
 #' @rdname read_data
 #' @export
 
+# TODO: to be removed & replaced by load_forcis("cpr_north")
 read_cpr_north_data <- function(
     path = ".",
     version = options()$"forcis_version",

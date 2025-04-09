@@ -1,6 +1,7 @@
 #' @rdname read_data
 #' @export
 
+# TODO: to be removed & replaced by load_forcis("sediment_trap")
 read_sediment_trap_data <- function(
     path = ".",
     version = options()$"forcis_version",

@@ -46,6 +46,7 @@ NULL
 #' @rdname read_data
 #' @export
 
+# TODO: to be removed & replaced by load_forcis("net")
 read_plankton_nets_data <- function(
     path = ".",
     version = options()$"forcis_version",
