@@ -68,3 +68,135 @@ check_if_path_exists <- function(path) {
 
   invisible(NULL)
 }
+
+## Preapare cache helper functions
+
+#' Get directory path
+#'
+#' Returns the path to a directory for the package,
+#' either the data directory or a specific version directory
+#'
+#' @param version Optional version string for the data subfolder
+#' @param path Optional custom base path. If NULL (default),
+#'             uses the standard user data directory
+#' @param create Whether to create the directory if it doesn't exist
+#' @return The path to the requested directory
+#' @noRd
+get_data_dir <- function(version = NULL, path = NULL, create = TRUE) {
+  appauthor <- "cesab"
+  appname <- "forcis"
+  appdata_subdir <- "data"
+
+  # Use custom path if provided, otherwise use standard location
+  data_dir <- if (!is.null(path)) {
+    file.path(path, appname, appdata_subdir)
+  } else {
+    # Get user data directory with correct parameter order
+    user_data_dir <- rappdirs::user_data_dir(
+      appname = appname,
+      appauthor = appauthor
+    )
+    file.path(user_data_dir, appdata_subdir)
+  }
+
+  # Determine the target directory
+  target_dir <- if (!is.null(version)) {
+    file.path(data_dir, version)
+  } else {
+    data_dir
+  }
+
+  # Create if needed
+  if (create && !dir.exists(target_dir)) {
+    dir.create(target_dir, recursive = TRUE, showWarnings = FALSE)
+  }
+
+  target_dir
+}
+
+#' List locally cached versions
+#'
+#' Lists all versions that have been downloaded and cached
+#'
+#' @param path Optional custom path for the data directory. If NULL (default),
+#'        uses the standard user data directory
+#' @return A character vector of version strings
+#' @noRd
+list_cached_versions <- function(path = NULL) {
+  # Get data directory using the new get_dir function
+  data_dir <- get_data_dir(path = path, create = FALSE)
+
+  # Check if directory exists
+  if (!dir.exists(data_dir)) {
+    return(character(0))
+  }
+
+  # List subdirectories (versions)
+  versions <- list.dirs(data_dir, full.names = FALSE, recursive = FALSE)
+
+  versions
+}
+
+#' Clean cache
+#'
+#' Removes downloaded files from cache
+#'
+#' @param version Specific version to clean (NULL to clean all)
+#' @param path Optional custom path for the data directory. If NULL (default),
+#'        uses the standard user data directory
+#' @return TRUE if successful
+#' @noRd
+clean_cache <- function(version = NULL, path = NULL) {
+  # Get appropriate directory
+  if (!is.null(version)) {
+    # Get version directory
+    target_dir <- get_data_dir(version = version, path = path, create = FALSE)
+
+    # Check if version exists
+    if (!dir.exists(target_dir)) {
+      warning("Version ", version, " is not cached")
+      return(FALSE)
+    }
+
+    # Remove version directory
+    unlink(target_dir, recursive = TRUE)
+    message("Cleaned cache for version ", version)
+  } else {
+    # For cleaning everything, we need to find the base data directory
+    # and then clean the entire structure
+
+    # First get the path to the data directory
+    data_dir <- get_data_dir(path = path, create = FALSE)
+
+    if (!dir.exists(data_dir)) {
+      message("Cache directory does not exist, nothing to clean")
+      return(TRUE)
+    }
+
+    # If using a custom path, we need to clean the appname/data directories too
+    if (!is.null(path)) {
+      # In custom path mode, get the appname directory
+      appname_dir <- dirname(data_dir) # This points to the appname folder
+      print(appname_dir)
+
+      # Remove the appname directory and everything under it
+      unlink(appname_dir, recursive = TRUE)
+      message("Cleaned all cached data and directory structure")
+    } else {
+      # For standard path, just clean everything under the data directory
+      contents <- list.files(data_dir,
+        full.names = TRUE, all.files = TRUE,
+        include.dirs = TRUE, no.. = TRUE
+      )
+
+      if (length(contents) > 0) {
+        sapply(contents, unlink, recursive = TRUE)
+        message("Cleaned all cached versions")
+      } else {
+        message("Cache is already empty")
+      }
+    }
+  }
+
+  TRUE
+}
