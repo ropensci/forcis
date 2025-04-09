@@ -90,8 +90,7 @@ get_data_dir <- function(version = NULL, path = NULL, create = FALSE) {
   data_dir <- if (!is.null(path)) {
     file.path(path, appname, appdata_subdir)
   } else {
-    # Use backports::R_user_dir instead of rappdirs::user_data_dir
-    user_data_dir <- backports::R_user_dir(
+    user_data_dir <- R_user_dir(
       package = appname,
       which = "cache"
     )
