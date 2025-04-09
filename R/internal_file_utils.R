@@ -101,6 +101,7 @@ get_data_dir <- function(version = NULL, path = NULL, create = FALSE) {
 
   # Determine the target directory
   target_dir <- if (!is.null(version)) {
+    version <- sanitize_version(version = version)
     file.path(data_dir, version)
   } else {
     data_dir
@@ -203,4 +204,25 @@ clean_cache <- function(version = NULL, path = NULL) {
   }
 
   TRUE
+}
+
+#' Clean a version string for use as a directory name
+#'
+#' Removes or replaces characters that are problematic in directory names.
+#'
+#' @param version Character string representing the version
+#'                (e.g., "v1.2.3", "release-2024")
+#' @param replacement Character to replace special characters with
+#'                    (default: "_")
+#' @return A string with special characters removed or replaced
+#'
+#' @noRd
+sanitize_version <- function(version, separator = "_") {
+  check_version(version)
+
+  # Replace characters that are problematic in directory names
+  # This includes: / \ : * ? " < > | and spaces
+  cleaned <- gsub("[\\/:*?\"<>|\\s]", separator, version)
+
+  cleaned
 }
