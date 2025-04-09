@@ -120,15 +120,17 @@ forcis_datasets_info <- function() {
   # Add convenience functions - with swapped naming
   metadata$names <- function() dataset_entries() # Returns "net", "pump", etc.
   metadata$types <- function() {
-    sapply(
+    vapply(
       metadata[dataset_entries()],
-      function(x) x$name
+      function(x) x$name,
+      FUN.VALUE = character(1)
     )
   } # Returns "Net", "Pump", etc.
   metadata$filename_prefixes <- function() {
-    sapply(
+    vapply(
       metadata[dataset_entries()],
-      function(x) x$filename_prefix
+      function(x) x$filename_prefix,
+      FUN.VALUE = character(1)
     )
   }
 

@@ -191,7 +191,7 @@ clean_cache <- function(version = NULL, path = NULL) {
       )
 
       if (length(contents) > 0) {
-        sapply(contents, unlink, recursive = TRUE)
+        vapply(contents, unlink, recursive = TRUE, FUN.VALUE = logical(1))
         message("Cleaned all cached versions")
       } else {
         message("Cache is already empty")
