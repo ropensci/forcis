@@ -212,7 +212,7 @@ clean_cache <- function(version = NULL, path = NULL) {
 #'
 #' @param version Character string representing the version
 #'                (e.g., "v1.2.3", "release-2024")
-#' @param replacement Character to replace special characters with
+#' @param separator Character to replace special characters with
 #'                    (default: "_")
 #' @return A string with special characters removed or replaced
 #'
