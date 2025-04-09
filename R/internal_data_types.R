@@ -138,7 +138,7 @@ forcis_datasets_info <- function() {
 }
 
 # TODO: read_dataset_by_name -> load_dataset() or load_forcis()
-# TODO: custom path should be NULL by default (rappdirs)
+# TODO: custom path should be NULL by default (R_user_dir)
 # TODO: export load_forcis() & move it into separate file
 
 #' Load a FORCIS dataset by name

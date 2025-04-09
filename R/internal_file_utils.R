@@ -83,7 +83,6 @@ check_if_path_exists <- function(path) {
 #' @return The path to the requested directory
 #' @noRd
 get_data_dir <- function(version = NULL, path = NULL, create = FALSE) {
-  appauthor <- get_app_author()
   appname <- get_app_name()
   appdata_subdir <- get_app_data_subdir()
 
@@ -91,10 +90,10 @@ get_data_dir <- function(version = NULL, path = NULL, create = FALSE) {
   data_dir <- if (!is.null(path)) {
     file.path(path, appname, appdata_subdir)
   } else {
-    # Get user data directory with correct parameter order
-    user_data_dir <- rappdirs::user_data_dir(
-      appname = appname,
-      appauthor = appauthor
+    # Use backports::R_user_dir instead of rappdirs::user_data_dir
+    user_data_dir <- backports::R_user_dir(
+      package = appname,
+      which = "cache"
     )
     file.path(user_data_dir, appdata_subdir)
   }

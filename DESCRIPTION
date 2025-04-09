@@ -57,7 +57,7 @@ Imports:
     tidyr,
     utils,
     vroom,
-    rappdirs
+    backports
 Suggests: 
     fs,
     httptest2,
