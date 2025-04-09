@@ -82,10 +82,10 @@ check_if_path_exists <- function(path) {
 #' @param create Whether to create the directory if it doesn't exist
 #' @return The path to the requested directory
 #' @noRd
-get_data_dir <- function(version = NULL, path = NULL, create = TRUE) {
-  appauthor <- "cesab"
-  appname <- "forcis"
-  appdata_subdir <- "data"
+get_data_dir <- function(version = NULL, path = NULL, create = FALSE) {
+  appauthor <- get_app_author()
+  appname <- get_app_name()
+  appdata_subdir <- get_app_data_subdir()
 
   # Use custom path if provided, otherwise use standard location
   data_dir <- if (!is.null(path)) {
@@ -114,6 +114,8 @@ get_data_dir <- function(version = NULL, path = NULL, create = TRUE) {
   target_dir
 }
 
+## TODO: export list_cached_versions() (if the user want to make a check)
+
 #' List locally cached versions
 #'
 #' Lists all versions that have been downloaded and cached
@@ -124,7 +126,7 @@ get_data_dir <- function(version = NULL, path = NULL, create = TRUE) {
 #' @noRd
 list_cached_versions <- function(path = NULL) {
   # Get data directory using the new get_dir function
-  data_dir <- get_data_dir(path = path, create = FALSE)
+  data_dir <- get_data_dir(path = path)
 
   # Check if directory exists
   if (!dir.exists(data_dir)) {
@@ -136,6 +138,8 @@ list_cached_versions <- function(path = NULL) {
 
   versions
 }
+
+## TODO: export clean_cache() (seperate script)
 
 #' Clean cache
 #'
@@ -150,7 +154,7 @@ clean_cache <- function(version = NULL, path = NULL) {
   # Get appropriate directory
   if (!is.null(version)) {
     # Get version directory
-    target_dir <- get_data_dir(version = version, path = path, create = FALSE)
+    target_dir <- get_data_dir(version = version, path = path)
 
     # Check if version exists
     if (!dir.exists(target_dir)) {
@@ -166,7 +170,7 @@ clean_cache <- function(version = NULL, path = NULL) {
     # and then clean the entire structure
 
     # First get the path to the data directory
-    data_dir <- get_data_dir(path = path, create = FALSE)
+    data_dir <- get_data_dir(path = path)
 
     if (!dir.exists(data_dir)) {
       message("Cache directory does not exist, nothing to clean")
