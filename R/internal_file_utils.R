@@ -126,7 +126,7 @@ get_data_dir <- function(version = NULL, path = NULL, create = FALSE) {
 #' @return A character vector of version strings
 #' @noRd
 list_cached_versions <- function(path = NULL) {
-  # Get data directory using the new get_dir function
+  # Get data directory
   data_dir <- get_data_dir(path = path)
 
   # Check if directory exists
@@ -167,10 +167,7 @@ clean_cache <- function(version = NULL, path = NULL) {
     unlink(target_dir, recursive = TRUE)
     message("Cleaned cache for version ", version)
   } else {
-    # For cleaning everything, we need to find the base data directory
-    # and then clean the entire structure
-
-    # First get the path to the data directory
+    # For cleaning everything
     data_dir <- get_data_dir(path = path)
 
     if (!dir.exists(data_dir)) {
@@ -178,10 +175,9 @@ clean_cache <- function(version = NULL, path = NULL) {
       return(TRUE)
     }
 
-    # If using a custom path, we need to clean the appname/data directories too
+    # If using a custom path
     if (!is.null(path)) {
-      # In custom path mode, get the appname directory
-      appname_dir <- dirname(data_dir) # This points to the appname folder
+      appname_dir <- dirname(data_dir)
       print(appname_dir)
 
       # Remove the appname directory and everything under it

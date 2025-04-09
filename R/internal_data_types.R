@@ -136,17 +136,21 @@ forcis_datasets_info <- function() {
 }
 
 # TODO: read_dataset_by_name -> load_dataset() or load_forcis()
+# TODO: custom path should be NULL by default (rappdirs)
+# TODO: export load_forcis() & move it into separate file
 
-#' Read a FORCIS dataset by name
+#' Load a FORCIS dataset by name
 #'
 #' @param path The directory path to read from
-#' @param version Database version to use
+#' @param version Database version to use (TODO: should be NULL by default)
 #' @param check_for_update Whether to check for database updates
+#'                         (TODO: to be removed)
 #' @param name Key identifying the dataset ("net", "pump", etc.)
+#' @param cached TODO: for later use (cache dataset on local storage)
 #'
 #' @return A tibble containing the dataset
 #' @noRd
-read_dataset_by_name <- function(
+load_forcis <- function(
     name,
     path = ".",
     version = options()$"forcis_version",
