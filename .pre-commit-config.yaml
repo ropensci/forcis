@@ -1,0 +1,4 @@
+# All available hooks: https://pre-commit.com/hooks.html
+# R specific hooks: https://github.com/lorenzwalthert/precommit
+# TODO: setup pre-commit tests
+# example: https://github.com/r-lib/styler/blob/main/.pre-commit-config.yaml

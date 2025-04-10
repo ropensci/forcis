@@ -18,3 +18,4 @@
 ^air\.toml$
 ^\.lintr$
 ^\.vscode$
+^\.pre-commit-config\.yaml$
