@@ -220,3 +220,67 @@ sanitize_version <- function(version, separator = "_") {
 
   cleaned
 }
+
+#' Verify file integrity using checksum
+#'
+#' Compares a file's checksum with the expected value
+#'
+#' @param file_path The path to the file
+#' @param expected_checksum The expected checksum value
+#' @return TRUE if checksum matches, FALSE otherwise
+#' @noRd
+verify_file_checksum <- function(file_path, expected_checksum) {
+  # Extract checksum algorithm and value
+  checksum_parts <- strsplit(expected_checksum, ":")[[1]]
+  algorithm <- checksum_parts[1]
+  expected_value <- checksum_parts[2]
+
+  # Calculate checksum based on algorithm
+  if (algorithm == "md5") {
+    actual_value <- tools::md5sum(file_path)
+  } else {
+    # Default to md5 if algorithm is not supported
+    warning("Unsupported checksum algorithm: ", algorithm, ". Falling back to MD5.")
+    actual_value <- tools::md5sum(file_path)
+  }
+
+  # Compare checksums
+  is_valid <- tolower(actual_value) == tolower(expected_value)
+  is_valid
+}
+
+#' Check if version files exist locally
+#'
+#' Checks if all files for a specific version exist and are valid
+#'
+#' @param file_info Data frame with file information
+#' @param version_dir The directory to check
+#' @return A data frame with file status information
+#' @noRd
+check_local_files <- function(file_info, version_dir) {
+  # Initialize vectors for status
+  exists <- logical(nrow(file_info))
+  valid <- logical(nrow(file_info))
+
+  # Check each file
+  for (i in 1:nrow(file_info)) {
+    file_path <- file.path(version_dir, file_info$filename[i])
+
+    # Check if file exists
+    exists[i] <- file.exists(file_path)
+
+    # Check if file is valid (if it exists)
+    if (exists[i]) {
+      valid[i] <- verify_file_checksum(file_path, file_info$checksum[i])
+    } else {
+      valid[i] <- FALSE
+    }
+  }
+
+  # Add status to file_info
+  file_info$exists <- exists
+  file_info$valid <- valid
+  file_info$needs_download <- !exists | !valid
+
+  file_info
+}
