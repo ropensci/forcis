@@ -10,7 +10,7 @@
 #' @param cached TODO: for later use (cache dataset on local storage)
 #'
 #' @return A tibble containing the dataset
-#' @export
+#' @keywords internal
 load_forcis <- function(
     name,
     path = ".",
