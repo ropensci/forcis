@@ -7,7 +7,8 @@ with_mock_dir(
   {
     forcis_meta <- get_version_metadata(version = "08")
     forcis_files <- forcis_meta$"files"
-  }
+  },
+  simplify = FALSE
 )
 
 ## download_forcis_db() ----
@@ -37,7 +38,8 @@ test_that("Test download_forcis_db() for success", {
         overwrite = FALSE,
         timeout = 300
       ))
-    }
+    },
+    simplify = FALSE
   )
   expect_true(file.exists(file.path(
     "forcis-db",

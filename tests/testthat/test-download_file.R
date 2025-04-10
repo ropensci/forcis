@@ -29,5 +29,6 @@ with_mock_dir(
 
       expect_true(file.exists(forcis_file))
     })
-  }
+  },
+  simplify = FALSE
 )

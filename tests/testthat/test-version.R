@@ -63,7 +63,8 @@ with_mock_dir(
       expect_true("hits" %in% names(x))
       expect_true(x$"hits"$"total" > 0L)
     })
-  }
+  },
+  simplify = FALSE
 )
 
 
@@ -83,7 +84,8 @@ with_mock_dir(
       expect_true("version" %in% colnames(x))
       expect_true("access_right" %in% colnames(x))
     })
-  }
+  },
+  simplify = FALSE
 )
 
 
@@ -99,7 +101,8 @@ with_mock_dir(
         fixed = TRUE
       )
     })
-  }
+  },
+  simplify = FALSE
 )
 
 
@@ -113,7 +116,8 @@ test_that("Test get_version_metadata() for success", {
       expect_equal(class(x), "list")
       expect_true("version" %in% names(x))
       expect_true("files" %in% names(x))
-    }
+    },
+    simplify = FALSE
   )
 
   with_mock_dir(
@@ -127,7 +131,8 @@ test_that("Test get_version_metadata() for success", {
 
       expect_true(x$"version" == "08")
       expect_true(x$"publication_date" == "2024-02-09")
-    }
+    },
+    simplify = FALSE
   )
 })
 
@@ -143,7 +148,8 @@ with_mock_dir(
 
       expect_equal(class(x), "character")
     })
-  }
+  },
+  simplify = FALSE
 )
 
 
