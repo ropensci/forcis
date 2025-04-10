@@ -2,13 +2,11 @@
 
 First off, thanks for taking the time to contribute to `forcis`!
 
-All types of contributions are encouraged and valued. See the 
-[Table of contents](#table-of-contents) for different ways to help and details 
-about how this project handles them. Please make sure to read the relevant 
-section before making your contribution. It will make it a lot easier for us 
+All types of contributions are encouraged and valued. See the
+[Table of contents](#table-of-contents) for different ways to help and details
+about how this project handles them. Please make sure to read the relevant
+section before making your contribution. It will make it a lot easier for us
 maintainers and smooth out the experience for all involved.
-
-
 
 ## Table of contents
 
@@ -20,43 +18,57 @@ maintainers and smooth out the experience for all involved.
 - [Requesting features](#requesting-features)
 - [Contributing code](#contributing-code)
 
-
-
 ## Code of conduct
 
 This project is released with a
 [Contributor Code of Conduct](https://github.com/frbcesab/forcis/blob/master/CODE_OF_CONDUCT.md).
-By participating, you are expected to uphold this code. Please report 
+By participating, you are expected to uphold this code. Please report
 unacceptable behavior to <nicolas.casajus@fondationbiodiversite.fr>.
-
-
 
 ## Style guide
 
-We use the [Tidyverse style guide](https://style.tidyverse.org/) for writing R 
-code. You can install [styler](https://github.com/r-lib/styler/) to automatically 
-format your R code. Functions are documented with the 
-[roxygen2](https://roxygen2.r-lib.org/articles/roxygen2.html) syntax. 
-`forcis` uses the `lower_snake_case`.
+We use the [Tidyverse style guide](https://style.tidyverse.org/) for writing R code. To ensure code consistency:
 
+- Use [styler](https://github.com/r-lib/styler/) to automatically format your R code
+- Use [lintr](https://github.com/r-lib/lintr) to identify style and possible syntax issues
+- Use [goodpractice](https://github.com/mangothecat/goodpractice) to ensure rOpenSci best practices
 
+Before submitting a PR, please run these checks:
+
+```r
+styler::style_pkg()
+lintr::lint_package()
+goodpractice::gp()
+```
+
+Functions are documented with the
+[roxygen2](https://roxygen2.r-lib.org/articles/roxygen2.html) syntax.
+
+`forcis` uses the `lower_snake_case` naming convention.
 
 ## Commit messages
 
-If you want to contribute by commiting changes, please try to use the 
-[Conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) 
+If you want to contribute by commiting changes, please try to use the
+[Conventional commits](https://www.conventionalcommits.org/en/v1.0.0/)
 specification.
 
+### Setting up pre-commit hooks
 
+We recommend using [pre-commit](https://pre-commit.com/) to automatically check your code before committing. This ensures style consistency and prevents committing code with style issues.
+
+1. Install pre-commit: `pip install pre-commit`
+2. Install the hooks: `pre-commit install`
+
+The repository includes a `.pre-commit-config.yaml` file configured to run R-specific hooks including style checks.
 
 ## Asking questions
 
 Before you ask a question, it is best to search for existing
-[Issues](https://github.com/frbcesab/forcis/issues) that might help 
-you. In case you have found a suitable issue and still need clarification, you 
+[Issues](https://github.com/frbcesab/forcis/issues) that might help
+you. In case you have found a suitable issue and still need clarification, you
 can write your question in this issue.
 
-If you then still feel the need to ask a question and need clarification, we 
+If you then still feel the need to ask a question and need clarification, we
 recommend the following:
 
 - Open a new [Issue](https://github.com/frbcesab/forcis/issues/new).
@@ -66,121 +78,114 @@ recommend the following:
 
 We will then take care of the issue as soon as possible.
 
-
-
 ## Reporting bugs
-
-
 
 ### Before submitting a bug report
 
-A good bug report shouldn't leave others needing to chase you up for more 
+A good bug report shouldn't leave others needing to chase you up for more
 information. Therefore, we ask you to investigate carefully, collect information
-and describe the issue in detail in your report. Please complete the following 
+and describe the issue in detail in your report. Please complete the following
 steps in advance to help us fix any potential bug as fast as possible.
 
 - Make sure that you are using the latest version of `forcis`.
 - Determine if your bug is really a bug and not an error on your side.
-- To see if other users have experienced (and potentially already solved) the 
-same issue you are having, check if there is not already a bug report existing 
+- To see if other users have experienced (and potentially already solved) the
+same issue you are having, check if there is not already a bug report existing
 for your bug or error in the [bug tracker](https://github.com/frbcesab/forcis/issues?q=label%3Abug).
-
-
 
 ### How do I submit a bug report?
 
-We use [GitHub Issues](https://github.com/frbcesab/forcis/issues) to 
+We use [GitHub Issues](https://github.com/frbcesab/forcis/issues) to
 track bugs and errors. If you run into an issue with the project:
 
 - Open a new [Issue](https://github.com/frbcesab/forcis/issues/new).
 - Use the template [bug_report.md](https://github.com/frbcesab/forcis/blob/master/.github/ISSUE_TEMPLATE/bug_report.md).
 - Explain the behavior you would expect and the actual behavior.
-- Please provide as much context as possible and describe the 
-*reproduction steps* that someone else can follow to recreate the issue on 
+- Please provide as much context as possible and describe the
+*reproduction steps* that someone else can follow to recreate the issue on
 their own. This usually includes your code with a reproducible example.
 
 We will then take care of the issue as soon as possible.
 
-
-
 ## Requesting features
-
-
 
 ### Before requesting a feature
 
 - Make sure that you are using the latest version of `forcis`.
 - Read the [documentation](https://github.com/frbcesab/forcis/)
 carefully and find out if the functionality is already covered.
-- Perform a [search](https://github.com/frbcesab/forcis/issues) to 
-see if this enhancement has already been suggested. If it has, add a comment to 
+- Perform a [search](https://github.com/frbcesab/forcis/issues) to
+see if this enhancement has already been suggested. If it has, add a comment to
 the existing issue instead of opening a new one.
-
-
 
 ### How do I submit a feature request?
 
-Feature requests are tracked as 
+Feature requests are tracked as
 [GitHub Issues](https://github.com/frbcesab/forcis/issues).
 
 - Open a new [Issue](https://github.com/frbcesab/forcis/issues/new).
 - Use the template [feature_request.md](https://github.com/frbcesab/forcis/blob/master/.github/ISSUE_TEMPLATE/feature_request.md).
 - Provide a clear and descriptive title for the issue to identify the suggestion.
-- Provide a step-by-step description of the suggested enhancement in as 
+- Provide a step-by-step description of the suggested enhancement in as
 many details as possible.
 - Explain why this enhancement would be useful to most `forcis` users.
 
 We will then take care of the issue as soon as possible.
 
-
-
 ## Contributing code
-
-
 
 ### General workflow
 
-We use the [GitHub flow](https://docs.github.com/en/get-started/quickstart/github-flow) 
-to collaborate on this project:
+We use the [GitHub flow](https://docs.github.com/en/get-started/quickstart/github-flow) to collaborate on this project:
 
+1. [Fork](https://docs.github.com/en/get-started/quickstart/contributing-to-projects) this repository
+2. [Clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) your fork
+3. Create a new branch: `git checkout -b branch-name`
+4. Set up the development environment:
 
-1. [Fork](https://docs.github.com/en/get-started/quickstart/contributing-to-projects) 
-this repository using the GitHub interface.
-1. [Clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) 
-your fork using `git clone fork-url` (replace `fork-url` by the URL of your fork). 
-Alternatively, open RStudio IDE and create a New Project from Version Control.
-1. Create a new branch w/ `git checkout -b branch-name` (replace `branch-name` 
-by the name of your new branch).
-1. Make your contribution (see below for examples).
-1. Stage (`git add`) and commit (`git commit`) your changes as often as necessary
-1. Push your changes to GitHub w/ `git push origin branch-name`.
-3. Submit a [Pull Request](https://docs.github.com/en/get-started/quickstart/contributing-to-projects#making-a-pull-request) on the [original repo](https://github.com/frbcesab/forcis/compare).
+   ```r
+   # Install development dependencies
+   install.packages(c("devtools", "roxygen2", "testthat", "knitr", "rmarkdown", "styler", "lintr", "goodpractice"))
+   # Install the package in development mode
+   devtools::load_all()
+   ```
+
+5. Make your changes following our style guide
+6. Run automated checks:
+
+    ```r
+    styler::style_pkg()       # Fix code style
+    lintr::lint_package()     # Check for style issues
+    goodpractice::gp()        # Check for good practices
+    pkgdown::pkgdown_sitrep() # check site problems
+    devtools::document()      # Update documentation
+    devtools::test()          # Run tests
+    devtools::check()         # Comprehensive package check
+    ```
+
+7. Commit your changes: `git commit -m "type: descriptive message"`
+8. Push to your fork: `git push origin branch-name`
+9. Submit a [Pull Request](https://docs.github.com/en/get-started/quickstart/contributing-to-projects#making-a-pull-request) on the [original repo](https://github.com/frbcesab/forcis/compare).
 
 We will then review the PR as soon as possible.
 
-
-
 ### Improve documentation
-
-
 
 #### Editing the README
 
-If you want to contribute by improving the README, please edit the `README.Rmd` 
-(not the `README.md`). Do not forget to update the `README.md` by running: 
+If you want to contribute by improving the README, please edit the `README.Rmd`
+(not the `README.md`). Do not forget to update the `README.md` by running:
 
 ```r
 rmarkdown::render("README.Rmd")
 ```
 
-
-
 #### Editing vignettes
 
-If you want to contribute by editing an existing vignette, just edit the 
+If you want to contribute by editing an existing vignette, just edit the
 corresponding `Rmd` file stored in the `vignettes/` folder.
 
-If you want to contribute by adding a new vignette, create a new `Rmd` file in 
+If you want to contribute by adding a new vignette, create a new `Rmd` file in
 the `vignettes/` folder and add the following header:
 
 ```yaml
@@ -194,22 +199,20 @@ vignette: >
 ---
 ```
 
-If you use a new external dependency, do not forget to add it in the `DESCRIPTION` 
-file under the section `Suggests` (only if this package is not already listed 
+If you use a new external dependency, do not forget to add it in the `DESCRIPTION`
+file under the section `Suggests` (only if this package is not already listed
 under the section `Imports`).
 
-Check the integrity of the package with: 
+Check the integrity of the package with:
 
 ```r
 devtools::check()
 ```
 
-
-
 #### Editing function documentation
 
-If you want to contribute by improving the documentation of a function, open 
-the corresponding file in the `R/` folder and edit lines starting with `#'` 
+If you want to contribute by improving the documentation of a function, open
+the corresponding file in the `R/` folder and edit lines starting with `#'`
 ([roxygen2](https://roxygen2.r-lib.org/articles/roxygen2.html) syntax).
 
 Update the documentation (`Rd` files in the `man/` folder) by running:
@@ -218,33 +221,31 @@ Update the documentation (`Rd` files in the `man/` folder) by running:
 devtools::document()
 ```
 
-If you use a new external dependency in the example section, do not forget to 
-add it in the `DESCRIPTION` file under the section `Imports` (only if this 
+If you use a new external dependency in the example section, do not forget to
+add it in the `DESCRIPTION` file under the section `Imports` (only if this
 package is not already listed).
 
-Check the integrity of the package with: 
+Check the integrity of the package with:
 
 ```r
 devtools::check()
 ```
-
-
 
 ### Fix bug
 
-If you want to contribute by improving the code of a function, open and edit 
+If you want to contribute by improving the code of a function, open and edit
 the corresponding file in the `R/` folder.
 
-Check the integrity of the package with: 
+Check the integrity of the package with:
 
 ```r
 devtools::check()
 ```
 
-Do not forget to adapt the 
-[unit tests](https://r-pkgs.org/testing-basics.html#introducing-testthat) for 
-the function by editing the corresponding file stored in the `tests/testthat/` 
-folder. We use the package [`testthat`](https://testthat.r-lib.org/) to 
+Do not forget to adapt the
+[unit tests](https://r-pkgs.org/testing-basics.html#introducing-testthat) for
+the function by editing the corresponding file stored in the `tests/testthat/`
+folder. We use the package [`testthat`](https://testthat.r-lib.org/) to
 implement unit tests.
 
 Check your tests by running:
@@ -253,11 +254,9 @@ Check your tests by running:
 devtools::test()
 ```
 
-
-
 ### New feature
 
-If you want to contribute by submitting a new feature, please follow this 
+If you want to contribute by submitting a new feature, please follow this
 workflow:
 
 1. Create a new `R` file in the folder `R/`.
