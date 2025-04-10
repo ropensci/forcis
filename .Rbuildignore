@@ -6,6 +6,7 @@
 ^README\.html$
 ^\.github$
 ^_pkgdown\.yml$
+^pkgdown$
 ^rscripts$
 ^CITATION\.cff$
 ^CONTRIBUTING\.md$
