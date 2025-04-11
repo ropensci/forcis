@@ -176,7 +176,6 @@ clean_cache <- function(version = NULL, path = NULL) {
     # If using a custom path
     if (!is.null(path)) {
       appname_dir <- dirname(data_dir)
-      print(appname_dir)
 
       # Remove the appname directory and everything under it
       unlink(appname_dir, recursive = TRUE)
@@ -240,7 +239,10 @@ verify_file_checksum <- function(file_path, expected_checksum) {
     actual_value <- tools::md5sum(file_path)
   } else {
     # Default to md5 if algorithm is not supported
-    warning("Unsupported checksum algorithm: ", algorithm, ". Falling back to MD5.")
+    warning(
+      "Unsupported checksum algorithm: ", algorithm,
+      ". Falling back to MD5."
+    )
     actual_value <- tools::md5sum(file_path)
   }
 
@@ -263,7 +265,7 @@ check_local_files <- function(file_info, version_dir) {
   valid <- logical(nrow(file_info))
 
   # Check each file
-  for (i in 1:nrow(file_info)) {
+  for (i in seq_len(nrow(file_info))) {
     file_path <- file.path(version_dir, file_info$filename[i])
 
     # Check if file exists

@@ -7,6 +7,16 @@ repos:
       - id: style-files
         args: [--style_pkg=styler, --style_fun=tidyverse_style]
       - id: roxygenize
+        additional_dependencies:
+          - ggplot2
+          - httr2
+          - rlang
+          - sf
+          - tibble
+          - tidyr
+          - utils
+          - vroom
+          - backports
       # codemeta must be above use-tidy-description when both are used
       # -   id: codemeta-description-updated
       - id: use-tidy-description
@@ -41,6 +51,18 @@ repos:
           data/.*|
           )$
       - id: lintr
+        args: [--load_package]
+        additional_dependencies:
+          - r-lib/lintr
+          - ggplot2
+          - httr2
+          - rlang
+          - sf
+          - tibble
+          - tidyr
+          - utils
+          - vroom
+          - backports
       - id: readme-rmd-rendered
       - id: parsable-R
       - id: no-browser-statement
