@@ -60,7 +60,7 @@ get_option <- function(name, default = NULL) {
   # Get option value
   value <- getOption(full_name, default)
 
-  return(value)
+  value
 }
 
 #' Set package option
@@ -79,9 +79,9 @@ set_option <- function(name, value) {
   old_value <- getOption(full_name)
 
   # Set new value
-  options(list = structure(list(value), names = full_name))
+  options(structure(list(value), names = full_name))
 
-  return(invisible(old_value))
+  invisible(old_value)
 }
 
 #' Log message with timestamp
@@ -105,5 +105,5 @@ log_message <- function(..., level = "INFO") {
     message(msg)
   }
 
-  return(invisible(NULL))
+  invisible(NULL)
 }
