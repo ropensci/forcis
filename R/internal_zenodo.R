@@ -92,11 +92,15 @@ check_version <- function(version) {
 
 #' Get Zenodo latest version
 #'
+#' @param res API single response from Zenodo
 #' @return Character string with the latest version number
 #' @noRd
-get_latest_version <- function() {
-  versions <- get_metadata(version = "latest")
-  versions <- extract_single_version(versions)
+get_latest_version <- function(res = NULL) {
+  if (is.null(res)) {
+    res <- get_metadata(version = "latest")
+  }
+
+  versions <- extract_single_version(res)
   versions <- versions$version
 }
 
@@ -175,12 +179,16 @@ save_version <- function(version) {
 #' @param version Version to retrieve metadata for
 #' @return List with JSON response from Zenodo API
 #' @noRd
-get_metadata <- function(version = "latest") {
+get_metadata <- function(version = NULL) {
+  if (is.null(version)) version <- "latest" # tmp to avoid breaking it
+  check_version(version)
   tryCatch(
     {
+      log_message("Zenodo API: Loading metadata...")
       http_request <- build_http_request(version)
       http_response <- httr2::req_perform(http_request)
       httr2::resp_check_status(http_response)
+      log_message("Zenodo API: metadata has been loaded successfully!")
       httr2::resp_body_json(http_response)
     },
     error = function(e) {
