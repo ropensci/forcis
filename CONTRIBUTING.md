@@ -52,7 +52,7 @@ If you want to contribute by commiting changes, please try to use the
 [Conventional commits](https://www.conventionalcommits.org/en/v1.0.0/)
 specification.
 
-### Setting up pre-commit hooks
+### Setting up pre-commit hooks (optional)
 
 We recommend using [pre-commit](https://pre-commit.com/) to automatically check your code before committing. This ensures style consistency and prevents committing code with style issues.
 
@@ -157,7 +157,7 @@ We use the [GitHub flow](https://docs.github.com/en/get-started/quickstart/githu
     styler::style_pkg()       # Fix code style
     lintr::lint_package()     # Check for style issues
     goodpractice::gp()        # Check for good practices
-    pkgdown::pkgdown_sitrep() # check site problems
+    pkgdown::pkgdown_sitrep() # Check site problems
     devtools::document()      # Update documentation
     devtools::test()          # Run tests
     devtools::check()         # Comprehensive package check
