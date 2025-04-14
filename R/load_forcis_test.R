@@ -13,7 +13,7 @@ load_forcis_test <- function(
     name,
     version = NULL,
     path = NULL,
-    cached = FALSE) {
+    cached = TRUE) {
   # Check if name is valid
   validate_dataset_name(name = name)
 
@@ -102,7 +102,7 @@ load_forcis_test <- function(
     files_to_download <- file_status[file_status$needs_download, ]
     download_missing_files(files_to_download, version_cache_dir)
 
-    # Re-check local files (update status after download)
+    # Re-check the status of files that were downloaded
     file_status <- check_local_files(dataset_files_info, version_cache_dir)
   }
 
@@ -119,7 +119,6 @@ load_forcis_test <- function(
       show_col_types = FALSE
     )
 
-    data <- as.data.frame(data)
     data <- add_data_type(data, display_name)
 
     ## Check and convert columns ----
@@ -128,16 +127,21 @@ load_forcis_test <- function(
     if (is.null(columns_to_process)) {
       columns_to_process <- get_species_names(data)
     } else {
-      # For explicit columns, verify they exist
-      for (col in columns_to_process) {
-        check_field_in_data(data, col)
+      # Verify all columns exist at once
+      missing_cols <- setdiff(columns_to_process, names(data))
+      if (length(missing_cols) > 0) {
+        stop("Missing columns in data: ",
+          paste(missing_cols, collapse = ", "),
+          call. = FALSE
+        )
       }
     }
 
     # Process all columns
-    for (col in columns_to_process) {
-      data[[col]] <- as.numeric(data[[col]])
-    }
+    data[columns_to_process] <- lapply(
+      data[columns_to_process],
+      as.numeric
+    )
   } else {
     message(
       "Oops! something went wrong!",

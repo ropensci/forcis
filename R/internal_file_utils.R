@@ -178,27 +178,9 @@ clean_cache <- function(version = NULL, path = NULL, filename = NULL) {
       return(TRUE)
     }
 
-    # If using a custom path
-    if (!is.null(path)) {
-      appname_dir <- dirname(data_dir)
-
-      # Remove the appname directory and everything under it
-      unlink(appname_dir, recursive = TRUE)
-      message("Cleaned all cached data and directory structure")
-    } else {
-      # For standard path, just clean everything under the data directory
-      contents <- list.files(data_dir,
-        full.names = TRUE, all.files = TRUE,
-        include.dirs = TRUE, no.. = TRUE
-      )
-
-      if (length(contents) > 0) {
-        vapply(contents, unlink, recursive = TRUE, FUN.VALUE = logical(1))
-        message("Cleaned all cached versions")
-      } else {
-        message("Cache is already empty")
-      }
-    }
+    # Remove the appname directory and everything under it
+    unlink(data_dir, recursive = TRUE)
+    message("Cleaned all cached data: ", data_dir)
   }
 
   invisible(TRUE)
