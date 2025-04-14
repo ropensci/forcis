@@ -294,49 +294,57 @@ check_local_files <- function(file_info, version_dir) {
 
 #' Download missing or tampered files
 #'
-#' Downloads only those that are missing or tampered.
+#' Downloads only those files that are missing or tampered.
 #'
-#' @param file_info Data frame with file information
+#' @param files_info Data frame with file information
 #' @param version_dir The directory where files should be stored
 #' @return NULL invisibly
 #' @noRd
 download_missing_files <- function(files_info, version_dir) {
-  # Loop through files and check if they need to be downloaded
-  for (i in seq_len(nrow(files_info))) {
-    file_path <- file.path(version_dir, files_info$filename[i])
+  # Check if status columns already exist in files_info
+  status_columns <- c("exists", "valid", "needs_download")
+  status_columns_exist <- all(status_columns %in% names(files_info))
 
-    # Check if file exists and is valid
-    if (!file.exists(file_path)) {
-      message(sprintf(
-        "File %s is missing, downloading...",
-        files_info$filename[i]
-      ))
-      needs_download <- TRUE
-    } else if (!verify_file_checksum(
-      file_path,
-      files_info$checksum[i]
-    )) {
-      message(sprintf(
-        "File %s is tampered, re-downloading...",
-        files_info$filename[i]
-      ))
-      needs_download <- TRUE
-    } else {
-      message(sprintf(
-        "File %s is valid",
-        files_info$filename[i]
-      ))
-      needs_download <- FALSE
-    }
+  status_info <- if (status_columns_exist) {
+    files_info
+  } else {
+    check_local_files(files_info, version_dir)
+  }
 
-    # Download if needed
-    if (needs_download) {
+  # Extract files that need downloading (missing or invalid)
+  files_to_download <- status_info[status_info$needs_download, ]
+
+  # Download each file that needs it
+  if (nrow(files_to_download) > 0) {
+    for (i in seq_len(nrow(files_to_download))) {
+      # Display appropriate message based on status
+      if (!files_to_download$exists[i]) {
+        message(sprintf(
+          "File %s is missing, downloading...",
+          files_to_download$filename[i]
+        ))
+      } else {
+        message(sprintf(
+          "File %s is tampered, re-downloading...",
+          files_to_download$filename[i]
+        ))
+      }
+
+      # Download the file
       download_file(
-        url = files_info$url[i],
-        file = files_info$filename[i],
+        url = files_to_download$url[i],
+        file = files_to_download$filename[i],
         path = version_dir,
         overwrite = TRUE
       )
+    }
+  }
+
+  # Log valid files
+  valid_files <- status_info[!status_info$needs_download, ]
+  if (nrow(valid_files) > 0) {
+    for (i in seq_len(nrow(valid_files))) {
+      message(sprintf("File %s is valid", valid_files$filename[i]))
     }
   }
 
