@@ -372,3 +372,60 @@ remove_unnecessary_fields <- function(data, fields) {
   }
   data
 }
+
+#' Extract metadata for a specific version from a Zenodo API response
+#'
+#' This function searches through a Zenodo API response to find metadata
+#' for a specific version of a record.
+#'
+#' @param res A list containing the Zenodo API response. Must contain
+#'        nested elements 'hits' and 'hits$hits'.
+#' @param version A character string representing
+#'                the version number to search for.
+#'
+#' @return A list containing the complete metadata for the specified version
+#'         if found, or NULL if no matching version is found.
+#' @noRd
+extract_version_metadata <- function(res, version) {
+  validate_zenodo_response(res, c("hits", "hits$hits"))
+  hits <- res$hits$hits
+  for (hit in hits) {
+    validate_zenodo_response(hit, c("metadata"))
+    if (!is.null(hit$metadata$version) && hit$metadata$version == version) {
+      return(hit)
+    }
+  }
+  NULL
+}
+
+#' Get file URLs from record metadata
+#'
+#' Extracts file information from a Zenodo record's metadata
+#'
+#' @param metadata The record metadata
+#' @param prefix_filter Optional prefix to filter filenames (default: NULL)
+#' @return A data frame with file information (filename, url, size, checksum)
+#' @noRd
+get_files_info <- function(metadata, prefix_filter = NULL) {
+  # Extract files information
+  files <- metadata$files
+
+  # Filter files by prefix if needed
+  if (!is.null(prefix_filter)) {
+    files <- files[vapply(
+      files,
+      function(x) startsWith(x$key, prefix_filter), logical(1)
+    )]
+  }
+
+  # Create data frame with file information
+  file_info <- data.frame(
+    filename = vapply(files, function(x) x$key, character(1)),
+    url = vapply(files, function(x) x$links$self, character(1)),
+    size = vapply(files, function(x) x$size, numeric(1)),
+    checksum = vapply(files, function(x) x$checksum, character(1)),
+    stringsAsFactors = FALSE
+  )
+
+  file_info
+}

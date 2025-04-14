@@ -11,8 +11,6 @@ download_file <- function(url, path, file, overwrite = FALSE, timeout = 60) {
   url <- utils::URLencode(url)
   file <- gsub("\\s", "_", file)
 
-  check_if_path_exists(path)
-
   ## Check if the file already exists ----
 
   destination <- file.path(path, file)
@@ -147,9 +145,9 @@ list_cached_versions <- function(path = NULL) {
 #' @param version Specific version to clean (NULL to clean all)
 #' @param path Optional custom path for the data directory. If NULL (default),
 #'        uses the standard user data directory
-#' @return TRUE if successful
+#' @return invisible TRUE if successful
 #' @noRd
-clean_cache <- function(version = NULL, path = NULL) {
+clean_cache <- function(version = NULL, path = NULL, filename = NULL) {
   # Get appropriate directory
   if (!is.null(version)) {
     # Get version directory
@@ -161,9 +159,16 @@ clean_cache <- function(version = NULL, path = NULL) {
       return(FALSE)
     }
 
-    # Remove version directory
-    unlink(target_dir, recursive = TRUE)
-    message("Cleaned cache for version ", version)
+    if (!is.null(filename)) {
+      # Remove dataset file
+      file_path <- file.path(target_dir, filename)
+      unlink(file_path)
+      message("Cleaned cache file: ", filename)
+    } else {
+      # Remove version directory
+      unlink(target_dir, recursive = TRUE)
+      message("Cleaned cache for version ", version)
+    }
   } else {
     # For cleaning everything
     data_dir <- get_data_dir(path = path)
@@ -196,7 +201,7 @@ clean_cache <- function(version = NULL, path = NULL) {
     }
   }
 
-  TRUE
+  invisible(TRUE)
 }
 
 #' Clean a version string for use as a directory name
@@ -285,4 +290,55 @@ check_local_files <- function(file_info, version_dir) {
   file_info$needs_download <- !exists | !valid
 
   file_info
+}
+
+#' Download missing or tampered files
+#'
+#' Downloads only those that are missing or tampered.
+#'
+#' @param file_info Data frame with file information
+#' @param version_dir The directory where files should be stored
+#' @return NULL invisibly
+#' @noRd
+download_missing_files <- function(files_info, version_dir) {
+  # Loop through files and check if they need to be downloaded
+  for (i in seq_len(nrow(files_info))) {
+    file_path <- file.path(version_dir, files_info$filename[i])
+
+    # Check if file exists and is valid
+    if (!file.exists(file_path)) {
+      message(sprintf(
+        "File %s is missing, downloading...",
+        files_info$filename[i]
+      ))
+      needs_download <- TRUE
+    } else if (!verify_file_checksum(
+      file_path,
+      files_info$checksum[i]
+    )) {
+      message(sprintf(
+        "File %s is tampered, re-downloading...",
+        files_info$filename[i]
+      ))
+      needs_download <- TRUE
+    } else {
+      message(sprintf(
+        "File %s is valid",
+        files_info$filename[i]
+      ))
+      needs_download <- FALSE
+    }
+
+    # Download if needed
+    if (needs_download) {
+      download_file(
+        url = files_info$url[i],
+        file = files_info$filename[i],
+        path = version_dir,
+        overwrite = TRUE
+      )
+    }
+  }
+
+  invisible(NULL)
 }

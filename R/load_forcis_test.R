@@ -21,18 +21,20 @@ load_forcis_test <- function(
   metadata <- forcis_datasets_info()
   dataset_info <- metadata[[name]]
   display_name <- dataset_info$name
-  file_pattern <- dataset_info$filename_prefix
+  dataset_file_pattern <- dataset_info$filename_prefix
   columns_to_process <- dataset_info$columns
 
   ## Check args ----
-  # check_if_character(path)
+
   if (!is.null(version)) {
     check_version(version)
   }
 
-  ## Get metadata from Zenodo
+  ## Get metadata from Zenodo ---
+
   zenodo_metadata <- get_metadata(version = version)
 
+  ## Verify version & extract single metadata ---
 
   if (is.null(version) || version == "latest") {
     # zenodo_metadata is a single response (latest endpoint)
@@ -42,14 +44,16 @@ load_forcis_test <- function(
     version_to_use <- latest_version
   } else {
     # zenodo_metadata is a multi response (search endpoint)
-    # metadata could contain one or zero hit(s)
-    # either check "total" or "hits" length
-    # if "total" is 0 mean version doesn't exist (no hit)
-    # if "total" is 1 mean version exist (a hit) need to verify version
-    # if "total" > 1 something wrong :)
     validate_zenodo_response(zenodo_metadata, c("hits", "hits$hits"))
-    if (zenodo_metadata$hits$total == 1) {
+    # Extract metadata of a single hit
+    zenodo_metadata <- extract_version_metadata(
+      res = zenodo_metadata,
+      version = version
+    )
+    # verify version for example: API could return version 09 & 9 for version 9
+    if (!is.null(zenodo_metadata)) {
       log_message("Version exist: ", version)
+      version_to_use <- version
     } else {
       log_message("Version doen't exist: ", version)
       # List available versions
@@ -73,78 +77,83 @@ load_forcis_test <- function(
     }
   }
 
+  ## Check cache and files to download ---
 
+  log_message("Dataset version to use: ", version_to_use)
 
+  # Get version directory
+  version_cache_dir <- get_data_dir(
+    version = version_to_use,
+    path = path,
+    create = TRUE
+  )
+  log_message("Dataset cache path: ", version_cache_dir)
 
-  # # TODO: download only files related to the specified dataset
-  # # TODO: debate whether to download the extra files like the boubdries file
+  # Get dataset files information
+  dataset_files_info <- get_files_info(zenodo_metadata,
+    prefix_filter = dataset_file_pattern
+  )
 
-  # ## Check local database ----
-  # path <- file.path(path, "forcis-db", paste0("version-", version))
+  # Check local files
+  file_status <- check_local_files(dataset_files_info, version_cache_dir)
 
-  # if (!dir.exists(path)) {
-  #   stop(
-  #     "The directory '", path,
-  #     "' does not exist. Please check the ",
-  #     "argument 'path' or use the function 'download_forcis_db()'.",
-  #     call. = FALSE
-  #   )
-  # }
+  # Download missing or tampered files
+  if (any(file_status$needs_download)) {
+    files_to_download <- file_status[file_status$needs_download, ]
+    download_missing_files(files_to_download, version_cache_dir)
 
-  # ## Check file ----
+    # Re-check local files (update status after download)
+    file_status <- check_local_files(dataset_files_info, version_cache_dir)
+  }
 
-  # file_name <- list.files(path, pattern = file_pattern)
+  ## Read dataset data ---
 
-  # if (!length(file_name)) {
-  #   stop(
-  #     "The ", display_name, " dataset does not exist. Please use the function ",
-  #     "'download_forcis_db()'.",
-  #     call. = FALSE
-  #   )
-  # }
+  # Dataset file has been downloaded & should be valid
+  data <- NULL
+  if (file_status$exists && file_status$valid) {
+    ## Read data ----
+    data <- vroom::vroom(
+      file.path(version_cache_dir, file_status$filename),
+      delim = ";",
+      altrep = FALSE,
+      show_col_types = FALSE
+    )
 
-  # ## Check for update ----
-  # # TODO: remove the check for update
-  # if (is.null(check_for_update)) {
-  #   check_for_update <- TRUE
-  # }
+    data <- as.data.frame(data)
+    data <- add_data_type(data, display_name)
 
-  # if (check_for_update) {
-  #   if (version != get_latest_version()) {
-  #     message(
-  #       "A newer version of the FORCIS database is available. Use ",
-  #       "'download_forcis_db(version = NULL)' to download it."
-  #     )
-  #   }
-  # }
+    ## Check and convert columns ----
+    # If we have specific columns to process, use them
+    # Otherwise, get species names from data
+    if (is.null(columns_to_process)) {
+      columns_to_process <- get_species_names(data)
+    } else {
+      # For explicit columns, verify they exist
+      for (col in columns_to_process) {
+        check_field_in_data(data, col)
+      }
+    }
 
-  # ## Read data ----
-  # data <- vroom::vroom(
-  #   file.path(path, file_name),
-  #   delim = ";",
-  #   altrep = FALSE,
-  #   show_col_types = FALSE
-  # )
+    # Process all columns
+    for (col in columns_to_process) {
+      data[[col]] <- as.numeric(data[[col]])
+    }
+  } else {
+    message(
+      "Oops! something went wrong!",
+      "Please retry to load data again..."
+    )
+  }
 
-  # data <- as.data.frame(data)
-  # data <- add_data_type(data, display_name)
+  # Clean up if not caching
+  if (!cached) {
+    log_message("Cache disabled, cleaning up files")
+    clean_cache(
+      version = version_to_use,
+      path = path,
+      filename = file_status$filename
+    )
+  }
 
-  # ## Check and convert columns ----
-  # # If we have specific columns to process, use them
-  # # Otherwise, get species names from data
-  # if (is.null(columns_to_process)) {
-  #   columns_to_process <- get_species_names(data)
-  # } else {
-  #   # For explicit columns, verify they exist
-  #   for (col in columns_to_process) {
-  #     check_field_in_data(data, col)
-  #   }
-  # }
-
-  # # Process all columns
-  # for (col in columns_to_process) {
-  #   data[[col]] <- as.numeric(data[[col]])
-  # }
-
-  # tibble::as_tibble(data)
+  tibble::as_tibble(data)
 }
