@@ -192,7 +192,7 @@ get_metadata <- function(version = NULL) {
       httr2::resp_body_json(http_response)
     },
     error = function(e) {
-      stop("Zenodo API: Failed to retrieve metadata.",
+      stop("Zenodo API: Failed to retrieve metadata. ",
         e$message,
         call. = FALSE
       )

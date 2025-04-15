@@ -1,11 +1,9 @@
-# TODO: custom path should be NULL by default (R_user_dir)
-
 #' Load a FORCIS dataset by name
 #'
 #' @param path The directory path to read from
-#' @param version Database version to use (TODO: should be NULL by default)
+#' @param version Database version to use, NULL by default
 #' @param name Key identifying the dataset ("net", "pump", etc.)
-#' @param cached TODO: for later use (cache dataset on local storage)
+#' @param cached Logical, TRUE by default to cache dataset file & metadata
 #'
 #' @return A tibble containing the dataset
 #' @noRd
@@ -67,28 +65,20 @@ load_forcis_test <- function(
   ## Verify version & extract single metadata ---
 
   if (is.null(version) || version == "latest") {
-    # zenodo_metadata is a single response (latest endpoint)
+    ## zenodo_metadata is a single response (latest endpoint) ---
+
     validate_zenodo_response(zenodo_metadata, c("metadata"))
     set_option("latest_version", zenodo_metadata$metadata$version)
-
-    # save package options to refresh cached meta (eg. 7 days)
-    set_option(
-      "latest_version_access_right",
-      zenodo_metadata$metadata$access_right
-    )
-    set_option(
-      "latest_version_publication_date",
-      zenodo_metadata$metadata$publication_date
-    )
-    set_option("latest_version_check_date", Sys.time())
 
     version_to_use <- get_option("latest_version")
     log_message("Latest version: ", version_to_use)
   } else {
-    if (!cached) {
-      # zenodo_metadata is a multi response (search endpoint)
-      validate_zenodo_response(zenodo_metadata, c("hits", "hits$hits"))
+    ## zenodo_metadata is a multi response (search endpoint) ---
 
+    # cached metadata is a single hit
+    meta_cache_exist <- !is.null(meta_cache_path) &&
+      !file.exists(meta_cache_path)
+    if (!cached || meta_cache_exist) {
       # Extract metadata of a single hit
       zenodo_metadata <- extract_version_metadata(
         res = zenodo_metadata,
@@ -96,32 +86,34 @@ load_forcis_test <- function(
       )
     }
 
-    # verify version for example: API may return version 09 & 9 for v 9
-    if (!is.null(zenodo_metadata)) {
-      log_message("Version exist: ", version)
-      version_to_use <- version
-    } else {
-      log_message("Version doen't exist: ", version)
+    # Verify version and access rights
+    # Example: API may return version 09 & 9 for v 9
 
-      # List available versions
-      available_versions <- get_available_versions()
+    # Check if the version exists and matches first
+    not_found <- is.null(zenodo_metadata) ||
+      zenodo_metadata$metadata$version != version
+    if (not_found) {
+      log_message("Version doesn't exist: ", version)
       stop(
-        "Version \"", version, "\" doesn't exist.\n",
-        "Available versions are: ",
-        paste(
-          mapply(
-            function(ver, access, date) {
-              sprintf("\n\"%s\" (%s - %s)", ver, access, date)
-            },
-            available_versions$version,
-            available_versions$access_right,
-            available_versions$publication_date
-          ),
-          collapse = ", "
-        ),
+        "Error: Version \"", version, "\" doesn't exist.\n\n",
+        "Available options:\n",
+        "• Use `get_available_versions()` to retrieve version data\n",
+        "• Use `print_available_versions()` to display a formatted list ",
+        "of versions\n",
         call. = FALSE
       )
     }
+
+    # If the version exists, check access rights
+    if (zenodo_metadata$metadata$access_right != "open") {
+      stop(
+        "Error: Version \"", version, "\" exists but does not have open access!"
+      )
+    }
+
+    # If both checks pass, log and assign the version
+    log_message("Version found and has open access: ", version)
+    version_to_use <- version
   }
 
   ## Check cache and files to download ---
@@ -134,6 +126,7 @@ load_forcis_test <- function(
     path = path,
     create = TRUE
   )
+
   log_message("Dataset cache path: ", version_cache_dir)
 
   # Get dataset files information
