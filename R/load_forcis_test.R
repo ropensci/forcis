@@ -32,30 +32,77 @@ load_forcis_test <- function(
 
   ## Get metadata from Zenodo ---
 
-  zenodo_metadata <- get_metadata(version = version)
+  # Initialize zenodo_metadata to NULL
+  zenodo_metadata <- NULL
+
+  # Only do cache operations if caching is enabled
+  if (cached) {
+    # Resolve version
+    effective_version <- if (is.null(version) || version == "latest") {
+      get_option("latest_version")
+    } else {
+      version
+    }
+
+    # Check cache if we have a valid version
+    if (!is.null(effective_version)) {
+      meta_cache_path <- get_meta_cache_path(
+        version = effective_version,
+        path = path
+      )
+
+      # Load from cache if the file exists
+      if (file.exists(meta_cache_path)) {
+        zenodo_metadata <- readRDS(meta_cache_path)
+      }
+    }
+  }
+
+  # Fall back to API call if not loaded from cache
+  if (is.null(zenodo_metadata) || !cached) {
+    zenodo_metadata <- get_metadata(version = version)
+  }
+
 
   ## Verify version & extract single metadata ---
 
   if (is.null(version) || version == "latest") {
     # zenodo_metadata is a single response (latest endpoint)
     validate_zenodo_response(zenodo_metadata, c("metadata"))
-    latest_version <- zenodo_metadata$metadata$version
-    log_message("Current version: ", latest_version)
-    version_to_use <- latest_version
-  } else {
-    # zenodo_metadata is a multi response (search endpoint)
-    validate_zenodo_response(zenodo_metadata, c("hits", "hits$hits"))
-    # Extract metadata of a single hit
-    zenodo_metadata <- extract_version_metadata(
-      res = zenodo_metadata,
-      version = version
+    set_option("latest_version", zenodo_metadata$metadata$version)
+
+    # save package options to refresh cached meta (eg. 7 days)
+    set_option(
+      "latest_version_access_right",
+      zenodo_metadata$metadata$access_right
     )
-    # verify version for example: API could return version 09 & 9 for version 9
+    set_option(
+      "latest_version_publication_date",
+      zenodo_metadata$metadata$publication_date
+    )
+    set_option("latest_version_check_date", Sys.time())
+
+    version_to_use <- get_option("latest_version")
+    log_message("Latest version: ", version_to_use)
+  } else {
+    if (!cached) {
+      # zenodo_metadata is a multi response (search endpoint)
+      validate_zenodo_response(zenodo_metadata, c("hits", "hits$hits"))
+
+      # Extract metadata of a single hit
+      zenodo_metadata <- extract_version_metadata(
+        res = zenodo_metadata,
+        version = version
+      )
+    }
+
+    # verify version for example: API may return version 09 & 9 for v 9
     if (!is.null(zenodo_metadata)) {
       log_message("Version exist: ", version)
       version_to_use <- version
     } else {
       log_message("Version doen't exist: ", version)
+
       # List available versions
       available_versions <- get_available_versions()
       stop(
@@ -156,6 +203,12 @@ load_forcis_test <- function(
       version = version_to_use,
       path = path,
       filename = file_status$filename
+    )
+  } else {
+    # Save version metadata
+    saveRDS(
+      zenodo_metadata,
+      get_meta_cache_path(version = version_to_use, path = path)
     )
   }
 
