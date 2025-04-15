@@ -338,7 +338,7 @@ download_missing_files <- function(files_info, version_dir) {
 #' Constructs a file path to the Zenodo metadata cache file based on
 #' the specified version and base path.
 #'
-#' @param version_to_use The version of the data to use
+#' @param version The version of the data to use
 #' @param path The base path where data is stored
 #' @param filename The name of the metadata cache file
 #'                  (default: "zenodo_metadata.rds")
