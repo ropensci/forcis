@@ -12,8 +12,15 @@ load_forcis_test <- function(
     version = NULL,
     path = NULL,
     cached = TRUE) {
+  ## Check args ----
+
   # Check if name is valid
   validate_dataset_name(name = name)
+
+  # Check version
+  if (!is.null(version)) {
+    check_version(version)
+  }
 
   # Extract dataset-specific information
   metadata <- forcis_datasets_info()
@@ -22,37 +29,38 @@ load_forcis_test <- function(
   dataset_file_pattern <- dataset_info$filename_prefix
   columns_to_process <- dataset_info$columns
 
-  ## Check args ----
-
-  if (!is.null(version)) {
-    check_version(version)
-  }
-
   ## Get metadata from Zenodo ---
 
   # Initialize zenodo_metadata to NULL
   zenodo_metadata <- NULL
 
-  # Only do cache operations if caching is enabled
-  if (cached) {
-    # Resolve version
-    effective_version <- if (is.null(version) || version == "latest") {
-      get_option("latest_version")
-    } else {
-      version
+  # Resolve version for caching setting
+  effective_version <- if (is.null(version) || version == "latest") {
+    get_option("latest_version")
+  } else {
+    version
+  }
+
+  # Calculate meta_cache_path once
+  meta_cache_path <- NULL
+  if (!is.null(effective_version)) {
+    meta_cache_path <- get_meta_cache_path(
+      version = effective_version,
+      path = path
+    )
+  }
+
+  # Handle caching based on settings
+  if (cached && !is.null(meta_cache_path)) {
+    # Load from cache if the file exists
+    if (file.exists(meta_cache_path)) {
+      zenodo_metadata <- readRDS(meta_cache_path)
     }
-
-    # Check cache if we have a valid version
-    if (!is.null(effective_version)) {
-      meta_cache_path <- get_meta_cache_path(
-        version = effective_version,
-        path = path
-      )
-
-      # Load from cache if the file exists
-      if (file.exists(meta_cache_path)) {
-        zenodo_metadata <- readRDS(meta_cache_path)
-      }
+  } else if (!cached && !is.null(meta_cache_path)) {
+    # If not cached, clean up any metadata cache files
+    if (file.exists(meta_cache_path)) {
+      log_message("Removing cached metadata file: ", meta_cache_path)
+      file.remove(meta_cache_path)
     }
   }
 
@@ -60,7 +68,6 @@ load_forcis_test <- function(
   if (is.null(zenodo_metadata) || !cached) {
     zenodo_metadata <- get_metadata(version = version)
   }
-
 
   ## Verify version & extract single metadata ---
 
@@ -75,14 +82,18 @@ load_forcis_test <- function(
   } else {
     ## zenodo_metadata is a multi response (search endpoint) ---
 
+    version_to_use <- version
+
     # cached metadata is a single hit
-    meta_cache_exist <- !is.null(meta_cache_path) &&
-      !file.exists(meta_cache_path)
-    if (!cached || meta_cache_exist) {
+    meta_cache_path <- get_meta_cache_path(
+      version = version_to_use,
+      path = path
+    )
+    if (!cached || !file.exists(meta_cache_path)) {
       # Extract metadata of a single hit
       zenodo_metadata <- extract_version_metadata(
         res = zenodo_metadata,
-        version = version
+        version = version_to_use
       )
     }
 
@@ -90,16 +101,17 @@ load_forcis_test <- function(
     # Example: API may return version 09 & 9 for v 9
 
     # Check if the version exists and matches first
-    not_found <- is.null(zenodo_metadata) ||
-      zenodo_metadata$metadata$version != version
-    if (not_found) {
-      log_message("Version doesn't exist: ", version)
+    if (!is.null(zenodo_metadata)) {
+      short_ver <- zenodo_metadata$metadata$version
+    }
+
+    if (is.null(zenodo_metadata) || short_ver != version_to_use) {
+      log_message("Version doesn't exist: ", version_to_use)
       stop(
-        "Error: Version \"", version, "\" doesn't exist.\n\n",
+        "Error: Version \"", version_to_use, "\" doesn't exist.\n\n",
         "Available options:\n",
         "• Use `get_available_versions()` to retrieve version data\n",
-        "• Use `print_available_versions()` to display a formatted list ",
-        "of versions\n",
+        "• Use `print_available_versions()` to print versions list \n",
         call. = FALSE
       )
     }
@@ -110,10 +122,6 @@ load_forcis_test <- function(
         "Error: Version \"", version, "\" exists but does not have open access!"
       )
     }
-
-    # If both checks pass, log and assign the version
-    log_message("Version found and has open access: ", version)
-    version_to_use <- version
   }
 
   ## Check cache and files to download ---
