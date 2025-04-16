@@ -89,16 +89,47 @@ check_required_columns <- function(data) {
 
 #' Validate Zenodo API response format
 #'
-#' @param res API response from Zenodo
-#' @param required_fields Character vector of required fields
+#' @param res API response from Zenodo (should be a list)
+#' @param required_fields Character vector of required field names.
+#'        Nested fields can be specified using '$' (e.g., "hits$hits").
 #' @return NULL invisibly, raises an error if the required fields are missing
 #' @noRd
 validate_zenodo_response <- function(res, required_fields) {
+  # Check if res is a list
+  if (!is.list(res)) {
+    stop("Input 'res' must be a list.", call. = FALSE)
+  }
+
   for (field in required_fields) {
-    if (is.null(eval(parse(text = paste0("res$", field))))) {
-      stop("Invalid response format from Zenodo API", call. = FALSE)
+    # Split field string by '$' to handle potential nesting
+    field_parts <- strsplit(field, "$", fixed = TRUE)[[1]]
+
+    # Start at the top level of the response
+    current_obj <- res
+    field_exists <- TRUE
+
+    # Navigate through the nested structure
+    for (part in field_parts) {
+      if (is.list(current_obj) && part %in% names(current_obj)) {
+        current_obj <- current_obj[[part]]
+        if (is.null(current_obj)) {
+          field_exists <- FALSE
+          break
+        }
+      } else {
+        field_exists <- FALSE
+        break
+      }
+    }
+
+    if (!field_exists) {
+      stop("Invalid response format from Zenodo API: Missing required field '",
+        field, "'",
+        call. = FALSE
+      )
     }
   }
+
   invisible(NULL)
 }
 
