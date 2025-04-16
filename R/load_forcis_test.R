@@ -191,9 +191,11 @@ load_forcis_test <- function(
       as.numeric
     )
   } else {
-    message(
-      "Oops! something went wrong!",
-      "Please retry to load data again..."
+    # corrupted data due to network maybe O_O
+    stop(
+      "Ahoy, matey! Trouble on the high seas of data!",
+      "Our data loading ship has encountered a rogue wave. ",
+      "Please retry to brave the ocean again!"
     )
   }
 
@@ -213,5 +215,6 @@ load_forcis_test <- function(
     )
   }
 
+  # vroom return a tibble but just in case
   tibble::as_tibble(data)
 }
