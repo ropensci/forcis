@@ -110,8 +110,8 @@ load_forcis_test <- function(
       stop(
         "Error: Version \"", version_to_use, "\" doesn't exist.\n\n",
         "Available options:\n",
-        "• Use `get_available_versions()` to retrieve version data\n",
-        "• Use `print_available_versions()` to print versions list \n",
+        "- Use `get_available_versions()` to retrieve version data\n",
+        "- Use `print_available_versions()` to print versions list \n",
         call. = FALSE
       )
     }
