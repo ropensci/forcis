@@ -50,6 +50,8 @@ read_plankton_nets_data <- function(
     path = ".",
     version = options()$"forcis_version",
     check_for_update = options()$"forcis_check_for_update") {
+  .Deprecated("load_forcis")
+
   ## Check args ----
 
   check_if_character(path)
