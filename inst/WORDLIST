@@ -4,6 +4,7 @@ bslib
 commiting
 cpr
 desc
+foraminifera
 forcis
 frbcesab
 ggmap
@@ -15,10 +16,13 @@ io
 lintr
 md
 navbar
+planktonic
 pre
 README
 repo
 rOpenSci
 roxygen
 styler
+tibble
 Tidyverse
+Zenodo

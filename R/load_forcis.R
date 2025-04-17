@@ -45,10 +45,10 @@
 #' and converting columns to appropriate types. When caching is enabled, files
 #' are saved locally to speed up future access to the same dataset.
 #'
-#' The forcis database provides global distribution data for planktonic
+#' The FORCIS database provides global distribution data for planktonic
 #' foraminifera collected using various methods.
 #'
-#' @noRd
+#' @export
 load_forcis <- function(
     name,
     version = NULL,

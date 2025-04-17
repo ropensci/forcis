@@ -33,6 +33,7 @@ reference:
   desc: >
     Functions to download and import FORCIS database
   contents:
+    - load_forcis
     - download_forcis_db
     - read_cpr_north_data
     - read_cpr_south_data
