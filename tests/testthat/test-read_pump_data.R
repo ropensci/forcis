@@ -9,7 +9,7 @@ test_that("Test read_pump_data() for error", {
   create_tempdir()
 
   expect_error(
-    read_pump_data(version = "07"),
+    suppressWarnings(read_pump_data(version = "07")),
     paste0(
       "The directory './forcis-db/version-07' does not exist. ",
       "Please check the argument 'path' or use the function ",
@@ -21,7 +21,7 @@ test_that("Test read_pump_data() for error", {
   dir.create(file.path("forcis-db", "version-07"), recursive = TRUE)
 
   expect_error(
-    read_pump_data(version = "07"),
+    suppressWarnings(read_pump_data(version = "07")),
     paste0(
       "The Pump dataset does not exist. Please use the ",
       "function 'download_forcis_db()'."
@@ -41,7 +41,9 @@ test_that("Test read_pump_data() for success", {
     row.names = FALSE
   )
 
-  x <- read_pump_data(version = "07", check_for_update = FALSE)
+  x <- suppressWarnings(
+    read_pump_data(version = "07", check_for_update = FALSE)
+  )
 
   expect_true("data.frame" %in% class(x))
   expect_equal(ncol(x), 3L)
@@ -52,7 +54,7 @@ test_that("Test read_pump_data() for success", {
 
   expect_message(
     {
-      x <- read_pump_data(version = "07")
+      x <- suppressWarnings(read_pump_data(version = "07"))
     },
     paste0(
       "A newer version of the FORCIS database is available. ",
