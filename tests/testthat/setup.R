@@ -21,3 +21,7 @@ create_tempdir <- function(path = file.path(tempdir(), "sandbox")) {
 ## Setup httptest2
 
 library(httptest2)
+
+## Setup mockery
+
+library(mockery)
