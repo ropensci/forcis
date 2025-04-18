@@ -66,6 +66,5 @@ Suggests:
     testthat (>= 3.0.0),
     vdiffr,
     withr,
-    lintr,
-    styler
+    lintr
 Config/testthat/edition: 3

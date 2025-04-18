@@ -29,17 +29,28 @@ unacceptable behavior to <nicolas.casajus@fondationbiodiversite.fr>.
 
 We use the [Tidyverse style guide](https://style.tidyverse.org/) for writing R code. To ensure code consistency:
 
-- Use [styler](https://github.com/r-lib/styler/) to automatically format your R code
+- Use [air](https://github.com/posit-dev/air) to automatically format your R code
 - Use [lintr](https://github.com/r-lib/lintr) to identify style and possible syntax issues
 - Use [goodpractice](https://github.com/mangothecat/goodpractice) to ensure rOpenSci best practices
 
 Before submitting a PR, please run these checks:
 
-```r
-styler::style_pkg()
-lintr::lint_package()
-goodpractice::gp()
-```
+- In a terminal:
+
+  ```bash
+  # dry run to check for unformatted files
+  air format . --check
+
+  # format files
+  air format .
+  ```
+
+- in R console:
+
+  ```r
+  lintr::lint_package()
+  goodpractice::gp()
+  ```
 
 Functions are documented with the
 [roxygen2](https://roxygen2.r-lib.org/articles/roxygen2.html) syntax.
@@ -154,7 +165,6 @@ We use the [GitHub flow](https://docs.github.com/en/get-started/quickstart/githu
 6. Run automated checks:
 
     ```r
-    styler::style_pkg()       # Fix code style
     lintr::lint_package()     # Check for style issues
     goodpractice::gp()        # Check for good practices
     pkgdown::pkgdown_sitrep() # Check site problems
