@@ -13,6 +13,8 @@ Invisibly returns NULL, but prints output to console.
 Prints a human-readable formatted list of all available versions.
 }
 \examples{
+\dontrun{
 print_available_versions()
+}
 
 }

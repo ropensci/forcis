@@ -3,8 +3,11 @@
 #' Prints a human-readable formatted list of all available versions.
 #'
 #' @return Invisibly returns NULL, but prints output to console.
+#'
 #' @examples
+#' \dontrun{
 #' print_available_versions()
+#' }
 #'
 #' @export
 print_available_versions <- function() {
