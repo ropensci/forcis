@@ -37,6 +37,7 @@
 #'
 #' # Dimensions of the data.frame ----
 #' dim(net_data)
+
 select_taxonomy <- function(data, taxonomy) {
   ## Check args ----
 

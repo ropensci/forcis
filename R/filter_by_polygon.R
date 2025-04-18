@@ -46,6 +46,7 @@
 #'
 #' # Dimensions of the data.frame ----
 #' dim(net_data_sub)
+
 filter_by_polygon <- function(data, polygon) {
   ## Check ocean names ----
 

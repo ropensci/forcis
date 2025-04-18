@@ -22,6 +22,7 @@
 #'
 #' # Plot data by year (example dataset) ----
 #' plot_record_by_depth(net_data)
+
 plot_record_by_depth <- function(data) {
   ## Check data object ----
 

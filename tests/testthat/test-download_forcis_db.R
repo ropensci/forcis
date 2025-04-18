@@ -13,7 +13,6 @@ with_mock_dir(
 
 ## download_forcis_db() ----
 
-
 test_that("Test download_forcis_db() for success", {
   create_tempdir()
 

@@ -34,6 +34,7 @@
 #'
 #' # Dimensions of the data.frame ----
 #' dim(net_data_sub)
+
 filter_by_month <- function(data, months) {
   ## Check data object ----
 

@@ -2,36 +2,42 @@
 #'
 #' @return Character string with the concept record ID
 #' @noRd
+
 zenodo_conceptrecid <- function() "7390791"
 
 #' Zenodo Record identifier (for v10)
 #'
 #' @return Character string with the record ID
 #' @noRd
+
 zenodo_record_id <- function() "12724286"
 
 #' Zenodo Page Size
 #'
 #' @return Numeric value for page size
 #' @noRd
+
 zenodo_page_size <- function() 999
 
 #' Zenodo API base URL
 #'
 #' @return Character string with the Zenodo API base URL
 #' @noRd
+
 zenodo_api_url <- function() "https://zenodo.org/api"
 
 #' Zenodo Records endpoint URL
 #'
 #' @return Character string with the Zenodo records endpoint URL
 #' @noRd
+
 zenodo_records_endpoint <- function() paste0(zenodo_api_url(), "/records")
 
 #' Zenodo Record Versions endpoint URL
 #'
 #' @return Character string with the Zenodo record versions endpoint URL
 #' @noRd
+
 zenodo_record_versions_url <- function() {
   paste0(zenodo_records_endpoint(), "/", zenodo_record_id(), "/versions")
 }
@@ -40,6 +46,7 @@ zenodo_record_versions_url <- function() {
 #'
 #' @return Character string with the Zenodo latest version endpoint URL
 #' @noRd
+
 zenodo_latest_ver_url <- function() {
   paste0(zenodo_record_versions_url(), "/latest")
 }
@@ -48,6 +55,7 @@ zenodo_latest_ver_url <- function() {
 #'
 #' @return Character string with the error message
 #' @noRd
+
 err_msg_missing_version <- function() {
   paste(
     "Required version missing.",
@@ -56,12 +64,12 @@ err_msg_missing_version <- function() {
 }
 
 
-
 #' Check Zenodo version
 #'
 #' @param version Version string to validate
 #' @return NULL invisibly, raises an error for invalid version
 #' @noRd
+
 check_version <- function(version) {
   if (missing(version)) {
     stop("Argument 'version' is required", call. = FALSE)
@@ -95,6 +103,7 @@ check_version <- function(version) {
 #' @param res API single response from Zenodo
 #' @return Character string with the latest version number
 #' @noRd
+
 get_latest_version <- function(res = NULL) {
   if (is.null(res)) {
     res <- get_metadata(version = "latest")
@@ -110,6 +119,7 @@ get_latest_version <- function(res = NULL) {
 #' @param ask Whether to prompt for upgrading to latest version
 #' @return Character string with the version to use
 #' @noRd
+
 set_version <- function(version, ask = TRUE) {
   check_version(version)
 
@@ -163,6 +173,7 @@ set_version <- function(version, ask = TRUE) {
 #' @param version Version string to save
 #' @return NULL invisibly
 #' @noRd
+
 save_version <- function(version) {
   saved_version <- get_current_version()
 
@@ -179,6 +190,7 @@ save_version <- function(version) {
 #' @param version Version to retrieve metadata for
 #' @return List with JSON response from Zenodo API
 #' @noRd
+
 get_metadata <- function(version = NULL) {
   if (is.null(version)) version <- "latest" # tmp to avoid breaking it
   check_version(version)
@@ -192,7 +204,8 @@ get_metadata <- function(version = NULL) {
       httr2::resp_body_json(http_response)
     },
     error = function(e) {
-      stop("Zenodo API: Failed to retrieve metadata. ",
+      stop(
+        "Zenodo API: Failed to retrieve metadata. ",
         e$message,
         call. = FALSE
       )
@@ -205,8 +218,10 @@ get_metadata <- function(version = NULL) {
 #' @param version Version to build request for
 #' @return httr2 request object
 #' @noRd
+
 build_http_request <- function(version) {
-  switch(version,
+  switch(
+    version,
     "latest" = httr2::request(zenodo_latest_ver_url()),
     "all" = httr2::request(zenodo_record_versions_url()) |>
       httr2::req_url_query(size = zenodo_page_size(), sort = "version"),
@@ -232,6 +247,7 @@ build_http_request <- function(version) {
 #' @param res API response from Zenodo
 #' @return Data frame with publication date, version, and access right
 #' @noRd
+
 extract_single_version <- function(res) {
   validate_zenodo_response(res, c("metadata"))
   data.frame(
@@ -246,6 +262,7 @@ extract_single_version <- function(res) {
 #' @param res API response containing multiple hits from Zenodo
 #' @return Data frame with publication dates, versions, and access rights
 #' @noRd
+
 extract_versions <- function(res) {
   validate_zenodo_response(res, c("hits", "hits$hits"))
   versions <- lapply(res$"hits"$"hits", function(x) {
@@ -264,6 +281,7 @@ extract_versions <- function(res) {
 #' @param versions Data frame of available versions
 #' @return Numeric index of the version position
 #' @noRd
+
 determine_version_position <- function(version, versions) {
   if (is.null(version) || version == "latest") {
     pos <- which.max(as.Date(versions$"publication_date"))
@@ -290,6 +308,7 @@ determine_version_position <- function(version, versions) {
 #' @param version Version string
 #' @return List with processed metadata
 #' @noRd
+
 extract_metadata <- function(res, pos, version) {
   if (version == "latest") {
     validate_zenodo_response(res, c("metadata"))
@@ -310,6 +329,7 @@ extract_metadata <- function(res, pos, version) {
 #' @param creators List of creators from metadata
 #' @return Data frame with creator details
 #' @noRd
+
 extract_creators <- function(creators) {
   creators <- lapply(creators, function(x) {
     data.frame(
@@ -328,6 +348,7 @@ extract_creators <- function(creators) {
 #' @param version Version string
 #' @return Data frame with file details
 #' @noRd
+
 extract_files <- function(res, pos, version) {
   if (version == "latest") {
     files <- res$"files"
@@ -352,6 +373,7 @@ extract_files <- function(res, pos, version) {
 #' @param meta Metadata list from Zenodo API
 #' @return Cleaned metadata list
 #' @noRd
+
 clean_metadata <- function(meta) {
   meta <- remove_unnecessary_fields(meta, c("relations", "dates"))
   meta
@@ -363,6 +385,7 @@ clean_metadata <- function(meta) {
 #' @param fields Character vector of field names to remove
 #' @return Modified data structure with fields removed
 #' @noRd
+
 remove_unnecessary_fields <- function(data, fields) {
   for (field in fields) {
     pos <- which(names(data) == field)
@@ -386,6 +409,7 @@ remove_unnecessary_fields <- function(data, fields) {
 #' @return A list containing the complete metadata for the specified version
 #'         if found, or NULL if no matching version is found.
 #' @noRd
+
 extract_version_metadata <- function(res, version) {
   validate_zenodo_response(res, c("hits", "hits$hits"))
   hits <- res$hits$hits
@@ -406,6 +430,7 @@ extract_version_metadata <- function(res, version) {
 #' @param prefix_filter Optional prefix to filter filenames (default: NULL)
 #' @return A data frame with file information (filename, url, size, checksum)
 #' @noRd
+
 get_files_info <- function(metadata, prefix_filter = NULL) {
   # Extract files information
   files <- metadata$files
@@ -414,7 +439,8 @@ get_files_info <- function(metadata, prefix_filter = NULL) {
   if (!is.null(prefix_filter)) {
     files <- files[vapply(
       files,
-      function(x) startsWith(x$key, prefix_filter), logical(1)
+      function(x) startsWith(x$key, prefix_filter),
+      logical(1)
     )]
   }
 

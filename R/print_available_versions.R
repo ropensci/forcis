@@ -10,6 +10,7 @@
 #' }
 #'
 #' @export
+
 print_available_versions <- function() {
   # Get available versions
   available_versions <- get_available_versions()

@@ -38,6 +38,7 @@
 #'
 #' # Dimensions of the data.frame ----
 #' dim(net_data_sub)
+
 filter_by_ocean <- function(data, ocean) {
   ## Check ocean names ----
 

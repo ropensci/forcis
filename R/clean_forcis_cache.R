@@ -42,6 +42,7 @@
 #' }
 #'
 #' @noRd
+
 clean_forcis_cache <- function(version = NULL, path = NULL, filenames = NULL) {
   # Get appropriate directory
   if (!is.null(version)) {

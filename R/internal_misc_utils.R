@@ -4,6 +4,7 @@
 #'
 #' @return The app author name as a string
 #' @noRd
+
 get_app_author <- function() {
   "frb-cesab"
 }
@@ -14,6 +15,7 @@ get_app_author <- function() {
 #'
 #' @return The app name as a string
 #' @noRd
+
 get_app_name <- function() {
   "forcis"
 }
@@ -24,6 +26,7 @@ get_app_name <- function() {
 #'
 #' @return The name of the data subdirectory as a string
 #' @noRd
+
 get_app_data_subdir <- function() {
   "data"
 }
@@ -32,12 +35,14 @@ get_app_data_subdir <- function() {
 #'
 #' @return Character string with date format
 #' @noRd
+
 date_format <- function() "%d/%m/%Y"
 
 #' Robinson coordinate system
 #'
 #' @return Character string with Robinson coordinate projection
 #' @noRd
+
 crs_robinson <- function() {
   paste0(
     "+proj=robin +lon_0=0 +x_0=0 +y_0=0 +ellps=WGS84 +datum=WGS84",
@@ -53,6 +58,7 @@ crs_robinson <- function() {
 #' @param default The default value if option is not set
 #' @return The option value
 #' @noRd
+
 get_option <- function(name, default = NULL) {
   # Full option name
   full_name <- paste0(get_app_name(), ".", name)
@@ -71,6 +77,7 @@ get_option <- function(name, default = NULL) {
 #' @param value The value to set
 #' @return Invisibly returns the old value
 #' @noRd
+
 set_option <- function(name, value) {
   # Full option name
   full_name <- paste0(get_app_name(), ".", name)
@@ -92,6 +99,7 @@ set_option <- function(name, value) {
 #' @param level The log level (default: "INFO")
 #' @return Invisibly returns NULL
 #' @noRd
+
 log_message <- function(..., level = "INFO") {
   # Only log if debug mode is on
   if (get_option("debug", FALSE) || level == "ERROR") {

@@ -34,6 +34,7 @@
 #'
 #' # Dimensions of the data.frame ----
 #' dim(net_data_sub)
+
 filter_by_year <- function(data, years) {
   ## Check data object ----
 

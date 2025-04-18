@@ -32,6 +32,7 @@
 #'
 #' # Map data ----
 #' ggmap_data(net_data, col = "black", fill = "red", shape = 21, size = 2)
+
 ggmap_data <- function(data, col = "red", ...) {
   data_sf <- data_to_sf(data)
 

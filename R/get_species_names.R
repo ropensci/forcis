@@ -25,6 +25,7 @@
 #' # Retrieve taxon names ----
 #' get_species_names(nets)
 #' }
+
 get_species_names <- function(data) {
   check_if_df(data)
 

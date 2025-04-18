@@ -37,6 +37,7 @@
 #'
 #' # Column names ----
 #' colnames(net_data)
+
 convert_to_long_format <- function(data) {
   ## Check data object ----
 

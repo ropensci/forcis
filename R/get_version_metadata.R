@@ -20,6 +20,7 @@
 #'
 #' # Get information for the latest version of the FORCIS database ----
 #' get_version_metadata()
+
 get_version_metadata <- function(version = "latest") {
   check_version(version)
 

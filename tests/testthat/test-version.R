@@ -106,7 +106,6 @@ with_mock_dir(
 )
 
 
-
 test_that("Test get_version_metadata() for success", {
   with_mock_dir(
     test_path("mockdata", "latest"),
@@ -135,7 +134,6 @@ test_that("Test get_version_metadata() for success", {
     simplify = FALSE
   )
 })
-
 
 
 ## get_latest_version() ----

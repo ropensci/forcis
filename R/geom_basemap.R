@@ -18,6 +18,7 @@
 #' # World basemap ----
 #' ggplot() +
 #'   geom_basemap()
+
 geom_basemap <- function() {
   list(
     geom_sf(

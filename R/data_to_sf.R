@@ -40,6 +40,7 @@
 #' ggplot() +
 #'   geom_basemap() +
 #'   geom_sf(data = net_data_sub_sf)
+
 data_to_sf <- function(data) {
   ## Check data object ----
 

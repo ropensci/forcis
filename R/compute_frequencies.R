@@ -213,8 +213,7 @@ compute_frequencies <- function(data, aggregate = TRUE) {
 
     cols_to_remove <- c("tot_subsample", "tot_sample")
 
-    partial_data <- partial_data[
-      ,
+    partial_data <- partial_data[,
       !(colnames(partial_data) %in% cols_to_remove)
     ]
 

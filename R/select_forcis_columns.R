@@ -44,6 +44,7 @@
 #'
 #' # Dimensions of the data.frame ----
 #' dim(net_data)
+
 select_forcis_columns <- function(data, cols = NULL) {
   # Check args ----
 

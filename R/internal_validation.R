@@ -3,6 +3,7 @@
 #' @param data Data.frame to check
 #' @return NULL invisibly, raises an error if not a valid data.frame
 #' @noRd
+
 check_if_df <- function(data) {
   if (missing(data)) {
     stop("Argument 'data' is required", call. = FALSE)
@@ -25,6 +26,7 @@ check_if_df <- function(data) {
 #' @param field Column name to check for
 #' @return NULL invisibly, raises an error if field not found
 #' @noRd
+
 check_field_in_data <- function(data, field) {
   check_if_df(data)
   check_if_character(field)
@@ -46,6 +48,7 @@ check_field_in_data <- function(data, field) {
 #' @param str Value to check
 #' @return NULL invisibly, raises an error if not a valid character
 #' @noRd
+
 check_if_character <- function(str) {
   if (missing(str)) {
     stop("Argument '", deparse(substitute(str)), "' is required", call. = FALSE)
@@ -77,6 +80,7 @@ check_if_character <- function(str) {
 #' @param data Data.frame to check for required columns
 #' @return NULL invisibly, raises an error if required columns are missing
 #' @noRd
+
 check_required_columns <- function(data) {
   check_if_df(data)
 
@@ -94,6 +98,7 @@ check_required_columns <- function(data) {
 #'        Nested fields can be specified using '$' (e.g., "hits$hits").
 #' @return NULL invisibly, raises an error if the required fields are missing
 #' @noRd
+
 validate_zenodo_response <- function(res, required_fields) {
   # Check if res is a list
   if (!is.list(res)) {
@@ -123,8 +128,10 @@ validate_zenodo_response <- function(res, required_fields) {
     }
 
     if (!field_exists) {
-      stop("Invalid response format from Zenodo API: Missing required field '",
-        field, "'",
+      stop(
+        "Invalid response format from Zenodo API: Missing required field '",
+        field,
+        "'",
         call. = FALSE
       )
     }
@@ -141,6 +148,7 @@ validate_zenodo_response <- function(res, required_fields) {
 #'
 #' @param name A character string representing the dataset name to validate.
 #' @noRd
+
 validate_dataset_name <- function(name) {
   # Get metadata directly from forcis_datasets_info
   metadata <- forcis_datasets_info()
@@ -149,8 +157,11 @@ validate_dataset_name <- function(name) {
   valid_datasets <- metadata$names()
   if (!name %in% valid_datasets) {
     stop(
-      "Invalid dataset name: '", name, "'. ",
-      "Available datasets are: ", paste(valid_datasets, collapse = ", "),
+      "Invalid dataset name: '",
+      name,
+      "'. ",
+      "Available datasets are: ",
+      paste(valid_datasets, collapse = ", "),
       call. = FALSE
     )
   }

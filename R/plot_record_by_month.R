@@ -22,6 +22,7 @@
 #'
 #' # Plot data by year (example dataset) ----
 #' plot_record_by_month(net_data)
+
 plot_record_by_month <- function(data) {
   ## Check data object ----
 

@@ -331,6 +331,7 @@ species_list <- function() {
 #' @param taxonomy Taxonomy name to validate
 #' @return NULL invisibly, raises an error if taxonomy is invalid
 #' @noRd
+
 check_if_valid_taxonomy <- function(taxonomy) {
   check_if_character(taxonomy)
   taxonomy <- tolower(taxonomy)
@@ -354,6 +355,7 @@ check_if_valid_taxonomy <- function(taxonomy) {
 #' @param data A data.frame to check for multiple taxonomies
 #' @return NULL invisibly
 #' @noRd
+
 check_unique_taxonomy <- function(data) {
   check_if_df(data)
 

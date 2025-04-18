@@ -50,6 +50,7 @@
 #'
 #' # Get species names ----
 #' get_species_names(net_data_sub)
+
 filter_by_species <- function(data, species) {
   ## Check data object ----
 

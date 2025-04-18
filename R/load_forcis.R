@@ -49,11 +49,13 @@
 #' foraminifera collected using various methods.
 #'
 #' @export
+
 load_forcis <- function(
-    name,
-    version = NULL,
-    path = NULL,
-    cached = TRUE) {
+  name,
+  version = NULL,
+  path = NULL,
+  cached = TRUE
+) {
   ## Check args ----
 
   # Check if name is valid
@@ -102,7 +104,8 @@ load_forcis <- function(
     # If not cached, clean up any cache files
     if (file.exists(meta_cache_path)) {
       meta <- readRDS(meta_cache_path)
-      cached_files_info <- get_files_info(meta,
+      cached_files_info <- get_files_info(
+        meta,
         prefix_filter = dataset_file_pattern
       )
 
@@ -162,7 +165,9 @@ load_forcis <- function(
     if (is.null(zenodo_metadata) || short_ver != version_to_use) {
       log_message("Version doesn't exist: ", version_to_use)
       stop(
-        "Error: Version \"", version_to_use, "\" doesn't exist.\n\n",
+        "Error: Version \"",
+        version_to_use,
+        "\" doesn't exist.\n\n",
         "Available options:\n",
         "- Use `get_available_versions()` to retrieve version data\n",
         "- Use `print_available_versions()` to print versions list \n",
@@ -173,7 +178,9 @@ load_forcis <- function(
     # If the version exists, check access rights
     if (zenodo_metadata$metadata$access_right != "open") {
       stop(
-        "Error: Version \"", version, "\" exists but does not have open access!"
+        "Error: Version \"",
+        version,
+        "\" exists but does not have open access!"
       )
     }
   }
@@ -192,7 +199,8 @@ load_forcis <- function(
   log_message("Dataset cache path: ", version_cache_dir)
 
   # Get dataset files information
-  dataset_files_info <- get_files_info(zenodo_metadata,
+  dataset_files_info <- get_files_info(
+    zenodo_metadata,
     prefix_filter = dataset_file_pattern
   )
 
@@ -232,7 +240,8 @@ load_forcis <- function(
       # Verify all columns exist at once
       missing_cols <- setdiff(columns_to_process, names(data))
       if (length(missing_cols) > 0) {
-        stop("Missing columns in data: ",
+        stop(
+          "Missing columns in data: ",
           paste(missing_cols, collapse = ", "),
           call. = FALSE
         )

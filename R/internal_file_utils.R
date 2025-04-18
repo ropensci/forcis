@@ -13,6 +13,7 @@ meta_cache_filename <- function() "zenodo_metadata.rds"
 #' @param timeout Timeout value for download in seconds
 #' @return NULL invisibly
 #' @noRd
+
 download_file <- function(url, path, file, overwrite = FALSE, timeout = 60) {
   url <- utils::URLencode(url)
   file <- gsub("\\s", "_", file)
@@ -73,8 +74,6 @@ check_if_path_exists <- function(path) {
   invisible(NULL)
 }
 
-## Preapare cache helper functions
-
 #' Get directory path
 #'
 #' Returns the path to a directory for the package,
@@ -86,6 +85,7 @@ check_if_path_exists <- function(path) {
 #' @param create Whether to create the directory if it doesn't exist
 #' @return The path to the requested directory
 #' @noRd
+
 get_data_dir <- function(version = NULL, path = NULL, create = FALSE) {
   appname <- get_app_name()
   appdata_subdir <- get_app_data_subdir()
@@ -127,6 +127,7 @@ get_data_dir <- function(version = NULL, path = NULL, create = FALSE) {
 #'        uses the standard user data directory
 #' @return A character vector of version strings
 #' @noRd
+
 list_cached_versions <- function(path = NULL) {
   # Get data directory
   data_dir <- get_data_dir(path = path)
@@ -153,6 +154,7 @@ list_cached_versions <- function(path = NULL) {
 #' @return A string with special characters removed or replaced
 #'
 #' @noRd
+
 sanitize_version <- function(version, separator = "_") {
   check_version(version)
 
@@ -171,6 +173,7 @@ sanitize_version <- function(version, separator = "_") {
 #' @param expected_checksum The expected checksum value
 #' @return TRUE if checksum matches, FALSE otherwise
 #' @noRd
+
 verify_file_checksum <- function(file_path, expected_checksum) {
   # Extract checksum algorithm and value
   checksum_parts <- strsplit(expected_checksum, ":")[[1]]
@@ -183,7 +186,8 @@ verify_file_checksum <- function(file_path, expected_checksum) {
   } else {
     # Default to md5 if algorithm is not supported
     warning(
-      "Unsupported checksum algorithm: ", algorithm,
+      "Unsupported checksum algorithm: ",
+      algorithm,
       ". Falling back to MD5."
     )
     actual_value <- tools::md5sum(file_path)
@@ -202,6 +206,7 @@ verify_file_checksum <- function(file_path, expected_checksum) {
 #' @param version_dir The directory to check
 #' @return A data frame with file status information
 #' @noRd
+
 check_local_files <- function(file_info, version_dir) {
   # Initialize vectors for status
   exists <- logical(nrow(file_info))
@@ -238,6 +243,7 @@ check_local_files <- function(file_info, version_dir) {
 #' @param version_dir The directory where files should be stored
 #' @return NULL invisibly
 #' @noRd
+
 download_missing_files <- function(files_info, version_dir) {
   # Check if status columns already exist in files_info
   status_columns <- c("exists", "valid", "needs_download")
@@ -302,10 +308,12 @@ download_missing_files <- function(files_info, version_dir) {
 #' @return A character string with the full path to the metadata cache file
 #'
 #' @noRd
+
 get_meta_cache_path <- function(
-    version,
-    path,
-    filename = "zenodo_metadata.rds") {
+  version,
+  path,
+  filename = "zenodo_metadata.rds"
+) {
   file.path(
     get_data_dir(version = version, path = path),
     filename

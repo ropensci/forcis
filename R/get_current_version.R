@@ -26,6 +26,7 @@
 #' # Get the version of the database ----
 #' get_current_version()
 #' }
+
 get_current_version <- function() {
   if (file.exists(".forcis")) {
     config_file <- readLines(".forcis")
