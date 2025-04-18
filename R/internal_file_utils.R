@@ -1,3 +1,9 @@
+#' Get Zenodo Metadata Cache Filename
+#'
+#' @noRd
+meta_cache_filename <- function() "zenodo_metadata.rds"
+
+
 #' Download a csv file
 #'
 #' @param url URL of the file to download
@@ -134,56 +140,6 @@ list_cached_versions <- function(path = NULL) {
   versions <- list.dirs(data_dir, full.names = FALSE, recursive = FALSE)
 
   versions
-}
-
-## TODO: export clean_cache() (seperate script)
-
-#' Clean cache
-#'
-#' Removes downloaded files from cache
-#'
-#' @param version Specific version to clean (NULL to clean all)
-#' @param path Optional custom path for the data directory. If NULL (default),
-#'        uses the standard user data directory
-#' @return invisible TRUE if successful
-#' @noRd
-clean_cache <- function(version = NULL, path = NULL, filename = NULL) {
-  # Get appropriate directory
-  if (!is.null(version)) {
-    # Get version directory
-    target_dir <- get_data_dir(version = version, path = path)
-
-    # Check if version exists
-    if (!dir.exists(target_dir)) {
-      warning("Version ", version, " is not cached")
-      return(FALSE)
-    }
-
-    if (!is.null(filename)) {
-      # Remove dataset file
-      file_path <- file.path(target_dir, filename)
-      unlink(file_path)
-      message("Cleaned cache file: ", filename)
-    } else {
-      # Remove version directory
-      unlink(target_dir, recursive = TRUE)
-      message("Cleaned cache for version ", version)
-    }
-  } else {
-    # For cleaning everything
-    data_dir <- get_data_dir(path = path)
-
-    if (!dir.exists(data_dir)) {
-      message("Cache directory does not exist, nothing to clean")
-      return(TRUE)
-    }
-
-    # Remove the appname directory and everything under it
-    unlink(data_dir, recursive = TRUE)
-    message("Cleaned all cached data: ", data_dir)
-  }
-
-  invisible(TRUE)
 }
 
 #' Clean a version string for use as a directory name

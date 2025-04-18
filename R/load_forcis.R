@@ -99,10 +99,22 @@ load_forcis <- function(
       zenodo_metadata <- readRDS(meta_cache_path)
     }
   } else if (!cached && !is.null(meta_cache_path)) {
-    # If not cached, clean up any metadata cache files
+    # If not cached, clean up any cache files
     if (file.exists(meta_cache_path)) {
-      log_message("Removing cached metadata file: ", meta_cache_path)
-      file.remove(meta_cache_path)
+      meta <- readRDS(meta_cache_path)
+      cached_files_info <- get_files_info(meta,
+        prefix_filter = dataset_file_pattern
+      )
+
+      log_message("Removing cached dataset files: ", display_name)
+      clean_forcis_cache(
+        version = effective_version,
+        path = path,
+        filenames = c(
+          cached_files_info$filename,
+          meta_cache_filename()
+        )
+      )
     }
   }
 
@@ -244,10 +256,13 @@ load_forcis <- function(
   # Clean up if not caching
   if (!cached) {
     log_message("Cache disabled, cleaning up files")
-    clean_cache(
+    clean_forcis_cache(
       version = version_to_use,
       path = path,
-      filename = file_status$filename
+      filenames = c(
+        file_status$filename,
+        meta_cache_filename()
+      )
     )
   } else {
     # Save version metadata
