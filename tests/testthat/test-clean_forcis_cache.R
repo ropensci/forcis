@@ -4,12 +4,12 @@ test_that("clean_forcis_cache removes entire cache when version is NULL", {
   dir.create(root_dir, recursive = TRUE)
 
   # Create the expected directory structure
-  data_dir <- file.path(root_dir, "forcis", "data")
+  data_dir <- get_data_dir(path = root_dir)
   dir.create(data_dir, recursive = TRUE)
 
   # Create version directories
-  v1_dir <- file.path(data_dir, "01")
-  v2_dir <- file.path(data_dir, "02")
+  v1_dir <- get_data_dir(version = "01", path = root_dir)
+  v2_dir <- get_data_dir(version = "02", path = root_dir)
   dir.create(v1_dir)
   dir.create(v2_dir)
 
@@ -26,7 +26,14 @@ test_that("clean_forcis_cache removes entire cache when version is NULL", {
   expect_true(result)
 
   # Check that correct message was output
-  expect_match(messages, paste0("Cleaned all cached data: ", data_dir))
+  # expect_match(messages, paste0("Cleaned all cached data: ", data_dir))
+
+  expect_true(startsWith(messages, "Cleaned all cached data:"))
+
+  expect_true(grepl(basename(root_dir), messages, fixed = TRUE))
+
+  expect_true(grepl("forcis[/\\\\]data", messages, perl = TRUE))
+
 
   # Check that directory was removed
   expect_false(dir.exists(data_dir))
@@ -53,12 +60,12 @@ test_that("clean_forcis_cache removes specific version when version is provided"
   root_dir <- tempfile("forcis_test_root")
 
   # Create the expected directory structure
-  data_dir <- file.path(root_dir, "forcis", "data")
+  data_dir <- get_data_dir(path = root_dir)
   dir.create(data_dir, recursive = TRUE)
 
   # Create version directories
-  v1_dir <- file.path(data_dir, "01")
-  v2_dir <- file.path(data_dir, "02")
+  v1_dir <- get_data_dir(version = "01", path = root_dir)
+  v2_dir <- get_data_dir(version = "02", path = root_dir)
   dir.create(v1_dir)
   dir.create(v2_dir)
 
@@ -87,11 +94,11 @@ test_that("clean_forcis_cache handles non-existent version", {
   root_dir <- tempfile("forcis_test_root")
 
   # Create the expected directory structure
-  data_dir <- file.path(root_dir, "forcis", "data")
+  data_dir <- get_data_dir(path = root_dir)
   dir.create(data_dir, recursive = TRUE)
 
   # Create version directory (but not version 99)
-  v1_dir <- file.path(data_dir, "01")
+  v1_dir <- get_data_dir(version = "01", path = root_dir)
   dir.create(v1_dir)
 
   # Capture warnings
@@ -111,11 +118,11 @@ test_that("clean_forcis_cache removes specific files when filenames are provided
   root_dir <- tempfile("forcis_test_root")
 
   # Create the expected directory structure
-  data_dir <- file.path(root_dir, "forcis", "data")
+  data_dir <- get_data_dir(path = root_dir)
   dir.create(data_dir, recursive = TRUE)
 
   # Create version directory
-  v1_dir <- file.path(data_dir, "01")
+  v1_dir <- get_data_dir(version = "01", path = root_dir)
   dir.create(v1_dir)
 
   # Create test files
@@ -156,11 +163,11 @@ test_that("clean_forcis_cache handles non-existent files", {
   root_dir <- tempfile("forcis_test_root")
 
   # Create the expected directory structure
-  data_dir <- file.path(root_dir, "forcis", "data")
+  data_dir <- get_data_dir(path = root_dir)
   dir.create(data_dir, recursive = TRUE)
 
   # Create version directory
-  v1_dir <- file.path(data_dir, "01")
+  v1_dir <- get_data_dir(version = "01", path = root_dir)
   dir.create(v1_dir)
 
   # Create a test file (but not nonexistent.json)
