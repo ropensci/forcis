@@ -79,8 +79,8 @@ load_forcis <- function(
   zenodo_metadata <- NULL
 
   # Resolve version for caching setting
-  effective_version <- if (is.null(version) || version == "latest") {
-    get_option("latest_version")
+  effective_version <- if (!is.null(version) && version == "latest") {
+    NULL
   } else {
     version
   }
@@ -132,9 +132,8 @@ load_forcis <- function(
     ## zenodo_metadata is a single response (latest endpoint) ---
 
     validate_zenodo_response(zenodo_metadata, c("metadata"))
-    set_option("latest_version", zenodo_metadata$metadata$version)
 
-    version_to_use <- get_option("latest_version")
+    version_to_use <- zenodo_metadata$metadata$version
     log_message("Latest version: ", version_to_use)
   } else {
     ## zenodo_metadata is a multi response (search endpoint) ---
