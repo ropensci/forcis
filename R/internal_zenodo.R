@@ -310,7 +310,7 @@ determine_version_position <- function(version, versions) {
 #' @noRd
 
 extract_metadata <- function(res, pos, version) {
-  if (version == "latest") {
+  if (is.null(version) || version == "latest") {
     validate_zenodo_response(res, c("metadata"))
     meta <- res$"metadata"
   } else {
@@ -350,7 +350,7 @@ extract_creators <- function(creators) {
 #' @noRd
 
 extract_files <- function(res, pos, version) {
-  if (version == "latest") {
+  if (is.null(version) || version == "latest") {
     files <- res$"files"
   } else {
     files <- lapply(res$"hits"$"hits", function(x) x$"files")
