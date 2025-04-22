@@ -1,3 +1,52 @@
+MOCK_CSV_DATA <- paste(
+  "ID;Date;Latitude;Longitude;Species1;Species2;Species3",
+  "1;2020-01-01;45.5;-30.5;10;5;2",
+  "2;2020-01-02;46.0;-31.0;8;7;3",
+  sep = "\n"
+)
+
+forcis_datasets <- forcis_datasets_info()
+
+## Helper functions ---
+
+# set of data checks for a dataset
+verify_result <- function(
+  result,
+  expected_rows,
+  expected_cols,
+  expected_species1
+) {
+  expect_s3_class(result, "tbl_df")
+  expect_equal(nrow(result), expected_rows)
+  expect_equal(ncol(result), expected_cols)
+  expect_type(result$Species1, "double")
+  expect_equal(result$Species1, expected_species1)
+}
+
+# set of cache checks for a dataset
+verify_dataset_cache <- function(
+  root_dir,
+  dataset_prefix,
+  expect_files_exist = TRUE
+) {
+  cached_versions <- list_cached_versions(root_dir)
+  expect_true(length(cached_versions) > 0)
+
+  cached_versions_path <- get_data_dir(cached_versions[1], root_dir)
+  cached_meta_path <- file.path(cached_versions_path, meta_cache_filename())
+  expect_equal(file.exists(cached_meta_path), expect_files_exist)
+
+  cached_files <- list.files(cached_versions_path)
+  dataset_files <- cached_files[grepl(
+    paste0("^", dataset_prefix),
+    cached_files
+  )]
+  expect_equal(length(dataset_files) > 0, expect_files_exist)
+}
+
+## Test cases ---
+
+# Test loading a dataset (latest)
 test_that("Test load_forcis (latest dataset version) for success", {
   root_dir <- tempfile("load_forcis_root")
 
@@ -22,15 +71,9 @@ test_that("Test load_forcis (latest dataset version) for success", {
   download_file_mock <- function(url, file, path, overwrite = FALSE, ...) {
     dir.create(path, recursive = TRUE, showWarnings = FALSE)
 
-    mock_data <- paste(
-      "ID;Date;Latitude;Longitude;Species1;Species2;Species3",
-      "1;2020-01-01;45.5;-30.5;10;5;2",
-      "2;2020-01-02;46.0;-31.0;8;7;3",
-      sep = "\n"
-    )
     dest_path <- file.path(path, file)
     log_message("Writing mock data to:", dest_path)
-    writeLines(mock_data, dest_path)
+    writeLines(MOCK_CSV_DATA, dest_path)
     invisible(NULL)
   }
 
@@ -46,49 +89,38 @@ test_that("Test load_forcis (latest dataset version) for success", {
     download_file = download_file_mock,
     verify_file_checksum = verify_file_checksum_mock,
     {
-      result <- load_forcis("pump", path = root_dir)
-      result_cache <- load_forcis("pump", path = root_dir)
+      messages <- capture_messages({
+        result <- load_forcis("pump", path = root_dir)
+      })
+      messages_cache <- capture_messages({
+        result_cache <- load_forcis("pump", path = root_dir)
+      })
     }
   )
 
+  # dataset filename prefix
+  dataset_pump_prefix <- forcis_datasets$filename_prefixes()["pump"]
+
+  # Expect a message for a missing file
+  expect_match(
+    messages,
+    paste0("File ", dataset_pump_prefix, ".*\\.csv is missing, downloading...")
+  )
+
   # Verify the result
-  expect_s3_class(result, "tbl_df")
-  expect_equal(nrow(result), 2)
-  expect_equal(ncol(result), 8) # 7 columns + data_type
+  verify_result(result, 2, 8, c(10, 8))
+
+  # Expect no messages for the 2nd call
+  expect_length(messages_cache, 0)
 
   # 2nd call (cache)
-  expect_s3_class(result_cache, "tbl_df")
-  expect_equal(nrow(result_cache), 2)
-  expect_equal(ncol(result_cache), 8) # 7 columns + data_type
-
-  # Check numeric conversion worked
-  expect_type(result$Species1, "double")
-  expect_equal(result$Species1, c(10, 8))
-
-  # 2nd call (cache)
-  expect_type(result_cache$Species1, "double")
-  expect_equal(result_cache$Species1, c(10, 8))
+  verify_result(result_cache, 2, 8, c(10, 8))
 
   # Check cache
-  cached_versions <- list_cached_versions(root_dir)
-  expect_true(length(cached_versions) > 0)
-  cached_versions_path <- get_data_dir(cached_versions[1], root_dir)
-  cached_meta_path <- file.path(cached_versions_path, meta_cache_filename())
-
-  # Meta file is cached
-  expect_true(file.exists(cached_meta_path))
-
-  # Check for specific dataset files (file that starts with "pump")
-  cached_files <- list.files(cached_versions_path)
-  forcis_datasets <- forcis_datasets_info()
-  dataset_pump_prefix <- forcis_datasets$filename_prefixes()["pump"]
-  dataset_files <- cached_files[grepl(
-    paste0("^", dataset_pump_prefix),
-    cached_files
-  )]
-  expect_true(
-    length(dataset_files) > 0,
-    info = "No dataset files with prefix 'pump' found in cache"
+  verify_dataset_cache(
+    root_dir,
+    dataset_pump_prefix,
+    expect_files_exist = TRUE
   )
 
   ## Load a dataset (cached = FALSE) ---
@@ -108,34 +140,13 @@ test_that("Test load_forcis (latest dataset version) for success", {
   )
 
   # Verify the result
-  expect_s3_class(result_no_cache, "tbl_df")
-  expect_equal(nrow(result_no_cache), 2)
-  expect_equal(ncol(result_no_cache), 8) # 7 columns + data_type
+  verify_result(result_no_cache, 2, 8, c(10, 8))
 
-  # Check numeric conversion worked
-  expect_type(result_no_cache$Species1, "double")
-  expect_equal(result_no_cache$Species1, c(10, 8))
-
-  # Check cache
-  cached_versions <- list_cached_versions(root_dir)
-  expect_true(length(cached_versions) > 0) # version dir should exist
-
-  # Only dataset files & metadata should be deleted
-  cached_versions_path <- get_data_dir(cached_versions[1], root_dir)
-  cached_meta_path <- file.path(cached_versions_path, meta_cache_filename())
-
-  # Meta file is cached
-  expect_false(file.exists(cached_meta_path))
-
-  # Check for specific dataset files (file that starts with "pump")
-  cached_files <- list.files(cached_versions_path)
-  dataset_files <- cached_files[grepl(
-    paste0("^", dataset_pump_prefix),
-    cached_files
-  )]
-  expect_false(
-    length(dataset_files) > 0,
-    info = "Dataset files with prefix 'pump' found in cache"
+  # Check cache (Only dataset files & metadata should be deleted)
+  verify_dataset_cache(
+    root_dir,
+    dataset_pump_prefix,
+    expect_files_exist = FALSE
   )
 })
 
