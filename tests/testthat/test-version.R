@@ -138,44 +138,6 @@ with_mock_dir("get_latest_version", {
 })
 
 
-## save_version() ----
-
-test_that("Test save_version() for success", {
-  create_tempdir()
-
-  expect_invisible(save_version("06"))
-  expect_true(file.exists(".forcis"))
-  expect_equal(readLines(".forcis"), "FORCIS_VERSION=06")
-
-  x <- save_version("07")
-  expect_null(x)
-  expect_true(file.exists(".forcis"))
-  expect_equal(readLines(".forcis"), "FORCIS_VERSION=07")
-})
-
-
-## get_current_version() ----
-
-test_that("Test get_current_version() for success", {
-  create_tempdir()
-
-  x <- get_current_version()
-  expect_null(x)
-
-  save_version("07")
-  x <- get_current_version()
-  expect_equal(class(x), "character")
-  expect_equal(length(x), 1L)
-  expect_equal(x, "07")
-
-  invisible(file.remove(".forcis"))
-  invisible(file.create(".forcis"))
-
-  x <- get_current_version()
-  expect_null(x)
-})
-
-
 ## set_version() ----
 
 test_that("Test set_version() for error", {
@@ -198,7 +160,6 @@ test_that("Test set_version() for success", {
   expect_equal(class(x), "character")
   expect_equal(length(x), 1L)
   expect_equal(x, y)
-  expect_true(file.exists(".forcis"))
 })
 
 test_that("Test set_version() for success", {
@@ -209,12 +170,11 @@ test_that("Test set_version() for success", {
   expect_equal(class(x), "character")
   expect_equal(length(x), 1L)
   expect_equal(x, "07")
-  expect_true(file.exists(".forcis"))
 
+  y <- get_latest_version()
   x <- set_version(version = NULL, ask = FALSE)
 
   expect_equal(class(x), "character")
   expect_equal(length(x), 1L)
-  expect_equal(x, "07")
-  expect_true(file.exists(".forcis"))
+  expect_equal(x, y)
 })
