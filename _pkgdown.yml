@@ -45,7 +45,6 @@ reference:
     Functions to get information on database versions
   contents:
     - get_available_versions
-    - get_current_version
     - get_version_metadata
 
 - title: Select and filters tools

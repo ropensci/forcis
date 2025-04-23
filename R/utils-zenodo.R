@@ -39,11 +39,7 @@ set_version <- function(version, ask = TRUE) {
   latest_version <- get_latest_version()
 
   if (is.null(version)) {
-    version <- get_current_version()
-
-    if (is.null(version)) {
-      version <- latest_version
-    }
+    version <- latest_version
   } else {
     if (!(version %in% versions$"version")) {
       stop(
@@ -76,8 +72,6 @@ set_version <- function(version, ask = TRUE) {
     }
   }
 
-  save_version(version)
-
   version
 }
 
@@ -97,23 +91,7 @@ get_latest_version <- function() {
 }
 
 
-#' Set/update local database version number in an hidden file .forcis
-#'
-#' @noRd
-
-save_version <- function(version) {
-  saved_version <- get_current_version()
-
-  if (is.null(saved_version) || saved_version != version) {
-    version <- paste0("FORCIS_VERSION=", version)
-    cat(version, file = ".forcis", append = FALSE, sep = "\n")
-  }
-
-  invisible(NULL)
-}
-
-
-#' Set/update local database version number in an hidden file .forcis
+#' Retrieve Zenodo repo metadata
 #'
 #' @noRd
 
