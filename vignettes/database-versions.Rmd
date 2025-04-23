@@ -50,20 +50,10 @@ It is also possible to disable this message globally for the current session:
 options(forcis_check_for_update = FALSE)
 ```
 
-The package `forcis` _"knows"_ which version of the database you used last time. A hidden file named `.forcis` is created (or updated) each time the function `download_forcis_db()` or `read_*_data()` is called. This hidden file contains one line:
-
-```
-FORCIS_VERSION=99
-```
-
-Note that this hidden file is used by some functions of the `forcis` package. Users don't need to edit it manually.
-
 If you want to be sure to use a specific version of the database, you can use the argument `version` of the `read_*_data()` functions, or use the following line:
 
 ```{r 'freeze-version'}
 options(forcis_version = "99")
 ```
-
-At any time, user can run the function `get_current_version()` to check the version of the database currently in use.
 
 > But again, it is **recommended to use the latest version** of the database.
