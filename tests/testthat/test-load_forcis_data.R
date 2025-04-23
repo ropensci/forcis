@@ -26,11 +26,10 @@ verify_file_checksum_mock <- function(file_path, expected_checksum) {
 
 # set of data checks for a dataset
 verify_result <- function(
-  result,
-  expected_rows,
-  expected_cols,
-  expected_species1
-) {
+    result,
+    expected_rows,
+    expected_cols,
+    expected_species1) {
   expect_s3_class(result, "tbl_df")
   expect_equal(nrow(result), expected_rows)
   expect_equal(ncol(result), expected_cols)
@@ -40,10 +39,9 @@ verify_result <- function(
 
 # set of cache checks for a dataset
 verify_dataset_cache <- function(
-  root_dir,
-  dataset_prefix,
-  expect_files_exist = TRUE
-) {
+    root_dir,
+    dataset_prefix,
+    expect_files_exist = TRUE) {
   cached_versions <- list_cached_versions(root_dir)
   expect_true(length(cached_versions) > 0)
 
@@ -168,7 +166,7 @@ test_that("Test load_forcis (specific dataset version) for success", {
     simplify = FALSE
   )
 
-  # Mock the get_metadata function to return our controlled metadata
+  # Mock the get_metadata
   get_metadata_mock <- function(...) {
     return(mock_metadata_env$metadata)
   }
@@ -258,8 +256,156 @@ test_that("Test load_forcis (specific dataset version) for success", {
   )
 })
 
-# TODO: add more test cases (extreme cases)
-# Version dosen't exist
-# Version exists but not open
-# Dataset name not defined
-# Missing columns (cpr_north o_O)
+# Test loading a dataset with special column names
+test_that("Test load_forcis with special column names", {
+  root_dir <- tempfile("load_forcis_root")
+
+  log_message("load_forcis_root :", root_dir)
+
+  # Mock the get_metadata function
+  mock_metadata_env <- new.env()
+
+  with_mock_dir(
+    test_path("mockdata", "latest"),
+    {
+      mock_metadata_env$metadata <- get_metadata()
+    },
+    simplify = FALSE
+  )
+
+  # Mock the get_metadata
+  get_metadata_mock <- function(...) {
+    return(mock_metadata_env$metadata)
+  }
+
+  ## Load a dataset ---
+
+  with_mocked_bindings(
+    get_metadata = get_metadata_mock,
+    download_file = download_file_mock,
+    verify_file_checksum = verify_file_checksum_mock,
+    expect_error(
+      load_forcis("cpr_north", path = root_dir),
+      "Missing columns in data: count_bin_min, count_bin_max"
+    )
+  )
+})
+
+# Test loading a dataset (version 01 - restricted)
+test_that("Test load_forcis with a restricted version ", {
+  root_dir <- tempfile("load_forcis_root")
+
+  log_message("load_forcis_root :", root_dir)
+
+  # Mock the get_metadata function
+  mock_metadata_env <- new.env()
+
+  with_mock_dir(
+    test_path("mockdata", "v01"),
+    {
+      mock_metadata_env$metadata <- get_metadata("01")
+    },
+    simplify = FALSE
+  )
+
+  # Mock the get_metadata function to return our controlled metadata
+  get_metadata_mock <- function(...) {
+    return(mock_metadata_env$metadata)
+  }
+
+  ## Load a dataset ---
+
+  with_mocked_bindings(
+    get_metadata = get_metadata_mock,
+    {
+      expect_error(
+        load_forcis("sediment_trap", version = "01", path = root_dir),
+        paste0('Error: Version "01" exists but does not have open access!')
+      )
+    }
+  )
+})
+
+# Test loading a dataset (version 999 - non-existent)
+test_that("Test load_forcis with a non-existent version ", {
+  root_dir <- tempfile("load_forcis_root")
+
+  log_message("load_forcis_root :", root_dir)
+
+  # Mock the get_metadata function
+  mock_metadata_env <- new.env()
+
+  with_mock_dir(
+    test_path("mockdata", "v999"),
+    {
+      mock_metadata_env$metadata <- get_metadata("999")
+    },
+    simplify = FALSE
+  )
+
+  # Mock the get_metadata function to return our controlled metadata
+  get_metadata_mock <- function(...) {
+    return(mock_metadata_env$metadata)
+  }
+
+  ## Load a dataset ---
+
+  with_mocked_bindings(
+    get_metadata = get_metadata_mock,
+    {
+      expect_error(
+        load_forcis("cpr_south", version = "999", path = root_dir),
+        "Error: Version \"999\" doesn't exist",
+        fixed = FALSE
+      )
+    }
+  )
+})
+
+# Test a invalid dataset name
+test_that("Test load_forcis with a non-valid dataset name", {
+  expect_error(
+    load_forcis("invalid_dataset_name"),
+    "Invalid dataset name: 'invalid_dataset_name'",
+    fixed = FALSE
+  )
+})
+
+# Test tampering with files right after download (virus O_O)
+test_that("Test load_forcis with tampred files", {
+  root_dir <- tempfile("load_forcis_root")
+
+  log_message("load_forcis_root :", root_dir)
+
+  # Mock the get_metadata function
+  mock_metadata_env <- new.env()
+
+  with_mock_dir(
+    test_path("mockdata", "latest"),
+    {
+      mock_metadata_env$metadata <- get_metadata()
+    },
+    simplify = FALSE
+  )
+
+  # Mock the get_metadata
+  get_metadata_mock <- function(...) {
+    return(mock_metadata_env$metadata)
+  }
+
+  ## Load a dataset ---
+
+  with_mocked_bindings(
+    get_metadata = get_metadata_mock,
+    download_file = download_file_mock,
+    verify_file_checksum = function(...) FALSE,
+    {
+      # TODO: Change error message to be more informative
+      expect_error(
+        load_forcis("pump", path = root_dir),
+        "Ahoy, matey!",
+        fixed = FALSE
+      )
+    }
+  )
+})
