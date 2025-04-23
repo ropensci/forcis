@@ -2,7 +2,7 @@
 
 Answers to editor and reviewer comments:
 
-* Refactor code of `read_*_data()` functions
+* Refactor code of `read_*_data()` functions ([#85](https://github.com/FRBCesab/forcis/pull/85))
 * Recommend to use [`air`](https://github.com/posit-dev/air) to automatically format code ([#80](https://github.com/FRBCesab/forcis/pull/80))
 * Homogeneize function outputs (`tibble`) ([#82](https://github.com/FRBCesab/forcis/pull/82))
 * Use the same prefix `forcis_` in global options ([#81](https://github.com/FRBCesab/forcis/pull/81))
