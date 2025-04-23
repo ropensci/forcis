@@ -50,14 +50,6 @@ download_file <- function(url, path, file, overwrite = FALSE, timeout = 60) {
 }
 
 
-#' Vector of device types available in FORCIS database
-#'
-#' @noRd
-
-data_types <- function()
-  c("Net", "Pump", "Sediment trap", "CPR South", "CPR North")
-
-
 #' Date format used in raw data
 #'
 #' @noRd

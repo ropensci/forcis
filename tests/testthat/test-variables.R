@@ -81,20 +81,6 @@ test_that("Test get_required_columns() for success", {
 })
 
 
-## data_types() ----
-
-test_that("Test data_types() for success", {
-  x <- data_types()
-
-  expect_true(all(
-    c("Net", "Pump", "Sediment trap", "CPR South", "CPR North") %in% x
-  ))
-
-  expect_equal(class(x), "character")
-  expect_equal(length(x), 5L)
-})
-
-
 ## crs_robinson() ----
 
 test_that("Test crs_robinson() for success", {
