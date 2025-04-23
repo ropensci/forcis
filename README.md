@@ -22,7 +22,6 @@ status](https://www.r-pkg.org/badges/version/forcis)](https://CRAN.R-project.org
 
 <p align="left">
 • <a href="#overview">Overview</a><br> •
-<a href="#features">Features</a><br> •
 <a href="#installation">Installation</a><br> •
 <a href="#get-started">Get started</a><br> •
 <a href="#long-form-documentations">Long-form documentations</a><br> •
@@ -42,10 +41,12 @@ distribution in the global oceans from 1910 until 2018 collected using
 plankton tows, continuous plankton recorder, sediment traps and plankton
 pump from the global ocean.
 
-## Features
-
-The main purpose of the `forcis` package is to download, select, filter,
-homogenize, and visualize FORCIS data. The
+This package has been developed for researchers interested in working
+with the FORCIS database, even without advanced R skills. It provides
+basic functions to facilitate the handling of this large database,
+including functions to download, select, filter, homogenize, and
+visualize the data. It also enables users to explore the spatial
+distribution and temporal evolution of planktonic foraminifera. The
 [Functions](https://frbcesab.github.io/forcis/reference/index.html) page
 provides a full description of the features available in the package.
 
