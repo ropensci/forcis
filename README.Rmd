@@ -51,14 +51,14 @@ forcis <img src="man/figures/logo.png" height="120px" align="right" style="float
 
 The goal of the R package `forcis` is to provide an interface to the [FORCIS database](https://zenodo.org/doi/10.5281/zenodo.7390791) on global foraminifera distribution (Chaabane _et al._ 2023). This database includes data on living planktonic foraminifera diversity and distribution in the global oceans from 1910 until 2018 collected using plankton tows, continuous plankton recorder, sediment traps and plankton pump from the global ocean.
 
-![Figure 1: Recommended workflow and main features of `forcis`](inst/workflow.png)
+![Figure 1: Recommended workflow and main features of `forcis`](man/figures/workflow.png)
 
 <br/>
 
 This package has been developed for researchers interested in working with the FORCIS database, even without advanced R skills. It provides basic functions to facilitate the handling of this large database, including functions to download, select, filter, homogenize, and visualize the data. It also enables users to explore the spatial distribution and temporal evolution of planktonic foraminifera.
 
 
-![Figure 2: Overview of visualizations available in `forcis`](inst/visualization.png)
+![Figure 2: Overview of visualizations available in `forcis`](man/figures/visualization.png)
 
 ## Installation
 
