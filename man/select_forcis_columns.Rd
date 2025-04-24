@@ -23,9 +23,6 @@ columns, this function can be used to lighten the \code{data.frame} to easily
 handle it and to speed up some computations.
 }
 \examples{
-# Attach the package ----
-library("forcis")
-
 # Import example dataset ----
 file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"),
                          package = "forcis")

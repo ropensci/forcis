@@ -14,9 +14,6 @@
 #' @export
 #'
 #' @examples
-#' # Attach the package ----
-#' library("forcis")
-#'
 #' # Import example dataset ----
 #' file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"),
 #'                          package = "forcis")

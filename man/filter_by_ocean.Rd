@@ -20,9 +20,6 @@ A \code{tibble} containing a subset of \code{data} for the desired oceans.
 Filters FORCIS data by one or several oceans.
 }
 \examples{
-# Attach the package ----
-library("forcis")
-
 # Import example dataset ----
 file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"),
                          package = "forcis")

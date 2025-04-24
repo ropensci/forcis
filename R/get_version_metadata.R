@@ -15,9 +15,6 @@
 #' @export
 #'
 #' @examples
-#' # Attach the package ----
-#' library("forcis")
-#'
 #' # Get information for the latest version of the FORCIS database ----
 #' get_version_metadata()
 

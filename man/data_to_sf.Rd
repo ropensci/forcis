@@ -19,8 +19,7 @@ Note that coordinates (columns \code{site_lon_start_decimal} and
 \code{site_lat_start_decimal}) are projected in the Robinson coordinate system.
 }
 \examples{
-# Attach packages ----
-library("forcis")
+# Attach package ----
 library("ggplot2")
 
 # Import example dataset ----

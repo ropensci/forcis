@@ -16,8 +16,7 @@ Spatial layers come from the Natural Earth project
 coordinate system.
 }
 \examples{
-# Attach packages ----
-library("forcis")
+# Attach package ----
 library("ggplot2")
 
 # World basemap ----

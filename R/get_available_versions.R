@@ -12,9 +12,6 @@
 #' @export
 #'
 #' @examples
-#' # Attach the package ----
-#' library("forcis")
-#'
 #' # Versions of the FORCIS database ----
 #' get_available_versions()
 

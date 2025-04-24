@@ -13,8 +13,7 @@
 #' @export
 #'
 #' @examples
-#' # Attach packages ----
-#' library("forcis")
+#' # Attach package ----
 #' library("ggplot2")
 #'
 #' # Import example dataset ----

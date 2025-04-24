@@ -59,9 +59,6 @@ For more information, please read the vignette available at
 }
 \examples{
 \dontrun{
-# Attach the package ----
-library("forcis")
-
 # Folder in which the database will be saved ----
 path_to_save_db <- "data"
 
