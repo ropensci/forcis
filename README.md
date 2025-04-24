@@ -41,7 +41,7 @@ plankton tows, continuous plankton recorder, sediment traps and plankton
 pump from the global ocean.
 
 <figure>
-<img src="inst/workflow.png"
+<img src="man/figures/workflow.png"
 alt="Figure 1: Recommended workflow and main features of forcis" />
 <figcaption aria-hidden="true">Figure 1: Recommended workflow and main
 features of <code>forcis</code></figcaption>
@@ -57,7 +57,7 @@ visualize the data. It also enables users to explore the spatial
 distribution and temporal evolution of planktonic foraminifera.
 
 <figure>
-<img src="inst/visualization.png"
+<img src="man/figures/visualization.png"
 alt="Figure 2: Overview of visualizations available in forcis" />
 <figcaption aria-hidden="true">Figure 2: Overview of visualizations
 available in <code>forcis</code></figcaption>
