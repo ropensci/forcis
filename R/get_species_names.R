@@ -12,19 +12,17 @@
 #' @return A `character` vector of species names.
 #'
 #' @examples
-#' \dontrun{
-#' # Folder in which the database is stored ----
-#' path_to_db <- "data"
+#' # Import example dataset ----
+#' file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"),
+#'                          package = "forcis")
 #'
-#' # Download and read the plankton nets data ----
-#' plankton_nets_data <- read_plankton_nets_data(path_to_db)
+#' net_data <- read.table(file_name, dec = ".", sep = ";")
 #'
 #' # Select a taxonomy ----
-#' plankton_nets_data <- select_taxonomy(plankton_nets_data, taxonomy = "OT")
+#' net_data <- select_taxonomy(net_data, taxonomy = "VT")
 #'
 #' # Retrieve taxon names ----
-#' get_species_names(nets)
-#' }
+#' get_species_names(net_data)
 
 get_species_names <- function(data) {
   check_if_df(data)
