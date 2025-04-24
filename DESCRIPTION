@@ -32,6 +32,11 @@ Authors@R: c(
            family  = "Hammami",
            role    = "ctb",
            email   = "khalil.hammami@enetcom.usf.tn"),
+    person(given   = "Air",
+           family  = "Forbes",
+           role    = "rev",
+           email   = "amforbes@ualberta.ca",
+           comment = c(ORCID = "0000-0002-9842-7648")),
     person(given   = "FRB-CESAB",
            role    = "fnd"))
 Description: Provides an interface to the FORCIS database 

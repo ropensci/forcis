@@ -32,6 +32,7 @@ Authors:
 Other contributors:
 \itemize{
   \item Khalil Hammami \email{khalil.hammami@enetcom.usf.tn} [contributor]
+  \item Air Forbes \email{amforbes@ualberta.ca} (\href{https://orcid.org/0000-0002-9842-7648}{ORCID}) [reviewer]
   \item FRB-CESAB [funder]
 }
 
