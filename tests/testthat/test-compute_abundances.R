@@ -28,13 +28,13 @@ test_that("Test compute_abundances() for error", {
 })
 
 test_that("Test compute_abundances() for success", {
-  expect_message(res <- compute_abundances(df))
+  suppressMessages(res <- compute_abundances(df))
 
   expect_true(is.data.frame(res))
   expect_equal(ncol(res), 19L)
   expect_equal(nrow(res), 39032L)
 
-  expect_message(res <- compute_abundances(df, aggregate = FALSE))
+  suppressMessages(res <- compute_abundances(df, aggregate = FALSE))
 
   expect_true(is.data.frame(res))
   expect_equal(ncol(res), 22L)

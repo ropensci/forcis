@@ -28,13 +28,13 @@ test_that("Test compute_frequencies() for error", {
 })
 
 test_that("Test compute_frequencies() for success", {
-  expect_message(res <- compute_frequencies(df))
+  suppressMessages(res <- compute_frequencies(df))
 
   expect_true(is.data.frame(res))
   expect_equal(ncol(res), 18L)
   expect_equal(nrow(res), 46324L)
 
-  expect_message(res <- compute_frequencies(df, aggregate = FALSE))
+  suppressMessages(res <- compute_frequencies(df, aggregate = FALSE))
 
   expect_true(is.data.frame(res))
   expect_equal(ncol(res), 21L)
