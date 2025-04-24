@@ -47,7 +47,7 @@ relative abundance, and number concentration, using counts metadata.
 file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"),
                          package = "forcis")
 
-net_data <- read.table(file_name, dec = ".", sep = ";")
+net_data <- read.csv(file_name)
 
 # Select a taxonomy ----
 net_data <- select_taxonomy(net_data, taxonomy = "VT")
