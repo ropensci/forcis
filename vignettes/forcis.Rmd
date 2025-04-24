@@ -10,9 +10,9 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  eval     = FALSE,
-  echo     = TRUE,
-  comment  = "#>"
+  eval = TRUE,
+  echo = TRUE,
+  comment = "#>"
 )
 ```
 
@@ -21,7 +21,7 @@ The R package `forcis` is an interface to the [FORCIS database](https://zenodo.o
 
 This package has been developed for researchers interested in working with the FORCIS database, even without advanced R skills. It provides basic functions to facilitate the handling of this large database, including functions to download, select, filter, homogenize, and visualize the data. It also enables users to explore the spatial distribution and temporal evolution of planktonic foraminifera.
 
-This vignette is an overview of the main features.
+This vignette is an overview of the main features of the package.
 
 
 
@@ -41,11 +41,7 @@ remotes::install_github("FRBCesab/forcis")
 
 > The `forcis` package depends on the [`sf`](https://r-spatial.github.io/sf/) package which requires some spatial system libraries (GDAL and PROJ). Please read [this page](https://github.com/r-spatial/sf?tab=readme-ov-file#installing) if you have any trouble to install `forcis`.
 
-
-
-## Setup
-
-First, let's attach the required packages.
+Now let's attach the required packages.
 
 ```{r setup}
 library(forcis)
@@ -60,14 +56,17 @@ The FORCIS database consists of a collection of five `csv` files hosted on [Zeno
 Let's download the latest version of the FORCIS database with `download_forcis_db()`:
 
 ```{r 'download-db', eval=FALSE}
-# Create a data/ folder ----
+# Create a data/ folder in the current directory ----
 dir.create("data")
 
 # Download latest version of the database ----
-download_forcis_db(path = "data", version = NULL)
+download_forcis_db(
+  path = "data",
+  version = NULL
+)
 ```
 
-By default (`version = NULL`), this function downloads the latest version of the database. The database is saved in `data/forcis-db/version-99/`, where `99` is the version number.
+By default (i.e. `version = NULL`), this function downloads the latest version of the database. The database is saved in `data/forcis-db/version-99/`, where `99` is the version number.
 
 **N.B.** The package `forcis` is designed to handle the versioning of the database on Zenodo. Read the [Database versions](https://frbcesab.github.io/forcis/articles/database-versions.html) for more information.
 
@@ -80,9 +79,13 @@ By default (`version = NULL`), this function downloads the latest version of the
 In this vignette, we will use the plankton nets data of the FORCIS database. Let's import the latest release of the data.
 
 ```{r 'load-data', echo=FALSE}
-file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"), 
-                         package = "forcis")
-net_data <- read.csv(file_name)
+file_name <- system.file(
+  file.path("extdata", "FORCIS_net_sample.csv"),
+  package = "forcis"
+)
+
+net_data <- read.csv(file_name) |>
+  tibble::as_tibble()
 ```
 
 ```{r 'load-data-user', eval=FALSE}
@@ -90,29 +93,167 @@ net_data <- read.csv(file_name)
 net_data <- read_plankton_nets_data(path = "data")
 ```
 
-**N.B.** Here we use a subset of the plankton nets data, not the whole dataset.
+```{r 'print-data'}
+# Print data ----
+net_data
+```
+
+**N.B.** For this vignette, we use a subset of the plankton nets data, not the whole dataset.
 
 
 
-## Select a taxonomy
+## Select a FORCIS taxonomy
 
 The FORCIS database provides three different taxonomies: 
 
-- `LT`: lumped taxonomy
-- `VT`: validated taxonomy
-- `OT`: original taxonomy
+- `OT`: original taxonomy, i.e. the initial list of species names and attributes (e.g., shell pigmentation, coiling direction) as reported in various datasets and studies.
+- `VT`: validated taxonomy, i.e. a refined version of the original taxonomy that resolves issues of synonymy (different names for the same taxon) and shifting taxonomic concepts.
+- `LT`: lumped taxonomy, i.e. a simplified version of the validated taxonomy. It merges taxa that are difficult to distinguish across datasets (morphospecies), ensuring consistency and comparability in broader analyses. 
 
 See the associated [data paper](https://doi.org/10.1038/s41597-023-02264-2) for further information.
 
-After importing the data and before going any further, the next step involves choosing the taxonomic level for the analyses.
+After importing the data and before going any further, the next step involves choosing the taxonomic level for the analyses. **This is mandatory to avoid duplicated records**.
 
 Let's use the function `select_taxonomy()` to select the **VT** taxonomy (validated taxonomy):
 
 ```{r 'select-taxo'}
 # Select taxonomy ----
-net_data_vt <- select_taxonomy(net_data, taxonomy = "VT")
+net_data_vt <- net_data |>
+  select_taxonomy(taxonomy = "VT")
+
+net_data_vt
 ```
 
+This function has removed species columns associated with other taxonomies. 
+
+At this stage user can choose what he/she wants to do with this cleaned dataset. In the next sections, we present some use cases.
+
+## Use case 1: Exploration
+
+In this first use case, we want to have an overview of our data.
+
+```{r 'use-case-1-metrics'}
+# How many subsamples do we have? ----
+nrow(net_data_vt)
+
+# How many species have been sampled? ----
+net_data_vt |>
+  get_species_names() |>
+  length()
+```
+
+We can use the `plot_record_by_year()` function to display the number of samples per year.
+
+```{r 'use-case-1-time'}
+# What is the temporal extent? ----
+plot_record_by_year(net_data_vt)
+```
+
+The `plot_record_by_month()` and `plot_record_by_season()` are also available to display samples at different temporal resolutions.
+
+
+Let's use the `ggmap_data()` function to get an idea of the spatial extent of these data.
+
+```{r 'use-case-1-space'}
+# What is the spatial extent? ----
+ggmap_data(net_data_vt)
+```
+
+The [Data visualization](https://frbcesab.github.io/forcis/articles/data-visualization.html) vignette provides a complete description of all plotting functions available in `forcis`.
+
+
+## Use case 2: Specific question
+
+In this second use case we want to answer the following question: 
+
+> What is the distribution of the planktonic foraminifera species _Neogloboquadrina pachyderma_ between 1970 and 2000 in the Mediterranean Sea?
+
+We can divide the problem into different stages:
+
+1. Find the species name in the FORCIS dataset
+2. Filter data for _N. pachyderma_
+3. Keep non-zero samples for this species
+3. Filter data for 1970-2000
+4. Filter data for Mediterranean Sea
+5. Plot records on a map
+
+##### Find the species name
+
+```{r 'use-case-2-species'}
+# Get all species names ----
+species_list <- net_data_vt |>
+  get_species_names()
+
+# Search for species containing the word 'pachyderma' ----
+species_list[grep("pachyderma", species_list)]
+
+# Store the species name ----
+sp_name <- "n_pachyderma_VT"
+```
+
+##### Species filter
+
+```{r 'use-case-2-species-filter'}
+# Filter data by species ----
+net_data_vt_pachyderma <- net_data_vt |>
+  filter_by_species(species = sp_name)
+
+net_data_vt_pachyderma
+
+# Remove empty samples for N. pachyderma ----
+net_data_vt_pachyderma <- net_data_vt_pachyderma |>
+  dplyr::filter(n_pachyderma_VT > 0)
+
+net_data_vt_pachyderma
+```
+
+##### Temporal filter
+
+```{r 'use-case-2-temporal-filter'}
+# Filter data by years ----
+net_data_vt_pachyderma_7000 <- net_data_vt_pachyderma |>
+  filter_by_year(years = 1970:2000)
+
+# Number of records ----
+nrow(net_data_vt_pachyderma_7000)
+```
+
+##### Spatial filter
+
+```{r 'use-case-2-spatial-filter'}
+# Get the list of ocean names ----
+get_ocean_names()
+
+# Filter data by ocean ----
+net_data_vt_pachyderma_7000_med <- net_data_vt_pachyderma_7000 |>
+  filter_by_ocean(ocean = "Mediterranean Sea")
+
+# Number of records ----
+nrow(net_data_vt_pachyderma_7000_med)
+```
+
+##### Distribution map
+
+```{r 'use-case-2-map'}
+# Plot N. pachyderma records on a World map ----
+ggmap_data(net_data_vt_pachyderma_7000_med)
+```
+
+Finally, we can combine all these steps into one single pipeline:
+
+```{r 'use-case-2-all', eval=FALSE}
+# Final use case 2 code ----
+net_data_vt |>
+  filter_by_species(species = "n_pachyderma_VT") |>
+  dplyr::filter(n_pachyderma_VT > 0) |>
+  filter_by_year(years = 1970:2000) |>
+  filter_by_ocean(ocean = "Mediterranean Sea") |>
+  ggmap_data()
+```
+
+
+
+The [Select, reshape, and filter data](https://frbcesab.github.io/forcis/articles/select-and-filter-data.html) vignette shows examples to handle FORCIS data.
 
 ## To go further
 
