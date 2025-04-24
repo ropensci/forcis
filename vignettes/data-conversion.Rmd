@@ -10,9 +10,9 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  eval     = TRUE,
-  echo     = TRUE,
-  comment  = "#>"
+  eval = TRUE,
+  echo = TRUE,
+  comment = "#>"
 )
 ```
 
@@ -57,8 +57,10 @@ download_forcis_db(path = "data", version = NULL)
 The vignette will use the plankton net data of the FORCIS database. Let's import the latest release of the data.
 
 ```{r 'load-data', echo=FALSE}
-file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"), 
-                         package = "forcis")
+file_name <- system.file(
+  file.path("extdata", "FORCIS_net_sample.csv"),
+  package = "forcis"
+)
 net_data <- read.csv(file_name)
 ```
 
