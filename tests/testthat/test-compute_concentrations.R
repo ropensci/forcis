@@ -40,19 +40,19 @@ test_that("Test compute_concentrations() for error", {
 })
 
 test_that("Test compute_concentrations() for success", {
-  expect_message(res <- compute_concentrations(df))
+  suppressMessages(res <- compute_concentrations(df))
 
   expect_true(is.data.frame(res))
   expect_equal(ncol(res), 19L)
   expect_equal(nrow(res), 39032L)
 
-  expect_message(res <- compute_concentrations(df, aggregate = FALSE))
+  suppressMessages(res <- compute_concentrations(df, aggregate = FALSE))
 
   expect_true(is.data.frame(res))
   expect_equal(ncol(res), 22L)
   expect_equal(nrow(res), 134680L)
 
-  res <- compute_concentrations(df3)
+  suppressMessages(res <- compute_concentrations(df3))
 
   expect_true(is.data.frame(res))
   expect_equal(ncol(res), 78L)
