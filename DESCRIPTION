@@ -59,6 +59,7 @@ Imports:
     vroom
 Suggests: 
     fs,
+    dplyr,
     httptest2,
     knitr,
     rmarkdown,
