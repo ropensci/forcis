@@ -12,11 +12,10 @@
 #' @export
 #'
 #' @examples
-#' # Attach the package ----
-#' library("forcis")
-#'
+#' \dontrun{
 #' # Versions of the FORCIS database ----
 #' get_available_versions()
+#' }
 
 get_available_versions <- function() {
   ## Retrieve information ----

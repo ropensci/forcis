@@ -11,8 +11,7 @@
 #' @export
 #'
 #' @examples
-#' # Attach packages ----
-#' library("forcis")
+#' # Attach package ----
 #' library("ggplot2")
 #'
 #' # World basemap ----

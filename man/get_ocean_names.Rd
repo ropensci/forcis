@@ -14,9 +14,8 @@ This function returns the name of World oceans according to the IHO Sea Areas
 dataset version 3 (Flanders Marine Institute, 2018).
 }
 \examples{
-\dontrun{
+# Print the name of World oceans ----
 get_ocean_names()
-}
 }
 \references{
 Flanders Marine Institute (2018). IHO Sea Areas, version 3.

@@ -14,9 +14,8 @@
 #' DOI: \url{https://doi.org/10.14284/323}.
 #'
 #' @examples
-#' \dontrun{
+#' # Print the name of World oceans ----
 #' get_ocean_names()
-#' }
 
 get_ocean_names <- function() {
   iho_boundaries$"NAME"

@@ -14,17 +14,11 @@
 #' @export
 #'
 #' @examples
-#' # Attach the package ----
-#' library("forcis")
-#'
 #' # Import example dataset ----
 #' file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"),
 #'                          package = "forcis")
 #'
 #' net_data <- read.table(file_name, dec = ".", sep = ";")
-#'
-#' # Add 'data_type' column ----
-#' net_data$"data_type" <- "Net"
 #'
 #' # Map data (default) ----
 #' ggmap_data(net_data)

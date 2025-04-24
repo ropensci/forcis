@@ -13,8 +13,7 @@
 #' @export
 #'
 #' @examples
-#' # Attach packages ----
-#' library("forcis")
+#' # Attach package ----
 #' library("ggplot2")
 #'
 #' # Import example dataset ----
@@ -22,9 +21,6 @@
 #'                          package = "forcis")
 #'
 #' net_data <- read.table(file_name, dec = ".", sep = ";")
-#'
-#' # Add 'data_type' column ----
-#' net_data$"data_type" <- "Net"
 #'
 #' # Dimensions of the data.frame ----
 #' dim(net_data)
