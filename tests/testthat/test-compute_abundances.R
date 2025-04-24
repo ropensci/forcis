@@ -1,12 +1,10 @@
 ## Data for test ----
 
-df <- read.table(
+df <- read.csv(
   system.file(
     file.path("extdata", "FORCIS_net_sample.csv"),
     package = "forcis"
-  ),
-  dec = ".",
-  sep = ";"
+  )
 )
 
 df <- add_data_type(df, "Net")
@@ -33,12 +31,12 @@ test_that("Test compute_abundances() for success", {
   expect_message(res <- compute_abundances(df))
 
   expect_true(is.data.frame(res))
-  expect_equal(ncol(res), 16L)
+  expect_equal(ncol(res), 19L)
   expect_equal(nrow(res), 39032L)
 
   expect_message(res <- compute_abundances(df, aggregate = FALSE))
 
   expect_true(is.data.frame(res))
-  expect_equal(ncol(res), 19L)
+  expect_equal(ncol(res), 22L)
   expect_equal(nrow(res), 134008L)
 })

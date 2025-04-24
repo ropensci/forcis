@@ -82,7 +82,7 @@ In this vignette, we will use the plankton nets data of the FORCIS database. Let
 ```{r 'load-data', echo=FALSE}
 file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"), 
                          package = "forcis")
-net_data <- read.table(file_name, dec = ".", sep = ";")
+net_data <- read.csv(file_name)
 ```
 
 ```{r 'load-data-user', eval=FALSE}
