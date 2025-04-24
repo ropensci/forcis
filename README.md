@@ -45,10 +45,19 @@ This package has been developed for researchers interested in working
 with the FORCIS database, even without advanced R skills. It provides
 basic functions to facilitate the handling of this large database,
 including functions to download, select, filter, homogenize, and
-visualize the data. It also enables users to explore the spatial
-distribution and temporal evolution of planktonic foraminifera. The
-[Functions](https://frbcesab.github.io/forcis/reference/index.html) page
-provides a full description of the features available in the package.
+visualize the data (Figure 1). It also enables users to explore the
+spatial distribution and temporal evolution of planktonic foraminifera.
+
+<figure>
+<img src="inst/workflow.png"
+alt="Figure 1. Recommended workflow and main features of forcis" />
+<figcaption aria-hidden="true">Figure 1. Recommended workflow and main
+features of <code>forcis</code></figcaption>
+</figure>
+
+The [Functions](https://frbcesab.github.io/forcis/reference/index.html)
+page provides a full description of the features available in the
+package.
 
 ## Installation
 
