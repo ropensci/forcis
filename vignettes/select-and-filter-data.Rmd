@@ -10,16 +10,16 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  eval     = TRUE,
-  echo     = TRUE,
-  comment  = "#>",
-  dpi       = 120,
+  eval = TRUE,
+  echo = TRUE,
+  comment = "#>",
+  dpi = 120,
   fig.align = "center",
   out.width = "80%"
 )
 ```
 
-The package `forcis` provides [a lot of functions](https://frbcesab.github.io/forcis/reference/index.html#select-and-filters-tools) to filter, reshape, and select FORCIS data. This vignette shows how to use these functions.
+The package `forcis` provides [a lot of functions](https://frbcesab.github.io/forcis/reference/index.html#select-and-filters-tools) to filter, reshape, and select FORCIS data. This vignette shows how to use these functions. With the exception of `select_taxonomy()`, all functions presented in this vignette are optional and depend on your research questions. You can filter data by species, time range, ocean, etc.
 
 
 ## Setup
@@ -43,8 +43,10 @@ download_forcis_db(path = "data", version = NULL)
 The vignette will use the plankton nets data of the FORCIS database. Let's import the latest release of the data.
 
 ```{r 'load-data', echo=FALSE}
-file_name <- system.file(file.path("extdata", "FORCIS_net_sample.csv"), 
-                         package = "forcis")
+file_name <- system.file(
+  file.path("extdata", "FORCIS_net_sample.csv"),
+  package = "forcis"
+)
 net_data <- read.csv(file_name)
 ```
 
@@ -60,33 +62,49 @@ net_data <- read_plankton_nets_data(path = "data")
 
 ### Select a taxonomy
 
-The FORCIS database provides three different taxonomies: `LT` (lumped taxonomy), `VT` (validated taxonomy) and `OT` (original taxonomy). See the [associated data paper](https://doi.org/10.1038/s41597-023-02264-2) for further information.
+The FORCIS database provides three different taxonomies: 
 
-After importing the data and before going any further, the next step involves choosing the taxonomic level for the analyses. Let's use the function `select_taxonomy()` to select the **VT** taxonomy (validated taxonomy):
+- `OT`: original taxonomy, i.e. the initial list of species names and attributes (e.g., shell pigmentation, coiling direction) as reported in various datasets and studies.
+- `VT`: validated taxonomy, i.e. a refined version of the original taxonomy that resolves issues of synonymy (different names for the same taxon) and shifting taxonomic concepts.
+- `LT`: lumped taxonomy, i.e. a simplified version of the validated taxonomy. It merges taxa that are difficult to distinguish across datasets (morphospecies), ensuring consistency and comparability in broader analyses. 
+
+See the [associated data paper](https://doi.org/10.1038/s41597-023-02264-2) for further information.
+
+After importing the data and before going any further, the next step involves choosing the taxonomic level for the analyses. **This is mandatory to avoid duplicated records**.
+
+Let's use the function `select_taxonomy()` to select the **VT** taxonomy (validated taxonomy):
 
 ```{r 'select-taxo'}
 # Select taxonomy ----
-net_data <- select_taxonomy(net_data, taxonomy = "VT")
+net_data_vt <- net_data |>
+  select_taxonomy(taxonomy = "VT")
+
+net_data_vt
 ```
 
 
 
 ### Select required columns
 
-Because FORCIS data contain more than 100 columns, the function `select_forcis_columns()` can be used to lighten the `data.frame` to easily handle it and to speed up some computations. 
+Because FORCIS data contain more than 100 columns, the function `select_forcis_columns()` can be used to lighten the data to easily handle it and to speed up some computations. 
 
 By default, only required columns listed in `get_required_columns()` (required by some functions of the package like `compute_*()` and `plot_*()`) and species columns will be kept.
 
 
 ```{r 'select-columns'}
-# Select taxonomy ----
-net_data <- select_forcis_columns(net_data)
+# Remove not required columns (optional) ----
+net_data_vt <- net_data_vt |>
+  select_forcis_columns()
+
+net_data_vt
 ```
 
-But you can also use the argument `cols` to keep additional columns.
+You can also use the argument `cols` to keep additional columns.
 
 
 ## Filtering rows
+
+The `filter_by_*()` functions are optional and their use depends on your research questions.
 
 
 ### Filter by month of data collection
@@ -95,13 +113,14 @@ The `filter_by_month()` function filters observations based on the **month of sa
 
 ```{r 'filter-by-month'}
 # Filter data by sampling month ----
-net_july_aug <- filter_by_month(net_data, months = 7:8)
+net_data_vt_july_aug <- net_data_vt |>
+  filter_by_month(months = 7:8)
 
 # Number of original records ----
-nrow(net_data)
+nrow(net_data_vt)
 
 # Number of filtered records ----
-nrow(net_july_aug)
+nrow(net_data_vt_july_aug)
 ```
 
 
@@ -111,13 +130,14 @@ The `filter_by_year()` function filters observations based on the **year of samp
 
 ```{r 'filter-by-year'}
 # Filter data by sampling year ----
-net_90_20 <- filter_by_year(net_data, years = 1990:2020)
+net_data_vt_9020 <- net_data_vt |>
+  filter_by_year(years = 1990:2020)
 
 # Number of original records ----
-nrow(net_data)
+nrow(net_data_vt)
 
 # Number of filtered records ----
-nrow(net_90_20)
+nrow(net_data_vt_9020)
 ```
 
 
@@ -129,16 +149,34 @@ Let's filter the plankton net data by a spatial rectangle located in the Indian 
 
 ```{r 'filter-by-bbox'}
 # Filter by spatial bounding box ----
-net_data_bbox <- filter_by_bbox(net_data, bbox = c(45, -61, 82, -24))
+net_data_vt_bbox <- net_data_vt |>
+  filter_by_bbox(bbox = c(45, -61, 82, -24))
 
 # Number of original records ----
-nrow(net_data)
+nrow(net_data_vt)
 
 # Number of filtered records ----
-nrow(net_data_bbox)
+nrow(net_data_vt_bbox)
 ```
 
 Note that the argument `bbox` can be either an object of class `bbox` (package `sf`) or a vector of four numeric values defining a square bounding box. If a vector of numeric values is provided, coordinates must be defined in the system WGS 84 (`epsg=4326`).
+
+Let's check the spatial extent by converting these two `tibbles` into spatial layers (`sf` objects) with the function `data_to_sf()`.
+
+```{r 'check-bbox'}
+# Filter by spatial bounding box ----
+net_data_vt_sf <- net_data_vt |>
+  data_to_sf()
+
+net_data_vt_bbox_sf <- net_data_vt_bbox |>
+  data_to_sf()
+
+# Original spatial extent ----
+sf::st_bbox(net_data_vt_sf)
+
+# Spatial extent of filtered records ----
+sf::st_bbox(net_data_vt_bbox_sf)
+```
 
 
 
@@ -150,13 +188,14 @@ Let's filter the plankton net data located in the Indian ocean.
 
 ```{r 'filter-by-ocean'}
 # Filter by ocean name ----
-net_data_indian <- filter_by_ocean(net_data, ocean = "Indian Ocean")
+net_data_vt_indian <- net_data_vt |>
+  filter_by_ocean(ocean = "Indian Ocean")
 
 # Number of original records ----
-nrow(net_data)
+nrow(net_data_vt)
 
 # Number of filtered records ----
-nrow(net_data_indian)
+nrow(net_data_vt_indian)
 ```
 
 Use the function `get_ocean_names()` to retrieve the name of World oceans according to the IHO Sea Areas dataset version 3 (used in this package).
@@ -175,18 +214,22 @@ Let's filter the plankton net data by a spatial polygon defining boundaries of t
 
 ```{r 'filter-by-polygon'}
 # Import spatial polygon ----
-file_name <- system.file(file.path("extdata", "IHO_Indian_ocean_polygon.gpkg"), 
-                         package = "forcis")
+file_name <- system.file(
+  file.path("extdata", "IHO_Indian_ocean_polygon.gpkg"),
+  package = "forcis"
+)
+
 indian_ocean <- sf::st_read(file_name, quiet = TRUE)
 
 # Filter by polygon ----
-net_data_poly <- filter_by_polygon(net_data, polygon = indian_ocean)
+net_data_vt_poly <- net_data_vt |>
+  filter_by_polygon(polygon = indian_ocean)
 
 # Number of original records ----
-nrow(net_data)
+nrow(net_data_vt)
 
 # Number of filtered records ----
-nrow(net_data_poly)
+nrow(net_data_vt_poly)
 ```
 
 
@@ -195,24 +238,33 @@ nrow(net_data_poly)
 
 The `filter_by_species()` function allows users to filter FORCIS data for one or more species.
 
-It takes a `data.frame` and a vector of species names (argument `species`).
+It takes a `data.frame` (or a `tibble`) and a vector of species names (argument `species`).
 
-Let's subset plankton net data to only keep observations for *G. glutinata* and *C. nitida*.
+Let's subset plankton net data to only keep only two species: *G. glutinata* and *C. nitida*.
 
 ```{r 'filter-by-species'}
 # Filter by species ----
-glutinata_nitida <- filter_by_species(net_data, 
-                                      species = c("g_glutinata_VT", 
-                                                  "c_nitida_VT"))
+net_data_vt_glutinata_nitida <- net_data_vt |>
+  filter_by_species(species = c("g_glutinata_VT", "c_nitida_VT"))
 
 # Dimensions of original data ----
-dim(net_data)
+dim(net_data_vt)
 
 # Dimensions of filtered data ----
-dim(glutinata_nitida)
+dim(net_data_vt_glutinata_nitida)
 ```
 
+**Important:** The `filter_by_species()` function does not remove rows (samples) but columns: it removes other species columns. To only keep samples where these two species have been detected, we can use:
 
+
+```{r 'filter-counts'}
+# Keep samples with positive counts ----
+net_data_vt_glutinata_nitida <- net_data_vt_glutinata_nitida |>
+  dplyr::filter(g_glutinata_VT > 0 | c_nitida_VT > 0)
+
+# Number of filtered records ----
+nrow(net_data_vt_glutinata_nitida)
+```
 
 ## Reshaping
 
