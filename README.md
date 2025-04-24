@@ -23,8 +23,7 @@ status](https://www.r-pkg.org/badges/version/forcis)](https://CRAN.R-project.org
 <p align="left">
 • <a href="#overview">Overview</a><br> •
 <a href="#installation">Installation</a><br> •
-<a href="#get-started">Get started</a><br> •
-<a href="#long-form-documentations">Long-form documentations</a><br> •
+<a href="#documentation">Documentation</a><br> •
 <a href="#citation">Citation</a><br> •
 <a href="#contributing">Contributing</a><br> •
 <a href="#acknowledgments">Acknowledgments</a><br> •
@@ -41,23 +40,28 @@ distribution in the global oceans from 1910 until 2018 collected using
 plankton tows, continuous plankton recorder, sediment traps and plankton
 pump from the global ocean.
 
+<figure>
+<img src="inst/workflow.png"
+alt="Figure 1: Recommended workflow and main features of forcis" />
+<figcaption aria-hidden="true">Figure 1: Recommended workflow and main
+features of <code>forcis</code></figcaption>
+</figure>
+
+<br/>
+
 This package has been developed for researchers interested in working
 with the FORCIS database, even without advanced R skills. It provides
 basic functions to facilitate the handling of this large database,
 including functions to download, select, filter, homogenize, and
-visualize the data (Figure 1). It also enables users to explore the
-spatial distribution and temporal evolution of planktonic foraminifera.
+visualize the data. It also enables users to explore the spatial
+distribution and temporal evolution of planktonic foraminifera.
 
 <figure>
-<img src="inst/workflow.png"
-alt="Figure 1. Recommended workflow and main features of forcis" />
-<figcaption aria-hidden="true">Figure 1. Recommended workflow and main
-features of <code>forcis</code></figcaption>
+<img src="inst/visualization.png"
+alt="Figure 2: Overview of visualizations available in forcis" />
+<figcaption aria-hidden="true">Figure 2: Overview of visualizations
+available in <code>forcis</code></figcaption>
 </figure>
-
-The [Functions](https://frbcesab.github.io/forcis/reference/index.html)
-page provides a full description of the features available in the
-package.
 
 ## Installation
 
@@ -86,13 +90,7 @@ Finally you can attach the package `forcis` with:
 library("forcis")
 ```
 
-## Get started
-
-For an overview of the main features of `forcis`, please read the [Get
-started](https://frbcesab.github.io/forcis/articles/forcis.html)
-vignette.
-
-## Long-form documentations
+## Documentation
 
 `forcis` provides five vignettes to learn more about the package:
 
