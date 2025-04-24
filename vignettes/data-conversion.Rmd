@@ -78,7 +78,8 @@ Let's use the function `select_taxonomy()` to select the **VT** taxonomy (valida
 
 ```{r 'select-taxo'}
 # Select taxonomy ----
-net_data <- select_taxonomy(net_data, taxonomy = "VT")
+net_data_vt <- net_data |>
+  select_taxonomy(taxonomy = "VT")
 ```
 
 Once the data contain counts from the same taxonomic level, we can proceed with the conversion functions: `compute_*()`.
@@ -92,17 +93,19 @@ This function converts all counts into raw abundances, using sampling metadata s
 
 ```{r 'compute-abundance'}
 # Convert species counts in raw abundance ----
-net_data_raw_ab <- compute_abundances(net_data, aggregate = TRUE)
+net_data_vt_raw_ab <- net_data_vt |>
+  compute_abundances(aggregate = TRUE)
 ```
 
 ```{r 'exploration'}
 # Format ----
-dim(net_data)
-dim(net_data_raw_ab)
+dim(net_data_vt)
+dim(net_data_vt_raw_ab)
 
 # Header ----
-net_data_raw_ab <- as.data.frame(net_data_raw_ab)
-head(net_data_raw_ab)
+net_data_vt_raw_ab |>
+  as.data.frame() |>
+  head()
 ```
 
 The functions `compute_*()` output a table in a long-format as well as a message reporting the amount of data that could not be converted because of missing metadata.
@@ -115,8 +118,8 @@ This function transforms all counts into number concentration abundances. It als
 
 ```{r 'compute-concetration'}
 # Convert species counts in number concentration ----
-net_data_n_conc <- compute_concentrations(net_data, aggregate = TRUE)
-
+net_data_vt_n_conc <- net_data_vt |>
+  compute_concentrations(aggregate = TRUE)
 ```
 
 
@@ -126,5 +129,6 @@ This function computes relative abundance for each species using total assemblag
 
 ```{r 'compute-frequency'}
 # Convert species counts in relative abundance ----
-net_data_rel_ab <- compute_frequencies(net_data, aggregate = TRUE)
+net_data_rel_ab <- net_data_vt |>
+  compute_frequencies(aggregate = TRUE)
 ```

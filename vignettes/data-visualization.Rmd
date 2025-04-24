@@ -97,18 +97,18 @@ This function works with the output of various functions available in the `forci
 
 ```{r 'ggmap-filtered-data', echo=TRUE, eval=FALSE}
 # Filter net data ----
-indian_net_data <- filter_by_ocean(net_data, ocean = "Indian Ocean")
+net_data_indian <- filter_by_ocean(net_data, ocean = "Indian Ocean")
 
 # Map filtered data ----
-ggmap_data(indian_net_data)
+ggmap_data(net_data_indian)
 ```
 
 Note that the `forcis` package is pipe-friendly.
 
 ```{r 'ggmap-filtered-data-pipe', eval=FALSE}
 # Same as before, but w/ the pipe ----
-net_data %>%
-  filter_by_ocean(ocean = "Indian Ocean") %>%
+net_data |>
+  filter_by_ocean(ocean = "Indian Ocean") |>
   ggmap_data()
 ```
 
@@ -117,15 +117,15 @@ You can export this map with the function `ggsave()` of the package `ggplot2`.
 
 ```{r 'ggmap-save', eval=FALSE}
 # Map filtered data ----
-indian_net_data_map <- net_data %>%
-  filter_by_ocean(ocean = "Indian Ocean") %>%
+net_data_indian_map <- net_data |>
+  filter_by_ocean(ocean = "Indian Ocean") |>
   ggmap_data() +
   ggtitle("FORCIS net data - Indian Ocean")
 
 # Save as PNG ----
 ggsave(
-  indian_net_data_map,
-  filename = "indian_net_data_map.png",
+  net_data_indian_map,
+  filename = "net_data_indian_map.png",
   width = 20,
   height = 11,
   units = "cm",
