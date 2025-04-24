@@ -19,9 +19,6 @@
 #'
 #' net_data <- read.table(file_name, dec = ".", sep = ";")
 #'
-#' # Add 'data_type' column ----
-#' net_data$"data_type" <- "Net"
-#'
 #' # Select a taxonomy ----
 #' net_data <- select_taxonomy(net_data, taxonomy = "VT")
 #'
