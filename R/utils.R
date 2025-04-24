@@ -31,7 +31,7 @@ download_file <- function(url, path, file, overwrite = FALSE, timeout = 60) {
 
   tryCatch(
     {
-      utils::download.file(url = url, destfile = destination, mode = "wb")
+      utils_download_file(url = url, destfile = destination, mode = "wb")
 
       message("The file '", file, "' has been successfully downloaded")
     },
@@ -47,6 +47,14 @@ download_file <- function(url, path, file, overwrite = FALSE, timeout = 60) {
   )
 
   invisible(NULL)
+}
+
+#' download.file wrapper
+#'
+#' to make mock testing easier
+#' @noRd
+utils_download_file <- function(url, destfile, mode, ...) {
+  utils::download.file(url = url, destfile = destfile, mode = mode, ...)
 }
 
 

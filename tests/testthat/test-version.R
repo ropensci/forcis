@@ -53,60 +53,63 @@ test_that("Test check_version() for success", {
 
 ## get_metadata() ----
 
-with_mock_dir(
-  "get_metadata",
-  {
-    test_that("Test get_metadata() for success", {
+test_that("Test get_metadata() for success", {
+  with_mocked_bindings(
+    get_metadata = get_metadata_mock,
+    {
       x <- get_metadata()
+    }
+  )
 
-      expect_equal(class(x), "list")
-      expect_true("hits" %in% names(x))
-      expect_true(x$"hits"$"total" > 0L)
-    })
-  },
-  simplify = FALSE
-)
+  expect_equal(class(x), "list")
+  expect_true("hits" %in% names(x))
+  expect_true(x$"hits"$"total" > 0L)
+})
 
 
 ## get_available_versions() ----
 
-with_mock_dir(
-  "get_available_versions",
-  {
-    test_that("Test get_available_versions() for success", {
+test_that("Test get_available_versions() for success", {
+  with_mocked_bindings(
+    get_metadata = get_metadata_mock,
+    {
       x <- get_available_versions()
+    }
+  )
 
-      expect_true("data.frame" %in% class(x))
-      expect_true(nrow(x) > 0L)
-      expect_equal(ncol(x), 3L)
+  expect_true("data.frame" %in% class(x))
+  expect_true(nrow(x) > 0L)
+  expect_equal(ncol(x), 3L)
 
-      expect_true("publication_date" %in% colnames(x))
-      expect_true("version" %in% colnames(x))
-      expect_true("access_right" %in% colnames(x))
-    })
-  },
-  simplify = FALSE
-)
+  expect_true("publication_date" %in% colnames(x))
+  expect_true("version" %in% colnames(x))
+  expect_true("access_right" %in% colnames(x))
+})
 
 
 ## get_version_metadata() ----
 
 test_that("Test get_version_metadata() for error", {
-  expect_error(
-    get_version_metadata(version = "999"),
-    paste0(
-      "The required version is not available. Please run ",
-      "'get_available_versions()' to list available versions."
-    ),
-    fixed = TRUE
+  with_mocked_bindings(
+    get_metadata = get_metadata_mock,
+    {
+      expect_error(
+        get_version_metadata(version = "999"),
+        paste0(
+          "The required version is not available. Please run ",
+          "'get_available_versions()' to list available versions."
+        ),
+        fixed = TRUE
+      )
+    }
   )
 })
 
 
-with_mock_dir(
-  "get_version_metadata",
-  {
-    test_that("Test get_version_metadata() for success", {
+test_that("Test get_version_metadata() for success", {
+  with_mocked_bindings(
+    get_metadata = get_metadata_mock,
+    {
       x <- get_version_metadata(version = NULL)
 
       expect_equal(class(x), "list")
@@ -121,60 +124,80 @@ with_mock_dir(
 
       expect_true(x$"version" == "08")
       expect_true(x$"publication_date" == "2024-02-09")
-    })
-  },
-  simplify = FALSE
-)
+    }
+  )
+})
 
 
 ## get_latest_version() ----
 
-with_mock_dir("get_latest_version", {
-  test_that("Test get_latest_version() for success", {
-    x <- get_latest_version()
+test_that("Test get_latest_version() for success", {
+  with_mocked_bindings(
+    get_metadata = get_metadata_mock,
+    {
+      x <- get_latest_version()
+    }
+  )
 
-    expect_equal(class(x), "character")
-  })
+  expect_equal(class(x), "character")
 })
 
 
 ## set_version() ----
 
 test_that("Test set_version() for error", {
-  expect_error(
-    set_version(version = "999", ask = FALSE),
-    paste0(
-      "The required version is not available. Please run ",
-      "'get_available_versions()' to list available versions."
-    ),
-    fixed = TRUE
+  with_mocked_bindings(
+    get_metadata = get_metadata_mock,
+    {
+      expect_error(
+        set_version(version = "999", ask = FALSE),
+        paste0(
+          "The required version is not available. Please run ",
+          "'get_available_versions()' to list available versions."
+        ),
+        fixed = TRUE
+      )
+    }
   )
 })
 
+
 test_that("Test set_version() for success", {
   create_tempdir()
 
-  y <- get_latest_version()
-  x <- set_version(version = NULL, ask = FALSE)
+  with_mocked_bindings(
+    get_metadata = get_metadata_mock,
+    {
+      y <- get_latest_version()
+      x <- set_version(version = NULL, ask = FALSE)
+    }
+  )
 
   expect_equal(class(x), "character")
   expect_equal(length(x), 1L)
   expect_equal(x, y)
 })
 
+
 test_that("Test set_version() for success", {
   create_tempdir()
 
-  x <- set_version(version = "07", ask = FALSE)
+  with_mocked_bindings(
+    get_metadata = get_metadata_mock,
+    {
+      x <- set_version(version = "07", ask = FALSE)
 
-  expect_equal(class(x), "character")
-  expect_equal(length(x), 1L)
-  expect_equal(x, "07")
+      expect_equal(class(x), "character")
+      expect_equal(length(x), 1L)
+      expect_equal(x, "07")
 
-  y <- get_latest_version()
-  x <- set_version(version = NULL, ask = FALSE)
+      y <- get_latest_version()
 
-  expect_equal(class(x), "character")
-  expect_equal(length(x), 1L)
-  expect_equal(x, y)
+      x <- set_version(version = NULL, ask = FALSE)
+
+      expect_equal(class(x), "character")
+      expect_equal(length(x), 1L)
+      expect_equal(x, y)
+    }
+  )
 })
