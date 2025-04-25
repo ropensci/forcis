@@ -3,6 +3,8 @@
 on:
     push:
       branches: [main, master]
+    pull_request: # TO BE REMOVED. Testing on PR
+      branches: [main, master] 
     schedule:
       - cron: "15 0 * * *"
   
