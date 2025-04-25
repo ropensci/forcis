@@ -3,12 +3,12 @@
 on:
     push:
       branches: [main, master]
-    pull_request: # TO BE REMOVED. Testing on PR
-      branches: [main, master] 
+    # pull_request: # TO BE REMOVED. Testing on PR
+    #   branches: [main, master] 
     schedule:
       - cron: "15 0 * * *"
   
-name: R-CMD-check
+name: R-CMD-check (Real Tests)
   
 jobs:
     R-CMD-check:
@@ -20,11 +20,7 @@ jobs:
         fail-fast: false
         matrix:
           config:
-            - {os: macOS-latest,   r: 'release'}
-            - {os: windows-latest, r: 'release'}
-            - {os: ubuntu-latest,  r: 'devel', http-user-agent: 'release'}
-            - {os: ubuntu-latest,  r: 'release'}
-            - {os: ubuntu-latest,  r: 'oldrel-1'}
+            - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release'}
   
       env:
         GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
