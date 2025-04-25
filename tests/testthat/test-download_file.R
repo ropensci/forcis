@@ -19,18 +19,28 @@ forcis_file <- forcis_files$"key"
 
 ## download_file() ----
 
+# mock downloading a file by creating a dummy file
+download_file_mock <- function(url, destfile, mode, ...) {
+  file.create(destfile)
+}
+
 test_that("Test download_file() for success", {
   root_dir <- tempfile("download_file")
   dir.create(root_dir, recursive = TRUE, showWarnings = FALSE)
 
-  messages <- capture_messages(
-    expect_invisible(download_file(
-      url = forcis_url,
-      path = root_dir,
-      file = forcis_file,
-      overwrite = FALSE,
-      timeout = 300
-    ))
+  with_mocked_bindings(
+    utils_download_file = download_file_mock,
+    {
+      messages <- capture_messages(
+        expect_invisible(download_file(
+          url = forcis_url,
+          path = root_dir,
+          file = forcis_file,
+          overwrite = FALSE,
+          timeout = 300
+        ))
+      )
+    }
   )
 
   expect_match(
