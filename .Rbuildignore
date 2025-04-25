@@ -17,3 +17,4 @@
 ^forcis-db$
 ^air\.toml$
 ^\.vscode$
+^real-tests$
