@@ -132,10 +132,9 @@ All types of contributions are encouraged and valued. For more
 information, check out our [Contributor
 Guidelines](https://github.com/ropensci/forcis/blob/main/CONTRIBUTING.md).
 
-Please note that the `forcis` project is released with a [Contributor
-Code of
-Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html).
-By contributing to this project, you agree to abide by its terms.
+Please note that this package is released with a [Contributor Code of
+Conduct](https://ropensci.org/code-of-conduct/). By contributing to this
+project, you agree to abide by its terms.
 
 ## Acknowledgments
 

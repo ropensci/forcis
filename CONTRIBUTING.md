@@ -24,10 +24,9 @@ maintainers and smooth out the experience for all involved.
 
 ## Code of conduct
 
-This project is released with a
-[Contributor Code of Conduct](https://github.com/ropensci/forcis/blob/master/CODE_OF_CONDUCT.md).
-By participating, you are expected to uphold this code. Please report 
-unacceptable behavior to <nicolas.casajus@fondationbiodiversite.fr>.
+Please note that this package is released with a [Contributor
+Code of Conduct](https://ropensci.org/code-of-conduct/). 
+By contributing to this project, you agree to abide by its terms.
 
 
 
