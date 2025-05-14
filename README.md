@@ -118,7 +118,7 @@ Please cite this package as:
 
 > Casajus N, Greco M, Chaabane S, Giraud X & de Garidel-Thoron T (2025)
 > forcis: An R client to access the FORCIS database. R package version
-> 0.1.0.9000. URL: <https://docs.ropensci.org/forcis/>.
+> 1.0.0. URL: <https://docs.ropensci.org/forcis/>.
 
 You can also run:
 
