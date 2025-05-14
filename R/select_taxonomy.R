@@ -3,8 +3,8 @@
 #' @description
 #' Selects a taxonomy in FORCIS data. FORCIS database provides three different
 #' taxonomies: `"LT"` (lumped taxonomy), `"VT"` (validated taxonomy) and `"OT"`
-#' (original taxonomy). See \url{https://doi.org/10.1038/s41597-023-02264-2} for
-#' further information.
+#' (original taxonomy). See \doi{10.1038/s41597-023-02264-2} for further
+#' information.
 #'
 #' @param data a `tibble` or a `data.frame`. One obtained by `read_*_data()`
 #'   functions.

@@ -49,7 +49,7 @@
 #' Chaabane S, De Garidel-Thoron T, Giraud X, _et al._ (2023) The FORCIS
 #' database: A global census of planktonic Foraminifera from ocean waters.
 #' _Scientific Data_, 10, 354.
-#' DOI: <https://doi.org/10.1038/s41597-023-02264-2>.
+#' DOI: \doi{10.1038/s41597-023-02264-2}.
 #'
 #' @export
 #'

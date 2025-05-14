@@ -13,7 +13,7 @@ status](https://www.r-pkg.org/badges/version/forcis)](https://CRAN.R-project.org
 2)](https://img.shields.io/badge/License-GPL%20%28%3E%3D%202%29-blue.svg)](https://choosealicense.com/licenses/gpl-2.0/)
 [![R CMD
 Check](https://github.com/ropensci/forcis/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ropensci/forcis/actions/workflows/R-CMD-check.yaml)
-[![codecov](https://codecov.io/gh/ropensci/forcis/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/forcis)
+[![codecov](https://codecov.io/gh/ropensci/forcis/branch/main/graph/badge.svg)](https://app.codecov.io/gh/ropensci/forcis)
 <!-- badges: end -->
 
 ## Table of contents

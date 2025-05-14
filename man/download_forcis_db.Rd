@@ -73,7 +73,7 @@ list.files(path_to_save_db, recursive = TRUE)
 Chaabane S, De Garidel-Thoron T, Giraud X, \emph{et al.} (2023) The FORCIS
 database: A global census of planktonic Foraminifera from ocean waters.
 \emph{Scientific Data}, 10, 354.
-DOI: \url{https://doi.org/10.1038/s41597-023-02264-2}.
+DOI: \doi{10.1038/s41597-023-02264-2}.
 }
 \seealso{
 \code{\link[=read_plankton_nets_data]{read_plankton_nets_data()}} to import the FORCIS database.

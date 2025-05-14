@@ -18,8 +18,8 @@ A \code{tibble}.
 \description{
 Selects a taxonomy in FORCIS data. FORCIS database provides three different
 taxonomies: \code{"LT"} (lumped taxonomy), \code{"VT"} (validated taxonomy) and \code{"OT"}
-(original taxonomy). See \url{https://doi.org/10.1038/s41597-023-02264-2} for
-further information.
+(original taxonomy). See \doi{10.1038/s41597-023-02264-2} for further
+information.
 }
 \examples{
 # Import example dataset ----

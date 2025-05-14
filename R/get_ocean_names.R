@@ -11,7 +11,7 @@
 #' @references
 #' Flanders Marine Institute (2018). IHO Sea Areas, version 3.
 #' Available online at: \url{https://www.marineregions.org/}.
-#' DOI: \url{https://doi.org/10.14284/323}.
+#' DOI: \doi{10.14284/323}.
 #'
 #' @examples
 #' # Print the name of World oceans ----
