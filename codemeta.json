@@ -2,9 +2,9 @@
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "identifier": "forcis",
-  "description": "Provides an interface to the FORCIS database (<https://zenodo.org/doi/10.5281/zenodo.7390791>) on global foraminifera distribution. This package allows to download and to handle FORCIS data. It is part of the FRB-CESAB working group FORCIS. <https://www.fondationbiodiversite.fr/en/the-frb-in-action/programs-and-projects/le-cesab/forcis/>.",
+  "description": "Provides an interface to the FORCIS database (<doi:10.5281/zenodo.7390791>) on global foraminifera distribution. This package allows to download and to handle FORCIS data. It is part of the FRB-CESAB working group FORCIS. <https://www.fondationbiodiversite.fr/en/the-frb-in-action/programs-and-projects/le-cesab/forcis/>.",
   "name": "forcis: An R Client to Access the FORCIS Database",
-  "relatedLink": "https://docs.ropensci.org/forcis",
+  "relatedLink": "https://docs.ropensci.org/forcis/",
   "codeRepository": "https://github.com/ropensci/forcis",
   "issueTracker": "https://github.com/ropensci/forcis/issues",
   "license": "https://spdx.org/licenses/GPL-2.0",
@@ -281,7 +281,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "4680.24KB",
+  "fileSize": "4679.76KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -309,7 +309,7 @@
         }
       ],
       "name": "forcis: {An} {R} client to access the {FORCIS} database",
-      "url": "https://docs.ropensci.org/forcis",
+      "url": "https://docs.ropensci.org/forcis/",
       "description": "R package version 1.0.0"
     },
     {
@@ -523,7 +523,7 @@
   ],
   "releaseNotes": "https://github.com/ropensci/forcis/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/forcis/blob/main/README.md",
-  "contIntegration": ["https://github.com/ropensci/forcis/actions/workflows/R-CMD-check.yaml", "https://github.com/ropensci/forcis/actions/workflows/pkgdown.yaml", "https://codecov.io/gh/ropensci/forcis"],
+  "contIntegration": ["https://github.com/ropensci/forcis/actions/workflows/R-CMD-check.yaml", "https://app.codecov.io/gh/ropensci/forcis"],
   "review": {
     "@type": "Review",
     "url": "https://github.com/ropensci/software-review/issues/660",

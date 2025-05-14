@@ -9,7 +9,7 @@ type: software
 license: GPL-2.0-or-later
 title: 'forcis: An R Client to Access the FORCIS Database'
 version: 1.0.0
-abstract: Provides an interface to the FORCIS database (<https://zenodo.org/doi/10.5281/zenodo.7390791>)
+abstract: Provides an interface to the FORCIS database (<https://doi.org/10.5281/zenodo.7390791>)
   on global foraminifera distribution. This package allows to download and to handle
   FORCIS data. It is part of the FRB-CESAB working group FORCIS. <https://www.fondationbiodiversite.fr/en/the-frb-in-action/programs-and-projects/le-cesab/forcis/>.
 authors:
@@ -34,14 +34,82 @@ authors:
   name-particle: de
   email: garidel@cerege.fr
   orcid: https://orcid.org/0000-0001-8983-9571
+preferred-citation:
+  type: manual
+  title: 'forcis: An R client to access the FORCIS database'
+  authors:
+  - name: Casajus Nicolas
+  - name: Greco Mattia
+  - name: Chaabane Sonia
+  - name: Giraud Xavier
+  - name: de Garidel-Thoron Thibault
+  year: '2025'
+  notes: R package version 1.0.0
+  url: https://docs.ropensci.org/forcis/
 repository-code: https://github.com/ropensci/forcis
-url: https://docs.ropensci.org/forcis
+url: https://docs.ropensci.org/forcis/
 contact:
 - family-names: Casajus
   given-names: Nicolas
   email: nicolas.casajus@fondationbiodiversite.fr
   orcid: https://orcid.org/0000-0002-5537-5294
 references:
+- type: article
+  title: 'The FORCIS database: A global census of planktonic Foraminifera from ocean
+    waters'
+  authors:
+  - name: Chaabane Sonia
+  - name: De Garidel-Thoron Thibault
+  - name: Giraud Xavier
+  - name: Schiebel Ralf
+  - name: Beaugrand Gregory
+  - name: Brummer Geert-Jan
+  - name: Casajus Nicolas
+  - name: Greco Mattia
+  - name: Grigoratou Maria
+  - name: Howa Hélène
+  - name: Jonkers Lukas
+  - name: Kucera Michal
+  - name: Kuroyanagi Azumi
+  - name: Meilland Julie
+  - name: Monteiro Fanny
+  - name: Mortyn Graham
+  - name: Almogi-Labin Ahuva
+  - name: Asahi Hirofumi
+  - name: Avnaim-Katav Simona
+  - name: Bassinot Franck
+  - name: Davis Catherine V.
+  - name: Field David B.
+  - name: Hernández-Almeida Iván
+  - name: Herut Barak
+  - name: Hosie Graham
+  - name: Howard Will
+  - name: Jentzen Anna
+  - name: Johns David G.
+  - name: Keigwin Lloyd
+  - name: Kitchener John
+  - name: Kohfeld Karen E.
+  - name: Lessa Douglas V. O.
+  - name: Manno Clara
+  - name: Marchant Margarita
+  - name: Ofstad Siri
+  - name: Ortiz Joseph D.
+  - name: Post Alexandra
+  - name: Rigual-Hernandez Andres
+  - name: Rillo Marina C.
+  - name: Robinson Karen
+  - name: Sagawa Takuya
+  - name: Sierro Francisco
+  - name: Takahashi Kunio T.
+  - name: Torfstein Adi
+  - name: Venancio Igor
+  - name: Yamasaki Makoto
+  - name: Ziveri Patrizia
+  journal: Scientific Data
+  volume: '10'
+  doi: 10.1038/s41597-023-02264-2
+  year: '2023'
+  start: '354'
 - type: software
   title: 'R: A Language and Environment for Statistical Computing'
   notes: Depends
