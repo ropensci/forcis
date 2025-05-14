@@ -17,3 +17,4 @@
 ^air\.toml$
 ^\.vscode$
 ^real-tests$
+^cran-comments\.md$
