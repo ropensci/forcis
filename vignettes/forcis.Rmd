@@ -68,7 +68,7 @@ download_forcis_db(
 
 By default (i.e. `version = NULL`), this function downloads the latest version of the database. The database is saved in `data/forcis-db/version-99/`, where `99` is the version number.
 
-**N.B.** The package `forcis` is designed to handle the versioning of the database on Zenodo. Read the [Database versions](https://ropensci.github.io/forcis/articles/database-versions.html) for more information.
+**N.B.** The package `forcis` is designed to handle the versioning of the database on Zenodo. Read the [Database versions](https://docs.ropensci.org/forcis/articles/database-versions.html) for more information.
 
 
 
@@ -159,7 +159,7 @@ Let's use the `ggmap_data()` function to get an idea of the spatial extent of th
 ggmap_data(net_data_vt)
 ```
 
-The [Data visualization](https://ropensci.github.io/forcis/articles/data-visualization.html) vignette provides a complete description of all plotting functions available in `forcis`.
+The [Data visualization](https://docs.ropensci.org/forcis/articles/data-visualization.html) vignette provides a complete description of all plotting functions available in `forcis`.
 
 
 ## Use case 2: Specific question
@@ -253,16 +253,16 @@ net_data_vt |>
 
 
 
-The [Select, reshape, and filter data](https://ropensci.github.io/forcis/articles/select-and-filter-data.html) vignette shows examples to handle FORCIS data.
+The [Select, reshape, and filter data](https://docs.ropensci.org/forcis/articles/select-and-filter-data.html) vignette shows examples to handle FORCIS data.
 
 ## To go further
 
 Additional vignettes are available depending on user wishes:
 
-- the [Database versions](https://ropensci.github.io/forcis/articles/database-versions.html) vignette provides information on how to deal with the versioning of the database
-- the [Select, reshape, and filter data](https://ropensci.github.io/forcis/articles/select-and-filter-data.html) vignette shows examples to select, filter and reshape the FORCIS data
-- the [Data conversion](https://ropensci.github.io/forcis/articles/data-conversion.html) vignette describes the conversion functions available in `forcis` to compute abundances, concentrations, and frequencies
-- the [Data visualization](https://ropensci.github.io/forcis/articles/data-visualization.html) vignette describes the plotting functions available in `forcis`
+- the [Database versions](https://docs.ropensci.org/forcis/articles/database-versions.html) vignette provides information on how to deal with the versioning of the database
+- the [Select, reshape, and filter data](https://docs.ropensci.org/forcis/articles/select-and-filter-data.html) vignette shows examples to select, filter and reshape the FORCIS data
+- the [Data conversion](https://docs.ropensci.org/forcis/articles/data-conversion.html) vignette describes the conversion functions available in `forcis` to compute abundances, concentrations, and frequencies
+- the [Data visualization](https://docs.ropensci.org/forcis/articles/data-visualization.html) vignette describes the plotting functions available in `forcis`
 
 
 ## References

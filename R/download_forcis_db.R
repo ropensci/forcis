@@ -41,7 +41,7 @@
 #' he/she uses one of the `read_*_data()` functions.
 #'
 #' For more information, please read the vignette available at
-#' \url{https://ropensci.github.io/forcis/articles/database-versions.html}.
+#' \url{https://docs.ropensci.org/forcis/articles/database-versions.html}.
 #'
 #' @seealso [read_plankton_nets_data()] to import the FORCIS database.
 #'

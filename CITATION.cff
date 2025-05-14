@@ -45,9 +45,9 @@ preferred-citation:
   - name: de Garidel-Thoron Thibault
   year: '2025'
   notes: R package version 0.1.0.9000
-  url: https://github.com/ropensci/forcis
+  url: https://docs.ropensci.org/forcis
 repository-code: https://github.com/ropensci/forcis
-url: https://github.com/ropensci/forcis
+url: https://docs.ropensci.org/forcis
 contact:
 - family-names: Casajus
   given-names: Nicolas

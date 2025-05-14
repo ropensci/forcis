@@ -44,7 +44,7 @@ Description: Provides an interface to the FORCIS database
     distribution. This package allows to download and to handle FORCIS data.
     It is part of the FRB-CESAB working group FORCIS.
     <https://www.fondationbiodiversite.fr/en/the-frb-in-action/programs-and-projects/le-cesab/forcis/>.
-URL: https://github.com/ropensci/forcis
+URL: https://docs.ropensci.org/forcis
 BugReports: https://github.com/ropensci/forcis/issues
 License: GPL (>= 2)
 Encoding: UTF-8

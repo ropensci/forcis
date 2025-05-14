@@ -280,7 +280,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "4680.706KB",
+  "fileSize": "4680.167KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -308,7 +308,7 @@
         }
       ],
       "name": "forcis: {An} {R} client to access the {FORCIS} database",
-      "url": "https://github.com/ropensci/forcis",
+      "url": "https://docs.ropensci.org/forcis",
       "description": "R package version 0.1.0.9000"
     },
     {
@@ -520,6 +520,7 @@
       }
     }
   ],
+  "relatedLink": "https://docs.ropensci.org/forcis",
   "releaseNotes": "https://github.com/ropensci/forcis/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/forcis/blob/main/README.md",
   "contIntegration": ["https://github.com/ropensci/forcis/actions/workflows/R-CMD-check.yaml", "https://github.com/ropensci/forcis/actions/workflows/pkgdown.yaml", "https://codecov.io/gh/ropensci/forcis"],
