@@ -1,7 +1,7 @@
 Package: forcis
 Type: Package
 Title: An R Client to Access the FORCIS Database
-Version: 0.1.0.9000
+Version: 1.0.0
 Authors@R: c(
     person(given   = "Nicolas",
            family  = "Casajus",
@@ -44,8 +44,8 @@ Description: Provides an interface to the FORCIS database
     distribution. This package allows to download and to handle FORCIS data.
     It is part of the FRB-CESAB working group FORCIS.
     <https://www.fondationbiodiversite.fr/en/the-frb-in-action/programs-and-projects/le-cesab/forcis/>.
-URL: https://frbcesab.github.io/forcis
-BugReports: https://github.com/FRBCesab/forcis/issues
+URL: https://docs.ropensci.org/forcis, https://github.com/ropensci/forcis
+BugReports: https://github.com/ropensci/forcis/issues
 License: GPL (>= 2)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

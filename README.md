@@ -8,10 +8,10 @@
 [![Status at rOpenSci Software Peer
 Review](https://badges.ropensci.org/660_status.svg)](https://github.com/ropensci/software-review/issues/660)
 [![R CMD
-Check](https://github.com/FRBCesab/forcis/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/FRBCesab/forcis/actions/workflows/R-CMD-check.yaml)
+Check](https://github.com/ropensci/forcis/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ropensci/forcis/actions/workflows/R-CMD-check.yaml)
 [![Website
-deployment](https://github.com/FRBCesab/forcis/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/FRBCesab/forcis/actions/workflows/pkgdown.yaml)
-[![codecov](https://codecov.io/gh/frbcesab/forcis/branch/master/graph/badge.svg)](https://codecov.io/gh/frbcesab/forcis)
+deployment](https://github.com/ropensci/forcis/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/ropensci/forcis/actions/workflows/pkgdown.yaml)
+[![codecov](https://codecov.io/gh/ropensci/forcis/branch/master/graph/badge.svg)](https://codecov.io/gh/ropensci/forcis)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/forcis)](https://CRAN.R-project.org/package=forcis)
 [![License: GPL (\>=
@@ -75,7 +75,7 @@ if (!requireNamespace("remotes", quietly = TRUE)) {
 }
 
 ## Install dev version of < forcis > from GitHub ----
-remotes::install_github("FRBCesab/forcis")
+remotes::install_github("ropensci/forcis")
 ```
 
 **N.B.** The `forcis` package depends on the
@@ -95,30 +95,30 @@ library("forcis")
 `forcis` provides five vignettes to learn more about the package:
 
 - the [Get
-  started](https://frbcesab.github.io/forcis/articles/forcis.html)
+  started](https://docs.ropensci.org/forcis/articles/forcis.html)
   vignette describes the core features of the package
 - the [Database
-  versions](https://frbcesab.github.io/forcis/articles/database-versions.html)
+  versions](https://docs.ropensci.org/forcis/articles/database-versions.html)
   vignette provides information on how to deal with the versioning of
   the database
 - the [Select and filter
-  data](https://frbcesab.github.io/forcis/articles/select-and-filter-data.html)
+  data](https://docs.ropensci.org/forcis/articles/select-and-filter-data.html)
   vignette shows examples to handle the FORCIS data
 - the [Data
-  conversion](https://frbcesab.github.io/forcis/articles/data-conversion.html)
+  conversion](https://docs.ropensci.org/forcis/articles/data-conversion.html)
   vignette describes the conversion functions available in `forcis` to
   compute abundances, concentrations, and frequencies
 - the [Data
-  visualization](https://frbcesab.github.io/forcis/articles/data-visualization.html)
+  visualization](https://docs.ropensci.org/forcis/articles/data-visualization.html)
   vignette describes the plotting functions available in `forcis`
 
 ## Citation
 
 Please cite this package as:
 
-> Casajus N, Greco M, Chaabane S, Giraud X & de Garidel-Thoron T (2024)
+> Casajus N, Greco M, Chaabane S, Giraud X & de Garidel-Thoron T (2025)
 > forcis: An R client to access the FORCIS database. R package version
-> 0.1.0.9000. URL: <https://frbcesab.github.io/forcis/>.
+> 1.0.0. URL: <https://docs.ropensci.org/forcis/>.
 
 You can also run:
 
@@ -130,12 +130,11 @@ citation("forcis")
 
 All types of contributions are encouraged and valued. For more
 information, check out our [Contributor
-Guidelines](https://github.com/FRBCesab/forcis/blob/main/CONTRIBUTING.md).
+Guidelines](https://github.com/ropensci/forcis/blob/main/CONTRIBUTING.md).
 
-Please note that the `forcis` project is released with a [Contributor
-Code of
-Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html).
-By contributing to this project, you agree to abide by its terms.
+Please note that this package is released with a [Contributor Code of
+Conduct](https://ropensci.org/code-of-conduct/). By contributing to this
+project, you agree to abide by its terms.
 
 ## Acknowledgments
 

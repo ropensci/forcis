@@ -55,7 +55,7 @@ Zenodo and will inform the user if a new version is available each time
 he/she uses one of the \verb{read_*_data()} functions.
 
 For more information, please read the vignette available at
-\url{https://frbcesab.github.io/forcis/articles/database-versions.html}.
+\url{https://docs.ropensci.org/forcis/articles/database-versions.html}.
 }
 \examples{
 \dontrun{

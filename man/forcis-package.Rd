@@ -13,8 +13,9 @@ Provides an interface to the FORCIS database (\url{https://zenodo.org/doi/10.528
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://frbcesab.github.io/forcis}
-  \item Report bugs at \url{https://github.com/FRBCesab/forcis/issues}
+  \item \url{https://docs.ropensci.org/forcis}
+  \item \url{https://github.com/ropensci/forcis}
+  \item Report bugs at \url{https://github.com/ropensci/forcis/issues}
 }
 
 }

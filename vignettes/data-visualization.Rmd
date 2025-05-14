@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-The package `forcis` provides [numerous functions](https://frbcesab.github.io/forcis/reference/index.html#visualization-tools) to visualize FORCIS data. This vignette shows how to use and customize these functions.
+The package `forcis` provides [numerous functions](https://docs.ropensci.org/forcis/reference/index.html#visualization-tools) to visualize FORCIS data. This vignette shows how to use and customize these functions.
 
 
 ## Setup
