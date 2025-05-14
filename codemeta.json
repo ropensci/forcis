@@ -4,8 +4,8 @@
   "identifier": "forcis",
   "description": "Provides an interface to the FORCIS database (<https://zenodo.org/doi/10.5281/zenodo.7390791>) on global foraminifera distribution. This package allows to download and to handle FORCIS data. It is part of the FRB-CESAB working group FORCIS. <https://www.fondationbiodiversite.fr/en/the-frb-in-action/programs-and-projects/le-cesab/forcis/>.",
   "name": "forcis: An R Client to Access the FORCIS Database",
-  "codeRepository": "https://github.com/frbcesab/forcis",
-  "issueTracker": "https://github.com/FRBCesab/forcis/issues",
+  "codeRepository": "https://github.com/ropensci/forcis",
+  "issueTracker": "https://github.com/ropensci/forcis/issues",
   "license": "https://spdx.org/licenses/GPL-2.0",
   "version": "0.1.0.9000",
   "programmingLanguage": {
@@ -13,7 +13,7 @@
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.4.1 (2024-06-14)",
+  "runtimePlatform": "R version 4.5.0 (2025-04-11)",
   "author": [
     {
       "@type": "Person",
@@ -98,6 +98,30 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "dplyr",
+      "name": "dplyr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=dplyr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "httptest2",
+      "name": "httptest2",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=httptest2"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "knitr",
       "name": "knitr",
       "provider": {
@@ -163,21 +187,9 @@
       "@type": "SoftwareApplication",
       "identifier": "R",
       "name": "R",
-      "version": ">= 2.10"
+      "version": ">= 4.1.0"
     },
     "2": {
-      "@type": "SoftwareApplication",
-      "identifier": "dplyr",
-      "name": "dplyr",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=dplyr"
-    },
-    "3": {
       "@type": "SoftwareApplication",
       "identifier": "ggplot2",
       "name": "ggplot2",
@@ -189,19 +201,19 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggplot2"
     },
-    "4": {
+    "3": {
       "@type": "SoftwareApplication",
-      "identifier": "jsonlite",
-      "name": "jsonlite",
+      "identifier": "httr2",
+      "name": "httr2",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://CRAN.R-project.org/package=jsonlite"
+      "sameAs": "https://CRAN.R-project.org/package=httr2"
     },
-    "5": {
+    "4": {
       "@type": "SoftwareApplication",
       "identifier": "rlang",
       "name": "rlang",
@@ -213,7 +225,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=rlang"
     },
-    "6": {
+    "5": {
       "@type": "SoftwareApplication",
       "identifier": "sf",
       "name": "sf",
@@ -224,6 +236,18 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=sf"
+    },
+    "6": {
+      "@type": "SoftwareApplication",
+      "identifier": "tibble",
+      "name": "tibble",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=tibble"
     },
     "7": {
       "@type": "SoftwareApplication",
@@ -256,11 +280,11 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "3718.985KB",
+  "fileSize": "4680.742KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
-      "datePublished": "2024",
+      "datePublished": "2025",
       "author": [
         {
           "@type": "Organization",
@@ -284,7 +308,7 @@
         }
       ],
       "name": "forcis: {An} {R} client to access the {FORCIS} database",
-      "url": "https://frbcesab.github.io/forcis",
+      "url": "https://github.com/ropensci/forcis",
       "description": "R package version 0.1.0.9000"
     },
     {
@@ -496,8 +520,12 @@
       }
     }
   ],
-  "relatedLink": "https://frbcesab.github.io/forcis",
-  "releaseNotes": "https://github.com/frbcesab/forcis/blob/master/NEWS.md",
-  "readme": "https://github.com/FRBCesab/forcis/blob/master/README.md",
-  "contIntegration": ["https://github.com/FRBCesab/forcis/actions/workflows/R-CMD-check.yaml", "https://github.com/FRBCesab/forcis/actions/workflows/pkgdown.yaml", "https://codecov.io/gh/frbcesab/forcis"]
+  "releaseNotes": "https://github.com/ropensci/forcis/blob/master/NEWS.md",
+  "readme": "https://github.com/ropensci/forcis/blob/main/README.md",
+  "contIntegration": ["https://github.com/ropensci/forcis/actions/workflows/R-CMD-check.yaml", "https://github.com/ropensci/forcis/actions/workflows/pkgdown.yaml", "https://codecov.io/gh/ropensci/forcis"],
+  "review": {
+    "@type": "Review",
+    "url": "https://github.com/ropensci/software-review/issues/660",
+    "provider": "https://ropensci.org"
+  }
 }

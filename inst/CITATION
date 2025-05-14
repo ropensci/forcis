@@ -18,7 +18,7 @@ bibentry(
               person("de Garidel-Thoron Thibault")),
   year    = year,
   note    = note,
-  url     = "https://frbcesab.github.io/forcis",
+  url     = "https://github.com/ropensci/forcis",
   header  = "To cite the FORCIS package in publications use:"
 )
 

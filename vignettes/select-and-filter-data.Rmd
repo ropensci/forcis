@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-The package `forcis` provides [a lot of functions](https://frbcesab.github.io/forcis/reference/index.html#select-and-filters-tools) to filter, reshape, and select FORCIS data. This vignette shows how to use these functions. With the exception of `select_taxonomy()`, all functions presented in this vignette are optional and depend on your research questions. You can filter data by species, time range, ocean, etc.
+The package `forcis` provides [a lot of functions](https://ropensci.github.io/forcis/reference/index.html#select-and-filters-tools) to filter, reshape, and select FORCIS data. This vignette shows how to use these functions. With the exception of `select_taxonomy()`, all functions presented in this vignette are optional and depend on your research questions. You can filter data by species, time range, ocean, etc.
 
 
 ## Setup

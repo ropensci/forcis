@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 ```
 
 
-The package `forcis` provides [functions](https://frbcesab.github.io/forcis/reference/index.html#standardization-functions) to homogenize FORCIS data and compute abundances, concentrations, and frequencies of foraminifera counts.
+The package `forcis` provides [functions](https://ropensci.github.io/forcis/reference/index.html#standardization-functions) to homogenize FORCIS data and compute abundances, concentrations, and frequencies of foraminifera counts.
 This vignette shows how to use these functions.
 
 ## Count formats

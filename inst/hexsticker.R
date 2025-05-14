@@ -35,7 +35,7 @@ hexSticker::sticker(
   s_width   = 1.40,        # Subplot
   s_height  = 1.10,        # Subplot
   
-  url       = "https://frbcesab.github.io/forcis",
+  url       = "https://github.com/ropensci/forcis",
   
   spotlight = TRUE,
   l_alpha   = 0.10,
