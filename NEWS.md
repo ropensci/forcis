@@ -16,7 +16,7 @@ Answers to CRAN comments:
   * No default value for argument `path` in `download_forcis_db()` and `read_*_data()` functions
 
 * Unit tests
-  * Update tests for `read_*_data()` functions (no default valur for `path`)
+  * Update tests for `read_*_data()` functions (no default value for `path`)
 
 
 # forcis 1.0.0

@@ -8,7 +8,7 @@
   "codeRepository": "https://github.com/ropensci/forcis",
   "issueTracker": "https://github.com/ropensci/forcis/issues",
   "license": "https://spdx.org/licenses/GPL-2.0",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -281,7 +281,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "4679.781KB",
+  "fileSize": "4680.606KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -310,7 +310,7 @@
       ],
       "name": "forcis: {H}andle the {FORCIS} {F}oraminifera {D}atabase",
       "url": "https://docs.ropensci.org/forcis/",
-      "description": "R package version 1.0.0"
+      "description": "R package version 1.0.1"
     },
     {
       "@type": "ScholarlyArticle",
