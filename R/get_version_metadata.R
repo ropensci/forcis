@@ -15,7 +15,7 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Get information for the latest version of the FORCIS database ----
 #' get_version_metadata()
 #' }

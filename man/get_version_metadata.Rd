@@ -21,7 +21,7 @@ Prints information of a specific version of the FORCIS database by querying
 the Zenodo API (\url{https://developers.zenodo.org}).
 }
 \examples{
-\dontrun{
+\donttest{
 # Get information for the latest version of the FORCIS database ----
 get_version_metadata()
 }

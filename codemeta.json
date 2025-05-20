@@ -2,8 +2,8 @@
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "identifier": "forcis",
-  "description": "Provides an interface to the FORCIS database (<doi:10.5281/zenodo.7390791>) on global foraminifera distribution. This package allows to download and to handle FORCIS data. It is part of the FRB-CESAB working group FORCIS. <https://www.fondationbiodiversite.fr/en/the-frb-in-action/programs-and-projects/le-cesab/forcis/>.",
-  "name": "forcis: An R Client to Access the FORCIS Database",
+  "description": "Provides an interface to the 'FORCIS' database (Chaabane et al. (2024) <doi:10.5281/zenodo.7390791>) on global foraminifera distribution. This package allows to download and to handle 'FORCIS' data. It is part of the FRB-CESAB working group FORCIS. <https://www.fondationbiodiversite.fr/en/the-frb-in-action/programs-and-projects/le-cesab/forcis/>.",
+  "name": "forcis: Handle the FORCIS Foraminifera Database",
   "relatedLink": "https://docs.ropensci.org/forcis/",
   "codeRepository": "https://github.com/ropensci/forcis",
   "issueTracker": "https://github.com/ropensci/forcis/issues",
@@ -281,7 +281,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "4679.76KB",
+  "fileSize": "4679.781KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -308,7 +308,7 @@
           "name": "de Garidel-Thoron Thibault"
         }
       ],
-      "name": "forcis: {An} {R} client to access the {FORCIS} database",
+      "name": "forcis: {H}andle the {FORCIS} {F}oraminifera {D}atabase",
       "url": "https://docs.ropensci.org/forcis/",
       "description": "R package version 1.0.0"
     },

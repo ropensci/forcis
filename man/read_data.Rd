@@ -11,31 +11,31 @@
 \title{Read FORCIS data}
 \usage{
 read_cpr_north_data(
-  path = ".",
+  path,
   version = options()$forcis_version,
   check_for_update = options()$forcis_check_for_update
 )
 
 read_cpr_south_data(
-  path = ".",
+  path,
   version = options()$forcis_version,
   check_for_update = options()$forcis_check_for_update
 )
 
 read_plankton_nets_data(
-  path = ".",
+  path,
   version = options()$forcis_version,
   check_for_update = options()$forcis_check_for_update
 )
 
 read_pump_data(
-  path = ".",
+  path,
   version = options()$forcis_version,
   check_for_update = options()$forcis_check_for_update
 )
 
 read_sediment_trap_data(
-  path = ".",
+  path,
   version = options()$forcis_version,
   check_for_update = options()$forcis_check_for_update
 )
@@ -79,15 +79,17 @@ must be used first to store locally the database.
 }
 }
 \examples{
-\dontrun{
+\donttest{
 # Folder in which the database will be saved ----
-path_to_save_db <- "data"
+# N.B. In this example we use a temporary folder but you should select an
+# existing folder (for instance "data/").
+path <- tempdir()
 
 # Download the database ----
-download_forcis_db(path = path_to_save_db)
+download_forcis_db(path, timeout = 300)
 
 # Import plankton nets data ----
-plankton_nets_data <- read_plankton_nets_data(path = path_to_save_db)
+plankton_nets_data <- read_plankton_nets_data(path)
 }
 }
 \seealso{

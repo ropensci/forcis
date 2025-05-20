@@ -12,7 +12,7 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Versions of the FORCIS database ----
 #' get_available_versions()
 #' }

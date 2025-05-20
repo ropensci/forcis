@@ -54,19 +54,21 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Folder in which the database will be saved ----
-#' path_to_save_db <- "data"
+#' # N.B. In this example we use a temporary folder but you should select an
+#' # existing folder (for instance "data/").
+#' path <- tempdir()
 #'
 #' # Download the database ----
-#' download_forcis_db(path = path_to_save_db)
+#' download_forcis_db(path, timeout = 300)
 #'
 #' # Check the content of the folder ----
-#' list.files(path_to_save_db, recursive = TRUE)
+#' list.files(path, recursive = TRUE)
 #' }
 
 download_forcis_db <- function(
-  path = ".",
+  path,
   version = options()$"forcis_version",
   check_for_update = options()$"forcis_check_for_update",
   overwrite = FALSE,

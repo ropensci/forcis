@@ -1,6 +1,6 @@
 bibentry(
   bibtype = "Manual",
-  title = "forcis: {An} {R} client to access the {FORCIS} database",
+  title = "forcis: {H}andle the {FORCIS} {F}oraminifera {D}atabase",
   author = c(
     person("Casajus Nicolas"),
     person("Greco Mattia"),

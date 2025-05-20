@@ -1,6 +1,6 @@
 Package: forcis
 Type: Package
-Title: An R Client to Access the FORCIS Database
+Title: Handle the FORCIS Foraminifera Database
 Version: 1.0.0
 Authors@R: c(
     person(given   = "Nicolas",
@@ -39,9 +39,9 @@ Authors@R: c(
            comment = c(ORCID = "0000-0002-9842-7648")),
     person(given   = "FRB-CESAB",
            role    = "fnd"))
-Description: Provides an interface to the FORCIS database 
-    (<doi:10.5281/zenodo.7390791>) on global foraminifera
-    distribution. This package allows to download and to handle FORCIS data.
+Description: Provides an interface to the 'FORCIS' database 
+    (Chaabane et al. (2024) <doi:10.5281/zenodo.7390791>) on global foraminifera
+    distribution. This package allows to download and to handle 'FORCIS' data.
     It is part of the FRB-CESAB working group FORCIS.
     <https://www.fondationbiodiversite.fr/en/the-frb-in-action/programs-and-projects/le-cesab/forcis/>.
 URL: https://docs.ropensci.org/forcis/, https://github.com/ropensci/forcis
