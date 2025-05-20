@@ -39,9 +39,9 @@ Authors@R: c(
            comment = c(ORCID = "0000-0002-9842-7648")),
     person(given   = "FRB-CESAB",
            role    = "fnd"))
-Description: Provides an interface to the FORCIS database 
+Description: Provides an interface to the 'FORCIS' database 
     (<doi:10.5281/zenodo.7390791>) on global foraminifera
-    distribution. This package allows to download and to handle FORCIS data.
+    distribution. This package allows to download and to handle 'FORCIS' data.
     It is part of the FRB-CESAB working group FORCIS.
     <https://www.fondationbiodiversite.fr/en/the-frb-in-action/programs-and-projects/le-cesab/forcis/>.
 URL: https://docs.ropensci.org/forcis/, https://github.com/ropensci/forcis
