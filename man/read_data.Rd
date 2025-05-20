@@ -81,12 +81,12 @@ must be used first to store locally the database.
 \examples{
 \donttest{
 # Folder in which the database will be saved ----
-# N.B. In this example we use a temporary folder but you should select an 
+# N.B. In this example we use a temporary folder but you should select an
 # existing folder (for instance "data/").
 path <- tempdir()
 
 # Download the database ----
-download_forcis_db(path)
+download_forcis_db(path, timeout = 300)
 
 # Import plankton nets data ----
 plankton_nets_data <- read_plankton_nets_data(path)
