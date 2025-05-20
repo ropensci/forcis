@@ -27,7 +27,7 @@
 #' @name read_data
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Folder in which the database will be saved ----
 #' path_to_save_db <- "data"
 #'

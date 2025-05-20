@@ -7,6 +7,8 @@ Answers to CRAN comments:
   * Single quote FORCIS database
   * Add authors and year in reference
 
+* Examples
+  * Replace `\dontrun{}` by `\donttest{}`
 
 # forcis 1.0.0
 

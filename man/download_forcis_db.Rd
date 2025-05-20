@@ -58,7 +58,7 @@ For more information, please read the vignette available at
 \url{https://docs.ropensci.org/forcis/articles/database-versions.html}.
 }
 \examples{
-\dontrun{
+\donttest{
 # Folder in which the database will be saved ----
 path_to_save_db <- "data"
 
