@@ -9,6 +9,7 @@ Answers to CRAN comments:
 
 * Examples
   * Replace `\dontrun{}` by `\donttest{}`
+  * Store database in temporary directory
 
 # forcis 1.0.0
 

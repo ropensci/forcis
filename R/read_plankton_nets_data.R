@@ -29,13 +29,15 @@
 #' @examples
 #' \donttest{
 #' # Folder in which the database will be saved ----
-#' path_to_save_db <- "data"
+#' # N.B. In this example we use a temporary folder but you should select an 
+#' # existing folder (for instance "data/").
+#' path <- tempdir()
 #'
 #' # Download the database ----
-#' download_forcis_db(path = path_to_save_db)
+#' download_forcis_db(path)
 #'
 #' # Import plankton nets data ----
-#' plankton_nets_data <- read_plankton_nets_data(path = path_to_save_db)
+#' plankton_nets_data <- read_plankton_nets_data(path)
 #' }
 
 NULL

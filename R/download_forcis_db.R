@@ -56,13 +56,15 @@
 #' @examples
 #' \donttest{
 #' # Folder in which the database will be saved ----
-#' path_to_save_db <- "data"
+#' # N.B. In this example we use a temporary folder but you should select an 
+#' # existing folder (for instance "data/").
+#' path <- tempdir()
 #'
 #' # Download the database ----
-#' download_forcis_db(path = path_to_save_db)
+#' download_forcis_db(path)
 #'
 #' # Check the content of the folder ----
-#' list.files(path_to_save_db, recursive = TRUE)
+#' list.files(path, recursive = TRUE)
 #' }
 
 download_forcis_db <- function(
