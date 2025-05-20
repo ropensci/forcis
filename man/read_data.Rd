@@ -11,31 +11,31 @@
 \title{Read FORCIS data}
 \usage{
 read_cpr_north_data(
-  path = ".",
+  path,
   version = options()$forcis_version,
   check_for_update = options()$forcis_check_for_update
 )
 
 read_cpr_south_data(
-  path = ".",
+  path,
   version = options()$forcis_version,
   check_for_update = options()$forcis_check_for_update
 )
 
 read_plankton_nets_data(
-  path = ".",
+  path,
   version = options()$forcis_version,
   check_for_update = options()$forcis_check_for_update
 )
 
 read_pump_data(
-  path = ".",
+  path,
   version = options()$forcis_version,
   check_for_update = options()$forcis_check_for_update
 )
 
 read_sediment_trap_data(
-  path = ".",
+  path,
   version = options()$forcis_version,
   check_for_update = options()$forcis_check_for_update
 )

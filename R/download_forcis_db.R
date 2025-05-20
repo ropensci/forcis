@@ -68,7 +68,7 @@
 #' }
 
 download_forcis_db <- function(
-  path = ".",
+  path,
   version = options()$"forcis_version",
   check_for_update = options()$"forcis_check_for_update",
   overwrite = FALSE,

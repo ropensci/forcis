@@ -2,7 +2,7 @@
 #' @export
 
 read_cpr_north_data <- function(
-  path = ".",
+  path,
   version = options()$"forcis_version",
   check_for_update = options()$"forcis_check_for_update"
 ) {

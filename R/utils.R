@@ -111,7 +111,7 @@ add_data_type <- function(data, type) {
 read_data_ <- function(
   check_file_fun,
   data_msg,
-  path = ".",
+  path,
   version = options()$"forcis_version",
   check_for_update = options()$"forcis_check_for_update"
 ) {

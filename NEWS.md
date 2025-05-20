@@ -5,11 +5,19 @@ Answers to CRAN comments:
 * `DESCRIPTION` file
   * Change package title
   * Single quote FORCIS database
-  * Add authors and year in reference
+  * Add authors and year in Zenodo reference
 
 * Examples
   * Replace `\dontrun{}` by `\donttest{}`
   * Store database in temporary directory
+  * Increase timeout for examples (API requests)
+
+* R code
+  * No default value for argument `path` in `download_forcis_db()` and `read_*_data()` functions
+
+* Unit tests
+  * Update tests for `read_*_data()` functions (no default valur for `path`)
+
 
 # forcis 1.0.0
 
