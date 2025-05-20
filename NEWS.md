@@ -1,3 +1,11 @@
+# forcis 1.0.1
+
+Answers to CRAN comments:
+
+* `DESCRIPTION` file
+  * Change package title
+
+
 # forcis 1.0.0
 
 Answers to editor and reviewer comments:

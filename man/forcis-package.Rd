@@ -4,7 +4,7 @@
 \name{forcis-package}
 \alias{forcis}
 \alias{forcis-package}
-\title{forcis: An R Client to Access the FORCIS Database}
+\title{forcis: Handle the FORCIS Foraminifera Database}
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 

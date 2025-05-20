@@ -7,7 +7,7 @@ cff-version: 1.2.0
 message: 'To cite package "forcis" in publications use:'
 type: software
 license: GPL-2.0-or-later
-title: 'forcis: An R Client to Access the FORCIS Database'
+title: 'forcis: Handle the FORCIS Foraminifera Database'
 version: 1.0.0
 abstract: Provides an interface to the FORCIS database (<https://doi.org/10.5281/zenodo.7390791>)
   on global foraminifera distribution. This package allows to download and to handle
@@ -36,7 +36,7 @@ authors:
   orcid: https://orcid.org/0000-0001-8983-9571
 preferred-citation:
   type: manual
-  title: 'forcis: An R client to access the FORCIS database'
+  title: 'forcis: Handle the FORCIS Foraminifera Database'
   authors:
   - name: Casajus Nicolas
   - name: Greco Mattia
