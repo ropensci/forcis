@@ -4,6 +4,8 @@ Answers to CRAN comments:
 
 * `DESCRIPTION` file
   * Change package title
+  * Single quote FORCIS database
+  * Add authors and year in reference
 
 
 # forcis 1.0.0
