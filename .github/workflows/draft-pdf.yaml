@@ -1,0 +1,25 @@
+# Source: https://github.com/marketplace/actions/open-journals-pdf-generator
+
+on:
+  push:
+    paths:
+      - joss-paper/**
+      - .github/workflows/draft-pdf.yaml
+
+jobs:
+  paper:
+    runs-on: ubuntu-latest
+    name: Paper Draft
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build draft PDF
+        uses: openjournals/openjournals-draft-action@master
+        with:
+          journal: joss
+          paper-path: joss-paper/paper.md
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: paper
+          path: joss-paper/paper.pdf
