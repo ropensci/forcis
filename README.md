@@ -14,12 +14,14 @@ status](https://www.r-pkg.org/badges/version/forcis)](https://CRAN.R-project.org
 [![R CMD
 Check](https://github.com/ropensci/forcis/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ropensci/forcis/actions/workflows/R-CMD-check.yaml)
 [![codecov](https://codecov.io/gh/ropensci/forcis/branch/main/graph/badge.svg)](https://app.codecov.io/gh/ropensci/forcis)
+[![JOSS](https://joss.theoj.org/papers/10.21105/joss.09217/status.svg)](https://doi.org/10.21105/joss.09217)
 [![DOI](https://zenodo.org/badge/428715013.svg)](https://doi.org/10.5281/zenodo.15470664)
 <!-- badges: end -->
 
 ## Table of contents
 
 <p align="left">
+
 • <a href="#overview">Overview</a><br> •
 <a href="#installation">Installation</a><br> •
 <a href="#documentation">Documentation</a><br> •
