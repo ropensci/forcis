@@ -9,6 +9,7 @@ type: software
 license: GPL-2.0-or-later
 title: 'forcis: Handle the FORCIS Foraminifera Database'
 version: 1.0.1
+doi: 10.21105/joss.09217
 identifiers:
 - type: doi
   value: 10.32614/CRAN.package.forcis
@@ -38,17 +39,19 @@ authors:
   email: garidel@cerege.fr
   orcid: https://orcid.org/0000-0001-8983-9571
 preferred-citation:
-  type: manual
-  title: 'forcis: Handle the FORCIS Foraminifera Database'
+  type: article
+  title: 'forcis: An R package for accessing, handling and analysing the FORCIS database'
   authors:
   - name: Casajus Nicolas
-  - name: Greco Mattia
   - name: Chaabane Sonia
   - name: Giraud Xavier
   - name: de Garidel-Thoron Thibault
+  - name: Greco Mattia
+  journal: Journal of Open Source Software
+  volume: '10'
+  doi: 10.21105/joss.09217
   year: '2025'
-  notes: R package version 1.0.1
-  url: https://docs.ropensci.org/forcis/
+  start: '9217'
 repository: https://CRAN.R-project.org/package=forcis
 repository-code: https://github.com/ropensci/forcis
 url: https://docs.ropensci.org/forcis/

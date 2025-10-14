@@ -117,9 +117,10 @@ library("forcis")
 
 Please cite this package as:
 
-> Casajus N, Greco M, Chaabane S, Giraud X & de Garidel-Thoron T (2025)
-> forcis: Handle the FORCIS foraminifera database. R package version
-> 1.0.1. URL: <https://docs.ropensci.org/forcis/>.
+> Casajus N, Chaabane S, de Garidel-Thoron T, Giraud X & Greco M (2025)
+> forcis: An R package for accessing, handling and analysing the FORCIS
+> database. **Journal of Open Source Software**, 10(114), 9217. DOI:
+> [10.21105/joss.09217](https://doi.org/10.21105/joss.09217).
 
 You can also run:
 

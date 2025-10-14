@@ -1,17 +1,19 @@
 bibentry(
-  bibtype = "Manual",
-  title = "forcis: {H}andle the {FORCIS} {F}oraminifera {D}atabase",
+  bibtype = "Article",
+  title = "forcis: {A}n {R} package for accessing, handling and analysing the {FORCIS} database",
   author = c(
     person("Casajus Nicolas"),
-    person("Greco Mattia"),
     person("Chaabane Sonia"),
     person("Giraud Xavier"),
-    person("de Garidel-Thoron Thibault")
+    person("de Garidel-Thoron Thibault"),
+    person("Greco Mattia")
   ),
+  journal = "Journal of Open Source Software",
+  volume = "10",
+  pages = "9217",
+  doi = "10.21105/joss.09217",
   year = "2025",
-  note = "R package version 1.0.1",
-  url = "https://docs.ropensci.org/forcis/",
-  header = "To cite the FORCIS package in publications use:"
+  header = "To cite the forcis package in publications use:"
 )
 
 bibentry(
